@@ -1,4 +1,4 @@
-# Estado — 2026-09-18 (fim do dia, 2ª revisão)
+# Estado — 2026-09-18 (fim do dia, 3ª revisão)
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
@@ -7,9 +7,14 @@
 Fundação e evals mergeados na `main` via PR #1. Repositório em
 `github.com/yvesas/yas-canvas`, privado, remote em SSH.
 
-`npm run check` passa e a suíte de evals passa inteira: **6 de 6**, com a
-`webhook-cpf` conduzida por sete turnos. Levou três rodadas para chegar lá, e
-cada rodada ensinou algo diferente — ver abaixo.
+`npm run check` passa e a suíte de evals passa inteira: **8 de 8**, quatro
+fixtures, as de relatório conduzidas por até nove turnos.
+
+A feature **0001** está fechada: o `/eng-review` trata o caso de não haver código
+para ler. O diagnóstico da rodada 1 estava exagerado — cinco dos seis critérios
+já passavam; o que faltava era mais estreito e mais interessante do que parecia.
+Ver `specs/features/0001-eng-review-no-code/tasks.md`, onde cada task carrega o
+veredito literal que a moveu.
 
 Nada foi instalado em `~/.claude/skills` ainda — só `bin/install --check`.
 
@@ -29,7 +34,7 @@ Consertado: o runner abre o turno 1 com `--session-id` e continua com
 `--resume`, mandando a resposta roteirizada da fixture até o marco de parada.
 `no-target` e `vague-scale` seguem de um turno só, de propósito.
 
-**Ainda aberto — falta um caso na skill.** O `Passo 4` manda ler o código
+**Fechado pela feature 0001.** O `Passo 4` manda ler o código
 real antes de opinar. A fixture é um plano de sistema que **ainda não existe**,
 e a sessão registrou "não tenho o código" e seguiu. A skill não diz o que fazer
 quando não há código para ler — e plano de coisa nova é metade dos casos reais.
@@ -88,7 +93,10 @@ jogada fora. Eval se roda sem cano, ou com `tee`.
 
 ## Perguntas em aberto para o Yves
 
-1. Com a bancada verde, a próxima é `/cto-canvas` ou o caso "não há código para
-   ler" do `/eng-review`? O segundo é pequeno e fecha um buraco conhecido.
+1. Com a 0001 fechada, a próxima é `/cto-canvas` — a skill que é só sua. Alguma
+   razão para inverter e fazer `/ceo-review` antes?
+2. O `/eng-review` está em 266 das 400 linhas do teto. A segunda role vai
+   copiar esse esqueleto: vale extrair o que é comum para o preâmbulo antes de
+   duplicar?
 2. O `/design-review` cobre design visual e UX na mesma skill, ou os dois
    papéis ficam separados como estão no roteador hoje?

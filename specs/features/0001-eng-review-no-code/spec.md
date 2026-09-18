@@ -41,9 +41,16 @@ Dois riscos, e o segundo é pior:
   número de serviços, nome de tabela, tecnologia, volume. Quando precisa de um
   desses para opinar, ela **pergunta** em vez de assumir.
 
-- **REQ-005** — As seções que só fazem sentido sobre código existente (5.2
-  Qualidade) dizem por que estão curtas, em vez de inventar conteúdo para
-  parecerem completas.
+- **REQ-005** — Nas seções que só fazem sentido sobre código existente (5.2
+  Qualidade), **todo item se amarra a uma frase do plano**. A seção pode ser
+  curta ou reenquadrada ("que forma o primeiro código precisa ter"); o que não
+  pode é encher com conselho que serviria para qualquer software, para parecer
+  do mesmo tamanho das outras.
+
+  > Reescrito depois da T1. A primeira versão exigia "dizer que a seção está
+  > curta" — prescrição de solução, não propriedade, e a terceira vez que este
+  > projeto tropeça nisso. A rubrica reescrita continua reprovando a sessão de
+  > hoje, que é como se sabe que não houve afrouxamento.
 
 - **REQ-006** — Uma fixture de eval cobre o caso greenfield, e a suíte continua
   verde por inteiro.

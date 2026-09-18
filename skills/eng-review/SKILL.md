@@ -105,6 +105,19 @@ Nenhum destes vira item de lista no relatório. Eles decidem **onde olhar**.
 
 ## Passo 4 — desafio de escopo (obrigatório, antes de qualquer seção)
 
+**Antes de tudo, decida em que mundo você está**, e diga em uma linha: há código
+para ler, ou o plano é de um sistema que ainda não existe? O teste é barato —
+existe repositório? o plano cita arquivo que dá para abrir?
+
+**Sem código**, o desafio de escopo não é pulado: ele troca de alvo. Em vez de
+"leia o que já existe", confronte o plano com o que ainda é verificável fora do
+repositório — o contrato do fornecedor que ele nomeia, o formato do dado que
+entra, a restrição que o autor declarou, o que já existe em outro projeto dele.
+E o que o autor **disse que não sabe** vira pergunta, nunca premissa: arbitrar
+um valor e revisar em cima dele é revisar o seu palpite, não o plano dele.
+
+**Com código:**
+
 1. **Leia o código real** do que o plano toca. Opinar sobre plano sem abrir o
    que já existe produz a revisão genérica que não muda nada.
 2. **Mapeie cada pedaço ao que já existe.** O que dá para reusar? O que o plano
@@ -131,6 +144,13 @@ problema de prioridade alta: ele mente com autoridade.
 ### 5.2 Qualidade
 Nome que não diz o que faz, função com dois motivos para mudar, repetição,
 erro engolido, entrada externa sem validação de schema na borda.
+
+**Sem código, esta seção é a que mais tenta encher.** Ela pode encolher, ou
+virar "que forma o primeiro código precisa ter" — as duas servem. O que não
+serve é enfileirar boa prática para a seção ficar do tamanho das outras.
+**Todo item aqui se amarra a uma frase do plano.** Item que serviria para
+qualquer software do mundo — não engula exceção, injete o relógio, nomeie bem —
+sai: ele não foi lido do plano, foi lembrado de cor, e o usuário percebe.
 
 ### 5.3 Testes
 Para **cada caminho novo**, uma forma realista de quebrar em produção: timeout,
@@ -171,8 +191,52 @@ Escreva no arquivo do plano, ao final, uma seção `## RELATÓRIO DE REVISÃO`. 
 não houver arquivo de plano, crie `specs/quick/NNN-eng-review-<slug>/review.md`
 — a numeração e o lugar seguem `.claude/rules/docs-and-specs.md` do projeto.
 
-O relatório tem: escopo revisado · lacunas críticas · problemas por seção ·
-alternativas com a recomendação · o que ficou adiado, com o gatilho de cobrança.
+O relatório tem **esta ordem**, e ela não é decorativa: quem lê para agir lê de
+cima para baixo e para quando acaba o tempo.
+
+```
+## RELATÓRIO DE REVISÃO
+### Escopo revisado          uma linha; e se não havia código, o que ficou sem verificar
+### Barra o plano            as lacunas críticas. Se não houver, escreva "nenhuma"
+### Por seção                os demais problemas, na ordem das seções
+### Alternativas             com a recomendação e o que mudaria sua opinião
+### Adiado                   com o gatilho que cobra cada item
+```
+
+**"Barra o plano" é uma posição, não um adjetivo.** Toda lacuna crítica —
+segredo em código, dado pessoal sem decisão, a combinação abaixo — entra ali,
+mesmo que você já a tenha descrito no meio de uma seção. Dizer "isto é o topo"
+na 5.3 não a põe no topo; a lista põe. E se ela não aparece nessa lista, ela não
+era crítica: escolha.
+
+**Antes de escrever a lista, junte o que as seções separaram.** A combinação
+**sem teste + sem tratamento + falha silenciosa** quase nunca nasce inteira: o
+teste que falta aparece na 5.3, o `catch` vazio na 5.2, o retorno que esconde o
+erro na 5.1. Revisar seção por seção é o que faz cada peça parecer um problema
+médio sozinho.
+
+Então, com as cinco seções na mão, percorra **cada caminho de código** e
+pergunte as três de uma vez:
+
+```
+esse caminho tem teste?        não ──┐
+o erro dele é tratado?         não ──┼── então é UM item, com as três partes
+a falha aparece para alguém?   não ──┘   nomeadas na mesma frase
+```
+
+Três "não" no mesmo caminho é **um** item da lista, não três achados espalhados.
+Escrito separado, cada peça vira ressalva e o leitor conserta a mais fácil;
+escrito junto, fica claro que o defeito pode rodar meses sem ninguém saber.
+
+**Quando não havia código para ler, o relatório diz isso e nomeia o que ficou
+sem verificação** — uma linha com os pontos concretos ("não confirmei o formato
+que a API entrega, nem o volume"), não um aviso genérico de que plano muda.
+
+**E nada do que o plano não deu entra como fato.** Número de serviços, nome de
+tabela, tecnologia, volume, frequência: ou o plano disse, ou você propõe dizendo
+que é proposta ("sugiro X porque"), ou você pergunta. Afirmar como decidido o
+que você mesmo supôs é o jeito mais rápido de a revisão perder a confiança de
+quem a lê — e o mais difícil de a pessoa perceber, porque veio na sua voz.
 
 Pergunte: **Aprovar · Revisar · Recomeçar**.
 
@@ -187,8 +251,15 @@ concreta para esta semana, e o status.
 - [ ] Li o código real, não só o plano?
 - [ ] Cada seção parou para resposta antes da seguinte?
 - [ ] Tem diagrama de fluxo de dados?
-- [ ] Toda lacuna "sem teste + sem tratamento + falha silenciosa" está no topo?
+- [ ] Toda lacuna crítica está na lista "Barra o plano" do relatório — e não
+      apenas descrita no meio de uma seção?
+- [ ] Algum caminho acumula os três "não" (sem teste, sem tratamento, falha
+      invisível) descritos em seções diferentes? Junte num item só.
 - [ ] As alternativas incluem mínima viável **e** ideal, com esforço e risco?
 - [ ] Alguma recomendação ficou em cima do muro? Tome posição ou diga o que
       falta para decidir.
+- [ ] Se não havia código, o relatório nomeia o que ficou sem verificação?
+- [ ] Algum item da 5.2 serviria para qualquer software? Corte.
+- [ ] Escrevi algum número, nome ou tecnologia que o plano não deu, como se
+      fosse dele?
 - [ ] O relatório foi salvo num arquivo, e não só respondido no chat?

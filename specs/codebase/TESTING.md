@@ -108,9 +108,15 @@ propósito: o que elas medem — parar no portão, empurrar por especificidade �
 acontece no primeiro. Conduzir a sessão esconderia exatamente isso.
 
 **Custo:** com driver, um eval é `maxTurns` sessões do modelo sujeito, e o
-contexto cresce a cada turno. `maxTurns: 7` em Opus é a chamada mais cara da
-suíte. O teto do `check` é 12, e passar disso é dinheiro queimado — se o
-protocolo não fechou em doze turnos, o problema é o protocolo.
+contexto cresce a cada turno. As fixtures com relatório rodam em 9, que é a
+chamada mais cara da suíte. O teto do `check` é 12, e passar disso é dinheiro
+queimado — se o protocolo não fechou em doze turnos, o problema é o protocolo.
+
+**O teto é orçamento, não asserção.** Quando a skill ganha um passo, o protocolo
+passa a precisar de mais turnos e a fixture fica vermelha com a mensagem "não
+chegou a … em N turno(s)". Subir o teto nesse caso não afrouxa teste nenhum: a
+asserção que vale — o relatório existe, em arquivo — continua a mesma. Já se a
+sessão fica sem chegar ao fim com doze, o protocolo é que está longo demais.
 
 ## Variáveis
 
