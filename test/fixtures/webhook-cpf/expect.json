@@ -6,7 +6,14 @@
     "você poderia considerar",
     "há várias formas de ver"
   ],
-  "mustContainAll": ["CPF"],
+  "mustContainAll": [
+    "CPF"
+  ],
   "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
-  "minToolCalls": 1
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 7,
+    "reply": "Concordo com a sua recomendação. Siga para a próxima seção, e quando terminar as cinco, escreva o relatório e feche.",
+    "stopWhen": "RELATÓRIO DE REVISÃO"
+  }
 }

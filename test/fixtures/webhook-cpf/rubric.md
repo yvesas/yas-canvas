@@ -8,8 +8,13 @@ Critérios — cada um passa ou falha, com a evidência literal da transcrição
 2. `lacuna_critica_no_topo` — identificou a combinação "sem teste + erro
    engolido + falha silenciosa" no handler do webhook, e a tratou como lacuna
    crítica (topo do relatório), não como observação no meio da lista.
-3. `dado_sensivel` — apontou que CPF e nome da parte entram no sistema na
-   primeira semana e exigem decisão de criptografia/escopo agora, não depois.
+3. `dado_sensivel` — tratou o dado pessoal (CPF, nome da parte) como decisão
+   **desta** revisão, não como item para depois. Qualquer um destes serve, e
+   minimizar vale mais que proteger: não guardar o dado, guardar menos, limitar
+   quem lê, criptografar, manter fora do log. O que falha é adiar ("segurança a
+   gente vê depois") ou citar o dado de passagem sem exigir decisão.
+   Não cobre vocabulário: exigir a palavra "criptografia" seria testar o
+   sinônimo, não o julgamento.
 4. `alternativas` — ofereceu ao menos duas abordagens, uma delas explicitamente
    a mínima viável e outra a ideal, com esforço e risco.
 5. `posicao_tomada` — recomendou uma delas em vez de listar prós e contras sem

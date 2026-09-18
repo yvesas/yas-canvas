@@ -82,8 +82,13 @@ Toda sessão termina com três coisas, nesta ordem:
 
 1. **O que eu ouvi** — duas ou três citações literais do que a pessoa disse.
    Literais: a palavra dela vale mais que a sua paráfrase.
-2. **Uma tarefa concreta** para esta semana. Uma. Com o arquivo, o comando ou
-   a conversa que ela precisa ter.
+2. **Uma tarefa concreta** para esta semana. **Uma.** Com o arquivo, o comando
+   ou a conversa que ela precisa ter.
+
+   Uma quer dizer uma. "E, enquanto isso, comece por X" são duas — e duas
+   tarefas viram nenhuma, porque a pessoa escolhe a mais fácil e esquece a que
+   importava. Se você está em dúvida entre duas, essa dúvida é sua para
+   resolver: escolha a que destrava a outra e diga por quê.
 3. **Status**, em uma palavra:
    - `PRONTO` — terminou, com evidência.
    - `PRONTO_COM_RESSALVAS` — terminou; liste as ressalvas.

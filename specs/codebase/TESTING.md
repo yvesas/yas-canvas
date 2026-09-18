@@ -36,9 +36,9 @@ pior que skill não instalada: ela só falha na frente do usuário.
 Cada fixture é uma pasta em `test/fixtures/`:
 
 ```
-prompt.txt    o que o usuário diz (começa por /skill)
+prompt.txt    o que o usuário diz no primeiro turno (começa por /skill)
 plan.md       (e outros arquivos) o material que a sessão vê
-expect.json   as checagens determinísticas
+expect.json   as checagens determinísticas — e o driver, quando houver
 rubric.md     os critérios que o modelo juiz aplica, com id por critério
 ```
 
@@ -81,12 +81,36 @@ comando e torcer.
 — e joga fora a evidência das primeiras falhas. Já aconteceu na primeira rodada.
 Rode sem cano, ou com `tee arquivo`.
 
-## Limitação conhecida: um turno só
+## O driver: conduzir a sessão por vários turnos
 
-O protocolo do `/eng-review` para a cada seção esperando a resposta do usuário.
-`claude -p` executa **um turno**. Hoje a fixture só consegue afirmar sobre o que
-cabe nesse turno; cobrar o fechamento dela é cobrar o que a skill não deve fazer
-sozinha. O eval multi-turno é o item 1 do roadmap.
+O protocolo destas skills é interativo — uma seção por vez, parando para a
+resposta — e `claude -p` executa **um turno**. A primeira versão desta bancada
+cobrava, num turno só, o que a skill só faz em vários: a fixture ficava vermelha
+por defeito do teste.
+
+Fixture que precisa atravessar o protocolo inteiro declara um `driver`:
+
+```json
+"driver": {
+  "maxTurns": 7,
+  "reply": "Concordo com a sua recomendação. Siga para a próxima seção…",
+  "stopWhen": "RELATÓRIO DE REVISÃO"
+}
+```
+
+O runner abre o turno 1 com `--session-id` e continua com `--resume`, mandando
+a mesma resposta até aparecer o `stopWhen` ou acabar o teto. É o usuário dizendo
+"concordo, segue" — que é o que o protocolo espera receber. Não chegou ao
+`stopWhen`? Falha determinística, com o número de turnos na mensagem.
+
+**Driver é opção, não padrão.** `no-target` e `vague-scale` rodam em um turno de
+propósito: o que elas medem — parar no portão, empurrar por especificidade —
+acontece no primeiro. Conduzir a sessão esconderia exatamente isso.
+
+**Custo:** com driver, um eval é `maxTurns` sessões do modelo sujeito, e o
+contexto cresce a cada turno. `maxTurns: 7` em Opus é a chamada mais cara da
+suíte. O teto do `check` é 12, e passar disso é dinheiro queimado — se o
+protocolo não fechou em doze turnos, o problema é o protocolo.
 
 ## Variáveis
 

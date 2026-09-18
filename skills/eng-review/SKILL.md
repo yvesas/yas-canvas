@@ -87,8 +87,10 @@ Nenhum destes vira item de lista no relatório. Eles decidem **onde olhar**.
    ou um que nós mesmos criamos três decisões atrás?
 5. **Sistemas, não heróis.** O desenho precisa funcionar para alguém cansado às
    três da manhã, não para o melhor dev no melhor dia.
-6. **A fronteira segue o time.** Duas pessoas, três serviços é um erro de
-   organização virando erro de arquitetura.
+6. **A fronteira segue o time.** Mais serviços do que gente para cuidar deles é
+   erro de organização virando erro de arquitetura. Pergunte quantos são e quem
+   cuida de cada um — **e não escreva um número que o plano não deu**: exemplo
+   seu citado duas vezes vira fato do usuário na terceira.
 7. **O dado sensível chega antes do produto ficar pronto.** Se algo pessoal
    entra no sistema na primeira semana, o escopo e a criptografia são desta
    revisão, não da próxima.

@@ -1,4 +1,4 @@
-# Estado — 2026-09-18 (fim do dia)
+# Estado — 2026-09-18 (fim do dia, 2ª revisão)
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
@@ -7,38 +7,57 @@
 Fundação e evals mergeados na `main` via PR #1. Repositório em
 `github.com/yvesas/yas-canvas`, privado, remote em SSH.
 
-`npm run check` passa. A suíte de evals **não**: 4 de 6 passam, e as duas que
-falham são a fixture `webhook-cpf` — ver abaixo, porque o motivo é bom.
+`npm run check` passa e a suíte de evals passa inteira: **6 de 6**, com a
+`webhook-cpf` conduzida por sete turnos. Levou três rodadas para chegar lá, e
+cada rodada ensinou algo diferente — ver abaixo.
 
 Nada foi instalado em `~/.claude/skills` ainda — só `bin/install --check`.
 
-## O que a primeira rodada de evals ensinou
+## O que as três rodadas de eval ensinaram
 
 `no-target` e `vague-scale` passaram nas duas camadas. `webhook-cpf` falhou, e
 o veredito do juiz aponta três coisas distintas — só uma é defeito da skill:
 
-**1. O eval está mal desenhado (meu erro).** O protocolo é interativo por
+**Rodada 1 — o eval estava mal desenhado (meu erro).** O protocolo é interativo por
 construção: uma seção por vez, parando para a resposta. `claude -p` é **um
 turno**. A sessão fez o certo — revisou a 5.1, parou e disse "responda e eu sigo
 para 5.2 Qualidade" — e a rubrica cobrou dela, no mesmo turno, alternativas
 rotuladas, decisão sobre CPF (que é da 5.4), relatório salvo e a tarefa de
 fechamento. A fixture cobra o que a skill não deve fazer num turno só.
 
-Conserto de verdade: **eval multi-turno**, alimentando respostas roteirizadas
-(`--input-format stream-json` ou `--resume`). Paliativo: cada fixture afirmar só
-sobre o trecho de protocolo que cabe no turno dela.
+Consertado: o runner abre o turno 1 com `--session-id` e continua com
+`--resume`, mandando a resposta roteirizada da fixture até o marco de parada.
+`no-target` e `vague-scale` seguem de um turno só, de propósito.
 
-**2. Falta um caso na skill (defeito real).** O `Passo 4` manda ler o código
+**Ainda aberto — falta um caso na skill.** O `Passo 4` manda ler o código
 real antes de opinar. A fixture é um plano de sistema que **ainda não existe**,
 e a sessão registrou "não tenho o código" e seguiu. A skill não diz o que fazer
 quando não há código para ler — e plano de coisa nova é metade dos casos reais.
 
-**3. Um sinal a confirmar.** O plano diz, com todas as letras, "sem teste no
-handler por enquanto". A lacuna crítica do topo citou o `catch` que engole e o
-dado perdido, mas não nomeou a ausência de teste. Pode ser porque a seção 5.3
-nunca rodou (ver item 1). Só dá para saber depois do eval multi-turno.
+**Resolvido pelo multi-turno.** A ausência de teste no handler não aparecia
+porque a seção 5.3 nunca chegava a rodar.
 
-**4. Footgun meu, na coleta.** Rodei a suíte com `| tail -60`: o exit code
+**Rodada 2 — duas rubricas erradas e um contrato frouxo.** A rubrica cobrava a
+palavra "criptografia": vocabulário, não julgamento — e *minimizar* o dado é
+resposta melhor que criptografá-lo. E o preâmbulo dizia "uma tarefa" com folga
+suficiente para a skill entregar a principal mais um "enquanto isso, comece
+por X". Duas tarefas viram nenhuma.
+
+**Rodada 3 — dois defeitos da bancada e um vazamento da skill.**
+
+- O teto de ferramentas contava *qualquer* chamada e reprovou a sessão por um
+  `ToolSearch`, que carrega schema e não lê nada. Agora conta só ferramenta de
+  investigação (`maxInvestigativeCalls`). Teste que reprova comportamento certo
+  perde a confiança de quem lê o resultado.
+- O juiz **deduzia** uso de ferramenta a partir da prosa e acusou um `git` que
+  nunca rodou. Agora ele recebe a lista de chamadas como fato, com instrução de
+  julgar a lista e não o texto.
+- O instinto nº 6 da skill dizia "duas pessoas, três serviços". O modelo ecoou
+  o número e depois reafirmou "os três serviços" como fato do plano, que nunca
+  disse quantos eram. **Exemplo citado duas vezes vira dado do usuário na
+  terceira** — o instinto perdeu o numeral e ganhou o aviso.
+
+**Footgun da coleta.** Rodei a suíte com `| tail -60`: o exit code
 virou o do `tail` (0, parecendo verde) e a evidência das primeiras falhas foi
 jogada fora. Eval se roda sem cano, ou com `tee`.
 
@@ -69,8 +88,7 @@ jogada fora. Eval se roda sem cano, ou com `tee`.
 
 ## Perguntas em aberto para o Yves
 
-1. Conserto do eval multi-turno **antes** da próxima role, ou escrevo
-   `/cto-canvas` e conserto os dois evals juntos? O risco de adiar é escrever a
-   segunda role em cima de um esqueleto que ainda não foi medido de verdade.
+1. Com a bancada verde, a próxima é `/cto-canvas` ou o caso "não há código para
+   ler" do `/eng-review`? O segundo é pequeno e fecha um buraco conhecido.
 2. O `/design-review` cobre design visual e UX na mesma skill, ou os dois
    papéis ficam separados como estão no roteador hoje?
