@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# Instala as skills deste pack.
+#
+#   bin/install                    → ~/.claude/skills  (o usuário; o padrão)
+#   bin/install --check            → mostra o que mudaria, sem escrever
+#   bin/install --project <caminho> → .claude/skills de um repositório
+#
+# Por que no usuário, e não no repositório: método viaja com a pessoa. Estas
+# skills servem numa conversa com um fundador que ainda não tem repo. As guardas
+# — hook, permissão, regra de commit — é que viajam com o código, e essas vêm do
+# outro baseline.
+#
+# O preâmbulo é copiado para dentro de cada skill de propósito: uma fonte no
+# repositório, cópias sobrescritas a cada instalação. Ver docs/adr/0001.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+target="$HOME/.claude/skills"
+check_only=false
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --check) check_only=true ;;
+    --project)
+      shift
+      [ -n "${1:-}" ] || { echo "⛔ --project exige um caminho" >&2; exit 1; }
+      [ -d "$1" ] || { echo "⛔ '$1' não existe" >&2; exit 1; }
+      target="$(cd "$1" && pwd)/.claude/skills"
+      ;;
+    -*) echo "⛔ opção desconhecida: $1" >&2; exit 1 ;;
+    *) echo "⛔ argumento inesperado: $1" >&2; exit 1 ;;
+  esac
+  shift
+done
+
+# Skill quebrada instalada é pior que skill não instalada: ela só falha na
+# frente do usuário, no meio de uma sessão.
+node "$ROOT/scripts/check.mjs" >/dev/null || {
+  echo "⛔ a validação estática falhou — rode 'npm run check' e conserte antes de instalar." >&2
+  exit 1
+}
+
+changed=0
+unchanged=0
+
+copy() {
+  src="$1"; dst="$2"; rel="${dst#"$target"/}"
+  if [ -f "$dst" ] && cmp -s "$src" "$dst"; then
+    unchanged=$((unchanged + 1))
+    return 0
+  fi
+  [ -f "$dst" ] && echo "  ~ $rel" || echo "  + $rel"
+  changed=$((changed + 1))
+  if [ "$check_only" = false ]; then
+    mkdir -p "$(dirname "$dst")"
+    cp "$src" "$dst"
+  fi
+}
+
+echo "yas-canvas → $target"
+[ "$check_only" = true ] && echo "(modo --check: nada será escrito)"
+echo
+
+for dir in "$ROOT"/skills/*/; do
+  name="$(basename "$dir")"
+  copy "$dir/SKILL.md" "$target/$name/SKILL.md"
+  copy "$ROOT/shared/preamble.md" "$target/$name/preamble.md"
+done
+
+echo
+if [ "$changed" -eq 0 ]; then
+  echo "✓ já está em dia ($unchanged arquivos)"
+elif [ "$check_only" = true ]; then
+  echo "→ $changed arquivo(s) mudariam · $unchanged em dia"
+else
+  echo "✓ $changed arquivo(s) instalados · $unchanged já estavam em dia"
+  echo "  Abra uma sessão nova do Claude Code para as skills aparecerem."
+fi
