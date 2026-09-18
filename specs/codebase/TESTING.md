@@ -75,6 +75,19 @@ O comando é `node --test test/*.test.mjs` (o que `npm test` faz). Se um dia a
 suíte migrar para `bun:test`, a migração é reescrever os imports — não trocar o
 comando e torcer.
 
+## Footgun: não canalize a saída do eval
+
+`npm run eval | tail -60` devolve o exit code do `tail` — **0, parecendo verde**
+— e joga fora a evidência das primeiras falhas. Já aconteceu na primeira rodada.
+Rode sem cano, ou com `tee arquivo`.
+
+## Limitação conhecida: um turno só
+
+O protocolo do `/eng-review` para a cada seção esperando a resposta do usuário.
+`claude -p` executa **um turno**. Hoje a fixture só consegue afirmar sobre o que
+cabe nesse turno; cobrar o fechamento dela é cobrar o que a skill não deve fazer
+sozinha. O eval multi-turno é o item 1 do roadmap.
+
 ## Variáveis
 
 `YAS_EVAL=1` liga · `YAS_EVAL_SUBJECT_MODEL` (padrão `opus`) ·
