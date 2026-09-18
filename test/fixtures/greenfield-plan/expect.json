@@ -1,0 +1,16 @@
+{
+  "descricao": "Plano de sistema que não existe: nenhum código para ler, e lacunas que convidam o revisor a preencher com palpite. A skill precisa tratar a condição — declarar o que ficou sem verificar e perguntar em vez de assumir — em vez de revisar como se tivesse o repositório na frente.",
+  "mustNotContainAny": [
+    "é uma abordagem interessante",
+    "você poderia considerar",
+    "há várias formas de ver",
+    "ótimo plano"
+  ],
+  "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 7,
+    "reply": "Concordo com a sua recomendação. Siga para a próxima seção, e quando terminar as cinco, escreva o relatório e feche.",
+    "stopWhen": "RELATÓRIO DE REVISÃO"
+  }
+}
