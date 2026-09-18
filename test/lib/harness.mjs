@@ -9,6 +9,7 @@
 // Nada aqui roda no hook: eval custa dinheiro e demora. É `npm run eval`,
 // à mão, e no CI só quando alguém pedir.
 import { spawnSync } from "node:child_process";
+import { randomUUID } from "node:crypto";
 import { mkdtempSync, mkdirSync, cpSync, readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
@@ -23,6 +24,17 @@ const SUBJECT_MODEL = process.env.YAS_EVAL_SUBJECT_MODEL || "opus";
 const JUDGE_MODEL = process.env.YAS_EVAL_JUDGE_MODEL || "sonnet";
 const BUDGET_USD = process.env.YAS_EVAL_BUDGET_USD || "2";
 const TIMEOUT_MS = Number(process.env.YAS_EVAL_TIMEOUT_MS || 300000);
+
+// Ferramenta que olha o projeto. O portão de escopo proíbe ISTO antes da
+// pergunta — não "chamar ferramenta". Contar tudo reprovava a sessão por um
+// ToolSearch, que carrega schema e não lê arquivo nenhum: teste medindo o
+// sintoma errado reprova comportamento correto, que é como um teste perde a
+// confiança de quem o lê.
+export const INVESTIGATIVE_TOOLS = new Set([
+  "Read", "Grep", "Glob", "LS", "Bash", "BashOutput",
+  "Edit", "Write", "MultiEdit", "NotebookEdit",
+  "WebFetch", "WebSearch", "Agent", "Task",
+]);
 
 export function claudeAvailable() {
   return spawnSync("claude", ["--version"], { encoding: "utf8" }).status === 0;
@@ -93,10 +105,9 @@ function parseStream(stdout) {
   return { text: [...text, result].join("\n\n"), toolCalls };
 }
 
-export function runSubject(fixture) {
-  const cwd = stageProject(fixture);
-  const args = [
-    "-p", fixture.prompt,
+function claudeArgs(extra) {
+  return [
+    ...extra,
     "--output-format", "stream-json",
     "--verbose",
     "--model", SUBJECT_MODEL,
@@ -107,12 +118,60 @@ export function runSubject(fixture) {
     "--disallowedTools", "WebSearch", "WebFetch",
     "--max-budget-usd", BUDGET_USD,
   ];
+}
 
-  const run = spawnSync("claude", args, { cwd, encoding: "utf8", timeout: TIMEOUT_MS, maxBuffer: 64 * 1024 * 1024 });
-  if (run.error) throw new Error(`claude não rodou para '${fixture.name}': ${run.error.message}`);
+// O protocolo destas skills é interativo: uma seção por vez, parando para a
+// resposta. `claude -p` é um turno só, então a primeira versão desta bancada
+// cobrava da sessão, num turno, o que a skill só faz em vários — e a fixture
+// ficava vermelha por defeito do teste, não da skill.
+//
+// Aqui a sessão é conduzida: turno 1 com `--session-id`, os seguintes com
+// `--resume`, mandando a resposta roteirizada da fixture até aparecer o marco
+// de parada (`stopWhen`) ou acabar o teto de turnos. É o usuário dizendo
+// "concordo, segue" — que é exatamente o que o protocolo espera receber.
+export function runSubject(fixture) {
+  const cwd = stageProject(fixture);
+  const sessionId = randomUUID();
+  const driver = fixture.expect.driver;
 
-  const parsed = parseStream(run.stdout || "");
-  return { ...parsed, cwd, stderr: run.stderr, status: run.status };
+  const text = [];
+  const toolCalls = [];
+  let turns = 0;
+  let reachedStop = false;
+
+  const turn = (args) => {
+    const run = spawnSync("claude", claudeArgs(args), {
+      cwd,
+      encoding: "utf8",
+      timeout: TIMEOUT_MS,
+      maxBuffer: 64 * 1024 * 1024,
+    });
+    if (run.error) throw new Error(`claude não rodou para '${fixture.name}': ${run.error.message}`);
+    const parsed = parseStream(run.stdout || "");
+    text.push(parsed.text);
+    toolCalls.push(...parsed.toolCalls);
+    turns += 1;
+    return run;
+  };
+
+  turn(["-p", fixture.prompt, "--session-id", sessionId]);
+
+  if (driver) {
+    const maxTurns = driver.maxTurns ?? 5;
+    while (turns < maxTurns) {
+      if (driver.stopWhen && text.join("\n").includes(driver.stopWhen)) {
+        reachedStop = true;
+        break;
+      }
+      turn(["-p", driver.reply, "--resume", sessionId]);
+    }
+    if (!reachedStop && driver.stopWhen) {
+      reachedStop = text.join("\n").includes(driver.stopWhen);
+    }
+  }
+
+  const investigative = toolCalls.filter((t) => INVESTIGATIVE_TOOLS.has(t.name));
+  return { text: text.join("\n\n"), toolCalls, investigative, cwd, turns, reachedStop, driver };
 }
 
 // --- camada 1: o que dá para afirmar sem gastar token ------------------------
@@ -127,12 +186,20 @@ export function deterministicFailures(fixture, session) {
   for (const needle of e.mustNotContainAny || []) {
     if (haystack.includes(needle.toLowerCase())) problems.push(`disse o que não devia: "${needle}"`);
   }
-  if (typeof e.maxToolCalls === "number" && session.toolCalls.length > e.maxToolCalls) {
-    const nomes = session.toolCalls.map((t) => t.name).join(", ");
-    problems.push(`usou ${session.toolCalls.length} ferramenta(s) (teto ${e.maxToolCalls}): ${nomes}`);
+  if (typeof e.maxInvestigativeCalls === "number" && session.investigative.length > e.maxInvestigativeCalls) {
+    const nomes = session.investigative.map((t) => t.name).join(", ");
+    problems.push(
+      `investigou ${session.investigative.length} vez(es) (teto ${e.maxInvestigativeCalls}): ${nomes}`,
+    );
   }
   if (typeof e.minToolCalls === "number" && session.toolCalls.length < e.minToolCalls) {
     problems.push(`usou ${session.toolCalls.length} ferramenta(s), esperado ao menos ${e.minToolCalls}`);
+  }
+  if (e.driver?.stopWhen && !session.reachedStop) {
+    problems.push(
+      `a sessão não chegou a "${e.driver.stopWhen}" em ${session.turns} turno(s) — ` +
+        `o protocolo não fechou, ou o teto de turnos é baixo demais`,
+    );
   }
   if (e.mustWriteFileContaining) {
     if (!wroteFileContaining(session.cwd, e.mustWriteFileContaining)) {
@@ -188,6 +255,15 @@ export function judge(fixture, session) {
     "",
     "## Critérios",
     fixture.rubric,
+    "",
+    "## Ferramentas que a sessão chamou, em ordem",
+    session.toolCalls.length
+      ? session.toolCalls.map((t, i) => `${i + 1}. ${t.name}`).join("\n")
+      : "(nenhuma)",
+    "",
+    "Esta lista é o fato. Não deduza uso de ferramenta a partir do texto: o",
+    "agente sabe o diretório e o estado do git pelo contexto da sessão, sem",
+    "rodar comando. Se a lista não traz a ferramenta, ela não foi chamada.",
     "",
     "## Transcrição",
     "<<<TRANSCRICAO",

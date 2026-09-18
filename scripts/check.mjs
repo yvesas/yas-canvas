@@ -124,7 +124,7 @@ const FIXTURES = join(ROOT, "test", "fixtures");
 const FIXTURE_FILES = ["prompt.txt", "rubric.md", "expect.json"];
 const EXPECT_KEYS = new Set([
   "descricao", "mustContainAll", "mustNotContainAny",
-  "mustWriteFileContaining", "maxToolCalls", "minToolCalls",
+  "mustWriteFileContaining", "maxInvestigativeCalls", "minToolCalls", "driver",
 ]);
 
 if (existsSync(FIXTURES)) {
@@ -147,6 +147,25 @@ if (existsSync(FIXTURES)) {
       }
       if (expect) {
         if (!expect.descricao) fail(`${rel}/expect.json`, "sem `descricao` — ela vira a mensagem de falha do teste");
+
+        // O driver conduz a sessão por vários turnos. Campo torto aqui custa
+        // uma rodada inteira de modelo para aparecer.
+        const d = expect.driver;
+        if (d !== undefined) {
+          if (typeof d !== "object" || d === null) {
+            fail(`${rel}/expect.json`, "`driver` precisa ser um objeto");
+          } else {
+            if (typeof d.reply !== "string" || !d.reply.trim()) {
+              fail(`${rel}/expect.json`, "`driver.reply` vazio — é a resposta que o usuário daria a cada seção");
+            }
+            if (typeof d.maxTurns !== "number" || d.maxTurns < 2 || d.maxTurns > 12) {
+              fail(`${rel}/expect.json`, "`driver.maxTurns` fora de 2..12 — abaixo não conduz, acima é dinheiro queimado");
+            }
+            if (d.stopWhen !== undefined && typeof d.stopWhen !== "string") {
+              fail(`${rel}/expect.json`, "`driver.stopWhen` precisa ser string");
+            }
+          }
+        }
         for (const key of Object.keys(expect)) {
           if (!EXPECT_KEYS.has(key)) fail(`${rel}/expect.json`, `chave desconhecida \`${key}\` — o harness ignora, e um teste que ignora expectativa mente`);
         }
