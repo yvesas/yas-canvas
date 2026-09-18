@@ -116,6 +116,66 @@ if (existsSync(routerFile)) {
   }
 }
 
+// --- fixtures de eval --------------------------------------------------------
+//
+// A camada barata valida a entrada da camada cara: fixture torta só aparece
+// depois de gastar uma sessão de modelo, e aí o erro parece da skill.
+const FIXTURES = join(ROOT, "test", "fixtures");
+const FIXTURE_FILES = ["prompt.txt", "rubric.md", "expect.json"];
+const EXPECT_KEYS = new Set([
+  "descricao", "mustContainAll", "mustNotContainAny",
+  "mustWriteFileContaining", "maxToolCalls", "minToolCalls",
+]);
+
+if (existsSync(FIXTURES)) {
+  const dirs = readdirSync(FIXTURES).filter((d) => statSync(join(FIXTURES, d)).isDirectory()).sort();
+  if (dirs.length === 0) warn("test/fixtures/", "nenhuma fixture — os evals não exercitam nada");
+
+  for (const dir of dirs) {
+    const rel = `test/fixtures/${dir}`;
+    for (const file of FIXTURE_FILES) {
+      if (!existsSync(join(FIXTURES, dir, file))) fail(rel, `falta ${file}`);
+    }
+
+    const expectPath = join(FIXTURES, dir, "expect.json");
+    if (existsSync(expectPath)) {
+      let expect;
+      try {
+        expect = JSON.parse(readFileSync(expectPath, "utf8"));
+      } catch (err) {
+        fail(`${rel}/expect.json`, `JSON inválido: ${err.message}`);
+      }
+      if (expect) {
+        if (!expect.descricao) fail(`${rel}/expect.json`, "sem `descricao` — ela vira a mensagem de falha do teste");
+        for (const key of Object.keys(expect)) {
+          if (!EXPECT_KEYS.has(key)) fail(`${rel}/expect.json`, `chave desconhecida \`${key}\` — o harness ignora, e um teste que ignora expectativa mente`);
+        }
+      }
+    }
+
+    const rubricPath = join(FIXTURES, dir, "rubric.md");
+    if (existsSync(rubricPath)) {
+      const ids = [...readFileSync(rubricPath, "utf8").matchAll(/^\d+\.\s+`([a-z0-9_]+)`/gm)].map((m) => m[1]);
+      if (ids.length === 0) fail(`${rel}/rubric.md`, "nenhum critério no formato `1. \`id\` — ...`; o juiz precisa de ids");
+      const seen = new Set();
+      for (const id of ids) {
+        if (seen.has(id)) fail(`${rel}/rubric.md`, `critério duplicado: \`${id}\``);
+        seen.add(id);
+      }
+    }
+
+    const promptPath = join(FIXTURES, dir, "prompt.txt");
+    if (existsSync(promptPath)) {
+      const invoked = (readFileSync(promptPath, "utf8").match(/^\/([a-z0-9-]+)/) || [])[1];
+      if (!invoked) {
+        warn(`${rel}/prompt.txt`, "não invoca skill nenhuma (/nome no começo) — o eval vira teste do modelo, não da skill");
+      } else if (!skills.includes(invoked)) {
+        fail(`${rel}/prompt.txt`, `invoca \`/${invoked}\`, que não existe em skills/`);
+      }
+    }
+  }
+}
+
 // --- saída -------------------------------------------------------------------
 for (const w of warnings) console.warn(`  ⚠ ${w}`);
 if (errors.length > 0) {

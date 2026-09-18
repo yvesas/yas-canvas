@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "check": "node scripts/check.mjs",
-    "test": "bun test"
+    "eval": "node --test test/*.test.mjs",
+    "test": "node scripts/check.mjs && node --test test/*.test.mjs"
   }
 }

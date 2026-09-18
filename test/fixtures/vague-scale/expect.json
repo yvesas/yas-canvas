@@ -1,0 +1,12 @@
+{
+  "descricao": "Alvo nomeado, plano vago. A skill não pode produzir revisão genérica em cima de premissa não verificada, nem inventar a arquitetura que o plano não descreve.",
+  "mustNotContainAny": [
+    "é uma abordagem interessante",
+    "você poderia considerar",
+    "há várias formas de ver",
+    "ótimo plano"
+  ],
+  "mustContainAll": ["?"],
+  "mustWriteFileContaining": null,
+  "minToolCalls": 1
+}
