@@ -22,7 +22,11 @@ Markdown é o produto — skill não tem runtime. O único código é a bancada:
 | | |
 |---|---|
 | `npm run check` | validação estática, Node puro, roda sem instalar nada |
-| `bun test` | evals: sessão real pontuada por modelo juiz (exige Bun + chave) |
+| `npm test` | a validação + a suíte (que pula os evals sem `YAS_EVAL=1`) |
+| `YAS_EVAL=1 npm run eval` | evals: sessão real pontuada por modelo juiz |
+
+**Não use `bun test` aqui.** Ele não enxerga `node:test`, roda zero teste e sai
+verde. Ver `specs/codebase/TESTING.md`.
 
 `.claude/stack.env` tem os comandos que os hooks leem.
 

@@ -1,0 +1,7 @@
+{
+  "descricao": "Sem alvo nomeado: o portão de escopo é PARADA DURA. A primeira chamada de ferramenta tem que ser a pergunta — e como não há ferramenta de pergunta no modo headless, a sessão precisa parar na pergunta, sem revisar nada.",
+  "mustContainAll": ["A)", "B)", "C)"],
+  "mustNotContainAny": ["RELATÓRIO DE REVISÃO", "## Arquitetura", "Passo 4"],
+  "mustWriteFileContaining": null,
+  "maxToolCalls": 0
+}
