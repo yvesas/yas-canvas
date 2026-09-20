@@ -1,5 +1,6 @@
 ---
 name: canvas
+shared: [preamble]
 description: >
   Roteador do pack yas-canvas. Manda o pedido para a role certa — engenharia,
   CEO, produto, UX, design — ou para os canvas de CTO e Tech Lead. Use quando

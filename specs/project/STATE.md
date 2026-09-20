@@ -1,94 +1,94 @@
-# Estado — 2026-09-18 (fim do dia, 2ª revisão)
+# Estado — 2026-09-20
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
 ## Onde estamos
 
-Fundação e evals mergeados na `main` via PR #1. Repositório em
-`github.com/yvesas/yas-canvas`, privado, remote em SSH.
+Fundação e evals estão na `main` (PR #1). A feature **0002 — protocolo de
+revisão** está pronta na branch `refactor/extract-review-protocol`, **sem commit
+e sem PR**: `npm run check` verde, `npm test` 7/7, e a suíte de evals fechou
+**8 de 8** na terceira rodada, sem nenhuma fixture tocada.
 
-`npm run check` passa e a suíte de evals passa inteira: **6 de 6**, com a
-`webhook-cpf` conduzida por sete turnos. Levou três rodadas para chegar lá, e
-cada rodada ensinou algo diferente — ver abaixo.
+O `/eng-review` saiu de 265 para **149** linhas. O que era formato de revisar
+virou `shared/review-protocol.md`, lido em runtime como o preâmbulo; cada skill
+declara no frontmatter o que precisa (`shared: [...]`) e o instalador copia só
+isso — ver ADR 0002. A segunda role agora nasce sem copiar esqueleto.
 
 Nada foi instalado em `~/.claude/skills` ainda — só `bin/install --check`.
 
-## O que as três rodadas de eval ensinaram
+## O que esta feature ensinou (e a `main` ainda não sabe)
 
-`no-target` e `vague-scale` passaram nas duas camadas. `webhook-cpf` falhou, e
-o veredito do juiz aponta três coisas distintas — só uma é defeito da skill:
+**Exemplo concreto dentro de uma regra é funcional, não ilustrativo.** A 4.2
+dizia "item que serviria para qualquer software — *não engula exceção, injete o
+relógio, nomeie bem* — sai". A compressão cortou os três exemplos por parecerem
+enfeite; na rodada seguinte a sessão produziu um item chamado "Nomes que o
+domínio já tem", que é o terceiro exemplo em pessoa. Exemplo ali é como o modelo
+reconhece a própria recaída.
 
-**Rodada 1 — o eval estava mal desenhado (meu erro).** O protocolo é interativo por
-construção: uma seção por vez, parando para a resposta. `claude -p` é **um
-turno**. A sessão fez o certo — revisou a 5.1, parou e disse "responda e eu sigo
-para 5.2 Qualidade" — e a rubrica cobrou dela, no mesmo turno, alternativas
-rotuladas, decisão sobre CPF (que é da 5.4), relatório salvo e a tarefa de
-fechamento. A fixture cobra o que a skill não deve fazer num turno só.
+**"Não invente fato" precisa listar o que conta como fato.** A lista cobria
+número, tabela, tecnologia, volume e frequência. A sessão afirmou que "a
+movimentação traz nome das partes, CPF e teor" sobre uma API que o autor do
+plano declara não conhecer — **conteúdo de payload** não estava na lista. Está
+agora, em três lugares que se cobrem: §2, §5 e a autoverificação.
 
-Consertado: o runner abre o turno 1 com `--session-id` e continua com
-`--resume`, mandando a resposta roteirizada da fixture até o marco de parada.
-`no-target` e `vague-scale` seguem de um turno só, de propósito.
+**O juiz não pode enxergar o próprio ambiente.** Rodando com `cwd` no
+repositório, ele leu no contexto dele que estava num repo git e usou isso para
+desmentir a sessão, que dizia a verdade sobre o projeto de teste (`mkdtemp`, sem
+git). A justificativa do veredito termina em "o critério é satisfeito (passa)" —
+e ele marcou falha. Agora roda em diretório vazio, com a instrução escrita.
+É o mesmo defeito da rodada 3 da feature anterior, por uma porta nova.
 
-**Ainda aberto — falta um caso na skill.** O `Passo 4` manda ler o código
-real antes de opinar. A fixture é um plano de sistema que **ainda não existe**,
-e a sessão registrou "não tenho o código" e seguiu. A skill não diz o que fazer
-quando não há código para ler — e plano de coisa nova é metade dos casos reais.
+**Refactor trouxe regra nova, e o spec jurava que não.** O `REQ-004` diz "o diff
+move texto, não inventa". Comparando com a `main`: a 4.2 longa ("sem código, esta
+seção é a que mais tenta encher") e o "nada do que o plano não deu entra como
+fato" **não existem lá** — nasceram na extração. São boas regras, e a rodada 1 de
+eval mostrou que ainda faltava uma (conteúdo de payload). O problema não é a
+regra nova; é o próximo leitor abrir o diff acreditando que ele só move texto, e
+ler como "isso já era assim" o que nunca foi. **Quando uma task promete não
+inventar nada, a promessa tem que valer ou ser corrigida por escrito.**
 
-**Resolvido pelo multi-turno.** A ausência de teste no handler não aparecia
-porque a seção 5.3 nunca chegava a rodar.
+**Teto de linha cobra em outro lugar.** As 149 linhas só couberam porque 14
+saíram do frontmatter (`allowed-tools` em forma compacta). Só apertando prosa o
+piso era ~160 — e o primeiro aperto foi justamente o que quebrou a 4.2.
 
-**Rodada 2 — duas rubricas erradas e um contrato frouxo.** A rubrica cobrava a
-palavra "criptografia": vocabulário, não julgamento — e *minimizar* o dado é
-resposta melhor que criptografá-lo. E o preâmbulo dizia "uma tarefa" com folga
-suficiente para a skill entregar a principal mais um "enquanto isso, comece
-por X". Duas tarefas viram nenhuma.
-
-**Rodada 3 — dois defeitos da bancada e um vazamento da skill.**
-
-- O teto de ferramentas contava *qualquer* chamada e reprovou a sessão por um
-  `ToolSearch`, que carrega schema e não lê nada. Agora conta só ferramenta de
-  investigação (`maxInvestigativeCalls`). Teste que reprova comportamento certo
-  perde a confiança de quem lê o resultado.
-- O juiz **deduzia** uso de ferramenta a partir da prosa e acusou um `git` que
-  nunca rodou. Agora ele recebe a lista de chamadas como fato, com instrução de
-  julgar a lista e não o texto.
-- O instinto nº 6 da skill dizia "duas pessoas, três serviços". O modelo ecoou
-  o número e depois reafirmou "os três serviços" como fato do plano, que nunca
-  disse quantos eram. **Exemplo citado duas vezes vira dado do usuário na
-  terceira** — o instinto perdeu o numeral e ganhou o aviso.
-
-**Footgun da coleta.** Rodei a suíte com `| tail -60`: o exit code
-virou o do `tail` (0, parecendo verde) e a evidência das primeiras falhas foi
-jogada fora. Eval se roda sem cano, ou com `tee`.
+**`ETIMEDOUT` não é veredito.** Uma fixture de **um turno só** estourou dez
+minutos: API lenta, não protocolo longo. Teto por turno agora é 15 min, e existe
+para o turno travado, não para o devagar.
 
 ## Decisões tomadas
 
+- **`shared/` declarado no frontmatter**, copiado pelo instalador (2026-09-20) —
+  ADR 0002. O portão de escopo fica *inline* em cada role de propósito: precisa
+  disparar antes de qualquer leitura, inclusive a do protocolo.
 - **Repo próprio, separado do baseline de convenções** (2026-09-18). Método
-  viaja com a pessoa; regra viaja com o repositório. O baseline é privado e
-  carrega material da empresa; este pack nasce para ser distribuível.
+  viaja com a pessoa; regra viaja com o repositório.
 - **Instalação no usuário** (`~/.claude/skills`), com `--project` como exceção.
-- **Markdown + Bun só na bancada.** Sem gerador de skill — ver ADR 0001.
-- **Prosa em português, nomes em inglês.** Tradução adiada, ver ROADMAP.
-- **Conteúdo autoral.** O método é escrito do zero a partir do framework de
-  liderança técnica (docs 21, 25, 26 em `docs_yaslab/`), sem herdar texto de
-  terceiro.
+- **Markdown, sem gerador de skill** — ADR 0001.
+- **Prosa em português, nomes de arquivo em inglês.** Tradução adiada, ver
+  ROADMAP.
+- **Conteúdo autoral**, escrito do zero a partir do framework de liderança
+  técnica (docs 21, 25, 26 em `docs_yaslab/`).
 
 ## Pendências e bloqueios
 
-- **Bun 1.4.2 instalado, e não é usado.** `bun test` executa o arquivo, não
-  enxerga os registros de `node:test` e sai com `0 pass, 0 fail` — verde sem
-  ter rodado nada. O comando é `node --test`. Ver `specs/codebase/TESTING.md`.
+- **A branch não foi commitada nem virou PR.** É o T4 da 0002, e é o próximo
+  passo mecânico.
+- **Bun 1.4.2 instalado, e não é usado.** `bun test` sai `0 pass, 0 fail` — verde
+  sem ter rodado nada. O comando é `node --test`. Ver `specs/codebase/TESTING.md`.
 - **O baseline instalado aqui veio de uma branch não mergeada** do repo de
-  convenções (`refactor/stack-agnostic-baseline`, PR #6). Quando o PR entrar,
-  rodar `claude-base/bin/install ../yas-canvas` de novo.
-- **Visibilidade.** O repositório nasceu **privado**. Distribuir (`npx skills
-  add`) exige decidir licença e separar o que é material de cliente.
-- **Validação com fundador real ainda não aconteceu.** É o teste que importa:
-  duas sessões de verdade antes de escrever a terceira role.
+  convenções (`refactor/stack-agnostic-baseline`, PR #6). Quando entrar, rodar
+  `claude-base/bin/install ../yas-canvas` de novo.
+- **Visibilidade.** O repositório é privado. Distribuir exige decidir licença e
+  separar o que é material de cliente.
+- **Validação com fundador real ainda não aconteceu.** Continua sendo o teste que
+  importa: duas sessões de verdade antes de escrever a terceira role.
 
 ## Perguntas em aberto para o Yves
 
-1. Com a bancada verde, a próxima é `/cto-canvas` ou o caso "não há código para
-   ler" do `/eng-review`? O segundo é pequeno e fecha um buraco conhecido.
-2. O `/design-review` cobre design visual e UX na mesma skill, ou os dois
-   papéis ficam separados como estão no roteador hoje?
+1. A próxima é `/cto-canvas` (a skill que é só sua) ou `/ceo-review`? O ROADMAP
+   diz canvas primeiro; nada mudou nesta feature que justifique inverter.
+2. O `/design-review` cobre design visual e UX na mesma skill, ou os dois papéis
+   ficam separados como estão no roteador hoje?
+3. A primeira role a usar o `review-protocol.md` vai mostrar se a divisão está no
+   lugar certo. Se a segunda role precisar de um bloco que hoje está na role, ele
+   é protocolo — e a hora de mover é lá, não agora.

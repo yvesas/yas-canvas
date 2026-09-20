@@ -1,13 +1,10 @@
 {
-  "descricao": "Alvo nomeado: a skill não deve perguntar o escopo, e o plano tem lacuna crítica clássica (sem teste + erro engolido + falha silenciosa) mais CPF em claro.",
+  "descricao": "Plano de sistema que não existe: nenhum código para ler, e lacunas que convidam o revisor a preencher com palpite. A skill precisa tratar a condição — declarar o que ficou sem verificar e perguntar em vez de assumir — em vez de revisar como se tivesse o repositório na frente.",
   "mustNotContainAny": [
-    "O que eu reviso?",
     "é uma abordagem interessante",
     "você poderia considerar",
-    "há várias formas de ver"
-  ],
-  "mustContainAll": [
-    "CPF"
+    "há várias formas de ver",
+    "ótimo plano"
   ],
   "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
   "minToolCalls": 1,

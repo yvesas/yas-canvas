@@ -75,6 +75,36 @@ O comando é `node --test test/*.test.mjs` (o que `npm test` faz). Se um dia a
 suíte migrar para `bun:test`, a migração é reescrever os imports — não trocar o
 comando e torcer.
 
+## Não rodar o que a mudança não pode quebrar
+
+```bash
+YAS_EVAL=1 npm run eval          # tudo — o gate antes do merge
+YAS_EVAL=1 npm run eval:changed  # só o que o diff alcança
+```
+
+Oito sessões de modelo para conferir uma vírgula em documentação é desperdício.
+Mas **o mapa não é um-para-um**, e é isso que o seletor sabe:
+
+| Mudou | Roda |
+|---|---|
+| `skills/<role>/SKILL.md` | as fixtures daquela role |
+| `test/fixtures/<f>/` | aquela fixture |
+| `shared/<algo>.md` | as fixtures das skills que **declaram** aquele arquivo |
+| `shared/preamble.md`, `test/lib/`, `scripts/check.mjs`, `bin/install` | **tudo** — alcança todas as skills, ou é a própria régua |
+| só `docs/`, `specs/`, `*.md` de raiz | nada |
+| o diff não pôde ser calculado | **tudo**, e diz por quê |
+
+Duas regras que não se negociam aqui, as duas pelo mesmo motivo — pular errado é
+como um gate desaparece sem ninguém ver:
+
+1. **Na dúvida, roda.** Diff indisponível, branch sem base, caminho que o mapa
+   não conhece: roda tudo.
+2. **O que foi pulado é dito em voz alta**, com o motivo, na saída do teste.
+   Fixture que some em silêncio é igual a fixture que não existe.
+
+O seletor tem teste próprio (`test/scope.test.mjs`), **grátis e sem modelo**:
+ele decide o que *não* rodar, então o erro dele nunca apareceria numa rodada.
+
 ## Footgun: não canalize a saída do eval
 
 `npm run eval | tail -60` devolve o exit code do `tail` — **0, parecendo verde**
@@ -108,15 +138,39 @@ propósito: o que elas medem — parar no portão, empurrar por especificidade �
 acontece no primeiro. Conduzir a sessão esconderia exatamente isso.
 
 **Custo:** com driver, um eval é `maxTurns` sessões do modelo sujeito, e o
-contexto cresce a cada turno. `maxTurns: 7` em Opus é a chamada mais cara da
-suíte. O teto do `check` é 12, e passar disso é dinheiro queimado — se o
-protocolo não fechou em doze turnos, o problema é o protocolo.
+contexto cresce a cada turno. As fixtures com relatório rodam em 9, que é a
+chamada mais cara da suíte. O teto do `check` é 12, e passar disso é dinheiro
+queimado — se o protocolo não fechou em doze turnos, o problema é o protocolo.
+
+**O teto é orçamento, não asserção.** Quando a skill ganha um passo, o protocolo
+passa a precisar de mais turnos e a fixture fica vermelha com a mensagem "não
+chegou a … em N turno(s)". Subir o teto nesse caso não afrouxa teste nenhum: a
+asserção que vale — o relatório existe, em arquivo — continua a mesma. Já se a
+sessão fica sem chegar ao fim com doze, o protocolo é que está longo demais.
 
 ## Variáveis
 
 `YAS_EVAL=1` liga · `YAS_EVAL_SUBJECT_MODEL` (padrão `opus`) ·
 `YAS_EVAL_JUDGE_MODEL` (padrão `sonnet`) · `YAS_EVAL_BUDGET_USD` (padrão `2`) ·
-`YAS_EVAL_TIMEOUT_MS` (padrão `300000`).
+`YAS_EVAL_TIMEOUT_MS` (padrão `900000`, **por turno**).
+
+O timeout é por turno, e a transcrição cresce a cada um: num protocolo de nove
+turnos com relatório em arquivo, o último turno é muito mais pesado que o
+primeiro. `ETIMEDOUT` derruba a fixture inteira e não diz nada sobre a skill —
+a mensagem do runner nomeia o teto e o que fazer. Dez minutos já derrubaram uma
+fixture de **um turno só**, que não tem protocolo longo nenhum: era a API lenta
+naquela hora. O teto existe para o turno travado, não para o turno devagar.
+
+## Footgun: o juiz não pode enxergar o próprio ambiente
+
+O juiz roda em diretório temporário vazio, de propósito. Rodando dentro do
+repositório, ele lê no próprio contexto de sessão que está num repo git — e
+usou isso como prova sobre a sessão julgada, reprovando o agente por dizer, com
+razão, que o projeto de teste **não** é um repo. O prompt diz isso em palavras
+e o `cwd` garante.
+
+É o mesmo defeito que a rodada 3 pegou por outra porta (juiz deduzindo uso de
+ferramenta a partir da prosa): **o juiz julga a transcrição, e só ela.**
 
 ## Quando escrever teste novo
 

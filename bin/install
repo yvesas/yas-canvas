@@ -10,8 +10,12 @@
 # — hook, permissão, regra de commit — é que viajam com o código, e essas vêm do
 # outro baseline.
 #
-# O preâmbulo é copiado para dentro de cada skill de propósito: uma fonte no
+# Os arquivos de `shared/` são copiados para dentro de cada skill: uma fonte no
 # repositório, cópias sobrescritas a cada instalação. Ver docs/adr/0001.
+#
+# Cada skill declara no frontmatter o que precisa (`shared: [preamble,
+# review-protocol]`) e recebe só isso. Um canvas não carrega protocolo de
+# revisão ao lado: arquivo que ninguém lê vira dúvida para quem mantém.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -64,7 +68,13 @@ echo
 for dir in "$ROOT"/skills/*/; do
   name="$(basename "$dir")"
   copy "$dir/SKILL.md" "$target/$name/SKILL.md"
-  copy "$ROOT/shared/preamble.md" "$target/$name/preamble.md"
+
+  # `shared: [preamble, review-protocol]` → um nome por linha.
+  shared="$(sed -n 's/^shared:[[:space:]]*\[\(.*\)\].*/\1/p' "$dir/SKILL.md" | tr ',' '\n' | tr -d ' ')"
+  for item in $shared; do
+    [ -n "$item" ] || continue
+    copy "$ROOT/shared/$item.md" "$target/$name/$item.md"
+  done
 done
 
 echo
