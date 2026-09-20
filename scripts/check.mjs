@@ -10,11 +10,17 @@ import { join } from "node:path";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const SKILLS = join(ROOT, "skills");
-const PREAMBLE = join(ROOT, "shared", "preamble.md");
+const SHARED = join(ROOT, "shared");
+const PREAMBLE = join(SHARED, "preamble.md");
 
 // Teto de linhas por skill. Skill que ninguém lê inteira não é seguida
 // inteira — e o agente paga o contexto de qualquer jeito.
 const MAX_LINES = 400;
+
+// Markdown quebra linha a cada ~80 colunas, então uma sentença inteira nunca
+// casa com `includes` cru. Comparar sem quebra é o que permite âncora longa —
+// e âncora precisa ser longa para não acusar cópia por coincidência.
+const flat = (t) => t.replace(/\s+/g, " ");
 
 const errors = [];
 const warnings = [];
@@ -29,19 +35,42 @@ const preamble = existsSync(PREAMBLE) ? readFileSync(PREAMBLE, "utf8") : "";
 
 // Frases do preâmbulo que não podem aparecer coladas dentro de uma skill.
 // Se aparecerem, alguém duplicou a fonte e as duas vão divergir.
-const FINGERPRINTS = [
-  "Concordar por educação destrói o valor da sessão inteira",
-  "Despejar seis perguntas de uma vez produz seis respostas rasas",
-  "Inventar API, comando ou comportamento é a falha mais cara",
-];
-for (const phrase of FINGERPRINTS) {
-  if (preamble && !preamble.includes(phrase)) {
-    fail("scripts/check.mjs", `a frase-âncora "${phrase.slice(0, 40)}…" sumiu do preâmbulo; atualize FINGERPRINTS junto`);
+const FINGERPRINTS = {
+  preamble: [
+    "Concordar por educação destrói o valor da sessão inteira",
+    "Despejar seis perguntas de uma vez produz seis respostas rasas",
+    "Inventar API, comando ou comportamento é a falha mais cara",
+  ],
+  // Âncora é sentença inteira e distintiva, nunca expressão curta: a primeira
+  // versão acusou cópia por causa de "aprovação com comentários", quatro
+  // palavras que qualquer texto sobre revisão usa — e acusar errado é como um
+  // validador ensina a ignorá-lo.
+  "review-protocol": [
+    "Opinar sem abrir o que existe produz a revisão genérica que não muda nada",
+    "arbitrar um valor e revisar em cima dele é revisar o seu palpite",
+    "quem lê para agir lê de cima para baixo e para quando acaba o tempo",
+  ],
+};
+
+const fingerprintsOf = (item) => FINGERPRINTS[item] || [];
+
+// Frase-âncora que sumiu da fonte deixa de proteger coisa nenhuma, em silêncio.
+for (const [item, phrases] of Object.entries(FINGERPRINTS)) {
+  const file = join(SHARED, `${item}.md`);
+  if (!existsSync(file)) {
+    fail(`shared/${item}.md`, "citado em FINGERPRINTS e não existe");
+    continue;
+  }
+  const content = flat(readFileSync(file, "utf8"));
+  for (const phrase of phrases) {
+    if (!content.includes(flat(phrase))) {
+      fail("scripts/check.mjs", `a frase-âncora "${phrase.slice(0, 40)}…" sumiu de ${item}.md; atualize FINGERPRINTS junto`);
+    }
   }
 }
 
 // --- frontmatter mínimo ------------------------------------------------------
-const REQUIRED = ["name", "description", "allowed-tools", "triggers"];
+const REQUIRED = ["name", "shared", "description", "allowed-tools", "triggers"];
 
 function frontmatter(text) {
   if (!text.startsWith("---\n")) return null;
@@ -82,13 +111,29 @@ for (const dir of skills) {
   const name = (fm.match(/^name:\s*(\S+)/m) || [])[1];
   if (name && name !== dir) fail(rel, `\`name: ${name}\` não bate com a pasta \`${dir}\``);
 
-  // O preâmbulo é lido, nunca copiado.
-  if (!/preamble\.md/.test(text)) {
-    fail(rel, "não manda ler o preamble.md — toda skill começa por ele");
+  // O contrato do compartilhado tem três lados, e todos os três são cobrados:
+  // o arquivo declarado existe, a skill manda lê-lo, e ninguém cola trecho.
+  const declared = ((fm.match(/^shared:\s*\[(.*)\]/m) || [])[1] || "")
+    .split(",")
+    .map((x) => x.trim())
+    .filter(Boolean);
+
+  if (!declared.includes("preamble")) {
+    fail(rel, "não declara `preamble` em `shared:` — toda skill começa por ele");
   }
-  for (const phrase of FINGERPRINTS) {
-    if (text.includes(phrase)) {
-      fail(rel, `copiou um trecho do preâmbulo ("${phrase.slice(0, 40)}…") — leia, não cole`);
+
+  for (const item of declared) {
+    if (!existsSync(join(SHARED, `${item}.md`))) {
+      fail(rel, `declara \`${item}\` em shared:, e shared/${item}.md não existe`);
+      continue;
+    }
+    if (!new RegExp(`${item}\\.md`).test(text)) {
+      fail(rel, `declara \`${item}\` e nunca manda lê-lo — arquivo copiado que ninguém abre`);
+    }
+    for (const phrase of fingerprintsOf(item)) {
+      if (flat(text).includes(flat(phrase))) {
+        fail(rel, `copiou um trecho de ${item}.md ("${phrase.slice(0, 40)}…") — leia, não cole`);
+      }
     }
   }
 

@@ -66,6 +66,12 @@ Inventar API, comando ou comportamento é a falha mais cara que existe aqui,
 porque o erro se propaga para o plano, para as tasks e para o código. Incerteza
 declarada é sempre melhor que certeza fabricada.
 
+**E isto vale para todo detalhe, não só para API:** número, contagem, nome de
+tabela, tecnologia, volume, prazo. Ou a pessoa disse, ou você propõe **dizendo
+que é proposta** ("sugiro X porque"), ou você pergunta. Escrever "as 40
+consultas" sobre um sistema que ninguém escreveu ainda não é ilustração — é
+uma afirmação que volta como decisão tomada três reuniões depois, na sua voz.
+
 ## A saída é um documento
 
 Sessão que termina só no chat evapora. Toda skill salva um arquivo — no lugar
