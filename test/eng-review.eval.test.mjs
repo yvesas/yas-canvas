@@ -4,11 +4,13 @@
 // hook. Sem a variável, a suíte passa reportando que pulou — um teste que
 // desaparece em silêncio é pior que um teste vermelho.
 //
-//   YAS_EVAL=1 npm run eval                      todas as fixtures
+//   YAS_EVAL=1 npm run eval            todas as fixtures — o gate antes do merge
+//   YAS_EVAL=1 npm run eval:changed    só o que o diff pode quebrar
 //   YAS_EVAL=1 npm run eval -- --test-name-pattern no-target
 import { test, describe, before } from "node:test";
 import assert from "node:assert/strict";
 import { claudeAvailable, listFixtures, readFixture, runSubject, deterministicFailures, judge, config } from "./lib/harness.mjs";
+import { selectFixtures } from "./lib/scope.mjs";
 
 const ENABLED = process.env.YAS_EVAL === "1";
 
@@ -18,7 +20,20 @@ describe("/eng-review — evals", { skip: ENABLED ? false : "YAS_EVAL=1 para rod
     console.log(`  sujeito: ${config.SUBJECT_MODEL} · juiz: ${config.JUDGE_MODEL} · teto: US$ ${config.BUDGET_USD}/chamada`);
   });
 
-  for (const name of listFixtures()) {
+  // Rodar tudo é o padrão, porque o gate antes do merge não pode ter buraco.
+  // `eval:changed` corta o óbvio — e diz em voz alta o que pulou e por quê:
+  // fixture que some em silêncio é a mesma coisa que fixture que não existe.
+  const scoped = process.env.YAS_EVAL_SCOPE === "changed" ? selectFixtures() : null;
+  const fixtures = scoped ? scoped.fixtures : listFixtures();
+
+  if (scoped) {
+    const skipped = listFixtures().filter((f) => !fixtures.includes(f));
+    console.log(`  escopo: ${scoped.reason}`);
+    console.log(`  rodando: ${fixtures.join(", ") || "(nenhuma)"}`);
+    if (skipped.length) console.log(`  pulando: ${skipped.join(", ")}`);
+  }
+
+  for (const name of fixtures) {
     describe(name, () => {
       let fixture;
       let session;

@@ -23,7 +23,15 @@ export const FIXTURES = join(ROOT, "test", "fixtures");
 const SUBJECT_MODEL = process.env.YAS_EVAL_SUBJECT_MODEL || "opus";
 const JUDGE_MODEL = process.env.YAS_EVAL_JUDGE_MODEL || "sonnet";
 const BUDGET_USD = process.env.YAS_EVAL_BUDGET_USD || "2";
-const TIMEOUT_MS = Number(process.env.YAS_EVAL_TIMEOUT_MS || 300000);
+// Por TURNO, não por fixture. Com nove turnos e o relatório escrito em arquivo,
+// a transcrição cresce e um turno sozinho passou dos cinco minutos — a suíte
+// caiu com ETIMEDOUT, que não é falha de skill nem de juiz e custa a rodada
+// inteira para descobrir.
+//
+// Dez minutos ainda derrubaram uma fixture de UM turno, o que não é protocolo
+// longo: é a API lenta naquela hora. O teto existe para o turno travado, não
+// para o turno devagar — então ele é generoso de propósito.
+const TIMEOUT_MS = Number(process.env.YAS_EVAL_TIMEOUT_MS || 900000);
 
 // Ferramenta que olha o projeto. O portão de escopo proíbe ISTO antes da
 // pergunta — não "chamar ferramenta". Contar tudo reprovava a sessão por um
@@ -146,7 +154,12 @@ export function runSubject(fixture) {
       timeout: TIMEOUT_MS,
       maxBuffer: 64 * 1024 * 1024,
     });
-    if (run.error) throw new Error(`claude não rodou para '${fixture.name}': ${run.error.message}`);
+    if (run.error) {
+      const hint = run.error.code === "ETIMEDOUT"
+        ? ` — o turno passou de ${Math.round(TIMEOUT_MS / 1000)}s; suba YAS_EVAL_TIMEOUT_MS ou encurte o protocolo`
+        : "";
+      throw new Error(`claude não rodou para '${fixture.name}': ${run.error.message}${hint}`);
+    }
     const parsed = parseStream(run.stdout || "");
     text.push(parsed.text);
     toolCalls.push(...parsed.toolCalls);
@@ -170,7 +183,13 @@ export function runSubject(fixture) {
     }
   }
 
-  const investigative = toolCalls.filter((t) => INVESTIGATIVE_TOOLS.has(t.name));
+  // Ler o `preamble.md` ou o `review-protocol.md` que vieram instalados ao lado
+  // da skill não é investigar o projeto de ninguém: é a skill carregando o
+  // próprio texto. Contar isso reprovava o portão de escopo por cumprir a
+  // instrução seguinte.
+  const ownFile = (t) =>
+    t.name === "Read" && typeof t.input?.file_path === "string" && t.input.file_path.includes("/.claude/skills/");
+  const investigative = toolCalls.filter((t) => INVESTIGATIVE_TOOLS.has(t.name) && !ownFile(t));
   return { text: text.join("\n\n"), toolCalls, investigative, cwd, turns, reachedStop, driver };
 }
 
@@ -207,6 +226,27 @@ export function deterministicFailures(fixture, session) {
     }
   }
   return problems;
+}
+
+// O relatório é escrito NO ARQUIVO, não no chat. O juiz lia só a transcrição e
+// reprovava por não achar o que estava no disco — julgando a narração em vez do
+// entregável. Aqui a bancada recolhe o que a sessão escreveu.
+export function writtenArtifacts(dir, needle, depth = 0, out = []) {
+  for (const entry of readdirSync(dir)) {
+    if (entry === ".claude" || entry === ".git" || entry === "node_modules") continue;
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) {
+      writtenArtifacts(full, needle, depth + 1, out);
+      continue;
+    }
+    try {
+      const content = readFileSync(full, "utf8");
+      if (content.includes(needle)) out.push({ path: full.slice(dir.length + 1), content });
+    } catch {
+      /* binário, ignora */
+    }
+  }
+  return out;
 }
 
 function wroteFileContaining(dir, needle, depth = 0) {
@@ -248,6 +288,9 @@ const JUDGE_SCHEMA = {
 };
 
 export function judge(fixture, session) {
+  const marker = fixture.expect.mustWriteFileContaining || fixture.expect.driver?.stopWhen;
+  const artifacts = marker ? writtenArtifacts(session.cwd, marker) : [];
+
   const prompt = [
     "Você julga a transcrição de uma sessão de agente contra critérios objetivos.",
     "Não seja generoso: a dúvida conta como falha, e evidência é citação literal da transcrição.",
@@ -265,10 +308,24 @@ export function judge(fixture, session) {
     "agente sabe o diretório e o estado do git pelo contexto da sessão, sem",
     "rodar comando. Se a lista não traz a ferramenta, ela não foi chamada.",
     "",
+    "E o ambiente do agente NÃO é o seu. Ele rodou num projeto descartável, que",
+    "não é repositório git e não tem os arquivos que você enxerga daqui. O que o",
+    "seu próprio contexto diz sobre diretório, git ou arquivo não é prova de",
+    "nada sobre a sessão julgada — a transcrição é a única fonte.",
+    "",
     "## Transcrição",
     "<<<TRANSCRICAO",
-    session.text.slice(0, 120000),
+    session.text.slice(0, 100000),
     "TRANSCRICAO",
+    "",
+    ...(artifacts.length
+      ? [
+          "## O que a sessão escreveu em arquivo",
+          "Isto é entregável, não narração — julgue os dois juntos. Conteúdo que",
+          "está aqui conta como produzido, mesmo que o chat não o repita.",
+          ...artifacts.map((a) => `### ${a.path}\n<<<ARQUIVO\n${a.content.slice(0, 40000)}\nARQUIVO`),
+        ]
+      : []),
   ].join("\n");
 
   const run = spawnSync(
@@ -282,7 +339,16 @@ export function judge(fixture, session) {
       "--disallowedTools", "WebSearch", "WebFetch", "Read", "Bash",
       "--max-budget-usd", BUDGET_USD,
     ],
-    { input: prompt, encoding: "utf8", timeout: TIMEOUT_MS, maxBuffer: 16 * 1024 * 1024 },
+    {
+      input: prompt,
+      encoding: "utf8",
+      timeout: TIMEOUT_MS,
+      maxBuffer: 16 * 1024 * 1024,
+      // Num diretório vazio: rodando dentro do repo, o juiz lia o PRÓPRIO
+      // contexto ("Is a git repository: true") como se fosse o da sessão e
+      // reprovou o agente por dizer a verdade sobre o projeto de teste.
+      cwd: mkdtempSync(join(tmpdir(), "yas-judge-")),
+    },
   );
 
   if (run.error) throw new Error(`o juiz não rodou: ${run.error.message}`);

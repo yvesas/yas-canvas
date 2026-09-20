@@ -7,6 +7,7 @@
   "scripts": {
     "check": "node scripts/check.mjs",
     "eval": "node --test test/*.test.mjs",
-    "test": "node scripts/check.mjs && node --test test/*.test.mjs"
+    "test": "node scripts/check.mjs && node --test test/*.test.mjs",
+    "eval:changed": "YAS_EVAL_SCOPE=changed node --test test/*.test.mjs"
   }
 }
