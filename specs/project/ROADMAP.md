@@ -2,6 +2,19 @@
 
 ## Entregue
 
+> Os quatro itens sem pasta em `specs/features/` são anteriores à numeração —
+> por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
+> renumerado: número gasto fica gasto.
+
+- **0002 — protocolo de revisão extraído** (2026-09-20,
+  `specs/features/0002-review-protocol/`): o que é formato de revisar saiu do
+  `/eng-review` e virou `shared/review-protocol.md`, lido em runtime como o
+  preâmbulo. Cada skill **declara** o que precisa (`shared: [...]`) e o
+  instalador copia só isso. A role caiu de 265 para **149** linhas sem perder
+  regra, e a segunda role nasce sem cópia. Ganhos que vieram junto: seletor de
+  fixture por diff (`npm run eval:changed`), juiz isolado do próprio ambiente,
+  e a regra de não afirmar como fato o que o fornecedor devolve. Suíte:
+  **8 de 8**.
 - **0001 — `/eng-review` sem código para ler** (2026-09-18): o `Passo 4` decide
   entre os dois mundos; o relatório ganhou esqueleto com "Barra o plano" em
   posição fixa; a combinação sem teste + sem tratamento + falha silenciosa é
