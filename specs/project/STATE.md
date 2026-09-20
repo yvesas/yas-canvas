@@ -4,10 +4,14 @@
 
 ## Onde estamos
 
-Fundação e evals estão na `main` (PR #1). A feature **0002 — protocolo de
-revisão** está pronta na branch `refactor/extract-review-protocol`, **sem commit
-e sem PR**: `npm run check` verde, `npm test` 7/7, e a suíte de evals fechou
-**8 de 8** na terceira rodada, sem nenhuma fixture tocada.
+As features **0001** (o `/eng-review` sem código para ler) e **0002**
+(protocolo de revisão extraído) estão na `main` desde 20/09, squashadas em
+`fd17a74` pelo PR #6. `npm run check` verde, `npm test` 7/7, evals **8 de 8** na
+terceira rodada, sem nenhuma fixture tocada.
+
+A 0001 tinha sido dada como entregue no ROADMAP em 18/09 e **estava só na
+branch** — o PR #6 levou as duas juntas. Vale a lição: "fechada" e "na `main`"
+são estados diferentes, e o ROADMAP não distingue um do outro sozinho.
 
 O `/eng-review` saiu de 265 para **149** linhas. O que era formato de revisar
 virou `shared/review-protocol.md`, lido em runtime como o preâmbulo; cada skill
@@ -71,8 +75,12 @@ para o turno travado, não para o devagar.
 
 ## Pendências e bloqueios
 
-- **A branch não foi commitada nem virou PR.** É o T4 da 0002, e é o próximo
-  passo mecânico.
+- **Nenhuma fixture de eval tem código.** As quatro são `plan.md`. Todo o
+  caminho "com código" do protocolo — ler o que o plano toca antes de opinar,
+  mapear o que dá para reusar, achar o que está sendo recriado por
+  desconhecimento — **nunca foi exercitado por teste nenhum**. As duas fixtures
+  multi-turno também respondem sempre a mesma frase, concordando: ninguém nunca
+  discordou da skill, mudou de assunto no meio nem desistiu na seção 2.
 - **Bun 1.4.2 instalado, e não é usado.** `bun test` sai `0 pass, 0 fail` — verde
   sem ter rodado nada. O comando é `node --test`. Ver `specs/codebase/TESTING.md`.
 - **O baseline instalado aqui veio de uma branch não mergeada** do repo de
