@@ -83,11 +83,15 @@ fazendo o papel de índice.
   próximo passo. Nunca escreve, nunca edita, nunca move (D-CANVAS-003).
   Ler só o frontmatter é barato e não depende de o controlador entender prosa.
 
-- **REQ-007 — A validação estática cobra o formato.**
-  WHEN `npm run check` roda, THEN ele SHALL falhar em arquivo de resposta sem
-  frontmatter obrigatório, com `status` fora do conjunto, ou com `parte` que não
-  existe na role que o escreveu.
-  O contrato entre skills é o formato; contrato sem validador diverge.
+- **REQ-007 — A validação estática cobra o que ela alcança.**
+  WHEN `npm run check` roda, THEN ele SHALL falhar se uma role de revisão não
+  declarar `parts:`, se uma parte declarada não for conduzida no corpo da skill,
+  ou se uma fixture que semeia estado tiver frontmatter inválido.
+  **Corrigido pelo `design.md` §8:** a primeira versão deste requisito mandava
+  validar "arquivo de resposta", e esses arquivos vivem no projeto **da
+  pessoa** — o `check` roda aqui e nunca os veria. Validador que promete o que
+  não alcança é pior que validador nenhum. Verificar a pasta de um projeto
+  qualquer seria comando de runtime, e é outra feature.
 
 - **REQ-008 — O eval cobre a volta, não só a ida.**
   WHEN a suíte roda, THEN SHALL existir fixture que **já nasce com respostas no

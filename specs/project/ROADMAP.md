@@ -35,11 +35,14 @@
   (`specs/features/0003-parts-menu-and-answers/`): cada parte de uma role fecha
   sozinha em arquivo, no projeto da pessoa (`specs/canvas/<role>/`); o menu
   mostra o que já fechou e sugere a próxima; o `/canvas` vira controlador que
-  **só lê** o frontmatter para saber onde a pessoa está. Especificado, sem
-  design nem tasks ainda.
+  **só lê** o frontmatter para saber onde a pessoa está.
 
-  **Vem antes da segunda role, de propósito.** O protocolo agora é `shared/`:
-  mexer nele depois de duas roles existirem é retrabalho em todas elas.
+  `spec.md`, `context.md` e `design.md` escritos; falta o `tasks.md`. A ordem de
+  implementação está no design §10, em cinco passos.
+
+  **Vem antes de tudo** (21/09), e antes da segunda role de propósito: o
+  protocolo agora é `shared/`, e mexer nele com duas roles existindo é
+  retrabalho nas duas.
 
 ## Próximo
 
