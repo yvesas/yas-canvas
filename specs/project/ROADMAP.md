@@ -29,6 +29,18 @@
   `/eng-review` como molde, validação estática (`npm run check`), instalador
   para `~/.claude/skills`, ADR do preâmbulo.
 
+## Em desenvolvimento
+
+- **0003 — menu de partes e pasta de respostas**
+  (`specs/features/0003-parts-menu-and-answers/`): cada parte de uma role fecha
+  sozinha em arquivo, no projeto da pessoa (`specs/canvas/<role>/`); o menu
+  mostra o que já fechou e sugere a próxima; o `/canvas` vira controlador que
+  **só lê** o frontmatter para saber onde a pessoa está. Especificado, sem
+  design nem tasks ainda.
+
+  **Vem antes da segunda role, de propósito.** O protocolo agora é `shared/`:
+  mexer nele depois de duas roles existirem é retrabalho em todas elas.
+
 ## Próximo
 
 1. **`/cto-canvas`** — as seis perguntas técnicas, roteamento por estágio

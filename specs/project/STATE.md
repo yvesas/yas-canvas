@@ -61,6 +61,11 @@ para o turno travado, não para o devagar.
 
 ## Decisões tomadas
 
+- **A pasta de respostas vive no projeto da pessoa** (`specs/canvas/<role>/`),
+  o **menu sugere** a próxima parte sem obrigar, e o controlador **só lê**
+  (2026-09-21) — D-CANVAS-001/002/003, em
+  `specs/features/0003-parts-menu-and-answers/context.md`, com a citação
+  literal de cada uma.
 - **`shared/` declarado no frontmatter**, copiado pelo instalador (2026-09-20) —
   ADR 0002. O portão de escopo fica *inline* em cada role de propósito: precisa
   disparar antes de qualquer leitura, inclusive a do protocolo.
@@ -93,10 +98,19 @@ para o turno travado, não para o devagar.
 
 ## Perguntas em aberto para o Yves
 
-1. A próxima é `/cto-canvas` (a skill que é só sua) ou `/ceo-review`? O ROADMAP
-   diz canvas primeiro; nada mudou nesta feature que justifique inverter.
-2. O `/design-review` cobre design visual e UX na mesma skill, ou os dois papéis
+1. A 0003 entrou na frente da segunda role, porque mexer no protocolo depois de
+   duas roles existirem é retrabalho nas duas. Confirma essa ordem? Ela adia o
+   `/cto-canvas`, que era o próximo no ROADMAP.
+2. A 0003 tem spec e decisões, e **não tem design nem tasks**. Ela é
+   multi-componente (protocolo, role, controlador, validação, bancada) — o
+   `design.md` provavelmente se paga. Escrever agora ou ir direto para tasks?
+3. A sessão real com fundador continua pendente, e agora há um argumento para
+   ela acontecer **depois** da 0003: é o menu que torna o abandono no meio
+   sobrevivível, e abandono no meio é o que a sessão real vai produzir.
+4. A próxima role é `/cto-canvas` (a skill que é só sua) ou `/ceo-review`? O
+   ROADMAP diz canvas primeiro; nada mudou que justifique inverter.
+5. O `/design-review` cobre design visual e UX na mesma skill, ou os dois papéis
    ficam separados como estão no roteador hoje?
-3. A primeira role a usar o `review-protocol.md` vai mostrar se a divisão está no
+6. A primeira role a usar o `review-protocol.md` vai mostrar se a divisão está no
    lugar certo. Se a segunda role precisar de um bloco que hoje está na role, ele
    é protocolo — e a hora de mover é lá, não agora.
