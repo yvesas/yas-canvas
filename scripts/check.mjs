@@ -169,16 +169,53 @@ for (const dir of skills) {
   if (lines > MAX_LINES) warn(rel, `${lines} linhas (teto ${MAX_LINES}) — corte ou divida`);
 }
 
+// --- o que viaja não pode citar o que só existe aqui -------------------------
+//
+// O pack é instalado na máquina de quem não tem o baseline de convenções. Uma
+// skill que manda rodar `/commit`, ou ler a regra de CI do projeto, manda a
+// pessoa para um sistema que ela não tem — e ela conclui que instalou errado.
+//
+// A fronteira é um documento (o handoff), não uma referência. Ver
+// specs/features/0004-decouple-and-handoff/design.md §8.
+//
+// Isto vale para o que **viaja**: `shared/` e `skills/`. O `CLAUDE.md`, o
+// `docs/`, o `specs/` e o `test/` deste repositório falam de como desenvolver o
+// pack, e aqui o baseline está instalado — eles citam à vontade.
+const BASELINE_PATTERNS = [
+  [/`\/(commit|pr|branch|spec|state|stack|new-project)`/g, "comando do baseline"],
+  [/\.claude\/(?!skills)/g, "pasta do baseline"],
+  [/docs-and-specs|ci-minutes/g, "regra do baseline pelo nome"],
+  [/TEST_CMD|CHECK_CMD|LINT_CMD|FMT_CMD|stack\.e[n]v/g, "configuração do baseline"],
+  [/specs\/(features|quick)\//g, "estrutura de pastas que o projeto pode não ter"],
+];
+
+const traveling = [
+  ...(existsSync(SHARED) ? readdirSync(SHARED).filter((f) => f.endsWith(".md")).map((f) => [`shared/${f}`, join(SHARED, f)]) : []),
+  ...skills.map((d) => [`skills/${d}/SKILL.md`, join(SKILLS, d, "SKILL.md")]),
+];
+
+for (const [rel, file] of traveling) {
+  if (!existsSync(file)) continue;
+  const text = readFileSync(file, "utf8");
+  for (const [pattern, motivo] of BASELINE_PATTERNS) {
+    for (const m of text.matchAll(pattern)) {
+      fail(rel, `cita \`${m[0]}\` (${motivo}) — descreva o comportamento, não a ferramenta: quem instala o pack pode não ter isso`);
+    }
+  }
+}
+
 // --- o roteador só pode apontar para skill que existe ------------------------
 const routerFile = join(SKILLS, "canvas", "SKILL.md");
 if (existsSync(routerFile)) {
   const router = readFileSync(routerFile, "utf8");
   const routed = [...router.matchAll(/`\/([a-z0-9-]+)`/g)].map((m) => m[1]);
   const known = new Set(skills);
-  // Comandos do baseline do projeto, que o roteador cita para mandar embora.
-  const external = new Set(["commit", "pr", "spec", "branch", "state", "stack", "new-project"]);
+  // A lista de exceções que existia aqui — commit, pr, spec, branch… — era o
+  // que autorizava o roteador a mandar a pessoa para o baseline. Ela saiu com
+  // a 0004: agora citar esses comandos é erro, e quem cobra é a varredura
+  // acima.
   for (const target of new Set(routed)) {
-    if (!known.has(target) && !external.has(target)) {
+    if (!known.has(target)) {
       fail("skills/canvas/SKILL.md", `roteia para \`/${target}\`, que não existe em skills/`);
     }
   }
