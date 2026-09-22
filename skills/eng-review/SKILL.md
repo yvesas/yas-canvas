@@ -42,14 +42,14 @@ anti-bajulação, fechamento) e `review-protocol.md` (o formato) — e siga:
 |---|---|---|
 | 1 | Em que mundo estou: há código ou não | protocolo §2 |
 | 2 | As cinco seções, uma por vez, teto de oito | aqui, Passo 4 |
-| 3 | **Alternativas — obrigatório**, mínima viável e ideal | protocolo §4 |
+| 3 | **Alternativas — obrigatório**, mínima viável e ideal | protocolo §5 |
 | 4 | Juntar o que as seções separaram | aqui, Passo 5 |
-| 5 | Relatório, com "Barra o plano" em posição fixa | protocolo §5 |
+| 5 | Relatório, com "Barra o plano" em posição fixa | protocolo §6 |
 | 6 | Fechamento: o que ouvi, **uma** tarefa, status | preâmbulo |
 
 Regra que dispara no fim da sessão não sobrevive só no arquivo lido no começo —
 daí a tabela, e o passo 3 é o que mais some. **Terminada a quinta seção, releia
-o `review-protocol.md` §4 e §5 — sim, de novo:** alternativas são mínima viável
+o `review-protocol.md` §5 e §6 — sim, de novo:** alternativas são mínima viável
 **e** ideal, com esforço e risco; o relatório abre por "Escopo revisado" e
 "Barra o plano", e junção de lacunas que ficou no fim do texto vai para o topo.
 
