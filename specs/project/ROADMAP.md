@@ -6,6 +6,15 @@
 > por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
 > renumerado: número gasto fica gasto.
 
+- **0004 — desacoplada do baseline, com handoff** (2026-09-22,
+  `specs/features/0004-decouple-and-handoff/`): o pack parou de apontar para
+  ferramenta que só existe onde o baseline está instalado — eram nove pontos, e
+  a causa era a golden rule deste repositório. A fronteira virou um documento: o
+  **handoff** (`specs/canvas/handoff/<alvo>.md`), montado a partir das partes de
+  todas as roles, onde proposta que ninguém confirmou **não** vira tarefa. O
+  pack só escreve em `specs/canvas/`, e o relatório saiu do arquivo do plano.
+  Guarda no `check.mjs` para o acoplamento não voltar. ADRs 0003 e 0004.
+  Suíte: **12 de 12**.
 - **0003 — menu de partes e pasta de respostas** (2026-09-22,
   `specs/features/0003-parts-menu-and-answers/`): cada parte de uma role fecha
   sozinha em `specs/canvas/<role>/<parte>.md`, no projeto da pessoa, com o que
@@ -39,17 +48,7 @@
 
 ## Em desenvolvimento
 
-- **0004 — desacoplar do baseline e entregar o handoff**
-  (`specs/features/0004-decouple-and-handoff/`, especificada em 22/09): o
-  pack para de **apontar** para ferramenta operacional (`/commit`, `/pr`,
-  `.claude/rules/`, `stack.env` — cinco pontos medidos) e passa a **produzir** o
-  material que um agente operacional pega depois. yas-canvas é estratégico;
-  o operacional é de quem executa, com o baseline ou sem ele. Decidido em 22/09:
-  handoff em formato próprio, agnóstico de agente, com campos que mapeiam 1:1
-  para o spec-driven — compatível sem depender. **Um handoff por alvo**,
-  regenerado a partir das partes; o pack só escreve em `specs/canvas/`, e o
-  relatório sai do arquivo do plano. E uma guarda no `check.mjs` para o
-  acoplamento não voltar. Especificada, desenhada e quebrada em seis tasks.
+_Nada em andamento._
 
 ## Próximo
 
