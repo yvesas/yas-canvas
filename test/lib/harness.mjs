@@ -182,7 +182,13 @@ export function runSubject(fixture) {
       turn(["-p", driver.reply, "--resume", sessionId]);
     }
     if (!reachedStop && driver.stopWhen) {
-      reachedStop = text.join("\n").includes(driver.stopWhen);
+      // Na transcrição **ou no disco**. O marco é "a sessão chegou ao fim", e o
+      // fim desta skill é um arquivo — repetir o título no chat é narração. Uma
+      // sessão que gravou o relatório e não o recitou fechou do mesmo jeito, e
+      // reprová-la é o defeito que a 0002 tirou do juiz aparecendo por outra
+      // porta.
+      reachedStop =
+        text.join("\n").includes(driver.stopWhen) || wroteFileContaining(cwd, driver.stopWhen);
     }
   }
 
