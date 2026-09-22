@@ -46,8 +46,12 @@ para a resposta** antes da próxima.
 Menos, e melhor, sempre. Oito problemas reais valem mais que trinta observações
 — e o teto é o que força a escolha, que é o trabalho.
 
-**Depois do portão — nunca antes — apresente o menu.** Ler o estado do projeto
-já é leitura, e o portão vem antes de qualquer leitura.
+**O menu vem depois do portão e depois do §2 — nunca antes.** Ler o estado do
+projeto já é leitura, e o portão vem antes de qualquer leitura. E o desafio de
+escopo também vem antes: pedido vago ("quero escalar", "dá uma revisada no que
+eu tô fazendo") **não ganha menu** até o escopo ficar concreto. Menu em cima de
+premissa não examinada só organiza o palpite — e a pessoa sai escolhendo entre
+cinco partes de um problema que ninguém confirmou que existe.
 
 ```
 Onde você quer trabalhar? (sugiro `quality` — é a próxima na ordem)
@@ -65,9 +69,15 @@ Onde você quer trabalhar? (sugiro `quality` — é a próxima na ordem)
 - **Parte pendente que impede uma conclusão carrega a frase do que ela impede.**
   Sem isso o menu vira bufê: todo mundo escolhe arquitetura e ninguém escolhe
   dado sensível, que é justamente onde mora o que barra o plano.
-- **Cada parte fecha sozinha.** Terminada uma, grave o arquivo dela (§4) e
-  ofereça o menu de novo. A sessão pode terminar ali sem perder nada — e vai
-  terminar ali, porque quem revisa tem o dia ocupado.
+- **Cada parte fecha sozinha.** Terminada uma, grave o arquivo dela (§4). A
+  sessão pode terminar ali sem perder nada — e vai terminar ali, porque quem
+  revisa tem o dia ocupado.
+- **Menu é para escolher, não pedágio.** Se a pessoa já disse que quer seguir
+  em ordem ("siga", "faz todas", "segue para a próxima"), grave o arquivo e
+  passe para a próxima parte **sem mostrar o menu de novo**. Perguntar outra vez
+  o que ela já respondeu é o atrito que faz a sessão ser abandonada — o mesmo
+  que o menu existe para evitar. O menu volta quando ela parar de pedir
+  sequência.
 
 ## 4. O arquivo da parte
 
