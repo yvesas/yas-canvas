@@ -1,6 +1,6 @@
 # 0003 — menu de partes e pasta de respostas
 
-**Status:** especificado (2026-09-21) · **Decisões:** `context.md`
+**Status:** entregue (2026-09-22) · **Decisões:** `context.md`
 **Origem:** conversa com o Yves depois do merge da 0002 — "vamos deixar mais
 flexível, podemos ter um tipo de menu (…) meio que um banco de dados, mas em
 markdowns".
@@ -132,3 +132,16 @@ a nova fixture). Mas o teste que importa nesta feature não é nenhum deles:
 **uma pessoa responder uma parte, fechar o laptop, e voltar dois dias depois
 sem perder nada.** Isso não tem eval — tem sessão real, que é a pendência aberta
 no `STATE.md` desde a 0002.
+
+## Como ficou — o que o plano não previu
+
+- **O menu tinha lugar errado duas vezes, e o spec não viu nenhuma.** O
+  REQ-001 dizia "depois do portão" — correto e insuficiente. O eval mostrou que
+  ele precisa vir depois do **desafio de escopo** também, e que não pode voltar
+  a cada parte quando a pessoa já pediu sequência. As duas regras nasceram de
+  fixture, não de desenho.
+- **O REQ-008 foi para a bancada mais do que o previsto.** Além de semear estado
+  (`cpSync` recursivo), o juiz precisou passar a receber os arquivos de parte:
+  o entregável deixou de ser um arquivo só.
+- **A contagem do gate estava errada no plano** — "9 de 9" para cinco fixtures
+  de duas camadas. Fechou em 10 de 10.
