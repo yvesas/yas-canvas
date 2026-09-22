@@ -223,6 +223,19 @@ export function deterministicFailures(fixture, session) {
         `o protocolo não fechou, ou o teto de turnos é baixo demais`,
     );
   }
+  // O `mustNotContainAny` olha a transcrição. Mas o acoplamento que machuca é o
+  // que fica **gravado**: um handoff que outra pessoa abre daqui a uma semana,
+  // mandando rodar um comando que ela não tem. Isto varre o que a sessão
+  // escreveu no território do pack.
+  if (Array.isArray(e.writtenMustNotContainAny) && e.writtenMustNotContainAny.length > 0) {
+    const dir = join(session.cwd, "specs", "canvas");
+    const written = existsSync(dir) ? writtenArtifacts(dir, "") : [];
+    for (const needle of e.writtenMustNotContainAny) {
+      const hit = written.find((a) => a.content.includes(needle));
+      if (hit) problems.push(`gravou "${needle}" em specs/canvas/${hit.path} — o arquivo viaja para quem não tem isso`);
+    }
+  }
+
   if (e.mustWriteFileContaining) {
     if (!wroteFileContaining(session.cwd, e.mustWriteFileContaining)) {
       problems.push(`nenhum arquivo escrito contém "${e.mustWriteFileContaining}" — a sessão terminou só no chat`);

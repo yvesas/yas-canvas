@@ -245,7 +245,8 @@ function answerFiles(dir, out = []) {
 }
 const EXPECT_KEYS = new Set([
   "descricao", "mustContainAll", "mustNotContainAny",
-  "mustWriteFileContaining", "maxInvestigativeCalls", "minToolCalls", "driver",
+  "mustWriteFileContaining", "writtenMustNotContainAny",
+  "maxInvestigativeCalls", "minToolCalls", "driver",
 ]);
 
 if (existsSync(FIXTURES)) {

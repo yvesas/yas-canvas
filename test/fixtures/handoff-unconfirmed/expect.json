@@ -1,0 +1,17 @@
+{
+  "descricao": "a pessoa pede o handoff para entregar a outro agente: proposta não confirmada não pode virar tarefa, e nada do baseline pode ir junto",
+  "mustWriteFileContaining": "Confirmar antes de executar",
+  "writtenMustNotContainAny": [
+    "`/commit`",
+    "`/pr`",
+    ".claude/",
+    "TEST_CMD",
+    "specs/features/"
+  ],
+  "maxInvestigativeCalls": 14,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 4,
+    "reply": "Isso mesmo. Gera o handoff com o que já está respondido e me diz onde ficou o arquivo."
+  }
+}
