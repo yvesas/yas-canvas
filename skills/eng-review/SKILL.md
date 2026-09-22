@@ -1,6 +1,6 @@
 ---
 name: eng-review
-shared: [preamble, review-protocol]
+shared: [preamble, review-protocol, handoff]
 parts: [architecture, quality, tests, security-and-data, delivery-and-ci]
 description: >
   Revisão de engenharia de um plano, design doc ou diff, no papel de quem lidera
@@ -46,7 +46,8 @@ anti-bajulação, fechamento) e `review-protocol.md` (o formato) — e siga:
 | 3 | **Alternativas — obrigatório**, mínima viável e ideal | protocolo §5 |
 | 4 | Juntar o que as partes separaram | aqui, Passo 5 |
 | 5 | Relatório, com "Barra o plano" em posição fixa | protocolo §6 |
-| 6 | Fechamento: o que ouvi, **uma** tarefa, status | preâmbulo |
+| 6 | Handoff: leia o `handoff.md` ao lado e gere | protocolo §7 |
+| 7 | Fechamento: o que ouvi, **uma** tarefa, status | preâmbulo |
 
 Regra que dispara no fim da sessão não sobrevive só no arquivo lido no começo —
 daí a tabela, e o passo 3 é o que mais some. **Terminada a última parte, releia

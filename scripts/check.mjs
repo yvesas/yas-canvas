@@ -45,6 +45,10 @@ const FINGERPRINTS = {
   // versão acusou cópia por causa de "aprovação com comentários", quatro
   // palavras que qualquer texto sobre revisão usa — e acusar errado é como um
   // validador ensina a ignorá-lo.
+  handoff: [
+    "Uma proposta sua implementada como se fosse decisão dela é o seu palpite virando código em produção",
+    "Item sem citação não é decisão — é proposta sua",
+  ],
   "review-protocol": [
     "Opinar sem abrir o que existe produz a revisão genérica que não muda nada",
     "arbitrar um valor e revisar em cima dele é revisar o seu palpite",
