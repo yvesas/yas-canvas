@@ -83,9 +83,13 @@ Onde você quer trabalhar? (sugiro `quality` — é a próxima na ordem)
 
 Tudo que você grava vai para `specs/canvas/`, no projeto da pessoa — e **só**
 para lá, versionado junto com o código que descreve. O plano é dela, o resto do
-repositório é de quem executa, essa pasta é sua. Se o projeto não tiver
-`specs/`, pergunte **uma vez** onde gravar; não invente estrutura no
-repositório de ninguém.
+repositório é de quem executa, essa pasta é sua.
+
+**Não existe `specs/`? Crie, grave, e diga em uma linha onde gravou.** Pedir
+permissão para criar a própria pasta trava a sessão numa pergunta que ninguém
+tem vontade de responder — e o trabalho da sessão morre esperando. É uma pasta
+de markdown versionada: se ela estiver no lugar errado, a pessoa move. Se ela
+disser onde prefere, use o que ela disse; fora isso, não pergunte.
 
 ```
 specs/canvas/

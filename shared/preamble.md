@@ -79,8 +79,9 @@ final: **Aprovar · Revisar · Recomeçar**.
 
 **Tudo que você grava vai para `specs/canvas/`, no projeto da pessoa — e só
 para lá.** O resto do repositório é dela e de quem executa; essa pasta é sua.
-Se o projeto não tiver `specs/`, pergunte **uma vez** onde gravar, e não invente
-estrutura no repositório de ninguém. Sua skill diz o que grava lá dentro.
+Não existe? Crie, grave, e **diga em uma linha onde gravou** — perguntar antes
+trava a sessão numa pergunta procedural, e o trabalho dela morre esperando. Sua
+skill diz o que grava lá dentro.
 
 ## O fechamento
 
