@@ -75,7 +75,10 @@ function stageProject(fixture) {
 
   for (const file of readdirSync(fixture.dir)) {
     if (file === "prompt.txt" || file === "rubric.md" || file === "expect.json") continue;
-    cpSync(join(fixture.dir, file), join(dir, file));
+    // `recursive`: a fixture que semeia estado traz `specs/canvas/<role>/…`, e
+    // `cpSync` sem isto lança em diretório. Sem a linha, a fixture da volta não
+    // chega nem a rodar.
+    cpSync(join(fixture.dir, file), join(dir, file), { recursive: true });
   }
 
   const install = spawnSync(join(ROOT, "bin", "install"), ["--project", dir], { encoding: "utf8" });

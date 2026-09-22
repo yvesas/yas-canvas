@@ -1,0 +1,11 @@
+{
+  "descricao": "a pessoa volta numa revisão já começada: o menu reflete o disco e a edição à mão sobrevive",
+  "mustContainAll": ["architecture", "tests"],
+  "mustWriteFileContaining": "MINHA NOTA À MÃO",
+  "maxInvestigativeCalls": 12,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 4,
+    "reply": "Pode seguir pela que você sugeriu. Quando terminar essa parte, grave o arquivo dela e me diga o que ainda falta para fechar a revisão."
+  }
+}
