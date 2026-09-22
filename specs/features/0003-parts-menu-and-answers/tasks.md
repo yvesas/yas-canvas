@@ -28,6 +28,11 @@ existindo, ou são atualizadas **junto**) · o protocolo diz, com essas palavras
 que a junção das lacunas críticas **não pode ser feita** sem as partes que a
 compõem · nenhuma regra do protocolo atual foi perdida no caminho.
 
+**Feito** (2026-09-22) — e corrigido duas vezes pelo eval, as duas por ordem:
+o menu vinha **antes** do desafio de escopo (pedido vago ganhava cinco opções
+em vez de uma pergunta), e voltava **a cada parte** mesmo depois de a pessoa
+pedir sequência. Ver T5. As seções renumeraram: o arquivo da parte é o novo §4.
+
 ---
 
 ## T2 — a role nomeia as partes `[REQ-001, REQ-002]`
@@ -44,6 +49,9 @@ referir a elas pelo nome, não por número.
 **Done when:** `npm run check` verde · a skill continua **abaixo de 400 linhas**
 (está em 149; se o menu não couber sem passar de ~200, a parte nova é protocolo
 e volta para T1) · cada parte declarada aparece conduzida no corpo.
+
+**Feito** (2026-09-22) — **153 linhas**. O menu não entrou na role: ficou
+inteiro no protocolo, que é onde o limite dizia que ele pertencia.
 
 ---
 
@@ -63,6 +71,10 @@ todo pendente, sem aviso.
 `Edit`, conferido no arquivo · o roteamento que já existia continua funcionando
 (o `check` cobra que o roteador só aponte para skill existente).
 
+**Feito** (2026-09-22) — com uma correção de ordem na primeira versão: o passo
+do estado tinha entrado **depois** do roteamento, onde ele não informa decisão
+nenhuma. Agora é o Passo 2.
+
 ---
 
 ## T4 — a validação, no escopo que ela alcança `[REQ-007]`
@@ -79,6 +91,16 @@ de terceiro — ver `design.md` §8.
 **Done when:** quebrar cada uma das três de propósito é apontado **pelo nome do
 arquivo e da parte** · `npm run check` verde depois de desfazer · a regra nova
 não reprova a `/canvas`, que não é role de revisão e não declara `parts:`.
+
+**Feito** (2026-09-22). Quebrado de propósito, quatro vezes, cada uma apontada
+pelo nome:
+
+```
+declara `review-protocol` e não declara `parts:` — sem partes não há menu
+declara a parte `arquitetura` e não a conduz no corpo
+`status: meio-respondido` fora do conjunto (pendente | respondido | descartado)
+arquivo de parte sem frontmatter — é ele que o controlador lê
+```
 
 ---
 
@@ -100,6 +122,38 @@ arquivo depois da sessão, e o menu mostrou o status certo.
 tocadas** · rodar a fixture nova duas vezes seguidas deixa o arquivo editado à
 mão intacto nas duas.
 
+**Feito** (2026-09-22), na terceira rodada. O "9 de 9" deste critério estava
+contado errado: são cinco fixtures com duas camadas cada, então **10 de 10**.
+
+```
+greenfield-plan  ok · ok      resumed-review  ok · ok
+no-target        ok · ok      vague-scale     ok · ok
+webhook-cpf      ok · ok      escopo por diff 7/7      # pass 17 · # fail 0
+```
+
+As quatro fixtures antigas não foram tocadas (`git diff origin/main -- test/fixtures`
+mostra só `resumed-review`). A nota escrita à mão sobreviveu nas quatro rodadas.
+
+**Rodada 1 — API sobrecarregada, e um defeito real.** `greenfield-plan` terminou
+em `529`/`500`, e o juiz do `vague-scale` estourou o tempo. Mas o
+`resumed-review` achou uma coisa verdadeira: com a pessoa dizendo só "pode
+seguir", não havia citação, e a skill gravou três arquivos **sem** o título
+`### O que você disse`. Título ausente é ambíguo — quem lê não sabe se ela ficou
+calada ou se a skill esqueceu. Agora o vazio diz que está vazio.
+
+**Rodada 2 — dois defeitos do menu e um da bancada.** `vague-scale` (um turno
+só) gastou o turno oferecendo cinco partes a um pedido vago — sem perguntar
+escalável onde, sem nomear bandeira vermelha, sem tomar posição. **Menu em cima
+de premissa não examinada só organiza o palpite.** `greenfield-plan` não chegou
+ao relatório em nove turnos porque o menu voltava a cada parte, mesmo depois de
+a pessoa pedir "siga, e quando terminar as cinco escreva o relatório" — o juiz
+aprovou o conteúdo, e a sessão nunca fechou. E o juiz do `resumed-review`
+reprovou por não ver citação na transcrição: estava gravada em três arquivos
+que a bancada não lhe mostrava.
+
+**Rodada 3 — 10 de 10**, sem tocar em fixture: as três correções de texto e a
+da bancada funcionaram na primeira tentativa.
+
 ---
 
 ## T6 — fechar a feature
@@ -112,3 +166,8 @@ aberto contra `main` com corpo informado.
 **Done when:** `docs/adr/` ganha ADR **se** o formato do arquivo de resposta
 sobreviver à feature como contrato entre roles — e ele deve: é o que a segunda
 role vai ler. Decidir isso no fechamento, não antes.
+
+**Feito** (2026-09-22). **ADR adiado, de propósito.** O formato sobreviveu à
+feature — mas ele só vira contrato **entre roles** quando uma segunda role ler o
+que a primeira escreveu, e ela não existe ainda. ADR escrito antes dessa leitura
+registraria um palpite como decisão. O gatilho está no `STATE.md`.

@@ -75,7 +75,10 @@ function stageProject(fixture) {
 
   for (const file of readdirSync(fixture.dir)) {
     if (file === "prompt.txt" || file === "rubric.md" || file === "expect.json") continue;
-    cpSync(join(fixture.dir, file), join(dir, file));
+    // `recursive`: a fixture que semeia estado traz `specs/canvas/<role>/…`, e
+    // `cpSync` sem isto lança em diretório. Sem a linha, a fixture da volta não
+    // chega nem a rodar.
+    cpSync(join(fixture.dir, file), join(dir, file), { recursive: true });
   }
 
   const install = spawnSync(join(ROOT, "bin", "install"), ["--project", dir], { encoding: "utf8" });
@@ -290,6 +293,19 @@ const JUDGE_SCHEMA = {
 export function judge(fixture, session) {
   const marker = fixture.expect.mustWriteFileContaining || fixture.expect.driver?.stopWhen;
   const artifacts = marker ? writtenArtifacts(session.cwd, marker) : [];
+
+  // Os arquivos de parte também são entregável, e nenhum marcador os alcança
+  // todos: a fixture da volta usa como marcador a nota escrita à mão, que só
+  // existe num deles. O juiz reprovou a sessão por não ver, na transcrição, a
+  // citação que estava gravada em três arquivos que ninguém lhe mostrou.
+  const partsDir = join(session.cwd, "specs", "canvas");
+  if (existsSync(partsDir)) {
+    const seen = new Set(artifacts.map((a) => a.path));
+    for (const a of writtenArtifacts(partsDir, "")) {
+      const path = `specs/canvas/${a.path}`;
+      if (!seen.has(path)) artifacts.push({ path, content: a.content });
+    }
+  }
 
   const prompt = [
     "Você julga a transcrição de uma sessão de agente contra critérios objetivos.",

@@ -1,120 +1,125 @@
-# Estado — 2026-09-20
+# Estado — 2026-09-22
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
 ## Onde estamos
 
-As features **0001** (o `/eng-review` sem código para ler) e **0002**
-(protocolo de revisão extraído) estão na `main` desde 20/09, squashadas em
-`fd17a74` pelo PR #6. `npm run check` verde, `npm test` 7/7, evals **8 de 8** na
-terceira rodada, sem nenhuma fixture tocada.
+O repositório é **público e MIT** (`Copyright (c) 2026 Yves Siqueira (Yaslab)`).
+Na `main`: as features 0001 e 0002. A **0003 — menu de partes e pasta de
+respostas** está pronta na branch `feat/parts-menu-and-answers`, com o gate
+fechado: evals **10 de 10**, cinco fixtures, na terceira rodada, sem tocar em
+nenhuma fixture antiga.
 
-A 0001 tinha sido dada como entregue no ROADMAP em 18/09 e **estava só na
-branch** — o PR #6 levou as duas juntas. Vale a lição: "fechada" e "na `main`"
-são estados diferentes, e o ROADMAP não distingue um do outro sozinho.
+Cada parte de uma role agora fecha sozinha em
+`specs/canvas/<role>/<parte>.md`, no projeto da pessoa. O menu vem depois do
+desafio de escopo e sugere a próxima parte sem obrigar. O `/canvas` virou
+controlador que só lê.
 
-O `/eng-review` saiu de 265 para **149** linhas. O que era formato de revisar
-virou `shared/review-protocol.md`, lido em runtime como o preâmbulo; cada skill
-declara no frontmatter o que precisa (`shared: [...]`) e o instalador copia só
-isso — ver ADR 0002. A segunda role agora nasce sem copiar esqueleto.
+A próxima é a **0004 — desacoplar do baseline e entregar o handoff**, ainda sem
+spec. Ela vem da mesma conversa em que o Yves nomeou a fronteira dos dois
+repositórios: **yas-canvas é estratégico; o baseline é operacional.** O pack não
+aponta para ferramenta operacional; ele produz o material que um agente
+operacional pega depois.
 
 Nada foi instalado em `~/.claude/skills` ainda — só `bin/install --check`.
 
-## O que esta feature ensinou (e a `main` ainda não sabe)
+## O que a 0003 ensinou
 
-**Exemplo concreto dentro de uma regra é funcional, não ilustrativo.** A 4.2
-dizia "item que serviria para qualquer software — *não engula exceção, injete o
-relógio, nomeie bem* — sai". A compressão cortou os três exemplos por parecerem
-enfeite; na rodada seguinte a sessão produziu um item chamado "Nomes que o
-domínio já tem", que é o terceiro exemplo em pessoa. Exemplo ali é como o modelo
-reconhece a própria recaída.
+**Menu em cima de premissa não examinada só organiza o palpite.** Na primeira
+versão o menu vinha logo depois do portão. Num pedido vago ("quero deixar o
+sistema mais escalável"), a sessão gastou o único turno oferecendo cinco partes,
+sem perguntar escalável onde. O desafio de escopo tem que vir antes de qualquer
+escolha.
 
-**"Não invente fato" precisa listar o que conta como fato.** A lista cobria
-número, tabela, tecnologia, volume e frequência. A sessão afirmou que "a
-movimentação traz nome das partes, CPF e teor" sobre uma API que o autor do
-plano declara não conhecer — **conteúdo de payload** não estava na lista. Está
-agora, em três lugares que se cobrem: §2, §5 e a autoverificação.
+**Menu é para escolher, não pedágio.** O menu voltava a cada parte mesmo depois
+de a pessoa pedir "siga, e quando terminar as cinco escreva o relatório", e a
+sessão não chegou ao fim em nove turnos. Repetir a pergunta que a pessoa já
+respondeu era o atrito que a feature existia para tirar.
 
-**O juiz não pode enxergar o próprio ambiente.** Rodando com `cwd` no
-repositório, ele leu no contexto dele que estava num repo git e usou isso para
-desmentir a sessão, que dizia a verdade sobre o projeto de teste (`mkdtemp`, sem
-git). A justificativa do veredito termina em "o critério é satisfeito (passa)" —
-e ele marcou falha. Agora roda em diretório vazio, com a instrução escrita.
-É o mesmo defeito da rodada 3 da feature anterior, por uma porta nova.
+**Título ausente é ambíguo.** Quando a pessoa só disse "pode seguir", a skill
+omitiu `### O que você disse`, e quem lê depois não sabe se ela ficou calada ou
+se a skill esqueceu. O vazio agora diz que está vazio.
 
-**Refactor trouxe regra nova, e o spec jurava que não.** O `REQ-004` diz "o diff
-move texto, não inventa". Comparando com a `main`: a 4.2 longa ("sem código, esta
-seção é a que mais tenta encher") e o "nada do que o plano não deu entra como
-fato" **não existem lá** — nasceram na extração. São boas regras, e a rodada 1 de
-eval mostrou que ainda faltava uma (conteúdo de payload). O problema não é a
-regra nova; é o próximo leitor abrir o diff acreditando que ele só move texto, e
-ler como "isso já era assim" o que nunca foi. **Quando uma task promete não
-inventar nada, a promessa tem que valer ou ser corrigida por escrito.**
+**O entregável deixou de ser um arquivo só, e a bancada precisou acompanhar.**
+O juiz reprovou a sessão por não achar na transcrição uma citação que estava
+gravada em três arquivos que ninguém lhe mostrou. Agora ele recebe todos os
+arquivos de parte.
 
-**Teto de linha cobra em outro lugar.** As 149 linhas só couberam porque 14
-saíram do frontmatter (`allowed-tools` em forma compacta). Só apertando prosa o
-piso era ~160 — e o primeiro aperto foi justamente o que quebrou a 4.2.
+**Em squash merge, "commits à frente" mente.** Commit de branch nunca vira
+ancestral da `main`. No niklas, `feat/route-names` aparecia 7 commits à frente
+com **zero** arquivos diferentes: tudo já tinha entrado. O que conta é
+`git diff --name-only origin/main <branch>`, diferença de conteúdo, não de
+histórico.
 
-**`ETIMEDOUT` não é veredito.** Uma fixture de **um turno só** estourou dez
-minutos: API lenta, não protocolo longo. Teto por turno agora é 15 min, e existe
-para o turno travado, não para o devagar.
+As lições da 0002 (exemplo concreto dentro de regra é funcional, "não invente
+fato" precisa listar o que conta como fato, o juiz não pode enxergar o próprio
+ambiente) estão no `tasks.md` dela e no `specs/codebase/TESTING.md`.
 
 ## Decisões tomadas
 
-- **A pasta de respostas vive no projeto da pessoa** (`specs/canvas/<role>/`),
-  o **menu sugere** a próxima parte sem obrigar, e o controlador **só lê**
-  (2026-09-21) — D-CANVAS-001/002/003, em
-  `specs/features/0003-parts-menu-and-answers/context.md`, com a citação
-  literal de cada uma.
+- **yas-canvas é estratégico, o baseline é operacional** (2026-09-22). O pack
+  não aponta para `/commit`, `/pr`, `.claude/rules/` nem `stack.env`: ele
+  **produz** um handoff para um agente operacional, em formato próprio,
+  agnóstico de agente, com campos que mapeiam 1:1 para o spec-driven
+  (compatível sem depender). É a 0004.
+- **MIT no repo inteiro** (2026-09-22), texto das skills incluído. O pack
+  antecede o SaaS e existe para validar o método, então adoção vale mais que
+  proteção. MIT no código com CC BY-SA na prosa foi considerado e descartado.
+  O titular é a pessoa física, não a YAS Softwares Ltda.: o pack não foi cedido.
+- **A marca é Yaslab no texto e yaslab no logotipo e no domínio** (2026-09-22) —
+  a forma do site em produção, a que o cliente já vê. "YAS Labs" era a grafia
+  antiga.
+- **A pasta de respostas vive no projeto da pessoa**, o menu sugere sem obrigar,
+  e o controlador só lê (2026-09-21) — D-CANVAS-001/002/003, em
+  `specs/features/0003-parts-menu-and-answers/context.md`.
 - **`shared/` declarado no frontmatter**, copiado pelo instalador (2026-09-20) —
-  ADR 0002. O portão de escopo fica *inline* em cada role de propósito: precisa
-  disparar antes de qualquer leitura, inclusive a do protocolo.
-- **Repo próprio, separado do baseline de convenções** (2026-09-18). Método
-  viaja com a pessoa; regra viaja com o repositório.
-- **Instalação no usuário** (`~/.claude/skills`), com `--project` como exceção.
-- **Markdown, sem gerador de skill** — ADR 0001.
-- **Prosa em português, nomes de arquivo em inglês.** Tradução adiada, ver
-  ROADMAP.
-- **Conteúdo autoral**, escrito do zero a partir do framework de liderança
-  técnica (docs 21, 25, 26 em `docs_yaslab/`).
+  ADR 0002.
+- **Repo próprio, separado do baseline** (2026-09-18) · **instalação no
+  usuário**, com `--project` como exceção · **Markdown, sem gerador** (ADR 0001)
+  · **prosa em português, nomes de arquivo em inglês** · **conteúdo autoral**,
+  a partir de `docs_yaslab/` (docs 21, 25, 26).
 
 ## Pendências e bloqueios
 
-- **Nenhuma fixture de eval tem código.** As quatro são `plan.md`. Todo o
-  caminho "com código" do protocolo — ler o que o plano toca antes de opinar,
-  mapear o que dá para reusar, achar o que está sendo recriado por
-  desconhecimento — **nunca foi exercitado por teste nenhum**. As duas fixtures
-  multi-turno também respondem sempre a mesma frase, concordando: ninguém nunca
-  discordou da skill, mudou de assunto no meio nem desistiu na seção 2.
-- **Bun 1.4.2 instalado, e não é usado.** `bun test` sai `0 pass, 0 fail` — verde
-  sem ter rodado nada. O comando é `node --test`. Ver `specs/codebase/TESTING.md`.
-- **O baseline instalado aqui veio de uma branch não mergeada** do repo de
-  convenções (`refactor/stack-agnostic-baseline`, PR #6). Quando entrar, rodar
-  `claude-base/bin/install ../yas-canvas` de novo.
-- **Público e sem licença até 22/09 — resolvido: MIT.** Sem arquivo de licença,
-  repositório público é "todos os direitos reservados", e ninguém instala de
-  boa-fé. MIT no repo inteiro, texto das skills incluído: o pack **antecede** o
-  SaaS e existe para validar o método, então adoção vale mais que proteção.
-  Considerado e descartado: MIT no código + CC BY-SA na prosa — duas licenças
-  em 400 linhas de markdown é fricção para quem ia experimentar.
+- **O ADR do formato do arquivo de parte está adiado, com gatilho.** O formato
+  sobreviveu à 0003, mas ele só vira contrato **entre roles** quando uma segunda
+  role ler o que a primeira escreveu. O ADR é escrito nessa hora, não antes.
+- **Nenhuma fixture tem código.** As cinco são `plan.md`, então o caminho "com
+  código" do protocolo (ler o que o plano toca antes de opinar, mapear o que dá
+  para reusar) nunca foi exercitado. E as fixtures multi-turno ainda respondem
+  sempre concordando.
+- **Validação com fundador real ainda não aconteceu.** Continua sendo o teste
+  que importa, e agora pode acontecer: o menu torna sobrevivível o abandono no
+  meio, que é o que uma sessão real vai produzir.
+- **O baseline instalado aqui está 1 arquivo atrás** (`guard-main-bash.sh`). O
+  PR #6 do claude-base entrou em 18/09; falta rodar
+  `../claude-base/bin/install .` numa branch própria.
 - **A separação de material de cliente foi feita?** Era condição para abrir o
   repositório, e a abertura aconteceu sem registro disso aqui. Fixtures são
-  sintéticas (PJe, CPF, escritório genérico); o resto não foi auditado.
-- **Validação com fundador real ainda não aconteceu.** Continua sendo o teste que
-  importa: duas sessões de verdade antes de escrever a terceira role.
+  sintéticas; o resto não foi auditado.
+- **Bun 1.4.2 instalado, e não é usado.** `bun test` sai verde sem rodar nada.
+  O comando é `node --test` — ver `specs/codebase/TESTING.md`.
+
+## Fora deste repositório, e esperando alguém
+
+- **yaslab-site PR #15** (marca na documentação) — aberto. O merge publica em
+  produção; o site gerado sai idêntico, mas a decisão é do Yves.
+- **niklas PR #66** (marca no README e no PROJECT) — aberto, esperando o CI.
+- **alfred** — a branch `docs/realinhamento`, sem commit, já troca `yaslabs/`
+  por `yaslab/`. Duas armadilhas nela: a troca quebrou a referência
+  `01-visao-yaslab-suite.md` (o arquivo real é `01-visao-yaslabs-suite.md`), e
+  quatro das edições estão em `.claude/`, que a próxima instalação do baseline
+  sobrescreve.
+- **audova** — nada a trocar: todas as ocorrências são o domínio `yaslab.io`.
+- **Arquivos de exemplo de ambiente do site e do audova** — o hook de segredos
+  não deixa o agente lê-los. O do site tem "YAS Labs" três vezes.
 
 ## Perguntas em aberto para o Yves
 
-1. A 0003 está pronta para implementar: spec, decisões, design e seis tasks.
-   A T1 (o contrato no `review-protocol.md`) é a que decide o resto — se ela
-   sair errada, as outras cinco carregam o erro.
-2. A sessão real com fundador continua pendente, e agora há um argumento para
-   ela acontecer **depois** da 0003: é o menu que torna o abandono no meio
-   sobrevivível, e abandono no meio é o que a sessão real vai produzir.
-3. A próxima role é `/cto-canvas` (a skill que é só sua) ou `/ceo-review`? O
-   ROADMAP diz canvas primeiro; nada mudou que justifique inverter.
-4. O `/design-review` cobre design visual e UX na mesma skill, ou os dois papéis
+1. A 0004 precisa de spec antes de código. O ponto que mais muda o desenho: o
+   handoff é **um por sessão**, **um por role**, ou **acumula** como os arquivos
+   de parte?
+2. A próxima role é `/cto-canvas` ou `/ceo-review`? O ROADMAP diz canvas
+   primeiro, e agora ela nasce com menu e handoff prontos.
+3. O `/design-review` cobre design visual e UX na mesma skill, ou os dois papéis
    ficam separados como estão no roteador hoje?
-5. A primeira role a usar o `review-protocol.md` vai mostrar se a divisão está no
-   lugar certo. Se a segunda role precisar de um bloco que hoje está na role, ele
-   é protocolo — e a hora de mover é lá, não agora.

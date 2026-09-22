@@ -6,6 +6,14 @@
 > por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
 > renumerado: número gasto fica gasto.
 
+- **0003 — menu de partes e pasta de respostas** (2026-09-22,
+  `specs/features/0003-parts-menu-and-answers/`): cada parte de uma role fecha
+  sozinha em `specs/canvas/<role>/<parte>.md`, no projeto da pessoa, com o que
+  ela disse separado do que a skill propôs **pelo título**, não pela prosa. O
+  menu vem depois do desafio de escopo e sugere a próxima sem obrigar; o
+  relatório diz o que as partes que faltam impedem de concluir. O `/canvas`
+  virou controlador que só lê — sem `Write` no `allowed-tools`. Suíte:
+  **10 de 10**, com a fixture da volta.
 - **0002 — protocolo de revisão extraído** (2026-09-20,
   `specs/features/0002-review-protocol/`): o que é formato de revisar saiu do
   `/eng-review` e virou `shared/review-protocol.md`, lido em runtime como o
@@ -31,18 +39,14 @@
 
 ## Em desenvolvimento
 
-- **0003 — menu de partes e pasta de respostas**
-  (`specs/features/0003-parts-menu-and-answers/`): cada parte de uma role fecha
-  sozinha em arquivo, no projeto da pessoa (`specs/canvas/<role>/`); o menu
-  mostra o que já fechou e sugere a próxima; o `/canvas` vira controlador que
-  **só lê** o frontmatter para saber onde a pessoa está.
-
-  Especificada, decidida, desenhada e quebrada em tasks — falta implementar.
-  São seis tasks, cada uma gate da seguinte (`tasks.md`).
-
-  **Vem antes de tudo** (21/09), e antes da segunda role de propósito: o
-  protocolo agora é `shared/`, e mexer nele com duas roles existindo é
-  retrabalho nas duas.
+- **0004 — desacoplar do baseline e entregar o handoff** (a especificar): o
+  pack para de **apontar** para ferramenta operacional (`/commit`, `/pr`,
+  `.claude/rules/`, `stack.env` — cinco pontos medidos) e passa a **produzir** o
+  material que um agente operacional pega depois. yas-canvas é estratégico;
+  o operacional é de quem executa, com o baseline ou sem ele. Decidido em 22/09:
+  handoff em formato próprio, agnóstico de agente, com campos que mapeiam 1:1
+  para o spec-driven — compatível sem depender. E uma guarda no `check.mjs`
+  para o acoplamento não voltar.
 
 ## Próximo
 
