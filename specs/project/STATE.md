@@ -98,9 +98,9 @@ para o turno travado, não para o devagar.
 
 ## Perguntas em aberto para o Yves
 
-1. A 0003 tem spec, decisões e design; **falta o `tasks.md`**. A ordem de
-   implementação está no `design.md` §10, em cinco passos, cada um gate do
-   seguinte.
+1. A 0003 está pronta para implementar: spec, decisões, design e seis tasks.
+   A T1 (o contrato no `review-protocol.md`) é a que decide o resto — se ela
+   sair errada, as outras cinco carregam o erro.
 2. A sessão real com fundador continua pendente, e agora há um argumento para
    ela acontecer **depois** da 0003: é o menu que torna o abandono no meio
    sobrevivível, e abandono no meio é o que a sessão real vai produzir.

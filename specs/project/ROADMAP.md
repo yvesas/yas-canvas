@@ -37,8 +37,8 @@
   mostra o que já fechou e sugere a próxima; o `/canvas` vira controlador que
   **só lê** o frontmatter para saber onde a pessoa está.
 
-  `spec.md`, `context.md` e `design.md` escritos; falta o `tasks.md`. A ordem de
-  implementação está no design §10, em cinco passos.
+  Especificada, decidida, desenhada e quebrada em tasks — falta implementar.
+  São seis tasks, cada uma gate da seguinte (`tasks.md`).
 
   **Vem antes de tudo** (21/09), e antes da segunda role de propósito: o
   protocolo agora é `shared/`, e mexer nele com duas roles existindo é
