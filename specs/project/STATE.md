@@ -15,8 +15,8 @@ Cada parte de uma role agora fecha sozinha em
 desafio de escopo e sugere a próxima parte sem obrigar. O `/canvas` virou
 controlador que só lê.
 
-A próxima é a **0004 — desacoplar do baseline e entregar o handoff**, ainda sem
-spec. Ela vem da mesma conversa em que o Yves nomeou a fronteira dos dois
+A próxima é a **0004 — desacoplar do baseline e entregar o handoff**,
+especificada em 22/09. Ela vem da mesma conversa em que o Yves nomeou a fronteira dos dois
 repositórios: **yas-canvas é estratégico; o baseline é operacional.** O pack não
 aponta para ferramenta operacional; ele produz o material que um agente
 operacional pega depois.
@@ -116,9 +116,10 @@ ambiente) estão no `tasks.md` dela e no `specs/codebase/TESTING.md`.
 
 ## Perguntas em aberto para o Yves
 
-1. A 0004 precisa de spec antes de código. O ponto que mais muda o desenho: o
-   handoff é **um por sessão**, **um por role**, ou **acumula** como os arquivos
-   de parte?
+1. A 0004 está pronta para implementar: spec, decisões, design e seis tasks. O
+   requisito que mais pesa é o REQ-006: **proposta não confirmada não vira
+   tarefa.** O handoff vai para um executor, e um agente que implementa palpite
+   da skill como decisão põe palpite em produção.
 2. A próxima role é `/cto-canvas` ou `/ceo-review`? O ROADMAP diz canvas
    primeiro, e agora ela nasce com menu e handoff prontos.
 3. O `/design-review` cobre design visual e UX na mesma skill, ou os dois papéis
