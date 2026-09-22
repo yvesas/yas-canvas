@@ -49,7 +49,7 @@
   para o spec-driven — compatível sem depender. **Um handoff por alvo**,
   regenerado a partir das partes; o pack só escreve em `specs/canvas/`, e o
   relatório sai do arquivo do plano. E uma guarda no `check.mjs` para o
-  acoplamento não voltar. Falta design e tasks.
+  acoplamento não voltar. Especificada, desenhada e quebrada em seis tasks.
 
 ## Próximo
 

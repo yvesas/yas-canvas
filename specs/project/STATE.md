@@ -116,7 +116,7 @@ ambiente) estão no `tasks.md` dela e no `specs/codebase/TESTING.md`.
 
 ## Perguntas em aberto para o Yves
 
-1. A 0004 tem spec e decisões (D-HANDOFF-001 a 004); falta design e tasks. O
+1. A 0004 está pronta para implementar: spec, decisões, design e seis tasks. O
    requisito que mais pesa é o REQ-006: **proposta não confirmada não vira
    tarefa.** O handoff vai para um executor, e um agente que implementa palpite
    da skill como decisão põe palpite em produção.
