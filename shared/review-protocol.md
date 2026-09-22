@@ -106,6 +106,12 @@ esse arquivo depois — outra role, ou você mesmo daqui a um mês — é um mod
 modelo que precisa inferir pela linguagem o que era proposta acaba tratando
 proposta como decisão tomada.
 
+**Os três títulos estão sempre lá, mesmo vazios.** Quando a pessoa não disse
+nada sobre a parte além de "pode seguir", escreva exatamente isso sob
+`### O que você disse` — nunca omita o título. Título ausente é ambíguo: quem lê
+não sabe se a pessoa ficou calada ou se a skill esqueceu, e passa a tratar tudo
+que está no arquivo como se tivesse vindo dela.
+
 **Nunca reescreva o corpo.** Leia o arquivo, reescreva **só o bloco de
 frontmatter**, e **acrescente** a rodada nova ao final. Não existe operação que
 apague texto, e é por isso que não é preciso detectar se alguém editou à mão —
@@ -195,7 +201,8 @@ Pergunte: **Aprovar · Revisar · Recomeçar**.
 - [ ] Alguma recomendação ficou em cima do muro? Tome posição ou diga o que
       falta para decidir.
 - [ ] O relatório foi salvo num arquivo, e não só respondido no chat?
-- [ ] Cada parte terminada virou arquivo em `specs/canvas/<role>/`, com a
-      citação literal separada do que eu propus?
+- [ ] Cada parte terminada virou arquivo em `specs/canvas/<role>/`, com os três
+      títulos presentes — inclusive `### O que você disse` quando ela só disse
+      "pode seguir"?
 - [ ] Escrevi por cima do corpo de algum arquivo que já existia? Nunca.
 - [ ] Se faltaram partes, o relatório nomeia o que elas impedem de concluir?
