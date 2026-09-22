@@ -63,8 +63,8 @@ de outro.
 
 - **REQ-003 — O relatório sai do arquivo do plano.**
   WHEN a revisão fecha, THEN o relatório SHALL ser gravado em
-  `specs/canvas/<role>/`, nunca acrescentado ao arquivo revisado. O plano é da
-  pessoa.
+  `specs/canvas/<role>/report-<alvo>.md`, um por alvo, nunca acrescentado ao
+  arquivo revisado. O plano é da pessoa.
 
 - **REQ-004 — Um handoff por alvo.**
   WHEN existe pelo menos uma parte respondida sobre um alvo, THEN a skill SHALL
@@ -75,8 +75,12 @@ de outro.
   O handoff SHALL ter, nesta ordem: **Contexto** · **Decisões** (`D-`) ·
   **Requisitos** (`REQ-`, com WHEN/THEN/SHALL) · **Restrições** (o que não
   fazer) · **Confirmar antes de executar** · **Tarefas** (com critério de
-  pronto) · **Primeira tarefa**. Nenhum campo depende de ferramenta instalada;
-  todos mapeiam 1:1 para o spec-driven (D-HANDOFF-002).
+  pronto) · **Primeira tarefa** · **O que esta revisão não cobriu**. Nenhum
+  campo depende de ferramenta instalada; todos mapeiam 1:1 para o spec-driven
+  (D-HANDOFF-002).
+  **O último campo foi acrescentado pelo `design.md` §4:** quem executa precisa
+  saber o que não foi revisado mais do que a pessoa, porque vai construir em
+  cima — e área não revisada parece área aprovada.
 
 - **REQ-006 — Proposta não confirmada não vira tarefa.**
   WHEN a skill gera o handoff, THEN só o que está em `### O que você disse` —
@@ -88,11 +92,16 @@ de outro.
   agente operacional que implementa uma proposta como se fosse decisão
   transforma o palpite da skill em código em produção.
 
-- **REQ-007 — O handoff é regenerado, e as notas da pessoa sobrevivem.**
-  WHEN o handoff é gerado de novo, THEN ele SHALL ser reescrito a partir das
-  partes — é a única exceção à regra da 0003 de nunca apagar texto — e SHALL
-  preservar, intacta, a seção `## Notas para quem executa`, que é da pessoa. O
-  topo do arquivo diz que ele é gerado e onde se edita a fonte.
+- **REQ-007 — Relatório e handoff são vistas; as notas da pessoa sobrevivem.**
+  WHEN o relatório ou o handoff é gerado de novo, THEN ele SHALL ser reescrito a
+  partir das partes, e o handoff SHALL preservar, intacta, a seção
+  `## Notas para quem executa`, que é da pessoa. O topo de cada um diz que ele é
+  gerado e onde se edita a fonte. **A parte continua sendo o que nunca se
+  reescreve.**
+  **Corrigido pelo `design.md` §1:** a primeira versão chamava o handoff de
+  "a única exceção" à regra da 0003. Com o relatório também virando arquivo do
+  pack, são duas — e a regra certa não é uma lista de exceções, é a distinção
+  entre memória (parte) e vista (relatório, handoff).
 
 - **REQ-008 — O fechamento aponta para o handoff.**
   WHEN a sessão fecha, THEN a **uma tarefa** do preâmbulo SHALL ser a primeira
