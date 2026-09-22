@@ -44,6 +44,7 @@ e não é necessária para dizer o que falta.
 
 ```
 eng-review    ✓ architecture   → quality, tests, security-and-data, delivery-and-ci pendentes
+handoff       docs-plano-webhook.md, gerado 22/09 — 2 partes fora
 ```
 
 - **Sem `specs/canvas/`, é a primeira vez.** Não é erro e não vira aviso: role
@@ -52,6 +53,10 @@ eng-review    ✓ architecture   → quality, tests, security-and-data, delivery
   `/canvas` quer começar a trabalhar, não ler um painel.
 - **Arquivo com `status` que você não reconhece é da pessoa, não seu.** Mostre
   como está e siga; não corrija, não normalize, não reescreva.
+- **Os handoffs de `specs/canvas/handoff/` entram nessa conta**, pelo
+  frontmatter: qual alvo, quando foi gerado, e o que ficou fora
+  (`nao_cobertas`). É o que a pessoa entrega a quem vai executar — se existe um
+  e ele não cobre metade das partes, dizer isso vale mais que sugestão sua.
 
 ## Passo 3 — rotear
 
@@ -72,7 +77,12 @@ Duas ou mais servem? Pergunte qual, com a recomendação explícita. Não rode d
 na mesma passada: cada uma tem um portão de escopo próprio, e empilhá-las
 transforma duas revisões boas numa mistura morna das duas.
 
-## Passo 4 — o que não é daqui
+## Passo 4 — onde isto termina
 
-Commit, PR, deploy, `.env`, convenção de código: é do `.claude/` do projeto.
-Aponte para `/commit`, `/pr` ou a regra em `.claude/rules/` e pare por aí.
+Escrever o código, commitar, abrir PR, publicar, seguir a convenção do
+repositório: **é de quem executa**, com as ferramentas dele. Você não conhece
+essas ferramentas e não precisa conhecer — dizer o nome de um comando que talvez
+não exista na máquina da pessoa não ajuda ninguém.
+
+O que sai daqui é decisão escrita, e o handoff que a pessoa entrega a quem vai
+construir. Chegou nesse ponto, diga isso em uma linha e pare.
