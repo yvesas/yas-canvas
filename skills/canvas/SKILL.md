@@ -2,23 +2,33 @@
 name: canvas
 shared: [preamble]
 description: >
-  Roteador do pack yas-canvas. Manda o pedido para a role certa — engenharia,
-  CEO, produto, UX, design — ou para os canvas de CTO e Tech Lead. Use quando
-  invocar `/canvas` sem dizer qual skill, ou perguntar "qual skill serve aqui?".
+  Controlador do pack yas-canvas. Diz onde a pessoa parou — o que já foi
+  respondido em `specs/canvas/` e o que falta — e manda o pedido para a role
+  certa: engenharia, CEO, produto, UX, design, ou os canvas de CTO e Tech Lead.
+  Use ao invocar `/canvas` sem dizer qual skill, ao perguntar "qual skill serve
+  aqui?" ou "onde eu parei?".
 allowed-tools:
   - Read
+  - Glob
   - Skill
   - AskUserQuestion
 triggers:
   - canvas
   - qual skill do canvas
   - roteia isso
+  - onde eu parei
 ---
 
-# /canvas — roteador
+# /canvas — controlador
 
-Uma função só: mandar o pedido para a skill certa. Se nenhuma servir, responda
-direto — mas leia a tabela antes de decidir que nenhuma serve.
+Duas funções, nesta ordem: **dizer onde a pessoa parou** e **mandar o pedido
+para a skill certa**. Se nenhuma servir, responda direto — mas leia a tabela
+antes de decidir que nenhuma serve.
+
+**Este arquivo não escreve nada.** Não tem `Write` nem `Edit` no
+`allowed-tools`, e é de propósito: o material das roles é delas, e um
+controlador que edita o que as roles escreveram precisa de regra de conflito
+que ninguém especificou. Precisou mudar um arquivo de parte? Chame a role.
 
 ## Passo 1 — preâmbulo
 
@@ -26,7 +36,24 @@ Leia o `preamble.md` que está **ao lado deste arquivo** (no repositório do
 pack: `shared/preamble.md`). Ele define voz, anti-bajulação e formato de
 pergunta, e vale também quando você responde direto.
 
-## Passo 2 — rotear
+## Passo 2 — onde a pessoa parou
+
+Antes de rotear, olhe o estado — **só o frontmatter**, com `Glob` em
+`specs/canvas/**/*.md` e `Read` no que aparecer. A prosa não é lida: ela é cara,
+e não é necessária para dizer o que falta.
+
+```
+eng-review    ✓ architecture   → quality, tests, security-and-data, delivery-and-ci pendentes
+```
+
+- **Sem `specs/canvas/`, é a primeira vez.** Não é erro e não vira aviso: role
+  nenhuma foi rodada ainda, e o menu nasce todo pendente.
+- **Diga o estado em uma ou duas linhas, não em relatório.** Quem invocou o
+  `/canvas` quer começar a trabalhar, não ler um painel.
+- **Arquivo com `status` que você não reconhece é da pessoa, não seu.** Mostre
+  como está e siga; não corrija, não normalize, não reescreva.
+
+## Passo 3 — rotear
 
 | O que a pessoa traz | Skill |
 |---|---|
@@ -45,7 +72,7 @@ Duas ou mais servem? Pergunte qual, com a recomendação explícita. Não rode d
 na mesma passada: cada uma tem um portão de escopo próprio, e empilhá-las
 transforma duas revisões boas numa mistura morna das duas.
 
-## Passo 3 — o que não é daqui
+## Passo 4 — o que não é daqui
 
 Commit, PR, deploy, `.env`, convenção de código: é do `.claude/` do projeto.
 Aponte para `/commit`, `/pr` ou a regra em `.claude/rules/` e pare por aí.
