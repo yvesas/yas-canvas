@@ -22,9 +22,12 @@ Skills de método. Cada uma é um **papel** com um protocolo próprio:
 
 ## Princípios
 
-1. **Skill propõe; hook enforça.** Regra que obriga pertence ao baseline de
-   convenções, que vive dentro de cada repositório. Aqui é método, e método
-   viaja com a pessoa — por isso a instalação é no usuário.
+1. **Estratégico aqui; operacional em quem executa.** Este pack entende,
+   desafia, decide e escreve — e entrega um **handoff**. Construir, commitar,
+   publicar é de quem recebe, com as ferramentas do repositório dele, que a
+   skill não conhece e não precisa conhecer. A fronteira é um documento, não
+   uma referência: é o que faz o método viajar com a pessoa e funcionar em
+   qualquer projeto.
 2. **Especificidade é a moeda.** Resposta genérica não vale nada; o protocolo
    empurra até aparecer um nome próprio, um número, um incidente real.
 3. **Uma pergunta por vez.** Seis perguntas de uma vez produzem seis respostas
