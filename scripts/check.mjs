@@ -137,6 +137,34 @@ for (const dir of skills) {
     }
   }
 
+  // --- as partes --------------------------------------------------------
+  //
+  // Role de revisão é a que declara o protocolo; só ela tem partes. Um canvas
+  // conduz uma pessoa em vez de avaliar um artefato, e não tem o que listar
+  // num menu — por isso a cobrança sai do `shared:`, e não de uma lista de
+  // nomes aqui dentro, que envelheceria a cada skill nova.
+  const parts = ((fm.match(/^parts:\s*\[(.*)\]/m) || [])[1] || "")
+    .split(",")
+    .map((x) => x.trim())
+    .filter(Boolean);
+
+  if (declared.includes("review-protocol") && parts.length === 0) {
+    fail(rel, "declara `review-protocol` e não declara `parts:` — sem partes não há menu");
+  }
+
+  const body = text.slice(text.indexOf("\n---", 3));
+  for (const part of parts) {
+    if (!/^[a-z0-9-]+$/.test(part)) {
+      fail(rel, `parte \`${part}\` fora do padrão: kebab-case, sem acento (regra code-style.md)`);
+      continue;
+    }
+    // Com crase, porque é assim que a skill se refere a uma parte — e porque
+    // `tests` solto casaria com qualquer frase sobre teste.
+    if (!body.includes(`\`${part}\``)) {
+      fail(rel, `declara a parte \`${part}\` e não a conduz no corpo — parte que só existe no frontmatter não aparece em menu nenhum`);
+    }
+  }
+
   const lines = text.split("\n").length;
   if (lines > MAX_LINES) warn(rel, `${lines} linhas (teto ${MAX_LINES}) — corte ou divida`);
 }
@@ -167,6 +195,17 @@ if (existsSync(routerFile)) {
 // depois de gastar uma sessão de modelo, e aí o erro parece da skill.
 const FIXTURES = join(ROOT, "test", "fixtures");
 const FIXTURE_FILES = ["prompt.txt", "rubric.md", "expect.json"];
+const STATUS = new Set(["pendente", "respondido", "descartado"]);
+
+// Os arquivos de parte que uma fixture semeia, em qualquer profundidade.
+function answerFiles(dir, out = []) {
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) answerFiles(full, out);
+    else if (entry.endsWith(".md")) out.push(full);
+  }
+  return out;
+}
 const EXPECT_KEYS = new Set([
   "descricao", "mustContainAll", "mustNotContainAny",
   "mustWriteFileContaining", "maxInvestigativeCalls", "minToolCalls", "driver",
@@ -213,6 +252,29 @@ if (existsSync(FIXTURES)) {
         }
         for (const key of Object.keys(expect)) {
           if (!EXPECT_KEYS.has(key)) fail(`${rel}/expect.json`, `chave desconhecida \`${key}\` — o harness ignora, e um teste que ignora expectativa mente`);
+        }
+      }
+    }
+
+    // Fixture que semeia estado carrega arquivos de parte prontos, como se uma
+    // sessão anterior os tivesse escrito. Eles são o contrato de verdade que
+    // este repositório consegue validar: o arquivo de um projeto de terceiro
+    // nunca passa por aqui (ver 0003/design.md §8).
+    const seeded = join(FIXTURES, dir, "specs", "canvas");
+    if (existsSync(seeded)) {
+      for (const file of answerFiles(seeded)) {
+        const relFile = `${rel}/${file.slice(join(FIXTURES, dir).length + 1)}`;
+        const fm = frontmatter(readFileSync(file, "utf8"));
+        if (!fm) {
+          fail(relFile, "arquivo de parte sem frontmatter — é ele que o controlador lê");
+          continue;
+        }
+        for (const key of ["role", "parte", "status"]) {
+          if (!new RegExp(`^${key}:`, "m").test(fm)) fail(relFile, `frontmatter sem \`${key}\``);
+        }
+        const status = (fm.match(/^status:\s*(\S+)/m) || [])[1];
+        if (status && !STATUS.has(status)) {
+          fail(relFile, `\`status: ${status}\` fora do conjunto (${[...STATUS].join(" | ")})`);
         }
       }
     }
