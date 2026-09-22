@@ -39,14 +39,17 @@
 
 ## Em desenvolvimento
 
-- **0004 — desacoplar do baseline e entregar o handoff** (a especificar): o
+- **0004 — desacoplar do baseline e entregar o handoff**
+  (`specs/features/0004-decouple-and-handoff/`, especificada em 22/09): o
   pack para de **apontar** para ferramenta operacional (`/commit`, `/pr`,
   `.claude/rules/`, `stack.env` — cinco pontos medidos) e passa a **produzir** o
   material que um agente operacional pega depois. yas-canvas é estratégico;
   o operacional é de quem executa, com o baseline ou sem ele. Decidido em 22/09:
   handoff em formato próprio, agnóstico de agente, com campos que mapeiam 1:1
-  para o spec-driven — compatível sem depender. E uma guarda no `check.mjs`
-  para o acoplamento não voltar.
+  para o spec-driven — compatível sem depender. **Um handoff por alvo**,
+  regenerado a partir das partes; o pack só escreve em `specs/canvas/`, e o
+  relatório sai do arquivo do plano. E uma guarda no `check.mjs` para o
+  acoplamento não voltar. Falta design e tasks.
 
 ## Próximo
 
