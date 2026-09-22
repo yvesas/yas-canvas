@@ -2,6 +2,7 @@
   "name": "yas-canvas",
   "version": "0.1.0",
   "description": "Skills de método para liderança técnica: roteador, roles de revisão e os canvas de CTO e Tech Lead.",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "scripts": {

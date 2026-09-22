@@ -91,8 +91,15 @@ para o turno travado, não para o devagar.
 - **O baseline instalado aqui veio de uma branch não mergeada** do repo de
   convenções (`refactor/stack-agnostic-baseline`, PR #6). Quando entrar, rodar
   `claude-base/bin/install ../yas-canvas` de novo.
-- **Visibilidade.** O repositório é privado. Distribuir exige decidir licença e
-  separar o que é material de cliente.
+- **Público e sem licença até 22/09 — resolvido: MIT.** Sem arquivo de licença,
+  repositório público é "todos os direitos reservados", e ninguém instala de
+  boa-fé. MIT no repo inteiro, texto das skills incluído: o pack **antecede** o
+  SaaS e existe para validar o método, então adoção vale mais que proteção.
+  Considerado e descartado: MIT no código + CC BY-SA na prosa — duas licenças
+  em 400 linhas de markdown é fricção para quem ia experimentar.
+- **A separação de material de cliente foi feita?** Era condição para abrir o
+  repositório, e a abertura aconteceu sem registro disso aqui. Fixtures são
+  sintéticas (PJe, CPF, escritório genérico); o resto não foi auditado.
 - **Validação com fundador real ainda não aconteceu.** Continua sendo o teste que
   importa: duas sessões de verdade antes de escrever a terceira role.
 
