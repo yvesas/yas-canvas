@@ -1,6 +1,7 @@
 ---
 name: eng-review
 shared: [preamble, review-protocol]
+parts: [architecture, quality, tests, security-and-data, delivery-and-ci]
 description: >
   Revisão de engenharia de um plano, design doc ou diff, no papel de quem lidera
   a técnica: arquitetura, qualidade, testes, dado sensível e entrega. Percorre
@@ -41,14 +42,14 @@ anti-bajulação, fechamento) e `review-protocol.md` (o formato) — e siga:
 | | Passo | Detalhe |
 |---|---|---|
 | 1 | Em que mundo estou: há código ou não | protocolo §2 |
-| 2 | As cinco seções, uma por vez, teto de oito | aqui, Passo 4 |
+| 2 | Menu: a pessoa escolhe a parte; uma por vez, teto de oito | protocolo §3 |
 | 3 | **Alternativas — obrigatório**, mínima viável e ideal | protocolo §5 |
-| 4 | Juntar o que as seções separaram | aqui, Passo 5 |
+| 4 | Juntar o que as partes separaram | aqui, Passo 5 |
 | 5 | Relatório, com "Barra o plano" em posição fixa | protocolo §6 |
 | 6 | Fechamento: o que ouvi, **uma** tarefa, status | preâmbulo |
 
 Regra que dispara no fim da sessão não sobrevive só no arquivo lido no começo —
-daí a tabela, e o passo 3 é o que mais some. **Terminada a quinta seção, releia
+daí a tabela, e o passo 3 é o que mais some. **Terminada a última parte, releia
 o `review-protocol.md` §5 e §6 — sim, de novo:** alternativas são mínima viável
 **e** ideal, com esforço e risco; o relatório abre por "Escopo revisado" e
 "Barra o plano", e junção de lacunas que ficou no fim do texto vai para o topo.
@@ -94,45 +95,48 @@ Nenhum destes vira item de lista no relatório. Eles decidem **onde olhar**.
 10. **Minuto de CI é dinheiro.** O mesmo commit rodado duas vezes, ou job sem
     `timeout`, aparece na fatura um mês depois (`ci-minutes.md` do projeto).
 
-## Passo 4 — as cinco seções
+## Passo 4 — as cinco partes
 
-Uma por vez, teto de oito, parando para a resposta — o formato está no
-`review-protocol.md`. O que cada uma procura:
+Uma por vez, teto de oito, parando para a resposta; o menu e o arquivo de cada
+parte estão no `review-protocol.md` §3 e §4. Esta é a ordem que faz sentido
+nesta role — e é a que o menu sugere. O que cada parte procura:
 
-**4.1 Arquitetura.** Fronteiras, fluxo de dados, quem depende de quem, o que
+**`architecture`.** Fronteiras, fluxo de dados, quem depende de quem, o que
 fica acoplado ao fornecedor. **Diagrama ASCII obrigatório** para fluxo de dados
 e para máquina de estado, quando houver. Diagrama que já existe no código e
 ficou errado é problema de prioridade alta: ele mente com autoridade.
 
-**4.2 Qualidade.** Nome que não diz o que faz, função com dois motivos para
+**`quality`.** Nome que não diz o que faz, função com dois motivos para
 mudar, repetição, erro engolido, entrada externa sem validação de schema na
-borda. **Sem código, esta seção é a que mais tenta encher** — pode encolher, ou
+borda. **Sem código, esta parte é a que mais tenta encher** — pode encolher, ou
 virar "que forma o primeiro código precisa ter"; o que não serve é enfileirar
 boa prática até ela ficar do tamanho das outras. **Todo item se amarra a uma
 frase do plano:** o que serve para qualquer software sai — *nomear bem, não
 engolir exceção, injetar o relógio* é lembrado de cor, não lido, e se nota.
 
-**4.3 Testes.** Para **cada caminho novo**, uma forma realista de quebrar em
+**`tests`.** Para **cada caminho novo**, uma forma realista de quebrar em
 produção: timeout, nulo, corrida, dado velho, resposta fora do formato. O
 comando da suíte é o do projeto (`TEST_CMD` no `.claude/stack.env`, ou
 `specs/codebase/TESTING.md`) — não invente comando de teste.
 
-**4.4 Segurança e dado.** Que dado pessoal entra, quem enxerga o registro de
+**`security-and-data`.** Que dado pessoal entra, quem enxerga o registro de
 quem, onde ele é criptografado, o que vai para o log. Segredo em código, fixture
 com dado real, credencial em claro — barra o plano, não vira ressalva.
 
-**4.5 Entrega e CI.** Como isso chega em produção, o que acontece quando não
+**`delivery-and-ci`.** Como isso chega em produção, o que acontece quando não
 chega, e quanto o pipeline custa por PR.
 
 ## Passo 5 — a combinação crítica desta role
 
-O `review-protocol.md` manda juntar o que as seções separaram antes de escrever
+O `review-protocol.md` manda juntar o que as partes separaram antes de escrever
 "Barra o plano". Na engenharia, a combinação que conta é esta:
 
 > **sem teste + sem tratamento + falha silenciosa = lacuna crítica.**
 
-Ela quase nunca nasce inteira: o teste que falta aparece na 4.3, o `catch` vazio
-na 4.2, o retorno que esconde o erro na 4.1. Com as cinco seções na mão,
+Ela quase nunca nasce inteira: o teste que falta aparece em `tests`, o `catch`
+vazio em `quality`, o retorno que esconde o erro em `architecture`. **É a razão
+de o relatório declarar o que faltou:** com duas das três partes, esta junção
+não pode ser feita, e dizer isso é obrigatório. Com as três na mão,
 percorra **cada caminho de código** e faça as três perguntas juntas — *tem
 teste? o erro é tratado? a falha aparece para alguém?* Três "não" no mesmo
 caminho é **um** item, com as três partes na mesma frase: separado, o leitor
@@ -143,7 +147,7 @@ conserta a peça mais fácil; junto, fica claro que o defeito roda meses calado.
 A lista do formato está no `review-protocol.md`. Aqui:
 
 - [ ] Tem diagrama de fluxo de dados?
-- [ ] Algum caminho acumula os três "não" descritos em seções diferentes?
-- [ ] Algum item da 4.2 serviria para qualquer software? Corte.
+- [ ] Algum caminho acumula os três "não" descritos em partes diferentes?
+- [ ] Algum item de `quality` serviria para qualquer software? Corte.
 - [ ] Segredo, dado pessoal sem decisão ou credencial em claro estão em "Barra
       o plano", e não como ressalva?
