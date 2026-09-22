@@ -62,5 +62,3 @@
 - **Tradução para inglês.** Hoje a prosa é em português. Traduzir cria duas
   versões que envelhecem em ritmos diferentes; só vale com a decisão de
   distribuir tomada.
-- **Licença e visibilidade.** Privado hoje. Distribuir exige escolher licença e
-  separar o que é material de cliente do que é público.
