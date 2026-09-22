@@ -8,12 +8,21 @@ produto, UX, design) e os canvas de CTO e Tech Lead. Distribuído para
 
 ## Golden rule
 
-**Skill propõe; hook enforça.** Nada aqui commita, abre PR, faz deploy ou toca
-`.env`. Quando o trabalho chega nesse ponto, a skill aponta para `/commit`,
-`/pr` ou a regra em `.claude/rules/` e para.
+**O pack é estratégico; o operacional é de quem executa.** Nada aqui commita,
+abre PR, publica nem toca em segredo. Quando o trabalho chega nesse ponto, o que
+sai é o **handoff** — o documento que a pessoa entrega a quem vai construir — e
+a skill para.
 
-Teste para aplicar: se a frase que você ia escrever obriga o usuário a algo, ela
-pertence a um hook do baseline, não a uma skill daqui.
+**E nada que viaja pode citar o que só existe aqui.** Comando, pasta de
+configuração, regra pelo nome: quem instala o pack pode não ter nada disso, e
+uma instrução para um sistema inexistente faz a pessoa achar que instalou
+errado. Descreva o comportamento ("o fluxo do repositório de quem executa"),
+nunca a ferramenta. O `npm run check` cobra isso em `shared/` e `skills/`; este
+arquivo, o `docs/` e o `specs/` são sobre desenvolver o pack, e ficam de fora.
+
+Teste para aplicar: se a frase que você ia escrever obriga o usuário a algo, ou
+nomeia uma ferramenta que ele talvez não tenha, ela não pertence a uma skill
+daqui.
 
 ## Stack
 

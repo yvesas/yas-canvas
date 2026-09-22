@@ -74,13 +74,14 @@ uma afirmação que volta como decisão tomada três reuniões depois, na sua vo
 
 ## A saída é um documento
 
-Sessão que termina só no chat evapora. Toda skill salva um arquivo — no lugar
-que a regra `docs-and-specs.md` do projeto define — e pergunta ao final:
-**Aprovar · Revisar · Recomeçar**.
+Sessão que termina só no chat evapora. Toda skill salva arquivo e pergunta ao
+final: **Aprovar · Revisar · Recomeçar**.
 
-Onde salvar, na ordem: a feature em `specs/features/NNNN-slug/` quando ela já
-existe; `specs/quick/NNN-slug/` quando é avulso; `docs/adr/` quando o que
-ficou decidido é estrutural e precisa sobreviver a uma reescrita do `STATE.md`.
+**Tudo que você grava vai para `specs/canvas/`, no projeto da pessoa — e só
+para lá.** O resto do repositório é dela e de quem executa; essa pasta é sua.
+Não existe? Crie, grave, e **diga em uma linha onde gravou** — perguntar antes
+trava a sessão numa pergunta procedural, e o trabalho dela morre esperando. Sua
+skill diz o que grava lá dentro.
 
 ## O fechamento
 
@@ -90,6 +91,11 @@ Toda sessão termina com três coisas, nesta ordem:
    Literais: a palavra dela vale mais que a sua paráfrase.
 2. **Uma tarefa concreta** para esta semana. **Uma.** Com o arquivo, o comando
    ou a conversa que ela precisa ter.
+
+   Quando a sessão produziu um handoff, essa tarefa é a **primeira dele** — e
+   você diz onde o arquivo está e o que fazer com ele: entregar a quem vai
+   construir. Sessão sem alvo para entregar (um canvas, por exemplo) fecha com
+   a tarefa e mais nada.
 
    Uma quer dizer uma. "E, enquanto isso, comece por X" são duas — e duas
    tarefas viram nenhuma, porque a pessoa escolhe a mais fácil e esquece a que
@@ -101,9 +107,19 @@ Toda sessão termina com três coisas, nesta ordem:
    - `BLOQUEADO` — não dá para seguir; diga o bloqueio e o que já tentou.
    - `FALTA_CONTEXTO` — diga exatamente o que falta.
 
-## O que este pack não faz
+## Onde este pack termina
 
-Ele **propõe**; quem **enforça** é o `.claude/` do projeto. Nenhuma skill daqui
-commita, abre PR, faz deploy ou mexe em `.env`. Quando o trabalho chegar nesse
-ponto, mande para `/commit`, `/pr` e as regras do baseline — que rodam com
-hook, não com boa vontade.
+Aqui é o **estratégico**: entender, desafiar, decidir e escrever. O operacional
+— escrever o código, commitar, abrir PR, publicar — é de quem executa, com as
+ferramentas e as regras do repositório **dele**, que você não conhece e não
+precisa conhecer.
+
+Nenhuma skill daqui commita, abre PR, publica nem toca em segredo. Quando o
+trabalho chega nesse ponto, o que sai daqui é o **handoff**: um documento que a
+pessoa entrega a quem vai construir — outro agente, outro editor, um dev do
+time. Entregue e pare.
+
+Não mande ninguém rodar um comando específico, nem cite arquivo de configuração
+de um sistema que talvez não exista na máquina dela. **A fronteira é um
+documento, não uma referência** — é isso que faz o pack funcionar em qualquer
+projeto.

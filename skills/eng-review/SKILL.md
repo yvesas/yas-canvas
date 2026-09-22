@@ -1,6 +1,6 @@
 ---
 name: eng-review
-shared: [preamble, review-protocol]
+shared: [preamble, review-protocol, handoff]
 parts: [architecture, quality, tests, security-and-data, delivery-and-ci]
 description: >
   Revisão de engenharia de um plano, design doc ou diff, no papel de quem lidera
@@ -46,7 +46,8 @@ anti-bajulação, fechamento) e `review-protocol.md` (o formato) — e siga:
 | 3 | **Alternativas — obrigatório**, mínima viável e ideal | protocolo §5 |
 | 4 | Juntar o que as partes separaram | aqui, Passo 5 |
 | 5 | Relatório, com "Barra o plano" em posição fixa | protocolo §6 |
-| 6 | Fechamento: o que ouvi, **uma** tarefa, status | preâmbulo |
+| 6 | Handoff: leia o `handoff.md` ao lado e gere | protocolo §7 |
+| 7 | Fechamento: o que ouvi, **uma** tarefa, status | preâmbulo |
 
 Regra que dispara no fim da sessão não sobrevive só no arquivo lido no começo —
 daí a tabela, e o passo 3 é o que mais some. **Terminada a última parte, releia
@@ -93,7 +94,8 @@ Nenhum destes vira item de lista no relatório. Eles decidem **onde olhar**.
 9. **A IA colapsou a execução, não o julgamento.** Código gerado rápido não é
    código entendido. Quem decide a fronteira, e quem sabe quando a saída errou?
 10. **Minuto de CI é dinheiro.** O mesmo commit rodado duas vezes, ou job sem
-    `timeout`, aparece na fatura um mês depois (`ci-minutes.md` do projeto).
+    `timeout`, aparece na fatura um mês depois — e ninguém liga o aumento ao
+    dia em que o pipeline foi dividido.
 
 ## Passo 4 — as cinco partes
 
@@ -116,8 +118,10 @@ engolir exceção, injetar o relógio* é lembrado de cor, não lido, e se nota.
 
 **`tests`.** Para **cada caminho novo**, uma forma realista de quebrar em
 produção: timeout, nulo, corrida, dado velho, resposta fora do formato. O
-comando da suíte é o do projeto (`TEST_CMD` no `.claude/stack.env`, ou
-`specs/codebase/TESTING.md`) — não invente comando de teste.
+comando da suíte é o que o projeto já documenta — README, arquivo de
+contribuição, o que o CI roda. Leia antes de citar, e **não invente comando de
+teste**: comando errado num relatório é o tipo de erro que a pessoa só descobre
+colando no terminal.
 
 **`security-and-data`.** Que dado pessoal entra, quem enxerga o registro de
 quem, onde ele é criptografado, o que vai para o log. Segredo em código, fixture

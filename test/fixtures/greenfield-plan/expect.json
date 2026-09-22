@@ -9,7 +9,7 @@
   "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
   "minToolCalls": 1,
   "driver": {
-    "maxTurns": 9,
+    "maxTurns": 11,
     "reply": "Concordo com a sua recomendação. Siga para a próxima seção, e quando terminar as cinco, escreva o relatório e feche.",
     "stopWhen": "RELATÓRIO DE REVISÃO"
   }

@@ -79,26 +79,58 @@ Onde você quer trabalhar? (sugiro `quality` — é a próxima na ordem)
   que o menu existe para evitar. O menu volta quando ela parar de pedir
   sequência.
 
-## 4. O arquivo da parte
+## 4. O que o pack escreve, e onde
 
-Terminada uma parte, o resultado dela vai para
-`specs/canvas/<role>/<parte>.md`, **no projeto da pessoa** — versionado junto
-com o código que descreve. Se o projeto não tiver `specs/`, pergunte **uma vez**
-onde gravar; não invente estrutura no repositório de ninguém.
+Tudo que você grava vai para `specs/canvas/`, no projeto da pessoa — e **só**
+para lá, versionado junto com o código que descreve. O plano é dela, o resto do
+repositório é de quem executa, essa pasta é sua.
+
+**Não existe `specs/`? Crie, grave, e diga em uma linha onde gravou.** Pedir
+permissão para criar a própria pasta trava a sessão numa pergunta que ninguém
+tem vontade de responder — e o trabalho da sessão morre esperando. É uma pasta
+de markdown versionada: se ela estiver no lugar errado, a pessoa move. Se ela
+disser onde prefere, use o que ela disse; fora isso, não pergunte.
+
+```
+specs/canvas/
+├── <role>/
+│   ├── <parte>.md            memória
+│   └── report-<alvo>.md      vista para a pessoa
+└── handoff/
+    └── <alvo>.md             vista para quem executa (§7)
+```
+
+**`<alvo>` sai do caminho, sempre igual:** sem extensão, `/` vira `-`,
+minúsculo. `docs/plano-webhook.md` → `docs-plano-webhook`. Ninguém escolhe nome,
+e dois `plan.md` em pastas diferentes não colidem.
+
+| | Quem edita | Você reescreve? |
+|---|---|---|
+| **parte** | a pessoa | **nunca** — só o frontmatter, e a rodada nova no fim |
+| **relatório** | ninguém: é gerado | sim, a cada fechamento |
+| **handoff** | ninguém, fora as notas dela | sim, preservando `## Notas para quem executa` |
+
+A parte é **memória**; relatório e handoff são **vistas** dela, como um build é
+vista do código. Quem quiser mudar o que o handoff diz muda a parte e gera de
+novo — nunca o contrário.
+
+### O arquivo da parte
+
+Terminada uma parte, o resultado dela vai para `specs/canvas/<role>/<parte>.md`.
 
 ```markdown
 ---
 role: eng-review
 parte: architecture
 status: respondido          # pendente | respondido | descartado
-alvo: specs/features/0004-webhook/plan.md
+alvo: docs/plano-webhook.md
 atualizado: 2026-09-21
 ---
 
 <!-- O frontmatter acima é da máquina. Daqui para baixo é seu: edite à
      vontade, a skill só acrescenta ao final e nunca reescreve o que já está. -->
 
-## 2026-09-21 — specs/features/0004-webhook/plan.md
+## 2026-09-21 — docs/plano-webhook.md
 
 ### O que você disse
 > citação literal, e só isso
@@ -147,9 +179,10 @@ o que foi descartado nem por quê.
 
 ## 6. O relatório
 
-Escreva no arquivo do plano, ao final, uma seção `## RELATÓRIO DE REVISÃO`. Se
-não houver arquivo de plano, crie `specs/quick/NNN-<role>-<slug>/review.md` — a
-numeração e o lugar seguem `.claude/rules/docs-and-specs.md` do projeto.
+Grave em `specs/canvas/<role>/report-<alvo>.md`, com o título
+`## RELATÓRIO DE REVISÃO`. **Não escreva no arquivo do plano:** ele é da pessoa,
+e o relatório é seu — misturar os dois faz a próxima revisão reescrever o plano
+de alguém.
 
 Esta ordem, e ela não é decorativa: quem lê para agir lê de cima para baixo e
 para quando acaba o tempo.
@@ -196,7 +229,20 @@ quem a lê — e o mais difícil de a pessoa perceber, porque veio na sua voz.
 
 Pergunte: **Aprovar · Revisar · Recomeçar**.
 
-## 7. Autoverificação — a parte que é do formato
+## 7. O handoff
+
+Aqui acaba o seu trabalho. O handoff é o documento que a pessoa entrega a quem
+vai construir: outro agente, outro editor, um dev da equipe.
+
+**No fechamento de toda sessão que respondeu ao menos uma parte, leia o
+`handoff.md` que está ao lado deste arquivo e siga o que ele diz.** Ele tem
+como montar, o formato e a regra que mais importa — proposta que ninguém
+confirmou **não** vira tarefa, vai para "Confirmar antes de executar".
+
+Ele não é lido no começo da sessão de propósito: o formato dele importa uma vez,
+no fim, e o que é lido em todo turno precisa caber numa resposta.
+
+## 8. Autoverificação — a parte que é do formato
 
 - [ ] O portão de escopo foi a primeira chamada de ferramenta?
 - [ ] Disse em que mundo estava, e li o código real quando havia?
@@ -216,3 +262,8 @@ Pergunte: **Aprovar · Revisar · Recomeçar**.
       "pode seguir"?
 - [ ] Escrevi por cima do corpo de algum arquivo que já existia? Nunca.
 - [ ] Se faltaram partes, o relatório nomeia o que elas impedem de concluir?
+- [ ] O handoff foi gerado, e cada item dele cita a parte e a frase que o
+      autoriza?
+- [ ] Alguma proposta minha, que ninguém confirmou, virou tarefa no handoff?
+      Ela vai para "Confirmar antes de executar".
+- [ ] Escrevi em algum arquivo fora de `specs/canvas/`? Só lá.

@@ -161,6 +161,19 @@ a mensagem do runner nomeia o teto e o que fazer. Dez minutos já derrubaram uma
 fixture de **um turno só**, que não tem protocolo longo nenhum: era a API lenta
 naquela hora. O teto existe para o turno travado, não para o turno devagar.
 
+## O marco de parada vale no chat ou no disco
+
+`driver.stopWhen` marca "a sessão chegou ao fim". O fim destas skills é um
+**arquivo**, e recitar o título dele no chat é narração — uma sessão gravou o
+relatório inteiro, não repetiu `RELATÓRIO DE REVISÃO` na resposta, e foi
+reprovada por não ter fechado. Agora o marco é procurado na transcrição **ou**
+nos arquivos escritos.
+
+É a terceira vez que o mesmo defeito aparece por uma porta diferente: o juiz
+lendo só a transcrição (0003), o juiz sem ver os arquivos de parte (0003), e
+agora o marco de parada. **Sempre que a régua olhar só o que foi dito, ela vai
+reprovar quem entregou sem narrar.**
+
 ## Footgun: o juiz não pode enxergar o próprio ambiente
 
 O juiz roda em diretório temporário vazio, de propósito. Rodando dentro do

@@ -182,7 +182,13 @@ export function runSubject(fixture) {
       turn(["-p", driver.reply, "--resume", sessionId]);
     }
     if (!reachedStop && driver.stopWhen) {
-      reachedStop = text.join("\n").includes(driver.stopWhen);
+      // Na transcrição **ou no disco**. O marco é "a sessão chegou ao fim", e o
+      // fim desta skill é um arquivo — repetir o título no chat é narração. Uma
+      // sessão que gravou o relatório e não o recitou fechou do mesmo jeito, e
+      // reprová-la é o defeito que a 0002 tirou do juiz aparecendo por outra
+      // porta.
+      reachedStop =
+        text.join("\n").includes(driver.stopWhen) || wroteFileContaining(cwd, driver.stopWhen);
     }
   }
 
@@ -223,6 +229,19 @@ export function deterministicFailures(fixture, session) {
         `o protocolo não fechou, ou o teto de turnos é baixo demais`,
     );
   }
+  // O `mustNotContainAny` olha a transcrição. Mas o acoplamento que machuca é o
+  // que fica **gravado**: um handoff que outra pessoa abre daqui a uma semana,
+  // mandando rodar um comando que ela não tem. Isto varre o que a sessão
+  // escreveu no território do pack.
+  if (Array.isArray(e.writtenMustNotContainAny) && e.writtenMustNotContainAny.length > 0) {
+    const dir = join(session.cwd, "specs", "canvas");
+    const written = existsSync(dir) ? writtenArtifacts(dir, "") : [];
+    for (const needle of e.writtenMustNotContainAny) {
+      const hit = written.find((a) => a.content.includes(needle));
+      if (hit) problems.push(`gravou "${needle}" em specs/canvas/${hit.path} — o arquivo viaja para quem não tem isso`);
+    }
+  }
+
   if (e.mustWriteFileContaining) {
     if (!wroteFileContaining(session.cwd, e.mustWriteFileContaining)) {
       problems.push(`nenhum arquivo escrito contém "${e.mustWriteFileContaining}" — a sessão terminou só no chat`);
