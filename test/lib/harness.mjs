@@ -294,6 +294,19 @@ export function judge(fixture, session) {
   const marker = fixture.expect.mustWriteFileContaining || fixture.expect.driver?.stopWhen;
   const artifacts = marker ? writtenArtifacts(session.cwd, marker) : [];
 
+  // Os arquivos de parte também são entregável, e nenhum marcador os alcança
+  // todos: a fixture da volta usa como marcador a nota escrita à mão, que só
+  // existe num deles. O juiz reprovou a sessão por não ver, na transcrição, a
+  // citação que estava gravada em três arquivos que ninguém lhe mostrou.
+  const partsDir = join(session.cwd, "specs", "canvas");
+  if (existsSync(partsDir)) {
+    const seen = new Set(artifacts.map((a) => a.path));
+    for (const a of writtenArtifacts(partsDir, "")) {
+      const path = `specs/canvas/${a.path}`;
+      if (!seen.has(path)) artifacts.push({ path, content: a.content });
+    }
+  }
+
   const prompt = [
     "Você julga a transcrição de uma sessão de agente contra critérios objetivos.",
     "Não seja generoso: a dúvida conta como falha, e evidência é citação literal da transcrição.",
