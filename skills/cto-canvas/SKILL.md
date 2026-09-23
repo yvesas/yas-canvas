@@ -161,6 +161,11 @@ sete" transforma a conversa numa avaliação, e a partir dali ela responde para
 pontuar, não para pensar. Quem ler o documento depois conta se precisar; a
 citação é o que torna a contagem verificável.
 
+**E se nenhum apareceu, a seção não existe.** Não escreva "nenhum dos sete
+apareceu" nem nada equivalente: isso é a nota zero dita com outras palavras, e é
+pior que a nota, porque vem no fim de uma conversa em que a pessoa se expôs. A
+ausência da seção já diz tudo a quem for ler depois.
+
 ## Passo 6 — o documento
 
 Grave `specs/canvas/cto-canvas/canvas.md` — **vista**, regenerada a cada
@@ -183,5 +188,6 @@ fechamento a partir das partes:
 - [ ] Alguma bandeira vermelha passou sem ser nomeada como bandeira?
 - [ ] Listei as premissas antes de recomendar, e perguntei do que ela discorda?
 - [ ] Escrevi contagem, nota ou "x de 7" em algum lugar? Nunca.
+- [ ] Escrevi que **nenhum** sinal apareceu? Isso é nota zero: apague a seção.
 - [ ] O documento tem **uma** tarefa, e ela é concreta a ponto de caber numa
       semana?
