@@ -1,0 +1,17 @@
+{
+  "descricao": "descoberta feita de duas conversas de mesa, com validação que só acontece construindo: as três faltas precisam virar um item só",
+  "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
+  "mustNotContainAny": ["ótima ideia", "é uma abordagem interessante", "você poderia considerar"],
+  "writtenMustNotContainAny": ["`/commit`", ".claude/", "TEST_CMD"],
+  "maxInvestigativeCalls": 12,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 8,
+    "replies": [
+      "A gente acredita que o dono perde tempo montando escala. Não sei o que derrubaria isso, acho meio óbvio.",
+      "Foram dois amigos donos de bar, numa conversa de mesa. Nunca vi nenhum dos dois montando a escala de verdade.",
+      "A ideia é construir o MVP e botar nos dois bares. Não pensei em teste menor que isso.",
+      "Eles usam WhatsApp e papel. Não procurei se existe app pronto. Agora escreve o relatório e fecha."
+    ]
+  }
+}

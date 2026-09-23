@@ -1,0 +1,18 @@
+{
+  "descricao": "os cinco estados cobrados pelo nome, a combinação da desistência silenciosa como um item, e a IA em destaque numa tela multi-empresa",
+  "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
+  "mustNotContainAny": ["pelo print", "na imagem", "ótimo fluxo", "é uma abordagem interessante"],
+  "writtenMustNotContainAny": ["`/commit`", ".claude/", "TEST_CMD"],
+  "maxInvestigativeCalls": 12,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 9,
+    "replies": [
+      "O contador chega pelo link do convite e cai direto na lista. Quem tem vários clientes troca de empresa num seletor no topo.",
+      "Pedimos senha de oito caracteres, e no cadastro CPF e telefone, para ter contato se precisar.",
+      "Tela vazia a gente não desenhou, nem erro: se der erro aparece um toast vermelho. Offline não pensamos, e a revogação a gente ainda não decidiu.",
+      "Os botões são os padrão do framework. Contraste e teclado a gente nunca testou.",
+      "O resumo aparece direto no topo, sem dizer de onde veio, e não dá para corrigir. Agora escreve o relatório e fecha."
+    ]
+  }
+}
