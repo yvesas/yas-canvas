@@ -36,7 +36,7 @@ ninguém está esperando resultado dele.
 
 | | Comportamento | Critério | Como medir |
 |---|---|---|---|
-| ⚠️ | Seguir em sequência é pular o menu, não as perguntas | **sem fixture que meça** — ver `STATE.md` | precisa de driver que responda |
+| ⚠️ | A marca "pelo que eu sei, confirme" na mesma frase | **quatro medições não sustentaram a cobrança** | a regra fica no protocolo; o critério saiu |
 
 ## Provado
 
@@ -48,6 +48,12 @@ ninguém está esperando resultado dele.
 | ✅ | Nome errado em `YAS_EVAL_ONLY` falha antes de gastar sessão | medido: falha na hora |
 | ✅ | As três faltas viram um item só, e cada ausência é nomeada | `scope-creep`, 23/09 — 10 turnos, 184s |
 | ✅ | Estratégia de produto não é opinião técnica | `scope-creep` · `sem_opiniao_tecnica` |
+| ✅ | As três peças do vazamento viram um item só | `security-leak-combo`, 23/09 — 9 turnos, 335s |
+| ✅ | A revisão de segurança não finge ter verificado | `security-leak-combo` · `nao_fingiu_verificar` |
+| ✅ | Cobra mecanismo, não promessa, na separação entre clientes | `security-leak-combo` · `mecanismo_nao_promessa` |
+| ✅ | **Pergunta cada parte** mesmo seguindo em ordem sem menu | `security-leak-combo` · `perguntou_cada_parte` — o ⚠️ de ontem, resolvido pelo driver que conversa |
+| ✅ | Não diz que conferiu o que não abriu | `security-leak-combo`, depois da regra no preâmbulo |
+| ✅ | `driver.replies` conversa turno a turno | a própria fixture, seis falas |
 | ✅ | Portão de estágio é a primeira coisa, sem leitura antes | `cto-stage-gate` |
 | ✅ | Empurrar até o específico, nomeando a bandeira vermelha | `cto-push-specific` |
 | ✅ | Sinais com citação, sem nota — e sem "nenhum dos sete" | `cto-push-specific` · `sem_nota` |

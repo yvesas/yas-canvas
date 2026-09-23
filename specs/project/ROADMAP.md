@@ -6,6 +6,15 @@
 > por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
 > renumerado: número gasto fica gasto.
 
+- **0007 — `/security-review`** (2026-09-23,
+  `specs/features/0007-security-review/`): a terceira role de revisão, das
+  etapas 10 e 11 do `docs_yaslab/26`. Seis partes — ciclo de vida do dado,
+  separação entre clientes, chaves, superfície de ataque, responsabilidade do
+  agente, observabilidade e incidente. Abre dizendo **você não verificou nada**,
+  e o relatório nomeia o que ficou sem verificação. Combinação crítica: dado
+  sensível + sem escopo por tenant + log sem filtro = vazamento que roda meses
+  sem ninguém saber. **Primeira feature com a ordem invertida**: skill, sessão
+  real, rubrica.
 - **0006 — `/ceo-review`, escopo e ambição** (2026-09-23,
   `specs/features/0006-ceo-review/`): a segunda role de revisão, e a primeira a
   provar que o `review-protocol` serve a mais de um papel — **sem precisar de
@@ -68,7 +77,26 @@ _Nada em andamento._
 
 ## Próximo
 
-1. **`/security-review`** — segurança, dado e operação, das etapas 10 e 11 do
+1. **`/pm-review`** — descoberta e validação: hipótese com o que a derruba,
+   evidência de primeira mão, o experimento que mata a ideia barato. Fonte:
+   etapa 2 do `docs_yaslab/26`. Especificada (0008).
+2. **`/ux-review`** — experiência e estados, **incluindo o que seria a
+   `/design-review`**: vazio, erro, sem permissão, offline, dado velho,
+   consistência, acessibilidade mínima, e onde a IA aparece na interface. Fonte:
+   etapa 6. Especificada (0009).
+
+## Bloqueadas por conteúdo, não por tempo
+
+- **`/techlead-canvas`** — o doc 21 tem o mapa de competências pronto, e as
+  seções de acompanhar dev, performance e indicadores estão marcadas como não
+  amadurecidas. Escrever agora seria inventar o método do Yves em vez de
+  transcrevê-lo (decisão de 23/09).
+- **`/design-review` visual** — tipografia, hierarquia, marca: sem fonte
+  autoral. O que a etapa 6 cobre foi para a `/ux-review` (decisão de 23/09).
+
+## Antigo próximo, já entregue
+
+- **`/security-review`** — segurança, dado e operação, das etapas 10 e 11 do
    `docs_yaslab/26`: LGPD e ciclo de vida do dado, escopo por tenant, segredo
    fora do alcance do agente, superfície de ataque (webhook, formulário,
    injeção de prompt), aprovação humana para ação automatizada, trilha do que a

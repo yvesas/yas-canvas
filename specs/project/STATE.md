@@ -8,8 +8,11 @@ Repositório **público e MIT**. Na `main`: 0001 a 0004. Duas features prontas e
 **não mergeadas**, empilhadas: a **0005 — `/cto-canvas`** (PR #17, gate 16 de
 16) e a **0006 — `/ceo-review`** (PR aberto sobre ela).
 
-**O pack tem quatro skills**: `/canvas` (roteador e controlador), `/eng-review`,
-`/ceo-review` e `/cto-canvas` — duas revisões e um canvas.
+**O pack tem cinco skills**: `/canvas` (roteador e controlador),
+`/eng-review`, `/ceo-review`, `/security-review` e `/cto-canvas` — três revisões
+e um canvas. Faltam duas especificadas (`/pm-review`, `/ux-review`) e duas
+**bloqueadas por conteúdo**, não por tempo: `/techlead-canvas` e a
+`/design-review` visual, ambas sem fonte amadurecida no framework.
 
 **O pack tem duas skills de método e um controlador.** A `/eng-review` avalia um
 artefato e entrega um handoff; a `/cto-canvas` conduz uma pessoa e entrega um
@@ -87,7 +90,22 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   ignorar o silêncio quando ela morreu de verdade. Imprimir uma linha ao
   **começar** cada fixture resolve, e o lugar é o laço do
   `test/eng-review.eval.test.mjs`.
-- **Nenhuma fixture mede se a role de revisão *pergunta*.** O driver responde
+- **A marca "pelo que eu sei, confirme" não tem cobrança automática.** A regra
+  está no `review-protocol` e está certa; quatro medições e três reforços de
+  texto não conseguiram fazer a sessão aplicá-la sempre. Ela marca a maioria e
+  solta algumas — "uma URL assinada tem validade própria". O critério saiu do
+  conjunto pass/fail, porque teste que sempre falha ensina a ignorar teste.
+  Resolver isso é achar uma formulação que o modelo aplique sozinho, não
+  reforçar a mesma pela quarta vez.
+- ~~Nenhuma fixture mede se a role de revisão *pergunta*~~ — **resolvido em
+  23/09** pelo `driver.replies`, que conversa turno a turno em vez de repetir
+  uma frase. A `security-leak-combo` mede isso com seis falas, uma por parte.
+- **Três vezes num dia o defeito era duas regras minhas brigando**, não uma
+  regra faltando: "assumir a pergunta não é respondê-la", "seguir em sequência é
+  pular o menu, não as perguntas", e "sua posição não leva marca de incerteza".
+  Regra nova escrita para consertar um caso atropela outro que já estava certo,
+  e quem revela é o eval. Vale reler as regras vizinhas antes de acrescentar
+  uma. O driver responde
   sempre a mesma frase de concordância, que serve para o `/eng-review` — ele
   propõe achados e a pessoa concorda — e não serve para o `/ceo-review`, que
   **pergunta**. "Concordo, siga" não responde "para quem é isso?", então a
