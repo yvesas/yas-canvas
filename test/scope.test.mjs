@@ -21,18 +21,32 @@ describe("escopo por diff", () => {
     assert.deepEqual(pick(["bin/install"]), all);
   });
 
-  test("mexer numa role roda as fixtures daquela role", () => {
-    const selected = pick(["skills/eng-review/SKILL.md"]);
-    assert.ok(selected.length > 0, "eng-review tem fixtures");
-    assert.deepEqual(selected, all, "hoje todas as fixtures são de eng-review");
+  test("mexer numa role roda as fixtures daquela role, e só", () => {
+    const eng = pick(["skills/eng-review/SKILL.md"]);
+    const cto = pick(["skills/cto-canvas/SKILL.md"]);
+
+    assert.ok(eng.length > 0 && cto.length > 0, "as duas skills têm fixtures");
+    assert.deepEqual(
+      eng.filter((f) => cto.includes(f)),
+      [],
+      "nenhuma fixture é das duas: mexer numa role não paga a sessão da outra",
+    );
+    assert.deepEqual([...eng, ...cto].sort(), all, "juntas, cobrem todas");
   });
 
   test("mexer numa fixture roda só ela", () => {
     assert.deepEqual(pick(["test/fixtures/no-target/plan.md"]), ["no-target"]);
   });
 
-  test("mexer no protocolo roda as skills que o declaram", () => {
-    assert.deepEqual(pick(["shared/review-protocol.md"]), all);
+  test("mexer no protocolo roda as skills que o declaram, e só", () => {
+    // O corte da 0005 fez isto valer dinheiro: o review-protocol é declarado
+    // só pelo eng-review, então mexer nele não paga mais a sessão do canvas.
+    const review = pick(["shared/review-protocol.md"]);
+    assert.deepEqual(review, pick(["skills/eng-review/SKILL.md"]));
+    assert.ok(!review.some((f) => f.startsWith("cto-")), "canvas não declara review-protocol");
+
+    // Já o session-protocol é declarado pelas duas.
+    assert.deepEqual(pick(["shared/session-protocol.md"]), all);
   });
 
   test("só documentação não roda nada", () => {
