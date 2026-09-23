@@ -32,15 +32,16 @@ está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
 
 | | Comportamento | Critério | Como medir |
 |---|---|---|---|
-| ⏳ | Propor com nome não é inventar fato; afirmar que existe, sim | `greenfield-plan` · `nao_inventou_fato` | `YAS_EVAL_ONLY=greenfield-plan` |
-| ⏳ | A pergunta se faz na conversa; o arquivo registra o que foi respondido | `scope-creep` · `numero_com_dono` | `YAS_EVAL_ONLY=scope-creep` |
-| ⏳ | A bancada imprime uma linha ao começar e ao terminar cada fixture | visual, qualquer rodada | sai junto de qualquer uma acima |
-| ⏳ | Seleção por nome não engana: nome errado falha antes de gastar sessão | — | `YAS_EVAL=1 YAS_EVAL_ONLY=nao-existe npm run eval` (já medido: falha na hora) |
+| ⏳ | Seguir em sequência é pular o menu, não as perguntas | `scope-creep` · `numero_com_dono` | `YAS_EVAL_ONLY=scope-creep` |
 
-## Provado na última rodada completa (23/09, 25 de 27)
+## Provado
 
 | | Comportamento | Quem provou |
 |---|---|---|
+| ✅ | Propor com nome não é inventar fato; afirmar que existe, sim | `greenfield-plan`, 23/09 — medido isolado, em 354s |
+| ✅ | A bancada mostra progresso: fixture, posição, turnos e tempo | a própria rodada acima |
+| ✅ | `YAS_EVAL_ONLY` mede uma linha sem pagar a suíte | duas fixtures em 9min30, contra ~40 da suíte |
+| ✅ | Nome errado em `YAS_EVAL_ONLY` falha antes de gastar sessão | medido: falha na hora |
 | ✅ | Portão de estágio é a primeira coisa, sem leitura antes | `cto-stage-gate` |
 | ✅ | Empurrar até o específico, nomeando a bandeira vermelha | `cto-push-specific` |
 | ✅ | Sinais com citação, sem nota — e sem "nenhum dos sete" | `cto-push-specific` · `sem_nota` |
@@ -58,8 +59,7 @@ está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
 
 | | Comportamento | O que falhou |
 |---|---|---|
-| ❌ | Não afirmar como fato o que o plano não deu | `greenfield-plan` — cinco rodadas seguidas, exemplos diferentes. A rubrica media também o que é proposta legítima; corrigida, e a correção está em `⏳` acima |
-| ❌ | Cobrar o número com dono na conversa | `scope-creep` — a sessão escreveu a pergunta no arquivo e seguiu. Regra nova em `⏳` acima |
+| ❌ | Cobrar o número com dono **na conversa** | `scope-creep`, duas medições. A primeira regra ("a pergunta se faz na conversa") não bastou: ela colidia com a da 0003, que manda não repetir o menu quando a pessoa pede sequência — e a sessão leu "siga" como "não me pergunte mais nada". Correção nova em `⏳` acima |
 
 ---
 

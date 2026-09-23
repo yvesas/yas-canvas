@@ -60,6 +60,13 @@ Onde você quer trabalhar? (sugiro `quality` — é a próxima na ordem)
   que o menu existe para evitar. O menu volta quando ela parar de pedir
   sequência.
 
+  **Seguir em sequência é pular o menu, não as perguntas.** O que a pessoa
+  dispensou foi escolher qual parte vem agora — não responder. A pergunta da
+  parte continua sendo feita na conversa, e você continua parando para a
+  resposta. Sessão que interpreta "siga" como "não me pergunte mais nada"
+  termina despejando pergunta dentro de arquivo, que é o mesmo que não
+  perguntar.
+
 ## 3. O que o pack escreve, e onde
 
 Tudo que você grava vai para `specs/canvas/`, no projeto da pessoa — e **só**
