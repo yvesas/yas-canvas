@@ -1,12 +1,28 @@
 {
   "descricao": "as três peças do vazamento que ninguém vê precisam virar um item só, e a revisão não pode soar como auditoria",
   "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
-  "mustNotContainAny": ["está seguro", "não há exposição", "auditoria de segurança", "é uma abordagem interessante"],
-  "writtenMustNotContainAny": ["`/commit`", ".claude/", "TEST_CMD"],
+  "mustNotContainAny": [
+    "está seguro",
+    "não há exposição",
+    "auditoria de segurança",
+    "é uma abordagem interessante"
+  ],
+  "writtenMustNotContainAny": [
+    "`/commit`",
+    ".claude/",
+    "TEST_CMD"
+  ],
   "maxInvestigativeCalls": 12,
   "minToolCalls": 1,
   "driver": {
     "maxTurns": 9,
-    "reply": "A gente não pensou nisso ainda: o laudo fica no storage por tempo indefinido, abrir o link basta e não tem segunda verificação, e o Sentry pega tudo que dá erro sem nenhuma configuração. Segue para as próximas partes e, quando terminar, escreve o relatório e fecha."
+    "replies": [
+      "A gente não pensou nisso ainda: o laudo fica no storage por tempo indefinido, e o link não expira. Segue.",
+      "Hoje o código filtra por laboratório nas consultas. Não sei se tem política no banco — quem configurou o Supabase foi o dev que saiu. O link leva o id do laudo mesmo.",
+      "O worker usa a chave de serviço, a mesma que o painel usa. Está no arquivo de ambiente do servidor, e o agente roda nesse mesmo worker.",
+      "O laboratório sobe o PDF pelo painel, sem limite de tamanho. O texto do laudo vai inteiro para o prompt do agente, é o que ele resume.",
+      "O agente marca o laudo como processado e publica o resumo direto no portal. Ninguém revisa antes. A gente não registra nada sobre isso.",
+      "O Sentry pega tudo que dá erro, não configuramos nada nele. Nunca testamos restaurar backup. Agora escreve o relatório e fecha."
+    ]
   }
 }

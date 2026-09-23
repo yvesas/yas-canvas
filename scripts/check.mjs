@@ -286,8 +286,15 @@ if (existsSync(FIXTURES)) {
           if (typeof d !== "object" || d === null) {
             fail(`${rel}/expect.json`, "`driver` precisa ser um objeto");
           } else {
-            if (typeof d.reply !== "string" || !d.reply.trim()) {
-              fail(`${rel}/expect.json`, "`driver.reply` vazio — é a resposta que o usuário daria a cada seção");
+            const temReplies = Array.isArray(d.replies) && d.replies.length > 0;
+            if (!temReplies && (typeof d.reply !== "string" || !d.reply.trim())) {
+              fail(`${rel}/expect.json`, "sem `driver.reply` nem `driver.replies` — falta o que o usuário responde");
+            }
+            if (Array.isArray(d.replies) && d.replies.some((r) => typeof r !== "string" || !r.trim())) {
+              fail(`${rel}/expect.json`, "`driver.replies` tem entrada vazia — turno sem fala é turno perdido");
+            }
+            if (temReplies && typeof d.maxTurns === "number" && d.replies.length > d.maxTurns) {
+              fail(`${rel}/expect.json`, `\`driver.replies\` tem ${d.replies.length} falas e só ${d.maxTurns} turnos: as últimas nunca seriam ditas`);
             }
             if (typeof d.maxTurns !== "number" || d.maxTurns < 2 || d.maxTurns > 12) {
               fail(`${rel}/expect.json`, "`driver.maxTurns` fora de 2..12 — abaixo não conduz, acima é dinheiro queimado");

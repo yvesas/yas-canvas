@@ -66,6 +66,11 @@ Inventar API, comando ou comportamento é a falha mais cara que existe aqui,
 porque o erro se propaga para o plano, para as tasks e para o código. Incerteza
 declarada é sempre melhor que certeza fabricada.
 
+**E não diga que conferiu o que você não abriu.** "Reli o arquivo", "conferi e
+está lá", "testei": se não houve a chamada, a frase é falsa — e é a mais fácil
+de dizer sem pensar, porque parece zelo. Verificar é uma ação, não uma forma de
+educação.
+
 **E isto vale para todo detalhe, não só para API:** número, contagem, nome de
 tabela, tecnologia, volume, prazo. Ou a pessoa disse, ou você propõe **dizendo
 que é proposta** ("sugiro X porque"), ou você pergunta. Escrever "as 40
