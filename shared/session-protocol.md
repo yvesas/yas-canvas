@@ -125,6 +125,12 @@ sua opinião**.
 Sem alternativas, a revisão vira aprovação com comentários — e ninguém aprende
 o que foi descartado nem por quê.
 
+**A pergunta se faz na conversa, não no arquivo.** Escrever "qual é o número e
+quem olha?" dentro do arquivo da parte e seguir é registrar a pergunta sem
+fazê-la: a pessoa está ali, esperando, e o arquivo é lido depois — se é que é.
+Pergunte, espere, grave o que ela respondeu. O arquivo só carrega pergunta em
+`### Em aberto`, que é o que ficou **depois** de perguntar.
+
 **A alternativa é sua; os fatos que a sustentam, não.** Propor um caminho é o
 trabalho — mas "fatura recorrente proporcional aos processos" e "meses
 construindo antes de conhecer uma fonte" são afirmações sobre o negócio **dela**
