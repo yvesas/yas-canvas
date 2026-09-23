@@ -23,6 +23,12 @@ declarar os dois, e as referências `§n` dele acompanham a renumeração.
 o diff move texto e ajusta número de seção, nada mais · `bin/install --project`
 copia os quatro arquivos para o lado da role.
 
+**Feito** (2026-09-22). O `review-protocol` caiu de 269 para 111 linhas: **158
+não eram de revisão**. Uma frase mudou de conteúdo, e vai declarada — o §1
+dizia "cada skill de revisão" e "entre as roles"; num arquivo que serve às duas
+famílias isso estava errado, e virou "cada skill traz o seu portão", com a
+diferença escrita: revisão pergunta escopo, canvas pergunta estágio.
+
 ---
 
 ## T2 — o gate do corte `[REQ-001]`
@@ -36,6 +42,14 @@ skill nova existir.
 mudar de arquivo — conserta o texto, nunca a fixture. E conserta **antes** de
 escrever a skill nova: diagnosticar as duas coisas ao mesmo tempo é o que fez a
 rodada 2 da 0004 custar caro.
+
+**Feito** (2026-09-22), de primeira: **12 de 12**, `# pass 19 · # fail 0`, sem
+nenhuma skill nova existir. O corte não mudou o que a role faz.
+
+Esta task se pagou duas vezes. Primeiro pelo que provou. Depois porque as três
+falhas que vieram na T5 puderam ser diagnosticadas **sabendo** que o corte
+estava bom — nenhuma delas gastou um minuto sendo investigada como "será que
+foi a separação dos protocolos?".
 
 ---
 
@@ -55,6 +69,16 @@ no `session-protocol`; se não couber, alguma coisa que eu escrevi é protocolo)
 nenhuma frase do gstack copiada · os sinais não viram nota em lugar nenhum do
 texto.
 
+**Feito** (2026-09-22) — **191 linhas**, com folga de 59. Isso é o teste do
+corte funcionando: se a skill tivesse estourado, seria sinal de que eu escrevi
+protocolo dentro dela.
+
+Uma regra ganhou caso novo na T5: **se nenhum sinal apareceu, a seção não
+existe.** A sessão tinha escrito "nenhum dos sete apareceu" — não é nota, mas é
+a nota zero com outras palavras, no fim de uma conversa em que a pessoa se
+expôs. A skill proibia contagem e mandava registrar os que apareceram; nenhuma
+das duas cobria o caso vazio.
+
 ---
 
 ## T4 — o roteador `[REQ-010]`
@@ -68,6 +92,9 @@ as duas: revisão avalia um artefato, canvas estrutura a pessoa.
 
 **Done when:** `npm run check` verde — ele já cobra que o roteador cite toda
 skill que existe, e agora existem duas.
+
+**Feito** (2026-09-22). O aviso do `check` apontou a falta antes de eu lembrar
+dela — a guarda que a 0001 criou trabalhando sozinha.
 
 ---
 
@@ -85,6 +112,31 @@ bandeira vermelha como bandeira).
 **Done when:** **16 de 16** · as seis fixtures antigas não foram tocadas · a
 fixture do empurrão falha se a skill aceitar a primeira resposta genérica.
 
+**Feito** (2026-09-23), em quatro rodadas, e **as seis fixtures antigas não
+foram tocadas**:
+
+```
+cto-push-specific ok·ok   greenfield-plan ok·ok   no-target      ok·ok
+cto-stage-gate    ok·ok   handoff-unconf. ok·ok   resumed-review ok·ok
+vague-scale       ok·ok   webhook-cpf     ok·ok   # pass 23 · # fail 0
+```
+
+Cada rodada achou **um defeito real e diferente** — nenhuma foi ruído:
+
+1. **A fixture que eu escrevi errada.** `minToolCalls: 1` num portão, quando
+   não existe ferramenta de pergunta no modo headless. Pior: o fato já estava
+   escrito na descrição da `no-target` desde a 0002, e eu escrevi uma fixture de
+   portão sem ler a que já existia para o mesmo caso. Foi para o `TESTING.md`,
+   onde se acha.
+2. **Regra faltando na role.** O `vague-scale` cobra nomear a bandeira vermelha
+   e tomar posição sobre microsserviços — e o `/eng-review` nunca teve essa
+   regra escrita. Passava quando o modelo inferia. **Critério que passa por
+   sorte parece critério que passa**, e duas rodadas verdes anteriores não
+   provavam nada.
+3. **Regra sem caso vazio** (ver T3).
+
+E um `ETIMEDOUT` de 15 minutos num turno do `webhook-cpf`, que não se repetiu.
+
 ---
 
 ## T6 — fechar
@@ -97,3 +149,6 @@ define o que uma skill lê por ser **sessão conduzida** e o que lê por ser
 de `shared/` muda, e as duas primeiras estão registradas.
 
 **Depende de:** T5
+
+**Feito** (2026-09-23). ADR **0005**: o corte sobreviveu, e é a terceira vez
+que a divisão de `shared/` muda — as duas anteriores estão em ADR, esta também.
