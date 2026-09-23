@@ -75,12 +75,43 @@ O comando é `node --test test/*.test.mjs` (o que `npm test` faz). Se um dia a
 suíte migrar para `bun:test`, a migração é reescrever os imports — não trocar o
 comando e torcer.
 
-## Não rodar o que a mudança não pode quebrar
+## Quando rodar a suíte inteira (decisão de 23/09)
+
+**Durante o trabalho de uma skill, não se roda a suíte completa.** Dez fixtures
+em sequência levam de trinta a quarenta e cinco minutos, e a maior parte delas
+não tem como quebrar com o que está sendo escrito. A suíte cheia fica para o
+fim: quando o conjunto de skills estiver pronto, uma rodada longa cobra tudo.
 
 ```bash
-YAS_EVAL=1 npm run eval          # tudo — o gate antes do merge
-YAS_EVAL=1 npm run eval:changed  # só o que o diff alcança
+YAS_EVAL=1 YAS_EVAL_ONLY=scope-creep npm run eval   # uma linha do VERIFICATION
+YAS_EVAL=1 npm run eval:changed                     # o que o diff alcança
+YAS_EVAL=1 npm run eval                             # no marco — o conjunto
 ```
+
+Os três medem coisas diferentes. `YAS_EVAL_ONLY` prova **um comportamento**;
+`eval:changed` prova **o que a mudança alcança** (e seleciona tudo quando ela
+alcança tudo — mexer em `shared/` ou na bancada é isso); a suíte inteira prova
+**o conjunto**, inclusive o que ninguém pensou em ligar.
+
+Nome errado em `YAS_EVAL_ONLY` falha antes de gastar sessão. E não tente
+filtrar com `--test-name-pattern`: o `node --test` roda o `before` de toda
+fixture mesmo pulando os testes, e é no `before` que a sessão acontece — você
+esconderia o resultado sem economizar nada.
+
+**O que isso custa, e por que ainda vale.** Uma regressão que a skill nova cause
+em outra role só aparece na rodada longa, e aí o diagnóstico é mais caro porque
+o diff acumulou. O seletor reduz esse risco onde ele é maior: mexer em `shared/`
+ou na bancada **seleciona tudo**, porque alcança todas as skills. O que fica
+barato é o caso comum — escrever uma skill nova toca só a pasta dela e as
+fixtures dela.
+
+**O que não muda:** a camada determinística e o `npm run check` continuam
+rodando sempre. São segundos, e pegam o erro estrutural antes de qualquer
+sessão de modelo.
+
+**E a dívida fica escrita.** O que foi feito entre duas rodadas longas vive em
+`specs/project/VERIFICATION.md`, uma linha por comportamento, com a fixture que
+o prova. A rodada longa não é uma nota de corte: é percorrer aquela lista.
 
 Oito sessões de modelo para conferir uma vírgula em documentação é desperdício.
 Mas **o mapa não é um-para-um**, e é isso que o seletor sabe:

@@ -6,6 +6,14 @@
 > por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
 > renumerado: número gasto fica gasto.
 
+- **0006 — `/ceo-review`, escopo e ambição** (2026-09-23,
+  `specs/features/0006-ceo-review/`): a segunda role de revisão, e a primeira a
+  provar que o `review-protocol` serve a mais de um papel — **sem precisar de
+  exceção por papel**. Cinco partes das etapas 1 a 3 do `docs_yaslab/26`, e a
+  combinação crítica que dá razão à role: problema sem dono + nenhum
+  não-objetivo + nenhum número = escopo que cresce para sempre, num item só.
+  Ela não opina sobre tecnologia: *o que o sistema faz é seu; como ele faz não
+  é* — e assumir a pergunta não é respondê-la.
 - **0005 — `/cto-canvas`, a segunda skill** (2026-09-23,
   `specs/features/0005-cto-canvas/`): o primeiro **canvas** — estrutura a pessoa
   em vez de avaliar um artefato. Seis perguntas técnicas com empurrão e
@@ -60,8 +68,12 @@ _Nada em andamento._
 
 ## Próximo
 
-1. **`/ceo-review`** — escopo e ambição: o que cortar, o que é apetite e o que
-   é necessidade.
+1. **`/security-review`** — segurança, dado e operação, das etapas 10 e 11 do
+   `docs_yaslab/26`: LGPD e ciclo de vida do dado, escopo por tenant, segredo
+   fora do alcance do agente, superfície de ataque (webhook, formulário,
+   injeção de prompt), aprovação humana para ação automatizada, trilha do que a
+   IA fez em nome de quem, log sem PII, alerta que importa, backup testado.
+   **Fonte escrita**, e é onde o pack mais se diferencia de checklist genérico.
 2. **`/techlead-canvas`** — evolução de dev, review, velocidade real, gargalo.
 3. **`/pm-review`**, **`/ux-review`**, **`/design-review`**.
 4. **Orquestrador** — rodar as roles em sequência com princípios de decisão que

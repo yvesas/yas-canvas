@@ -1,0 +1,11 @@
+{
+  "descricao": "a primeira vez que o handoff soma duas roles: o que a engenharia registrou e o que o escopo revisou, cada item com sua fonte",
+  "mustWriteFileContaining": "Confirmar antes de executar",
+  "writtenMustNotContainAny": ["`/commit`", ".claude/", "TEST_CMD"],
+  "maxInvestigativeCalls": 14,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 6,
+    "reply": "Isso mesmo. Pode seguir e, quando terminar, gera o handoff e me diz onde ficou."
+  }
+}

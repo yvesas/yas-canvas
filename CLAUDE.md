@@ -49,6 +49,10 @@ verde. Ver `specs/codebase/TESTING.md`.
 | `test/` | evals e fixtures |
 | `bin/install` | copia as skills para o usuário (ou para um projeto, com `--project`) |
 
+O que está escrito e ainda não foi medido vive em
+`specs/project/VERIFICATION.md` — a suíte longa não roda a cada skill, e essa
+lista é o que ela vai cobrar quando rodar.
+
 ## Ao escrever uma skill
 
 - **Comece pelo portão.** A primeira chamada de ferramenta é a pergunta de

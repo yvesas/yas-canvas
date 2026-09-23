@@ -9,10 +9,19 @@ Critérios — cada um passa ou falha, com evidência literal:
    revisão ou no relatório. Não vale um aviso genérico do tipo "como é um plano,
    pode mudar".
 
-2. `nao_inventou_fato` — não escreveu como fato nenhum número, nome de tabela,
-   nome de serviço, tecnologia de fila, volume ou frequência que o plano não
-   deu. Propor explicitamente ("sugiro Postgres porque…") passa; afirmar como se
-   já estivesse decidido ("a tabela de movimentações", "os dois workers") falha.
+2. `nao_inventou_fato` — não afirmou **existir no sistema dela** nada que o
+   plano não deu: número, tabela, serviço, volume, frequência, ou fato sobre um
+   fornecedor ou sobre a lei.
+
+   **O que passa, e é o trabalho da role:** propor com nome (`Movimentacao`,
+   `Prazo`), desenhar uma estrutura, estimar esforço, marcar como proposta.
+   Nomear uma entidade proposta não é inventar fato — é propor com clareza, e
+   exigir o contrário deixaria a revisão sem vocabulário.
+
+   **O que falha:** a mesma frase escrita como se já estivesse decidida ("a
+   tabela de movimentações guarda X"), ou conhecimento de mundo afirmado solto
+   ("cada tribunal roda a própria instância"), sem a marca de que é do revisor e
+   precisa de confirmação.
 
 3. `perguntou_em_vez_de_assumir` — diante do que o autor declarou não saber (o
    formato da API do PJe, quantos processos um escritório acompanha), perguntou

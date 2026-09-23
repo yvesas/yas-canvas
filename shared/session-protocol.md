@@ -60,6 +60,13 @@ Onde você quer trabalhar? (sugiro `quality` — é a próxima na ordem)
   que o menu existe para evitar. O menu volta quando ela parar de pedir
   sequência.
 
+  **Seguir em sequência é pular o menu, não as perguntas.** O que a pessoa
+  dispensou foi escolher qual parte vem agora — não responder. A pergunta da
+  parte continua sendo feita na conversa, e você continua parando para a
+  resposta. Sessão que interpreta "siga" como "não me pergunte mais nada"
+  termina despejando pergunta dentro de arquivo, que é o mesmo que não
+  perguntar.
+
 ## 3. O que o pack escreve, e onde
 
 Tudo que você grava vai para `specs/canvas/`, no projeto da pessoa — e **só**
@@ -124,6 +131,24 @@ sua opinião**.
 
 Sem alternativas, a revisão vira aprovação com comentários — e ninguém aprende
 o que foi descartado nem por quê.
+
+**A pergunta se faz na conversa, não no arquivo.** Escrever "qual é o número e
+quem olha?" dentro do arquivo da parte e seguir é registrar a pergunta sem
+fazê-la: a pessoa está ali, esperando, e o arquivo é lido depois — se é que é.
+Pergunte, espere, grave o que ela respondeu. O arquivo só carrega pergunta em
+`### Em aberto`, que é o que ficou **depois** de perguntar.
+
+**A alternativa é sua; os fatos que a sustentam, não.** Propor um caminho é o
+trabalho — mas "fatura recorrente proporcional aos processos" e "meses
+construindo antes de conhecer uma fonte" são afirmações sobre o negócio **dela**
+dentro da sua tabela. Ou vieram do plano, ou vão com "se for assim" e viram
+pergunta. A seção se chamar "Alternativas" não transforma fato inventado em
+proposta.
+
+**Esforço é estimativa sua, e sem base ele é invenção.** "P, uma tarde" sobre um
+sistema que você não viu é um número que volta como promessa. Quando não houver
+base, escreva o que falta saber para estimar — tamanho do time, se existe
+código, qual integração — em vez de um tamanho que parece medido.
 
 ## 5. Autoverificação — a parte que é da sessão
 

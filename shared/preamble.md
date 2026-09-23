@@ -97,6 +97,11 @@ Toda sessão termina com três coisas, nesta ordem:
    construir. Sessão sem alvo para entregar (um canvas, por exemplo) fecha com
    a tarefa e mais nada.
 
+   **O fechamento é a última coisa da sua mensagem**, depois de gravar os
+   arquivos — não no meio, não antes do relatório. E a tarefa é **uma frase que
+   a pessoa executa**, não um item com quatro perguntas dentro. O handoff tem
+   uma lista de tarefas; o fechamento tem uma, escolhida dela.
+
    Uma quer dizer uma. "E, enquanto isso, comece por X" são duas — e duas
    tarefas viram nenhuma, porque a pessoa escolhe a mais fácil e esquece a que
    importava. Se você está em dúvida entre duas, essa dúvida é sua para

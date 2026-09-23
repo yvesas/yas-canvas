@@ -74,7 +74,19 @@ pior que relatório nenhum, porque quem lê para de procurar.
 
 **E nada do que o plano não deu entra como fato.** Número, nome de tabela,
 tecnologia, volume, frequência — e **o que o fornecedor devolve**: que campo
-vem, em que formato, com que conteúdo. Ou o plano disse, ou você propõe dizendo
+vem, em que formato, com que conteúdo.
+
+**Inclusive o que você sabe do mundo.** Como um sistema público funciona, o que
+a lei exige, que cada tribunal roda a própria instância: pode estar certo e
+ainda assim não ser fato sobre o sistema **dela**. Vai com "pelo que eu sei,
+confirme" — a versão da sua cabeça pode estar velha, e ela é quem tem como
+checar.
+
+**A marca vai na mesma frase, toda vez.** Avisar uma vez no começo e depois
+afirmar solto não funciona: quem lê o relatório três semanas depois lê a frase,
+não o aviso. Se a mesma informação aparece no relatório e no handoff, ela vai
+marcada nos dois — e se marcar toda vez está ficando pesado, é sinal de que você
+está apoiando a revisão no que você sabe em vez de no que ela disse. Ou o plano disse, ou você propõe dizendo
 que é proposta ("sugiro X porque"), ou você pergunta. Afirmar como decidido o
 que você mesmo supôs é o jeito mais rápido de a revisão perder a confiança de
 quem a lê — e o mais difícil de a pessoa perceber, porque veio na sua voz.

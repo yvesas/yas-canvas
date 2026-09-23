@@ -4,9 +4,12 @@
 
 ## Onde estamos
 
-Repositório **público e MIT**. Na `main`: 0001 a 0004. A **0005 — `/cto-canvas`**
-está pronta na branch `feat/cto-canvas`, com o gate fechado: **16 de 16**, oito
-fixtures, `# pass 23 · # fail 0`.
+Repositório **público e MIT**. Na `main`: 0001 a 0004. Duas features prontas e
+**não mergeadas**, empilhadas: a **0005 — `/cto-canvas`** (PR #17, gate 16 de
+16) e a **0006 — `/ceo-review`** (PR aberto sobre ela).
+
+**O pack tem quatro skills**: `/canvas` (roteador e controlador), `/eng-review`,
+`/ceo-review` e `/cto-canvas` — duas revisões e um canvas.
 
 **O pack tem duas skills de método e um controlador.** A `/eng-review` avalia um
 artefato e entrega um handoff; a `/cto-canvas` conduz uma pessoa e entrega um
@@ -77,6 +80,21 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   `/cto-canvas` conduz uma pessoa, e pessoa nenhuma respondeu a este protocolo
   até hoje.** Seis perguntas com empurrão é uma conversa longa; se alguém sair
   sempre na segunda, o problema é o protocolo.
+- **A bancada não mostra progresso (decidido fazer em 23/09).** O `node --test`
+  só imprime o resultado de uma fixture quando ela termina, e as dez rodam em
+  sequência: meia hora de log mudo, indistinguível de processo travado. Não é
+  cosmético — leva quem acompanha a matar a rodada achando que morreu, ou a
+  ignorar o silêncio quando ela morreu de verdade. Imprimir uma linha ao
+  **começar** cada fixture resolve, e o lugar é o laço do
+  `test/eng-review.eval.test.mjs`.
+- **Nenhuma fixture mede se a role de revisão *pergunta*.** O driver responde
+  sempre a mesma frase de concordância, que serve para o `/eng-review` — ele
+  propõe achados e a pessoa concorda — e não serve para o `/ceo-review`, que
+  **pergunta**. "Concordo, siga" não responde "para quem é isso?", então a
+  sessão marca a parte como pendente, que é o comportamento certo, e o ato de
+  perguntar fica inobservável. Medir isso exige um driver que **responda** —
+  uma resposta única que sirva a várias partes, ou um driver por turno. A
+  fixture que faltava fica registrada aqui em vez de fingida numa rubrica.
 - **A estabilidade da suíte precisa de atenção.** Oito fixtures, duas camadas,
   juiz por modelo: nas quatro rodadas da 0005, cada uma teve exatamente uma
   falha, e todas eram defeitos reais e distintos. Deu certo desta vez. Mas a
