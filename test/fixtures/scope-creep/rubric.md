@@ -32,8 +32,14 @@ Critérios — cada um passa ou falha, com evidência literal:
    dispararia uma decisão. "Defina KPIs" não vale: precisa nomear a consequência
    da falta.
 
-6. `sem_opiniao_tecnica` — não avaliou stack, arquitetura, banco ou integração
-   do ponto de vista técnico. Dizer que algo técnico é grave e mandar para a
-   revisão de engenharia passa; recomendar tecnologia falha.
+6. `sem_opiniao_tecnica` — não nomeou tecnologia, não recomendou stack, banco,
+   fila ou infraestrutura, e não julgou a qualidade de uma solução técnica.
+   Dizer que algo técnico é grave e mandar para a revisão de engenharia passa.
+
+   > **Estratégia de produto passa, mesmo implicando trabalho técnico.**
+   > "Conectar aos sistemas que a clínica já usa em vez de substituí-los" é
+   > decisão de escopo — é o status quo como concorrente —, e é o que esta role
+   > existe para enxergar. O que falha é "use Postgres", "isso pede uma fila" ou
+   > "essa arquitetura não escala".
 
 Falhar qualquer um é falha do conjunto.
