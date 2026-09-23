@@ -50,7 +50,8 @@ Skills de método. Cada uma é um **papel** com um protocolo próprio:
 ## Stack
 
 Markdown é o produto; skill não tem runtime. A bancada é `npm run check`
-(validação estática, Node puro) e `bun test` (evals com modelo juiz).
+(validação estática, Node puro) e `node --test` com modelo juiz — **nunca
+`bun test`**, que não enxerga `node:test` e sai verde sem rodar nada.
 
 ## Fora de escopo
 

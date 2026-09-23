@@ -4,9 +4,9 @@
 
 ## Onde estamos
 
-Repositório **público e MIT**. Na `main`: 0001 a 0006. Prontas na branch
-`feat/security-review`, sem PR ainda: **0007** (`/security-review`), **0008**
-(`/pm-review`) e **0009** (`/ux-review`).
+Repositório **público e MIT**. **Tudo mergeado: 0001 a 0009**, nada pendente em
+branch. `npm run check` e `npm test` verdes; as treze fixtures existem e as
+últimas medições estão no `VERIFICATION.md`.
 
 **Sete skills.** Cinco revisões, um canvas e o controlador:
 
@@ -24,6 +24,24 @@ Duas ficaram **bloqueadas por conteúdo**, não por tempo — o canvas de tech l
 e a revisão de design visual. O framework não tem base escrita para nenhuma das
 duas, e escrever sem base produziria checklist genérico, que é o que o
 `PROJECT.md` diz que já existe de graça.
+
+## Para quem pega o projeto agora
+
+**Leia, nesta ordem:** este arquivo · `ROADMAP.md` (o que vem e o que está
+bloqueado) · `VERIFICATION.md` (o que está escrito e ainda não foi medido) ·
+`specs/codebase/WRITING-SKILLS.md` **antes de escrever qualquer skill** ·
+`specs/codebase/TESTING.md` antes de rodar qualquer eval.
+
+**O que mais surpreende quem chega:**
+
+- **A suíte completa não roda a cada mudança.** São treze fixtures e ~40
+  minutos. Mede-se com `YAS_EVAL_ONLY=<fixture>`, e a dívida de medição fica
+  registrada, não na cabeça de ninguém.
+- **Conserta-se o texto, não a fixture** — e quando a fixture *é* o problema,
+  isso vai escrito no commit, porque é a exceção que corrói a regra.
+- **O `CLAUDE.md` está com 91 linhas**, acima das 80 que a regra do baseline
+  sugere. Foi decisão: a tabela das sete skills é o que um agente novo mais
+  precisa, e cortá-la para caber seria otimizar o número errado.
 
 ## O que a 0005 ensinou
 

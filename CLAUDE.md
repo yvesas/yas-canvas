@@ -2,9 +2,23 @@
 
 ## O que é
 
-Pack de skills de **método** para liderança técnica: roles de revisão (eng, CEO,
-produto, UX, design) e os canvas de CTO e Tech Lead. Distribuído para
-`~/.claude/skills` por `bin/install`.
+Pack de skills de **método** para liderança técnica, instalado em
+`~/.claude/skills` por `bin/install`. Sete existem, cada revisão com **a
+pergunta que a separa das outras**:
+
+| Skill | Pergunta |
+|---|---|
+| `/pm-review` | você **sabe** o suficiente para decidir? |
+| `/ceo-review` | **devia** ser construído assim, deste tamanho, agora? |
+| `/eng-review` | está **bem construído**? |
+| `/security-review` | e quando **vaza, é atacado ou cai**? |
+| `/ux-review` | e **fora do caminho feliz**? |
+| `/cto-canvas` | onde **você** está, e qual a próxima decisão? |
+| `/canvas` | roteia, e diz onde a pessoa parou |
+
+**Bloqueadas por conteúdo, não por tempo:** canvas de tech lead e revisão de
+design visual — o framework não tem base escrita, e escrever sem base produz
+checklist genérico. Ver `ROADMAP.md`.
 
 ## Golden rule
 
@@ -13,70 +27,65 @@ abre PR, publica nem toca em segredo. Quando o trabalho chega nesse ponto, o que
 sai é o **handoff** — o documento que a pessoa entrega a quem vai construir — e
 a skill para.
 
-**E nada que viaja pode citar o que só existe aqui.** Comando, pasta de
-configuração, regra pelo nome: quem instala o pack pode não ter nada disso, e
-uma instrução para um sistema inexistente faz a pessoa achar que instalou
-errado. Descreva o comportamento ("o fluxo do repositório de quem executa"),
-nunca a ferramenta. O `npm run check` cobra isso em `shared/` e `skills/`; este
-arquivo, o `docs/` e o `specs/` são sobre desenvolver o pack, e ficam de fora.
+**E nada que viaja pode citar o que só existe aqui** — comando, pasta de
+configuração, regra pelo nome. Quem instala pode não ter, e uma instrução para
+um sistema inexistente faz a pessoa achar que instalou errado. O `check` cobra
+em `shared/` e `skills/`; este arquivo, `docs/` e `specs/` ficam de fora.
 
-Teste para aplicar: se a frase que você ia escrever obriga o usuário a algo, ou
-nomeia uma ferramenta que ele talvez não tenha, ela não pertence a uma skill
-daqui.
+Teste: se a frase obriga o usuário a algo, ou nomeia ferramenta que ele talvez
+não tenha, ela não é de uma skill daqui.
 
-## Stack
+## Bancada
 
-Markdown é o produto — skill não tem runtime. O único código é a bancada:
+Markdown é o produto; o único código é a bancada. `npm run check` (estático,
+segundos) · `npm test` (o check mais os testes de nó) · e os evals, em três
+níveis:
 
 | | |
 |---|---|
-| `npm run check` | validação estática, Node puro, roda sem instalar nada |
-| `npm test` | a validação + a suíte (que pula os evals sem `YAS_EVAL=1`) |
-| `YAS_EVAL=1 npm run eval` | evals: sessão real pontuada por modelo juiz |
+| `YAS_EVAL=1 YAS_EVAL_ONLY=<fixture>` | **um comportamento**, minutos |
+| `YAS_EVAL=1 npm run eval:changed` | o que o diff alcança — tudo, se tocar `shared/` |
+| `YAS_EVAL=1 npm run eval` | a suíte: **só no marco**, ~40 min |
 
-**Não use `bun test` aqui.** Ele não enxerga `node:test`, roda zero teste e sai
-verde. Ver `specs/codebase/TESTING.md`.
-
-`.claude/stack.env` tem os comandos que os hooks leem.
+**A suíte completa não roda a cada skill** (23/09). Mede-se linha a linha, e
+`specs/project/VERIFICATION.md` guarda o que está escrito e ainda não foi
+medido, com o comando de cada linha. **Nunca `bun test`** — sai verde sem rodar
+nada (`specs/codebase/TESTING.md`).
 
 ## Estrutura
 
 | Caminho | O que é |
 |---|---|
 | `skills/<nome>/SKILL.md` | uma skill; a pasta dá o nome, e o frontmatter tem que bater |
-| `shared/preamble.md` | **a** fonte do preâmbulo; copiado ao lado de cada skill na instalação |
-| `scripts/check.mjs` | o gate barato; as frases-âncora do preâmbulo moram aqui |
+| `shared/preamble.md` | voz, anti-bajulação, fechamento — **toda** skill declara |
+| `shared/session-protocol.md` | portão, partes, menu, onde gravar, alternativas — quem **conduz** alguém |
+| `shared/review-protocol.md` | mundo, relatório, "Barra o plano", handoff — quem **avalia** um artefato |
+| `shared/handoff.md` | formato e montagem do handoff; lido **no fechamento** |
+| `scripts/check.mjs` | o gate barato; as frases-âncora de cada compartilhado moram aqui |
 | `test/` | evals e fixtures |
 | `bin/install` | copia as skills para o usuário (ou para um projeto, com `--project`) |
 
-O que está escrito e ainda não foi medido vive em
-`specs/project/VERIFICATION.md` — a suíte longa não roda a cada skill, e essa
-lista é o que ela vai cobrar quando rodar.
+Cada skill **declara** no frontmatter o que precisa (`shared: [...]`) e o
+instalador copia só isso — ADR 0002. A divisão entre sessão e revisão é o
+ADR 0005, e a pergunta que separa é: **de que a regra depende — conduzir
+alguém, ou avaliar um artefato?**
 
 ## Ao escrever uma skill
 
-- **Comece pelo portão.** A primeira chamada de ferramenta é a pergunta de
-  escopo, marcada `PARADA DURA`. Revisar a coisa errada com competência é pior
-  que não revisar.
-- **Leia o preâmbulo, nunca cole.** O `check.mjs` falha nos dois casos: skill
-  sem `preamble.md` e skill com trecho colado dele.
-- **Uma seção por vez, com teto.** Oito problemas reais valem mais que trinta
-  observações, e o teto é o que força a escolha.
-- **Alternativas são obrigatórias** — mínima viável e ideal, com esforço, risco
-  e o que dá para reusar. Sem elas a revisão vira aprovação com comentários.
-- **A sessão termina em arquivo**, com citação literal do que a pessoa disse e
-  **uma** tarefa concreta. Ver o fechamento no preâmbulo.
-- **Teto de 400 linhas.** Skill que ninguém lê inteira não é seguida inteira.
-- Roteador só aponta para skill que existe — o `check.mjs` cobra isso.
+**Leia `specs/codebase/WRITING-SKILLS.md` antes** — as regras e o que cada uma
+custou, inclusive as três em que uma regra nova atropelou outra que já estava
+certa. Resumo: portão primeiro (parada dura); leia o compartilhado, nunca cole;
+uma parte por vez com teto de oito; alternativas obrigatórias; termina em
+arquivo com **uma** tarefa; teto de 400 linhas; e **rode uma sessão de verdade
+antes de escrever a rubrica**.
 
-## Idioma
+## Idioma e decisões
 
-Prosa em **português**: o diferencial é ser brasileiro (LGPD, jurídico, o jeito
-de perguntar). **Nome de arquivo, de pasta e de skill em inglês.** A tradução
-para inglês é uma decisão de distribuição, e está no `ROADMAP.md` — não comece
-a manter duas versões sem essa decisão tomada.
+Prosa em **português** — o diferencial é brasileiro (LGPD, jurídico, o jeito de
+perguntar). **Nome de arquivo, pasta e skill em inglês.** Traduzir é decisão de
+distribuição, está no `ROADMAP.md`.
 
-## Onde as coisas são decididas
-
-`specs/` é o plano, `docs/` é o que ficou de pé — igual em todo projeto daqui.
-O que precisa sobreviver a uma reescrita do `STATE.md` vira ADR em `docs/adr/`.
+`specs/` é o plano, `docs/` é o que ficou de pé; o que precisa sobreviver a uma
+reescrita do `STATE.md` vira ADR. São cinco — os que mais mudam decisão são o
+**0003** (a fronteira é um documento) e o **0005** (sessão e revisão são dois
+protocolos).
