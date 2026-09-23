@@ -4,9 +4,12 @@
 
 ## Onde estamos
 
-Repositório **público e MIT**. Na `main`: 0001 a 0004. A **0005 — `/cto-canvas`**
-está pronta na branch `feat/cto-canvas`, com o gate fechado: **16 de 16**, oito
-fixtures, `# pass 23 · # fail 0`.
+Repositório **público e MIT**. Na `main`: 0001 a 0004. Duas features prontas e
+**não mergeadas**, empilhadas: a **0005 — `/cto-canvas`** (PR #17, gate 16 de
+16) e a **0006 — `/ceo-review`** (PR aberto sobre ela).
+
+**O pack tem quatro skills**: `/canvas` (roteador e controlador), `/eng-review`,
+`/ceo-review` e `/cto-canvas` — duas revisões e um canvas.
 
 **O pack tem duas skills de método e um controlador.** A `/eng-review` avalia um
 artefato e entrega um handoff; a `/cto-canvas` conduz uma pessoa e entrega um
