@@ -77,6 +77,13 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   `/cto-canvas` conduz uma pessoa, e pessoa nenhuma respondeu a este protocolo
   até hoje.** Seis perguntas com empurrão é uma conversa longa; se alguém sair
   sempre na segunda, o problema é o protocolo.
+- **A bancada não mostra progresso (decidido fazer em 23/09).** O `node --test`
+  só imprime o resultado de uma fixture quando ela termina, e as dez rodam em
+  sequência: meia hora de log mudo, indistinguível de processo travado. Não é
+  cosmético — leva quem acompanha a matar a rodada achando que morreu, ou a
+  ignorar o silêncio quando ela morreu de verdade. Imprimir uma linha ao
+  **começar** cada fixture resolve, e o lugar é o laço do
+  `test/eng-review.eval.test.mjs`.
 - **A estabilidade da suíte precisa de atenção.** Oito fixtures, duas camadas,
   juiz por modelo: nas quatro rodadas da 0005, cada uma teve exatamente uma
   falha, e todas eram defeitos reais e distintos. Deu certo desta vez. Mas a

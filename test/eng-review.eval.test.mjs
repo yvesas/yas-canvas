@@ -33,6 +33,8 @@ describe("/eng-review — evals", { skip: ENABLED ? false : "YAS_EVAL=1 para rod
     if (skipped.length) console.log(`  pulando: ${skipped.join(", ")}`);
   }
 
+  const posicao = (name) => `${fixtures.indexOf(name) + 1}/${fixtures.length}`;
+
   for (const name of fixtures) {
     describe(name, () => {
       let fixture;
@@ -40,7 +42,19 @@ describe("/eng-review — evals", { skip: ENABLED ? false : "YAS_EVAL=1 para rod
 
       before(() => {
         fixture = readFixture(name);
+
+        // O `node --test` só imprime uma fixture quando ela termina, e elas
+        // rodam em sequência: meia hora de log mudo, indistinguível de processo
+        // travado. Já levou a matar uma rodada que estava trabalhando — e o
+        // risco espelhado é pior: aprender a ignorar o silêncio na vez em que
+        // ela morreu de verdade.
+        const comeco = Date.now();
+        process.stderr.write(`  → ${name} (${posicao(name)}) …\n`);
+
         session = runSubject(fixture);
+
+        const seg = Math.round((Date.now() - comeco) / 1000);
+        process.stderr.write(`  ← ${name}: ${session.turns} turno(s), ${seg}s\n`);
       });
 
       // Camada 1. Roda primeiro porque é grátis, e porque quando ela falha o
