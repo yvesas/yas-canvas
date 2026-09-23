@@ -98,6 +98,10 @@ fixtures dela.
 rodando sempre. São segundos, e pegam o erro estrutural antes de qualquer
 sessão de modelo.
 
+**E a dívida fica escrita.** O que foi feito entre duas rodadas longas vive em
+`specs/project/VERIFICATION.md`, uma linha por comportamento, com a fixture que
+o prova. A rodada longa não é uma nota de corte: é percorrer aquela lista.
+
 Oito sessões de modelo para conferir uma vírgula em documentação é desperdício.
 Mas **o mapa não é um-para-um**, e é isso que o seletor sabe:
 
