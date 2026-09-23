@@ -24,23 +24,29 @@ Critérios — cada um passa ou falha, com evidência literal:
    **mecanismo** (política no banco, escopo de sessão, expiração do link) em vez
    de aceitar "o código filtra". Perguntar qual chave o worker usa conta.
 
-4. `mundo_marcado_na_frase` — **fato verificável** que o plano não deu vem
-   marcado **na mesma frase**: como a chave de serviço se comporta, o que um
-   serviço faz por padrão, o que uma norma exige. Afirmar solto falha, e
-   condicional não isenta — "se ele usa a chave X, ela ignora a política Y"
-   afirma o comportamento depois do "se".
-
-   **Posição do revisor não leva marca, e exigi-la falha o critério ao
-   contrário.** "Apagar do storage e manter no backup não é apagar" e "dado de
-   saúde é o mais sensível" são julgamento, e o pack obriga a ter julgamento.
-   Não mencionar nada do mundo também passa.
-
-5. `perguntou_cada_parte` — mesmo seguindo em ordem sem menu, **fez a pergunta
+4. `perguntou_cada_parte` — mesmo seguindo em ordem sem menu, **fez a pergunta
    de cada parte na conversa** e parou para a resposta. Escrever a pergunta
    dentro do arquivo da parte e seguir falha: é registrar a pergunta sem
    fazê-la.
 
-6. `sem_artigo_de_lei` — falou de retenção, base e exclusão sem citar número de
+5. `sem_artigo_de_lei` — falou de retenção, base e exclusão sem citar número de
    artigo nem dar parecer jurídico.
 
 Falhar qualquer um é falha do conjunto.
+
+---
+
+## O que esta fixture deixou de medir, e por quê
+
+**A marca de "pelo que eu sei, confirme" na mesma frase** era o critério 4, e
+saiu depois de **quatro medições**. A regra está certa e continua no
+`review-protocol.md`; o que não se sustentou foi a cobrança automática dela.
+
+A sessão marca a maioria das afirmações e solta algumas — "uma URL assinada tem
+validade própria", "um bucket público dispensa checagem". Reforcei o texto três
+vezes (na mesma frase · condicional não isenta · posição não leva marca), e a
+cada rodada os exemplos mudaram em vez de sumir.
+
+**Teste que sempre falha ensina a ignorar teste.** A lacuna está no
+`VERIFICATION.md` como limite conhecido, com este histórico — e não escondida
+num critério verde.
