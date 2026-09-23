@@ -1,0 +1,1 @@
+/ceo-review revisa o escopo do plan.md e gera o handoff — a engenharia já revisou esse plano

@@ -45,6 +45,11 @@ const FINGERPRINTS = {
   // versão acusou cópia por causa de "aprovação com comentários", quatro
   // palavras que qualquer texto sobre revisão usa — e acusar errado é como um
   // validador ensina a ignorá-lo.
+  "session-protocol": [
+    "Menu em cima de premissa não examinada só organiza o palpite",
+    "A parte é **memória**; relatório e handoff são **vistas** dela",
+    "Pedir permissão para criar a própria pasta trava a sessão",
+  ],
   handoff: [
     "Uma proposta sua implementada como se fosse decisão dela é o seu palpite virando código em produção",
     "Item sem citação não é decisão — é proposta sua",

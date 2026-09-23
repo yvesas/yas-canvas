@@ -1,129 +1,129 @@
-# Estado — 2026-09-22 (fim do dia)
+# Estado — 2026-09-23
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
 ## Onde estamos
 
-O repositório é **público e MIT** (`Copyright (c) 2026 Yves Siqueira (Yaslab)`).
-Na `main`: 0001, 0002 e 0003. A **0004 — desacoplar do baseline e entregar o
-handoff** está pronta na branch `feat/decouple-and-handoff`, com o gate fechado:
-**12 de 12**, seis fixtures, `# pass 19 · # fail 0`.
+Repositório **público e MIT**. Na `main`: 0001 a 0004. Duas features prontas e
+**não mergeadas**, empilhadas: a **0005 — `/cto-canvas`** (PR #17, gate 16 de
+16) e a **0006 — `/ceo-review`** (PR aberto sobre ela).
 
-**O pack agora é instalável por um estranho.** Os nove pontos que mandavam a
-pessoa para `/commit`, `/pr`, `.claude/rules/` ou `TEST_CMD` foram a zero, e o
-`npm run check` falha se voltarem. A fronteira virou um documento: o **handoff**
-(`specs/canvas/handoff/<alvo>.md`), montado a partir das partes de todas as
-roles, onde proposta que ninguém confirmou não vira tarefa.
+**O pack tem quatro skills**: `/canvas` (roteador e controlador), `/eng-review`,
+`/ceo-review` e `/cto-canvas` — duas revisões e um canvas.
 
-`shared/` tem três arquivos: `preamble.md` e `review-protocol.md`, lidos no
-começo, e `handoff.md`, lido no fechamento por quem gera o handoff. A role
-declara os três; o `/canvas` declara só o preâmbulo.
+**O pack tem duas skills de método e um controlador.** A `/eng-review` avalia um
+artefato e entrega um handoff; a `/cto-canvas` conduz uma pessoa e entrega um
+canvas. O `/canvas` diz onde ela parou e roteia — a diferença entre as duas é de
+**objeto**: se há documento para ler, é revisão; se o que existe está na cabeça
+dela, é canvas.
+
+`shared/` tem quatro arquivos, e quem lê o quê deixou de ser acidente:
+
+| | Contém | Quem declara |
+|---|---|---|
+| `preamble.md` | voz, anti-bajulação, fechamento | todas |
+| `session-protocol.md` | portão, partes, menu, território, alternativas | as duas skills de método |
+| `review-protocol.md` | mundo, relatório, "Barra o plano", handoff | `/eng-review` |
+| `handoff.md` | formato e montagem, lido no fechamento | `/eng-review` |
 
 Nada foi instalado em `~/.claude/skills` ainda — só `bin/install --check`.
 
-## O que a 0004 ensinou
+## O que a 0005 ensinou
 
-**Pedir permissão para criar a própria pasta custa a sessão.** A regra "se o
-projeto não tiver `specs/`, pergunte uma vez onde gravar" era inofensiva na
-0003, onde o relatório ia para o arquivo do plano. Com tudo indo para
-`specs/canvas/`, virou muro: uma fixture fechou com "espero a resposta para
-gravar" em vez da tarefa da semana. Crie, grave, e diga onde gravou.
+**Critério que passa por sorte parece critério que passa.** O `vague-scale`
+cobra, desde a 0002, que a role nomeie a bandeira vermelha e tome posição sobre
+microsserviços. A `/eng-review` **nunca teve essa regra escrita** — passava
+quando o modelo inferia. Só apareceu porque escrevi a tabela de bandeiras na
+skill nova e notei que a antiga não tinha a dela. Duas rodadas verdes daquele
+item não provavam nada.
 
-**Arquivo lido em todo turno precisa caber numa resposta.** Com o handoff
-dentro dele, o protocolo foi a 338 linhas, e uma fixture de um turno só parou de
-nomear bandeira vermelha e de tomar posição — duas rodadas seguidas, não foi
-ruído. Separado (`handoff.md`, lido no fechamento), o protocolo voltou para 269
-e a fixture voltou a passar. **O que importa uma vez por sessão não mora onde se
-lê sempre.**
+**Regra escrita só para o caso cheio quebra no vazio, e às vezes no sentido
+oposto.** A 0003 descobriu que título ausente é ambíguo: o vazio precisa dizer
+que está vazio. A 0005 descobriu o contrário: quando **nenhum** sinal de
+maturidade apareceu, escrever "nenhum dos sete apareceu" é a nota zero com
+outras palavras, no fim de uma conversa em que a pessoa se expôs. A seção some.
+A raiz é a mesma: a regra só previa o caso em que há o que listar.
 
-**A régua que olha só o que foi dito reprova quem entregou sem narrar.** É a
-terceira vez que este defeito aparece por uma porta nova: o juiz lendo só a
-transcrição, o juiz sem ver os arquivos de parte, e agora o marco de parada, que
-reprovou uma sessão por não recitar no chat o título do relatório que ela tinha
-gravado.
+**Separar antes de somar deixa o diagnóstico limpo.** A T2 rodou as seis
+fixtures antigas com o corte feito e **sem** a skill nova existir: 12 de 12. As
+três falhas seguintes foram diagnosticadas sabendo que o corte estava bom —
+nenhuma gastou um minuto sendo investigada como "será que foi a separação?".
 
-**Consertei uma fixture por um defeito da bancada, e só descobri porque fui
-conferir.** Subi o teto de turnos de duas fixtures; uma precisava, a outra não —
-ela já fechava, e quem errava era a régua. A regra "conserta o texto, nunca a
-fixture" só protege se alguém desfizer o conserto depois de corrigir a régua.
+**Decisão de arquitetura vira minuto de eval não gasto.** Mexer no
+`review-protocol` não roda mais as fixtures do canvas, porque ele não as
+declara. O seletor de escopo transformou o corte em economia real, e
+`test/scope.test.mjs` cobra isso.
 
-**Acoplamento tem causa, e ela costuma estar na regra, não no código.** Os nove
-pontos existiam porque a golden rule deste repositório mandava a skill apontar
-para `/commit` e `/pr`, e o `check.mjs` tinha uma lista de exceções liberando
-justamente esses nomes. Corrigir só as skills teria deixado a próxima role
-acoplar de novo.
+**Conhecimento escondido em campo de metadado é conhecimento perdido.** Escrevi
+uma fixture de portão cobrando uma ferramenta que não existe em modo headless —
+fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
+`TESTING.md`.
 
 ## Decisões tomadas
 
-- **A fronteira é um documento** (2026-09-22) — ADR 0003. Estratégico aqui,
-  operacional em quem executa; o handoff no meio. Proposta não confirmada não
-  vira tarefa.
-- **O arquivo de parte é o contrato** (2026-09-22) — ADR 0004. Estava adiado
-  desde a 0003, com gatilho escrito: valeria quando alguém além da role que
-  escreveu passasse a ler. O gerador do handoff é esse leitor.
-- **MIT no repo inteiro**, titular pessoa física (2026-09-22). O pack antecede
-  o SaaS; adoção vale mais que proteção.
-- **A marca é Yaslab** no texto e `yaslab` no logotipo e domínio (2026-09-22).
+- **Sessão e revisão são dois protocolos** (2026-09-23) — ADR 0005. A pergunta
+  que separa: de que a regra depende — conduzir alguém, ou avaliar um artefato?
+- **Sinais de maturidade nunca viram nota** (2026-09-23). Registrados com a
+  citação que os sustenta; sem contagem, sem classificação, e sem "nenhum".
+- **A fronteira é um documento** (2026-09-22) — ADR 0003 · **o arquivo de parte
+  é o contrato** — ADR 0004.
+- **MIT, titular pessoa física** · **a marca é Yaslab** (2026-09-22).
 - **Menu, partes e controlador que só lê** (2026-09-21) — D-CANVAS-001/002/003.
-- **`shared/` declarado no frontmatter** (2026-09-20) — ADR 0002. Na 0004 ele
-  serviu pela primeira vez para um arquivo que **nem toda** skill usa.
+- **`shared/` declarado no frontmatter** (2026-09-20) — ADR 0002.
 - **Repo próprio**, instalação no usuário, Markdown sem gerador (ADR 0001),
   prosa em português com nomes em inglês, conteúdo autoral.
 
-## O handoff foi lido por outro agente (22/09)
-
-Um handoff **real**, gerado pela skill no eval da 0004, entregue a um `claude -p`
-com **sonnet** (outro modelo), em diretório **sem o pack e sem o baseline**. Em
-duas montagens: com o estado completo, e **só com o handoff**. Critérios fixados
-antes de rodar; os dois planos estão na íntegra em
-`specs/quick/001-handoff-executor-test/`.
-
-**Passou nos cinco critérios, nas duas montagens** — e a versão que recebeu só o
-handoff foi a mais rigorosa. Os dois recusaram por nome o serviço separado, o
-cache e a validade do link mágico: a armadilha sobreviveu à troca de agente e de
-modelo. Nenhum dos dois citou nada do baseline.
-
-**O que o teste não prova:** pediu plano, não código; o handoff veio de uma
-fixture sem código, então executor dentro de base grande continua sem teste; e
-são duas rodadas, não uma amostra.
-
 ## Pendências e bloqueios
 
-- **Validação com fundador real ainda não aconteceu.** É a pendência mais velha
-  e a que mais importa. O handoff já foi testado com um agente (acima); falta o
-  outro lado — uma pessoa de verdade conduzindo a revisão até o fim.
-- **Nenhuma fixture tem código.** As seis são plano. Todo o caminho "com
-  código" do protocolo nunca foi exercitado, e as fixtures multi-turno
-  respondem sempre concordando.
+- **Validação com fundador real ainda não aconteceu, e agora ela é o gargalo.**
+  A `/eng-review` sobrevive a teste automatizado porque revisa um texto. **A
+  `/cto-canvas` conduz uma pessoa, e pessoa nenhuma respondeu a este protocolo
+  até hoje.** Seis perguntas com empurrão é uma conversa longa; se alguém sair
+  sempre na segunda, o problema é o protocolo.
+- **A bancada não mostra progresso (decidido fazer em 23/09).** O `node --test`
+  só imprime o resultado de uma fixture quando ela termina, e as dez rodam em
+  sequência: meia hora de log mudo, indistinguível de processo travado. Não é
+  cosmético — leva quem acompanha a matar a rodada achando que morreu, ou a
+  ignorar o silêncio quando ela morreu de verdade. Imprimir uma linha ao
+  **começar** cada fixture resolve, e o lugar é o laço do
+  `test/eng-review.eval.test.mjs`.
+- **Nenhuma fixture mede se a role de revisão *pergunta*.** O driver responde
+  sempre a mesma frase de concordância, que serve para o `/eng-review` — ele
+  propõe achados e a pessoa concorda — e não serve para o `/ceo-review`, que
+  **pergunta**. "Concordo, siga" não responde "para quem é isso?", então a
+  sessão marca a parte como pendente, que é o comportamento certo, e o ato de
+  perguntar fica inobservável. Medir isso exige um driver que **responda** —
+  uma resposta única que sirva a várias partes, ou um driver por turno. A
+  fixture que faltava fica registrada aqui em vez de fingida numa rubrica.
+- **A estabilidade da suíte precisa de atenção.** Oito fixtures, duas camadas,
+  juiz por modelo: nas quatro rodadas da 0005, cada uma teve exatamente uma
+  falha, e todas eram defeitos reais e distintos. Deu certo desta vez. Mas a
+  chance de uma rodada verde inteira cai conforme a suíte cresce, e uma rodada
+  custa meia hora.
+- **Nenhuma fixture tem código.** As oito são plano ou conversa. O caminho "com
+  código" do protocolo nunca foi exercitado, e a `/cto-canvas` deixou de fora
+  "ler o repositório antes de perguntar" pelo mesmo motivo.
 - **O baseline instalado aqui está 1 arquivo atrás** (`guard-main-bash.sh`).
-  Falta rodar `../claude-base/bin/install .` numa branch própria.
 - **A separação de material de cliente foi feita?** Era condição para abrir o
-  repositório e nunca foi registrada. As fixtures são sintéticas; o resto não
-  foi auditado.
+  repositório e nunca foi registrada.
 - **Bun 1.4.2 instalado, e não é usado.** `bun test` sai verde sem rodar nada.
 
-## Fora deste repositório, e esperando alguém
+## Fora deste repositório
 
-- **yaslab-site PR #15** (marca na documentação) — aberto. O merge publica em
-  produção; o build sai idêntico, mas a decisão é do Yves.
-- **niklas PR #66** (marca no README e no PROJECT) — aberto, esperando o CI.
-- **alfred** — a branch `docs/realinhamento`, sem commit, troca `yaslabs/` por
-  `yaslab/`. Duas armadilhas: a troca quebrou a referência
-  `01-visao-yaslab-suite.md` (o arquivo real é `01-visao-yaslabs-suite.md`), e
-  quatro edições estão em `.claude/`, que a próxima instalação sobrescreve.
-- **audova** — nada a trocar: tudo é o domínio `yaslab.io`.
-- Os arquivos de exemplo de ambiente do site e do audova têm a grafia antiga; o
-  hook de segredos não deixa o agente lê-los.
+- **yaslab-site PR #15** — aberto; o merge publica em produção.
+- **niklas PR #66** — aberto, esperando o CI.
+- **alfred** — a branch `docs/realinhamento` quebrou a referência
+  `01-visao-yaslab-suite.md` (o arquivo real tem o "s") e edita `.claude/`, que
+  a próxima instalação do baseline sobrescreve.
 
 ## Perguntas em aberto para o Yves
 
-1. A próxima é a segunda role — `/cto-canvas` ou `/ceo-review`? O ROADMAP diz
-   canvas primeiro. Ela nasce com menu, partes, handoff e a fronteira prontos,
-   e é ela que vai provar se a divisão entre protocolo e role está no lugar.
-2. **Respondida em 22/09**: o handoff foi lido por outro agente, passou nos
-   cinco critérios, e só o arquivo bastou. Fica a pergunta seguinte, mais cara:
-   vale testar um executor **dentro de uma base de código grande**, onde ele
-   pode contradizer o que já existe? Isso exige um handoff gerado sobre código
-   real — coisa que nenhuma fixture tem.
-3. O `/design-review` cobre design visual e UX na mesma skill, ou os dois papéis
-   ficam separados como estão no roteador hoje?
+1. **Rodar uma sessão real da `/cto-canvas`, com você mesmo como fundador.**
+   É a coisa mais barata que restou e a que mais pode mudar o protocolo. Duas
+   skills existem; nenhuma foi usada por gente.
+2. A próxima é `/ceo-review` ou `/techlead-canvas`? O ROADMAP diz `/ceo-review`,
+   e ela seria a **segunda role de revisão** — a primeira a provar que o
+   `review-protocol` serve a mais de um papel, do mesmo jeito que a
+   `/cto-canvas` provou o `session-protocol`.
+3. O `/design-review` cobre design visual e UX na mesma skill, ou os dois
+   papéis ficam separados como estão no roteador hoje?

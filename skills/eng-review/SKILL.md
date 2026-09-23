@@ -1,6 +1,6 @@
 ---
 name: eng-review
-shared: [preamble, review-protocol, handoff]
+shared: [preamble, session-protocol, review-protocol, handoff]
 parts: [architecture, quality, tests, security-and-data, delivery-and-ci]
 description: >
   Revisão de engenharia de um plano, design doc ou diff, no papel de quem lidera
@@ -36,22 +36,24 @@ linha. Menção de passagem não é nomear. Na dúvida, pergunte.
 
 ## O caminho, na ordem
 
-Respondido o portão, leia os dois arquivos ao lado deste — `preamble.md` (voz,
-anti-bajulação, fechamento) e `review-protocol.md` (o formato) — e siga:
+Respondido o portão, leia os arquivos ao lado deste — `preamble.md` (voz,
+anti-bajulação, fechamento), `session-protocol.md` (onde gravar, partes, menu,
+alternativas) e `review-protocol.md` (o formato de revisar) — e siga:
 
 | | Passo | Detalhe |
 |---|---|---|
-| 1 | Em que mundo estou: há código ou não | protocolo §2 |
-| 2 | Menu: a pessoa escolhe a parte; uma por vez, teto de oito | protocolo §3 |
-| 3 | **Alternativas — obrigatório**, mínima viável e ideal | protocolo §5 |
+| 1 | Em que mundo estou: há código ou não | review §1 |
+| 2 | Menu: a pessoa escolhe a parte; uma por vez, teto de oito | sessão §2 |
+| 3 | **Alternativas — obrigatório**, mínima viável e ideal | sessão §4 |
 | 4 | Juntar o que as partes separaram | aqui, Passo 5 |
-| 5 | Relatório, com "Barra o plano" em posição fixa | protocolo §6 |
-| 6 | Handoff: leia o `handoff.md` ao lado e gere | protocolo §7 |
+| 5 | Relatório, com "Barra o plano" em posição fixa | review §2 |
+| 6 | Handoff: leia o `handoff.md` ao lado e gere | review §3 |
 | 7 | Fechamento: o que ouvi, **uma** tarefa, status | preâmbulo |
 
 Regra que dispara no fim da sessão não sobrevive só no arquivo lido no começo —
 daí a tabela, e o passo 3 é o que mais some. **Terminada a última parte, releia
-o `review-protocol.md` §5 e §6 — sim, de novo:** alternativas são mínima viável
+o `session-protocol.md` §4 e o `review-protocol.md` §2 — sim, de novo:**
+alternativas são mínima viável
 **e** ideal, com esforço e risco; o relatório abre por "Escopo revisado" e
 "Barra o plano", e junção de lacunas que ficou no fim do texto vai para o topo.
 
@@ -97,10 +99,27 @@ Nenhum destes vira item de lista no relatório. Eles decidem **onde olhar**.
     `timeout`, aparece na fatura um mês depois — e ninguém liga o aumento ao
     dia em que o pipeline foi dividido.
 
+## Passo 3.1 — bandeiras vermelhas, nomeadas como bandeira
+
+Certas frases não são opinião discutível: são risco conhecido com nome. Quando
+uma aparecer, **diga que é bandeira vermelha** e dê a posição — não a dilua numa
+lista de "coisas a avaliar".
+
+| No plano | Não responda | Responda |
+|---|---|---|
+| microsserviços desde já | "pode ser prematuro" | Bandeira vermelha. Nomeie o domínio que precisa escalar **sozinho hoje**. Sem esse nome, é monólito modular com fronteira clara. |
+| "a gente escala quando precisar" | "vale monitorar" | Escalar depois custa o dobro quando a fundação não previu. Qual número dispara a mudança, e quem olha esse número? |
+| "a IA gera o código" | "ótimo, acelera" | Gera. Quem decide a fronteira do domínio, e quem sabe quando a saída está errada? |
+| "segurança a gente vê depois" | "é importante, sim" | Depois é quando o dado já vazou. Qual dado sensível entra na primeira semana? |
+
+Uma bandeira dissolvida numa lista genérica de custos deixa de ser bandeira.
+Se três mudanças caras aparecem juntas, **cada uma recebe a sua razão** — senão
+a pessoa corta a mais barata de cortar, que quase nunca é a mais perigosa.
+
 ## Passo 4 — as cinco partes
 
 Uma por vez, teto de oito, parando para a resposta; o menu e o arquivo de cada
-parte estão no `review-protocol.md` §3 e §4. Esta é a ordem que faz sentido
+parte estão no `session-protocol.md` §2 e §3. Esta é a ordem que faz sentido
 nesta role — e é a que o menu sugere. O que cada parte procura:
 
 **`architecture`.** Fronteiras, fluxo de dados, quem depende de quem, o que

@@ -1,0 +1,11 @@
+{
+  "descricao": "a pessoa só responde genérico: a skill precisa empurrar até o concreto e nomear a bandeira vermelha, sem fechar a parte e sem inventar",
+  "mustNotContainAny": ["é importante, sim", "pode ser prematuro", "é uma abordagem interessante"],
+  "writtenMustNotContainAny": ["`/commit`", ".claude/", "TEST_CMD"],
+  "maxInvestigativeCalls": 8,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 4,
+    "reply": "É mais ou menos isso mesmo. A gente usa uns serviços aí, e segurança a gente vê depois — primeiro precisa funcionar."
+  }
+}

@@ -31,16 +31,35 @@ const BUDGET_USD = process.env.YAS_EVAL_BUDGET_USD || "2";
 // Dez minutos ainda derrubaram uma fixture de UM turno, o que não é protocolo
 // longo: é a API lenta naquela hora. O teto existe para o turno travado, não
 // para o turno devagar — então ele é generoso de propósito.
-const TIMEOUT_MS = Number(process.env.YAS_EVAL_TIMEOUT_MS || 900000);
+//
+// Quinze estouraram três vezes, sempre na mesma fixture: a revisão completa,
+// que lê quatro arquivos compartilhados e termina escrevendo relatório e
+// handoff. Vinte também estourou, com a segunda role de revisão fazendo o
+// mesmo. Trinta.
+//
+// O número em si importa pouco; o que ele mede importa: **o turno de fechamento
+// de uma revisão completa é a coisa mais pesada que este pack faz.** Cinco
+// arquivos de parte, relatório e handoff, tudo num turno. Se um dia precisar
+// passar de trinta, o problema não é o teto — é o fechamento fazer demais de
+// uma vez.
+const TIMEOUT_MS = Number(process.env.YAS_EVAL_TIMEOUT_MS || 1800000);
 
 // Ferramenta que olha o projeto. O portão de escopo proíbe ISTO antes da
 // pergunta — não "chamar ferramenta". Contar tudo reprovava a sessão por um
 // ToolSearch, que carrega schema e não lê arquivo nenhum: teste medindo o
 // sintoma errado reprova comportamento correto, que é como um teste perde a
 // confiança de quem o lê.
+//
+// E **escrever não é investigar**. `Write` e `Edit` estavam nesta lista desde o
+// começo, quando uma sessão produzia um arquivo só. Depois da 0003 ela grava
+// cinco arquivos de parte, o relatório e o handoff — e o teto, que existe para
+// dizer "não vasculhe o projeto", virou uma contagem de entrega. A fixture de
+// escopo reprovou com 19 chamadas, das quais 14 eram Write e Edit.
+//
+// É o mesmo erro que o parágrafo acima descreve, sobrevivendo na mesma
+// constante: medir o sintoma errado reprova comportamento correto.
 export const INVESTIGATIVE_TOOLS = new Set([
   "Read", "Grep", "Glob", "LS", "Bash", "BashOutput",
-  "Edit", "Write", "MultiEdit", "NotebookEdit",
   "WebFetch", "WebSearch", "Agent", "Task",
 ]);
 

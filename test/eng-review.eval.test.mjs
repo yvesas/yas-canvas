@@ -24,7 +24,21 @@ describe("/eng-review — evals", { skip: ENABLED ? false : "YAS_EVAL=1 para rod
   // `eval:changed` corta o óbvio — e diz em voz alta o que pulou e por quê:
   // fixture que some em silêncio é a mesma coisa que fixture que não existe.
   const scoped = process.env.YAS_EVAL_SCOPE === "changed" ? selectFixtures() : null;
-  const fixtures = scoped ? scoped.fixtures : listFixtures();
+
+  // `YAS_EVAL_ONLY=scope-creep,vague-scale` mede uma linha do VERIFICATION.md
+  // sem pagar a suíte. Filtrar por `--test-name-pattern` não serve: o `node
+  // --test` roda o `before` de toda fixture mesmo quando pula os testes, e é no
+  // `before` que a sessão do modelo acontece — o filtro esconderia o resultado
+  // sem economizar um centavo.
+  const only = (process.env.YAS_EVAL_ONLY || "").split(",").map((s) => s.trim()).filter(Boolean);
+  const base = scoped ? scoped.fixtures : listFixtures();
+  const fixtures = only.length ? base.filter((f) => only.includes(f)) : base;
+
+  if (only.length) {
+    const inexistente = only.filter((f) => !listFixtures().includes(f));
+    if (inexistente.length) throw new Error(`YAS_EVAL_ONLY não conhece: ${inexistente.join(", ")}`);
+    console.log(`  só: ${fixtures.join(", ")}`);
+  }
 
   if (scoped) {
     const skipped = listFixtures().filter((f) => !fixtures.includes(f));
@@ -33,6 +47,8 @@ describe("/eng-review — evals", { skip: ENABLED ? false : "YAS_EVAL=1 para rod
     if (skipped.length) console.log(`  pulando: ${skipped.join(", ")}`);
   }
 
+  const posicao = (name) => `${fixtures.indexOf(name) + 1}/${fixtures.length}`;
+
   for (const name of fixtures) {
     describe(name, () => {
       let fixture;
@@ -40,7 +56,19 @@ describe("/eng-review — evals", { skip: ENABLED ? false : "YAS_EVAL=1 para rod
 
       before(() => {
         fixture = readFixture(name);
+
+        // O `node --test` só imprime uma fixture quando ela termina, e elas
+        // rodam em sequência: meia hora de log mudo, indistinguível de processo
+        // travado. Já levou a matar uma rodada que estava trabalhando — e o
+        // risco espelhado é pior: aprender a ignorar o silêncio na vez em que
+        // ela morreu de verdade.
+        const comeco = Date.now();
+        process.stderr.write(`  → ${name} (${posicao(name)}) …\n`);
+
         session = runSubject(fixture);
+
+        const seg = Math.round((Date.now() - comeco) / 1000);
+        process.stderr.write(`  ← ${name}: ${session.turns} turno(s), ${seg}s\n`);
       });
 
       // Camada 1. Roda primeiro porque é grátis, e porque quando ela falha o

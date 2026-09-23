@@ -6,7 +6,9 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import { selectFixtures } from "./lib/scope.mjs";
-import { listFixtures } from "./lib/harness.mjs";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { listFixtures, FIXTURES, ROOT } from "./lib/harness.mjs";
 
 const all = listFixtures();
 const pick = (changed) => selectFixtures("origin/main", changed).fixtures;
@@ -21,18 +23,37 @@ describe("escopo por diff", () => {
     assert.deepEqual(pick(["bin/install"]), all);
   });
 
-  test("mexer numa role roda as fixtures daquela role", () => {
-    const selected = pick(["skills/eng-review/SKILL.md"]);
-    assert.ok(selected.length > 0, "eng-review tem fixtures");
-    assert.deepEqual(selected, all, "hoje todas as fixtures são de eng-review");
+  // Derivado das declarações, não enumerado: esta suíte já quebrou duas vezes
+  // porque eu tinha escrito "hoje as fixtures são todas de X". Toda skill nova
+  // quebrava o teste sem que nada estivesse errado — e teste que quebra sem
+  // defeito ensina a ignorar teste.
+  const skillOf = (f) =>
+    (readFileSync(join(FIXTURES, f, "prompt.txt"), "utf8").match(/^\/([a-z0-9-]+)/) || [])[1];
+  const declares = (skill, item) =>
+    ((readFileSync(join(ROOT, "skills", skill, "SKILL.md"), "utf8").match(/^shared:\s*\[(.*)\]/m) || [])[1] || "")
+      .split(",")
+      .map((x) => x.trim())
+      .includes(item);
+  const skills = [...new Set(all.map(skillOf))];
+
+  test("mexer numa role roda as fixtures daquela role, e só", () => {
+    for (const skill of skills) {
+      const suas = all.filter((f) => skillOf(f) === skill);
+      assert.deepEqual(pick([`skills/${skill}/SKILL.md`]), suas, skill);
+    }
+    assert.ok(skills.length > 1, "mais de uma role, senão o teste não prova nada");
   });
 
   test("mexer numa fixture roda só ela", () => {
     assert.deepEqual(pick(["test/fixtures/no-target/plan.md"]), ["no-target"]);
   });
 
-  test("mexer no protocolo roda as skills que o declaram", () => {
-    assert.deepEqual(pick(["shared/review-protocol.md"]), all);
+  test("mexer num compartilhado roda só quem o declara", () => {
+    // É aqui que o corte da 0005 vira dinheiro: quem não declara, não paga.
+    for (const item of ["session-protocol", "review-protocol", "handoff"]) {
+      const esperado = all.filter((f) => declares(skillOf(f), item));
+      assert.deepEqual(pick([`shared/${item}.md`]), esperado, item);
+    }
   });
 
   test("só documentação não roda nada", () => {
