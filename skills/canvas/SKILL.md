@@ -63,9 +63,15 @@ handoff       docs-plano-webhook.md, gerado 22/09 — 2 partes fora
 | O que a pessoa traz | Skill |
 |---|---|
 | Plano, design doc ou branch para revisar antes de codar | `/eng-review` |
+| "por onde eu começo", "me ajuda a estruturar a técnica" | `/cto-canvas` |
+
+**A diferença entre as duas não é de assunto, é de objeto.** A revisão avalia um
+**artefato** que já existe escrito; o canvas estrutura a **pessoa** — onde ela
+está, o que está adiando, qual a próxima decisão. Se há um documento para ler,
+é revisão. Se o que existe está na cabeça dela, é canvas.
 
 **Ainda não existem** (não invoque, não prometa): ceo-review, pm-review,
-ux-review, design-review, cto-canvas, techlead-canvas. Quando o pedido for de
+ux-review, design-review, techlead-canvas. Quando o pedido for de
 uma delas, diga em uma linha que a role ainda não foi escrita e conduza a
 conversa você mesmo, seguindo o preâmbulo — sem fingir protocolo que não existe.
 
