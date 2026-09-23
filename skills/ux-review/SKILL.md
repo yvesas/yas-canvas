@@ -92,6 +92,10 @@ estados?":
 seguir.
 *Bandeiras:* "aí a gente mostra um toast" · erro genérico · tela vazia que
 parece defeito em vez de começo.
+**Os cinco entram nesta parte, e "pergunto depois" não existe:** o que a pessoa
+não responder vai para `### Em aberto` do arquivo, nomeado. Adiar dentro da
+própria parte é não ter perguntado — e o estado adiado é sempre o mesmo, o que
+ninguém lembra de desenhar.
 
 **`consistency-and-access`.** Os mesmos componentes se comportam igual? O botão
 diz o que faz — "Salvar" ou "Enviar para o cliente"? O tom das mensagens é o

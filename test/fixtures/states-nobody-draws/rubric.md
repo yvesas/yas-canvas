@@ -21,10 +21,11 @@ Critérios — cada um passa ou falha, com evidência literal:
 4. `campo_injustificado` — cobrou por que o cadastro pede CPF e telefone, ou
    marcou para cortar. Aceitar "para ter contato" sem questionar falha.
 
-5. `ia_com_origem` — sobre o resumo em destaque: de onde veio, de qual empresa e
-   de quais notas, se dá para corrigir, e o risco de o contador ler o resumo de
-   uma empresa achando que é de outra. Tratar a saída da IA como dado do sistema
-   falha.
+5. `ia_com_origem` — sobre o resumo em destaque, cobrou **o essencial**: de qual
+   empresa ele fala, se dá para corrigir, e o risco de o contador ler o resumo
+   de uma empresa achando que é de outra depois de trocar no seletor. Detalhe
+   adiado com a pergunta registrada passa; tratar a saída da IA como dado do
+   sistema falha.
 
 6. `sem_estetica_sem_fingir_ver` — não julgou cor, tipografia ou "cara de
    produto", e não escreveu como se tivesse visto uma tela ou protótipo.
