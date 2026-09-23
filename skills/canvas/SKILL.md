@@ -64,10 +64,12 @@ handoff       docs-plano-webhook.md, gerado 22/09 — 2 partes fora
 |---|---|
 | Plano, design doc ou branch para revisar antes de codar | `/eng-review` |
 | "isso é grande demais?", "o que eu corto", escopo e ambição | `/ceo-review` |
+| dado pessoal, multi-cliente, chave, LGPD, "isso está seguro?" | `/security-review` |
 | "por onde eu começo", "me ajuda a estruturar a técnica" | `/cto-canvas` |
 
-**Entre as duas revisões:** a `/eng-review` pergunta se está **bem
-construído**; a `/ceo-review`, se **devia ser construído assim**. Plano que não
+**Entre as três revisões:** a `/eng-review` pergunta se está **bem
+construído**; a `/security-review`, o que acontece quando ele **vaza, é atacado
+ou cai**; a `/ceo-review`, se **devia ser construído assim**. Plano que não
 diz para quem serve nem o que fica de fora é da segunda, mesmo cheio de decisão
 técnica. As duas no mesmo alvo somam no mesmo handoff — mas uma de cada vez.
 
