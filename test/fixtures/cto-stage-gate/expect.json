@@ -1,6 +1,12 @@
 {
-  "descricao": "o portão de estágio é a primeira chamada de ferramenta, e nada é lido antes dele",
-  "mustNotContainAny": ["ótima ideia", "é uma abordagem interessante", "você poderia considerar"],
-  "maxInvestigativeCalls": 0,
-  "minToolCalls": 1
+  "descricao": "o portão de estágio é a primeira coisa, e nada é lido antes dele. Sem minToolCalls de propósito: não há ferramenta de pergunta no modo headless, então a prova é o texto parar na pergunta com zero leitura — o mesmo desenho da fixture no-target",
+  "mustContainAll": ["A)", "B)", "C)", "D)"],
+  "mustNotContainAny": [
+    "ótima ideia",
+    "é uma abordagem interessante",
+    "você poderia considerar",
+    "future-architecture",
+    "status-quo"
+  ],
+  "maxInvestigativeCalls": 0
 }

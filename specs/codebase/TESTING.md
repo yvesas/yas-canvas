@@ -161,6 +161,17 @@ a mensagem do runner nomeia o teto e o que fazer. Dez minutos já derrubaram uma
 fixture de **um turno só**, que não tem protocolo longo nenhum: era a API lenta
 naquela hora. O teto existe para o turno travado, não para o turno devagar.
 
+## Não existe ferramenta de pergunta no modo headless
+
+`claude -p` não tem `AskUserQuestion`. Uma skill cujo portão é uma pergunta vai
+**escrever a pergunta e parar** — e está certa. Cobrar `minToolCalls` de uma
+fixture de portão reprova a sessão por não chamar uma ferramenta que não existe
+ali; aconteceu na 0005, depois de o mesmo fato já estar escrito na descrição da
+fixture `no-target` desde a 0002.
+
+A prova de que o portão disparou é outra: o texto contém as opções (`A)`, `B)`…)
+e `maxInvestigativeCalls` é **zero**. Nada lido antes da pergunta.
+
 ## O marco de parada vale no chat ou no disco
 
 `driver.stopWhen` marca "a sessão chegou ao fim". O fim destas skills é um
