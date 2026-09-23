@@ -6,6 +6,15 @@
 > por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
 > renumerado: número gasto fica gasto.
 
+- **0007 — `/security-review`** (2026-09-23,
+  `specs/features/0007-security-review/`): a terceira role de revisão, das
+  etapas 10 e 11 do `docs_yaslab/26`. Seis partes — ciclo de vida do dado,
+  separação entre clientes, chaves, superfície de ataque, responsabilidade do
+  agente, observabilidade e incidente. Abre dizendo **você não verificou nada**,
+  e o relatório nomeia o que ficou sem verificação. Combinação crítica: dado
+  sensível + sem escopo por tenant + log sem filtro = vazamento que roda meses
+  sem ninguém saber. **Primeira feature com a ordem invertida**: skill, sessão
+  real, rubrica.
 - **0006 — `/ceo-review`, escopo e ambição** (2026-09-23,
   `specs/features/0006-ceo-review/`): a segunda role de revisão, e a primeira a
   provar que o `review-protocol` serve a mais de um papel — **sem precisar de
@@ -68,17 +77,24 @@ _Nada em andamento._
 
 ## Próximo
 
-1. **`/security-review`** — segurança, dado e operação, das etapas 10 e 11 do
-   `docs_yaslab/26`: LGPD e ciclo de vida do dado, escopo por tenant, segredo
-   fora do alcance do agente, superfície de ataque (webhook, formulário,
-   injeção de prompt), aprovação humana para ação automatizada, trilha do que a
-   IA fez em nome de quem, log sem PII, alerta que importa, backup testado.
-   **Fonte escrita**, e é onde o pack mais se diferencia de checklist genérico.
-2. **`/techlead-canvas`** — evolução de dev, review, velocidade real, gargalo.
-3. **`/pm-review`**, **`/ux-review`**, **`/design-review`**.
-4. **Orquestrador** — rodar as roles em sequência com princípios de decisão que
-   respondem o intermediário, e **um** portão humano no fim. Só depois de três
-   ou quatro roles existirem: orquestrar duas não paga a complexidade.
+1. **Orquestrador** — rodar as roles em sequência sobre o mesmo alvo, com **um**
+   portão humano no fim. **Deixou de ser prematuro:** a condição que ele mesmo
+   declarava era "três ou quatro roles existirem", e hoje são **cinco revisões**
+   somando no mesmo handoff. O que ele precisa decidir: em que ordem rodam, o
+   que passa de uma para a outra, e onde a pessoa entra sem virar carimbo.
+
+2. **Uma sessão real com fundador.** Sete skills existem e **nenhuma foi usada
+   por gente** — é a pendência mais velha do `STATE.md`, e agora a mais cara de
+   adiar: cada role nova aumenta o que pode estar errado sem ninguém ter visto.
+
+## Bloqueadas por conteúdo, não por tempo
+
+- **`/techlead-canvas`** — o doc 21 tem o mapa de competências pronto, e as
+  seções de acompanhar dev, performance e indicadores estão marcadas como não
+  amadurecidas. Escrever agora seria inventar o método do Yves em vez de
+  transcrevê-lo (decisão de 23/09).
+- **Revisão de design visual** — tipografia, hierarquia, marca: sem fonte
+  autoral. O que a etapa 6 cobre foi para a `/ux-review` (decisão de 23/09).
 
 ## Decisões adiadas (não são tarefas até alguém decidir)
 

@@ -64,10 +64,23 @@ handoff       docs-plano-webhook.md, gerado 22/09 — 2 partes fora
 |---|---|
 | Plano, design doc ou branch para revisar antes de codar | `/eng-review` |
 | "isso é grande demais?", "o que eu corto", escopo e ambição | `/ceo-review` |
+| dado pessoal, multi-cliente, chave, LGPD, "isso está seguro?" | `/security-review` |
+| "será que alguém quer isso?", "como eu valido", hipótese | `/pm-review` |
+| fluxo, tela, formulário, "por que ninguém termina o cadastro" | `/ux-review` |
 | "por onde eu começo", "me ajuda a estruturar a técnica" | `/cto-canvas` |
 
-**Entre as duas revisões:** a `/eng-review` pergunta se está **bem
-construído**; a `/ceo-review`, se **devia ser construído assim**. Plano que não
+**Cinco revisões, cinco perguntas diferentes sobre o mesmo plano:**
+
+| Role | Pergunta |
+|---|---|
+| `/pm-review` | você **sabe** o suficiente para decidir? |
+| `/ceo-review` | **devia** ser construído assim, deste tamanho, agora? |
+| `/eng-review` | está **bem construído**? |
+| `/security-review` | o que acontece quando **vaza, é atacado ou cai**? |
+| `/ux-review` | o que acontece **fora do caminho feliz**? |
+
+Na dúvida entre duas, escolha pela pergunta, não pelo assunto — e **uma de cada
+vez**. As várias no mesmo alvo somam no mesmo handoff. Plano que não
 diz para quem serve nem o que fica de fora é da segunda, mesmo cheio de decisão
 técnica. As duas no mesmo alvo somam no mesmo handoff — mas uma de cada vez.
 
@@ -76,8 +89,14 @@ técnica. As duas no mesmo alvo somam no mesmo handoff — mas uma de cada vez.
 está, o que está adiando, qual a próxima decisão. Se há um documento para ler,
 é revisão. Se o que existe está na cabeça dela, é canvas.
 
-**Ainda não existem** (não invoque, não prometa): pm-review, ux-review,
-design-review, techlead-canvas. Quando o pedido for de
+**Ainda não existem** (não invoque, não prometa): revisão de **design visual**
+e canvas de **tech lead**. As duas estão **bloqueadas por conteúdo** — o
+framework ainda não tem base escrita para nenhuma delas, e escrever sem base
+produziria checklist genérico.
+
+Quando o pedido for de uma delas, diga isso em uma linha e ofereça o que existe:
+a `/ux-review` cobre consistência, clareza de texto e acessibilidade, que é
+metade do que se pede como "revisão de design". Quando o pedido for de
 uma delas, diga em uma linha que a role ainda não foi escrita e conduza a
 conversa você mesmo, seguindo o preâmbulo — sem fingir protocolo que não existe.
 

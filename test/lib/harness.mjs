@@ -198,7 +198,16 @@ export function runSubject(fixture) {
         reachedStop = true;
         break;
       }
-      turn(["-p", driver.reply, "--resume", sessionId]);
+      // `replies` conversa; `reply` repete. Uma resposta fixa serve a quem
+      // propõe achados e recebe concordância, e **não serve a quem pergunta**:
+      // seis partes fazem seis perguntas diferentes, e a mesma frase responde
+      // no máximo a primeira. Com ela, "perguntou cada parte" é intestável —
+      // custou duas fixtures para isso ficar claro. A última resposta da lista
+      // se repete se a conversa passar dela.
+      const fala = Array.isArray(driver.replies)
+        ? driver.replies[Math.min(turns - 1, driver.replies.length - 1)]
+        : driver.reply;
+      turn(["-p", fala, "--resume", sessionId]);
     }
     if (!reachedStop && driver.stopWhen) {
       // Na transcrição **ou no disco**. O marco é "a sessão chegou ao fim", e o

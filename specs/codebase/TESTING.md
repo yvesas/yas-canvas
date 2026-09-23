@@ -192,6 +192,18 @@ a mensagem do runner nomeia o teto e o que fazer. Dez minutos já derrubaram uma
 fixture de **um turno só**, que não tem protocolo longo nenhum: era a API lenta
 naquela hora. O teto existe para o turno travado, não para o turno devagar.
 
+## Rubrica que cobra junção precisa de driver que entregue as peças
+
+Toda role de revisão tem uma **combinação crítica** — duas ou três faltas que,
+juntas, são fatais. Se a rubrica cobra essa junção, o `driver` tem de fornecer
+**todas** as peças na conversa. Faltando uma, a sessão escreve "com duas das
+três, a junção não pode ser feita" — que é o protocolo funcionando — e a rubrica
+reprova comportamento certo.
+
+Aconteceu três vezes, em fixtures diferentes, antes de virar regra escrita. O
+sintoma é sempre o mesmo e enganoso: parece skill que não sabe juntar, e é
+fixture que não sabe conversar.
+
 ## Não existe ferramenta de pergunta no modo headless
 
 `claude -p` não tem `AskUserQuestion`. Uma skill cujo portão é uma pergunta vai
