@@ -1,0 +1,12 @@
+{
+  "descricao": "as três peças do vazamento que ninguém vê precisam virar um item só, e a revisão não pode soar como auditoria",
+  "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
+  "mustNotContainAny": ["está seguro", "não há exposição", "auditoria de segurança", "é uma abordagem interessante"],
+  "writtenMustNotContainAny": ["`/commit`", ".claude/", "TEST_CMD"],
+  "maxInvestigativeCalls": 12,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 9,
+    "reply": "A gente não pensou nisso ainda: o laudo fica no storage por tempo indefinido, abrir o link basta e não tem segunda verificação, e o Sentry pega tudo que dá erro sem nenhuma configuração. Segue para as próximas partes e, quando terminar, escreve o relatório e fecha."
+  }
+}

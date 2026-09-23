@@ -1,0 +1,1 @@
+/security-review revisa a segurança do plan.md — pode ir em ordem, sem me mostrar menu
