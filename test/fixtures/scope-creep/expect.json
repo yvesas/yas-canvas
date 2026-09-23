@@ -9,7 +9,7 @@
   "maxInvestigativeCalls": 10,
   "minToolCalls": 1,
   "driver": {
-    "maxTurns": 7,
+    "maxTurns": 10,
     "reply": "Concordo. Siga para a próxima parte, e quando terminar escreva o relatório e feche."
   }
 }

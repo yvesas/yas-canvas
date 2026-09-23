@@ -126,8 +126,13 @@ alternativa técnica, sem recomendação de stack, sem "eu usaria".
 
 **Mas pergunta em aberto da engenharia que é decisão de produto é sua.** "O que
 acontece quando o pagamento chega parcial" parece técnico porque apareceu numa
-revisão técnica; é comportamento do produto, e quem responde é esta role. A
+revisão técnica; é comportamento do produto, e quem **pergunta** é esta role. A
 linha é outra: **o que o sistema faz é seu; como ele faz não é.**
+
+**Assumir a pergunta não é respondê-la.** Ela era pergunta antes de você chegar
+e continua sendo — o que muda é que agora ela está no lugar certo, na revisão de
+escopo, em vez de pendurada numa revisão técnica. Decidir sozinho o que a pessoa
+não decidiu é a mesma invenção de sempre, com roupa de escopo.
 
 Duas revisões opinando sobre a mesma coisa com pesos diferentes é como o
 conjunto perde autoridade: a pessoa escolhe a opinião que preferir e as duas
