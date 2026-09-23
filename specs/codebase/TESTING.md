@@ -83,9 +83,20 @@ não tem como quebrar com o que está sendo escrito. A suíte cheia fica para o
 fim: quando o conjunto de skills estiver pronto, uma rodada longa cobra tudo.
 
 ```bash
-YAS_EVAL=1 npm run eval:changed  # durante a feature — só o que o diff alcança
-YAS_EVAL=1 npm run eval          # no marco — o gate do conjunto
+YAS_EVAL=1 YAS_EVAL_ONLY=scope-creep npm run eval   # uma linha do VERIFICATION
+YAS_EVAL=1 npm run eval:changed                     # o que o diff alcança
+YAS_EVAL=1 npm run eval                             # no marco — o conjunto
 ```
+
+Os três medem coisas diferentes. `YAS_EVAL_ONLY` prova **um comportamento**;
+`eval:changed` prova **o que a mudança alcança** (e seleciona tudo quando ela
+alcança tudo — mexer em `shared/` ou na bancada é isso); a suíte inteira prova
+**o conjunto**, inclusive o que ninguém pensou em ligar.
+
+Nome errado em `YAS_EVAL_ONLY` falha antes de gastar sessão. E não tente
+filtrar com `--test-name-pattern`: o `node --test` roda o `before` de toda
+fixture mesmo pulando os testes, e é no `before` que a sessão acontece — você
+esconderia o resultado sem economizar nada.
 
 **O que isso custa, e por que ainda vale.** Uma regressão que a skill nova cause
 em outra role só aparece na rodada longa, e aí o diagnóstico é mais caro porque

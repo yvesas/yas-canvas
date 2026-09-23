@@ -5,9 +5,18 @@
 > uma rodada longa e a seguinte, o pack acumula comportamento escrito e **não
 > medido**. Esta é a lista dessa dívida.
 >
-> **Como usar na rodada longa:** cada linha `⏳` tem a fixture e o critério que
-> a provam. Quando a rodada passar, a linha vira `✅` com a data; quando cair,
-> vira `❌` e o defeito vai para o `STATE.md`.
+> **Como medir uma linha sem pagar a suíte:** cada `⏳` traz o comando. Ele roda
+> só as fixtures daquela linha — uma ou duas sessões, minutos em vez de meia
+> hora. Quando passar, a linha vira `✅` com a data; quando cair, vira `❌` e o
+> defeito vai para o `STATE.md`.
+>
+> ```bash
+> YAS_EVAL=1 YAS_EVAL_ONLY=<fixture>[,<fixture>] npm run eval
+> ```
+>
+> **A rodada longa continua existindo**, e é outra coisa: ela cobra o conjunto,
+> inclusive o que ninguém pensou em ligar. Uma linha medida isoladamente prova
+> que aquele comportamento funciona — não que ele não quebrou outro.
 >
 > **Uma linha é um comportamento, não um commit.** Commit é o que eu fiz; aqui é
 > o que o pack passou a fazer — que é o que pode quebrar.
@@ -21,11 +30,12 @@ está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
 
 ## Não verificado
 
-| | Comportamento | Onde | Quem prova |
+| | Comportamento | Critério | Como medir |
 |---|---|---|---|
-| ⏳ | Propor com nome não é inventar fato; afirmar que existe, sim | `greenfield-plan/rubric.md` | `greenfield-plan` · `nao_inventou_fato` |
-| ⏳ | A pergunta se faz na conversa; o arquivo registra o que foi respondido | `session-protocol.md` | `scope-creep` · `numero_com_dono` |
-| ⏳ | A bancada imprime uma linha ao começar e ao terminar cada fixture | `eng-review.eval.test.mjs` | qualquer rodada — é visual |
+| ⏳ | Propor com nome não é inventar fato; afirmar que existe, sim | `greenfield-plan` · `nao_inventou_fato` | `YAS_EVAL_ONLY=greenfield-plan` |
+| ⏳ | A pergunta se faz na conversa; o arquivo registra o que foi respondido | `scope-creep` · `numero_com_dono` | `YAS_EVAL_ONLY=scope-creep` |
+| ⏳ | A bancada imprime uma linha ao começar e ao terminar cada fixture | visual, qualquer rodada | sai junto de qualquer uma acima |
+| ⏳ | Seleção por nome não engana: nome errado falha antes de gastar sessão | — | `YAS_EVAL=1 YAS_EVAL_ONLY=nao-existe npm run eval` (já medido: falha na hora) |
 
 ## Provado na última rodada completa (23/09, 25 de 27)
 
@@ -60,6 +70,10 @@ está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
 - **Não substitui o `tasks.md` de cada feature.** Lá fica o veredito congelado
   do que aconteceu naquela feature; aqui fica o que está em aberto **agora**,
   atravessando features.
+- **Não é o lugar de "rodar tudo por garantia".** Se você não souber dizer qual
+  fixture prova a linha, o problema não é a lista — é que o comportamento não
+  tem teste. Medir a suíte inteira não conserta isso: ela também não mede o que
+  ninguém escreveu.
 - **Não é escrito por máquina.** Uma linha só entra aqui se alguém souber dizer
   qual fixture a prova. Comportamento sem quem o prove não é linha `⏳`: é
   comportamento sem teste, e isso vai para o `STATE.md` como pendência.
