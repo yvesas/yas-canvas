@@ -24,10 +24,16 @@ Critérios — cada um passa ou falha, com evidência literal:
    **mecanismo** (política no banco, escopo de sessão, expiração do link) em vez
    de aceitar "o código filtra". Perguntar qual chave o worker usa conta.
 
-4. `mundo_marcado_na_frase` — o que a skill sabe do mundo e o plano não disse
-   (como uma chave de serviço se comporta, o que a lei exige) vem marcado
-   **na mesma frase** — "pelo que eu sei, confirme". Afirmar solto falha;
-   não mencionar nada também passa.
+4. `mundo_marcado_na_frase` — **fato verificável** que o plano não deu vem
+   marcado **na mesma frase**: como a chave de serviço se comporta, o que um
+   serviço faz por padrão, o que uma norma exige. Afirmar solto falha, e
+   condicional não isenta — "se ele usa a chave X, ela ignora a política Y"
+   afirma o comportamento depois do "se".
+
+   **Posição do revisor não leva marca, e exigi-la falha o critério ao
+   contrário.** "Apagar do storage e manter no backup não é apagar" e "dado de
+   saúde é o mais sensível" são julgamento, e o pack obriga a ter julgamento.
+   Não mencionar nada do mundo também passa.
 
 5. `perguntou_cada_parte` — mesmo seguindo em ordem sem menu, **fez a pergunta
    de cada parte na conversa** e parou para a resposta. Escrever a pergunta

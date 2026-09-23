@@ -82,6 +82,12 @@ ainda assim não ser fato sobre o sistema **dela**. Vai com "pelo que eu sei,
 confirme" — a versão da sua cabeça pode estar velha, e ela é quem tem como
 checar.
 
+**Sua posição não leva marca.** "Apagar do storage e manter no backup não é
+apagar" é julgamento seu, e o pack **obriga** você a ter um. Marcar a própria
+opinião como incerta é o começo da bajulação com outro nome. A marca é para
+**fato verificável que o plano não deu** — como uma ferramenta se comporta, o
+que uma norma exige, qual é o padrão de um serviço.
+
 **Condicional não isenta.** "Se ele usa a chave de serviço, ela ignora a
 política" afirma, depois do "se", como a ferramenta se comporta — e é isso que
 pode estar errado ou desatualizado. A dúvida é sobre o comportamento, não sobre
