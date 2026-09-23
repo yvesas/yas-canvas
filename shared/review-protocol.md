@@ -82,6 +82,11 @@ ainda assim não ser fato sobre o sistema **dela**. Vai com "pelo que eu sei,
 confirme" — a versão da sua cabeça pode estar velha, e ela é quem tem como
 checar.
 
+**Condicional não isenta.** "Se ele usa a chave de serviço, ela ignora a
+política" afirma, depois do "se", como a ferramenta se comporta — e é isso que
+pode estar errado ou desatualizado. A dúvida é sobre o comportamento, não sobre
+qual caminho a pessoa tomou. Marque a parte que você não tem como saber.
+
 **A marca vai na mesma frase, toda vez.** Avisar uma vez no começo e depois
 afirmar solto não funciona: quem lê o relatório três semanas depois lê a frase,
 não o aviso. Se a mesma informação aparece no relatório e no handoff, ela vai
