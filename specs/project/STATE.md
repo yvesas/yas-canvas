@@ -70,12 +70,28 @@ acoplar de novo.
 - **Repo próprio**, instalação no usuário, Markdown sem gerador (ADR 0001),
   prosa em português com nomes em inglês, conteúdo autoral.
 
+## O handoff foi lido por outro agente (22/09)
+
+Um handoff **real**, gerado pela skill no eval da 0004, entregue a um `claude -p`
+com **sonnet** (outro modelo), em diretório **sem o pack e sem o baseline**. Em
+duas montagens: com o estado completo, e **só com o handoff**. Critérios fixados
+antes de rodar; os dois planos estão na íntegra em
+`specs/quick/001-handoff-executor-test/`.
+
+**Passou nos cinco critérios, nas duas montagens** — e a versão que recebeu só o
+handoff foi a mais rigorosa. Os dois recusaram por nome o serviço separado, o
+cache e a validade do link mágico: a armadilha sobreviveu à troca de agente e de
+modelo. Nenhum dos dois citou nada do baseline.
+
+**O que o teste não prova:** pediu plano, não código; o handoff veio de uma
+fixture sem código, então executor dentro de base grande continua sem teste; e
+são duas rodadas, não uma amostra.
+
 ## Pendências e bloqueios
 
 - **Validação com fundador real ainda não aconteceu.** É a pendência mais velha
-  e a que mais importa. Agora há mais motivo para ela: o menu torna o abandono
-  sobrevivível, e o handoff é a parte que ninguém nunca viu em uso — ele foi
-  desenhado para um executor que ainda não existiu.
+  e a que mais importa. O handoff já foi testado com um agente (acima); falta o
+  outro lado — uma pessoa de verdade conduzindo a revisão até o fim.
 - **Nenhuma fixture tem código.** As seis são plano. Todo o caminho "com
   código" do protocolo nunca foi exercitado, e as fixtures multi-turno
   respondem sempre concordando.
@@ -104,8 +120,10 @@ acoplar de novo.
 1. A próxima é a segunda role — `/cto-canvas` ou `/ceo-review`? O ROADMAP diz
    canvas primeiro. Ela nasce com menu, partes, handoff e a fronteira prontos,
    e é ela que vai provar se a divisão entre protocolo e role está no lugar.
-2. O handoff nunca foi lido por um agente operacional de verdade. Vale gastar
-   uma sessão testando isso — pegar um handoff gerado e mandar outro agente
-   executar — antes de escrever a segunda role?
+2. **Respondida em 22/09**: o handoff foi lido por outro agente, passou nos
+   cinco critérios, e só o arquivo bastou. Fica a pergunta seguinte, mais cara:
+   vale testar um executor **dentro de uma base de código grande**, onde ele
+   pode contradizer o que já existe? Isso exige um handoff gerado sobre código
+   real — coisa que nenhuma fixture tem.
 3. O `/design-review` cobre design visual e UX na mesma skill, ou os dois papéis
    ficam separados como estão no roteador hoje?
