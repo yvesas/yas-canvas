@@ -48,7 +48,14 @@
 
 ## Em desenvolvimento
 
-_Nada em andamento._
+- **0005 — `/cto-canvas`** (`specs/features/0005-cto-canvas/`, especificada em
+  22/09): a segunda skill, e o primeiro **canvas** — estrutura a pessoa em vez
+  de avaliar um artefato. As seis perguntas técnicas com empurrão e bandeiras,
+  roteadas por estágio; portão de estágio como parada dura; sinais registrados
+  com citação e **sem nota**. Conteúdo do `docs_yaslab/25`, forma do gstack.
+
+  Ela já cobrou a dívida que o `STATE` previa: metade do `review-protocol` não
+  é de revisão, e sai para `shared/session-protocol.md` (D-CTO-001).
 
 ## Próximo
 
