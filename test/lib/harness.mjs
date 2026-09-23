@@ -49,9 +49,17 @@ const TIMEOUT_MS = Number(process.env.YAS_EVAL_TIMEOUT_MS || 1800000);
 // ToolSearch, que carrega schema e não lê arquivo nenhum: teste medindo o
 // sintoma errado reprova comportamento correto, que é como um teste perde a
 // confiança de quem o lê.
+//
+// E **escrever não é investigar**. `Write` e `Edit` estavam nesta lista desde o
+// começo, quando uma sessão produzia um arquivo só. Depois da 0003 ela grava
+// cinco arquivos de parte, o relatório e o handoff — e o teto, que existe para
+// dizer "não vasculhe o projeto", virou uma contagem de entrega. A fixture de
+// escopo reprovou com 19 chamadas, das quais 14 eram Write e Edit.
+//
+// É o mesmo erro que o parágrafo acima descreve, sobrevivendo na mesma
+// constante: medir o sintoma errado reprova comportamento correto.
 export const INVESTIGATIVE_TOOLS = new Set([
   "Read", "Grep", "Glob", "LS", "Bash", "BashOutput",
-  "Edit", "Write", "MultiEdit", "NotebookEdit",
   "WebFetch", "WebSearch", "Agent", "Task",
 ]);
 
