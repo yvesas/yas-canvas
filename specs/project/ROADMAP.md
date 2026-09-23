@@ -77,13 +77,15 @@ _Nada em andamento._
 
 ## Próximo
 
-1. **`/pm-review`** — descoberta e validação: hipótese com o que a derruba,
-   evidência de primeira mão, o experimento que mata a ideia barato. Fonte:
-   etapa 2 do `docs_yaslab/26`. Especificada (0008).
-2. **`/ux-review`** — experiência e estados, **incluindo o que seria a
-   `/design-review`**: vazio, erro, sem permissão, offline, dado velho,
-   consistência, acessibilidade mínima, e onde a IA aparece na interface. Fonte:
-   etapa 6. Especificada (0009).
+1. **Orquestrador** — rodar as roles em sequência sobre o mesmo alvo, com **um**
+   portão humano no fim. **Deixou de ser prematuro:** a condição que ele mesmo
+   declarava era "três ou quatro roles existirem", e hoje são **cinco revisões**
+   somando no mesmo handoff. O que ele precisa decidir: em que ordem rodam, o
+   que passa de uma para a outra, e onde a pessoa entra sem virar carimbo.
+
+2. **Uma sessão real com fundador.** Sete skills existem e **nenhuma foi usada
+   por gente** — é a pendência mais velha do `STATE.md`, e agora a mais cara de
+   adiar: cada role nova aumenta o que pode estar errado sem ninguém ter visto.
 
 ## Bloqueadas por conteúdo, não por tempo
 
@@ -91,22 +93,8 @@ _Nada em andamento._
   seções de acompanhar dev, performance e indicadores estão marcadas como não
   amadurecidas. Escrever agora seria inventar o método do Yves em vez de
   transcrevê-lo (decisão de 23/09).
-- **`/design-review` visual** — tipografia, hierarquia, marca: sem fonte
+- **Revisão de design visual** — tipografia, hierarquia, marca: sem fonte
   autoral. O que a etapa 6 cobre foi para a `/ux-review` (decisão de 23/09).
-
-## Antigo próximo, já entregue
-
-- **`/security-review`** — segurança, dado e operação, das etapas 10 e 11 do
-   `docs_yaslab/26`: LGPD e ciclo de vida do dado, escopo por tenant, segredo
-   fora do alcance do agente, superfície de ataque (webhook, formulário,
-   injeção de prompt), aprovação humana para ação automatizada, trilha do que a
-   IA fez em nome de quem, log sem PII, alerta que importa, backup testado.
-   **Fonte escrita**, e é onde o pack mais se diferencia de checklist genérico.
-2. **`/techlead-canvas`** — evolução de dev, review, velocidade real, gargalo.
-3. **`/pm-review`**, **`/ux-review`**, **`/design-review`**.
-4. **Orquestrador** — rodar as roles em sequência com princípios de decisão que
-   respondem o intermediário, e **um** portão humano no fim. Só depois de três
-   ou quatro roles existirem: orquestrar duas não paga a complexidade.
 
 ## Decisões adiadas (não são tarefas até alguém decidir)
 

@@ -54,6 +54,13 @@ ninguém está esperando resultado dele.
 | ✅ | **Pergunta cada parte** mesmo seguindo em ordem sem menu | `security-leak-combo` · `perguntou_cada_parte` — o ⚠️ de ontem, resolvido pelo driver que conversa |
 | ✅ | Não diz que conferiu o que não abriu | `security-leak-combo`, depois da regra no preâmbulo |
 | ✅ | `driver.replies` conversa turno a turno | a própria fixture, seis falas |
+| ✅ | Hipótese sem o que a derruba não é hipótese | `discovery-by-launch`, 23/09 — 8 turnos, 201s, de primeira |
+| ✅ | O que a pessoa viu é separado do que lhe contaram | `discovery-by-launch` · `viu_versus_contaram` |
+| ✅ | Experimento cobrado com prazo, pessoa e critério de morte | `discovery-by-launch` · `experimento_concreto` |
+| ✅ | Os cinco estados cobrados pelo nome, sem "pergunto depois" | `states-nobody-draws`, 23/09 — 9 turnos, 236s |
+| ✅ | A desistência silenciosa vira um item só | `states-nobody-draws` · `combinacao_como_um_item` |
+| ✅ | IA na tela: de qual empresa, dá para corrigir, risco da troca | `states-nobody-draws` · `ia_com_origem` |
+| ✅ | Não julga estética nem finge ter visto tela | `states-nobody-draws` · `sem_estetica_sem_fingir_ver` |
 | ✅ | Portão de estágio é a primeira coisa, sem leitura antes | `cto-stage-gate` |
 | ✅ | Empurrar até o específico, nomeando a bandeira vermelha | `cto-push-specific` |
 | ✅ | Sinais com citação, sem nota — e sem "nenhum dos sete" | `cto-push-specific` · `sem_nota` |
