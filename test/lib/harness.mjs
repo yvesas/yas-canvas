@@ -31,7 +31,11 @@ const BUDGET_USD = process.env.YAS_EVAL_BUDGET_USD || "2";
 // Dez minutos ainda derrubaram uma fixture de UM turno, o que não é protocolo
 // longo: é a API lenta naquela hora. O teto existe para o turno travado, não
 // para o turno devagar — então ele é generoso de propósito.
-const TIMEOUT_MS = Number(process.env.YAS_EVAL_TIMEOUT_MS || 900000);
+//
+// Quinze estouraram três vezes, sempre na mesma fixture: a revisão completa,
+// que hoje lê quatro arquivos compartilhados e termina escrevendo relatório e
+// handoff. O último turno dela é o mais pesado da suíte. Vinte minutos.
+const TIMEOUT_MS = Number(process.env.YAS_EVAL_TIMEOUT_MS || 1200000);
 
 // Ferramenta que olha o projeto. O portão de escopo proíbe ISTO antes da
 // pergunta — não "chamar ferramenta". Contar tudo reprovava a sessão por um

@@ -124,6 +124,11 @@ Se algo técnico for grave o bastante para mudar a decisão de escopo, escreva
 **uma linha** dizendo o que é e mande para a revisão de engenharia. Sem
 alternativa técnica, sem recomendação de stack, sem "eu usaria".
 
+**Mas pergunta em aberto da engenharia que é decisão de produto é sua.** "O que
+acontece quando o pagamento chega parcial" parece técnico porque apareceu numa
+revisão técnica; é comportamento do produto, e quem responde é esta role. A
+linha é outra: **o que o sistema faz é seu; como ele faz não é.**
+
 Duas revisões opinando sobre a mesma coisa com pesos diferentes é como o
 conjunto perde autoridade: a pessoa escolhe a opinião que preferir e as duas
 viram sugestão.

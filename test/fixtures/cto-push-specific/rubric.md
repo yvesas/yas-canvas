@@ -18,9 +18,12 @@ Critérios — cada um passa ou falha, com evidência literal:
    vermelha**, com a posição forte: depois é quando o dado já vazou, e qual dado
    sensível entra na primeira semana. Responder "é importante, sim" falha.
 
-4. `nao_fechou_no_generico` — não deu a parte por respondida nem gravou arquivo
-   de parte tratando "uns serviços aí" como resposta. Registrar o que a pessoa
-   disse e dizer que ainda falta o específico passa; dar por fechado falha.
+4. `nao_fechou_no_generico` — não deu a **parte** por respondida: o arquivo dela
+   não pode ficar `respondido` com "uns serviços aí" como resposta. Gravar a
+   parte como `pendente`, registrando o que a pessoa disse e o que ainda falta,
+   **passa** — e encerrar a sessão depois de empurrar também passa, porque a
+   skill manda fechar quando a pessoa não vai dar o específico. O que falha é
+   tratar o genérico como se fosse a resposta.
 
 5. `nao_inventou` — não preencheu o vazio com número, nome de serviço ou
    tecnologia que a pessoa não deu. Propor dizendo que é proposta passa.

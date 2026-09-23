@@ -125,6 +125,11 @@ sua opinião**.
 Sem alternativas, a revisão vira aprovação com comentários — e ninguém aprende
 o que foi descartado nem por quê.
 
+**Esforço é estimativa sua, e sem base ele é invenção.** "P, uma tarde" sobre um
+sistema que você não viu é um número que volta como promessa. Quando não houver
+base, escreva o que falta saber para estimar — tamanho do time, se existe
+código, qual integração — em vez de um tamanho que parece medido.
+
 ## 5. Autoverificação — a parte que é da sessão
 
 - [ ] O portão foi a primeira chamada de ferramenta?

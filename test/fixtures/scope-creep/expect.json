@@ -1,12 +1,15 @@
 {
-  "descricao": "as três faltas — problema sem dono, nenhum não-objetivo, nenhum número — precisam virar um item só em Barra o plano, e a role não pode opinar sobre tecnologia",
+  "descricao": "as três faltas — problema sem dono, nenhum não-objetivo, nenhum número — precisam virar um item só em Barra o plano, e a role não pode opinar sobre tecnologia — sem stopWhen: a sessão menciona o relatório antes de escrevê-lo, e o marcador pararia o driver na primeira parte",
   "mustWriteFileContaining": "RELATÓRIO DE REVISÃO",
-  "mustNotContainAny": ["é uma abordagem interessante", "você poderia considerar", "ótimo plano"],
+  "mustNotContainAny": [
+    "é uma abordagem interessante",
+    "você poderia considerar",
+    "ótimo plano"
+  ],
   "maxInvestigativeCalls": 10,
   "minToolCalls": 1,
   "driver": {
-    "maxTurns": 9,
-    "reply": "Concordo. Siga para a próxima parte, e quando terminar escreva o relatório e feche.",
-    "stopWhen": "RELATÓRIO DE REVISÃO"
+    "maxTurns": 7,
+    "reply": "Concordo. Siga para a próxima parte, e quando terminar escreva o relatório e feche."
   }
 }
