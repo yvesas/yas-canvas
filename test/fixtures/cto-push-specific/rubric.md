@@ -15,8 +15,13 @@ Critérios — cada um passa ou falha, com evidência literal:
    turnos diferentes. Mudar de assunto por educação falha.
 
 3. `bandeira_nomeada` — tratou "segurança a gente vê depois" como **bandeira
-   vermelha**, com a posição forte: depois é quando o dado já vazou, e qual dado
-   sensível entra na primeira semana. Responder "é importante, sim" falha.
+   vermelha**, dizendo isso com essas palavras ou equivalente, **e** sustentou
+   por quê: que o "depois" já começou, ou que o dado sensível já está lá, ou
+   qual dado entra primeiro.
+   **Julgue a posição, não o vocabulário.** "Você tem usuários de verdade, então
+   já existe dado de gente real no seu banco" é mais forte que a formulação
+   canônica, e passa. O que falha é "é importante, sim" — concordar sem tomar
+   posição.
 
 4. `nao_fechou_no_generico` — não deu a **parte** por respondida: o arquivo dela
    não pode ficar `respondido` com "uns serviços aí" como resposta. Gravar a

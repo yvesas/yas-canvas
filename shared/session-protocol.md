@@ -125,6 +125,13 @@ sua opinião**.
 Sem alternativas, a revisão vira aprovação com comentários — e ninguém aprende
 o que foi descartado nem por quê.
 
+**A alternativa é sua; os fatos que a sustentam, não.** Propor um caminho é o
+trabalho — mas "fatura recorrente proporcional aos processos" e "meses
+construindo antes de conhecer uma fonte" são afirmações sobre o negócio **dela**
+dentro da sua tabela. Ou vieram do plano, ou vão com "se for assim" e viram
+pergunta. A seção se chamar "Alternativas" não transforma fato inventado em
+proposta.
+
 **Esforço é estimativa sua, e sem base ele é invenção.** "P, uma tarde" sobre um
 sistema que você não viu é um número que volta como promessa. Quando não houver
 base, escreva o que falta saber para estimar — tamanho do time, se existe
