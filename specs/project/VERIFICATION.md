@@ -23,8 +23,12 @@
 
 ## Legenda
 
-`✅ provado` — passou numa rodada completa, com data · `⏳ não verificado` —
-está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
+`✅ provado` — passou numa medição, com data · `⏳ não verificado` — está no
+código, nunca foi medido · `❌ caiu` — foi medido e falhou · `⚠️ sem quem prove`
+— comportamento real, nenhuma fixture o alcança
+
+A quarta é a que some. `⏳` incomoda e `❌` dói; `⚠️` parece resolvido porque
+ninguém está esperando resultado dele.
 
 ---
 
@@ -32,7 +36,6 @@ está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
 
 | | Comportamento | Critério | Como medir |
 |---|---|---|---|
-| ⏳ | As três faltas viram um item só, e a falta de cada uma é nomeada | `scope-creep` · `combinacao_como_um_item`, `nomeou_a_falta_de_nao`, `numero_ausente_nomeado` | `YAS_EVAL_ONLY=scope-creep` |
 | ⚠️ | Seguir em sequência é pular o menu, não as perguntas | **sem fixture que meça** — ver `STATE.md` | precisa de driver que responda |
 
 ## Provado
@@ -43,6 +46,8 @@ está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
 | ✅ | A bancada mostra progresso: fixture, posição, turnos e tempo | a própria rodada acima |
 | ✅ | `YAS_EVAL_ONLY` mede uma linha sem pagar a suíte | duas fixtures em 9min30, contra ~40 da suíte |
 | ✅ | Nome errado em `YAS_EVAL_ONLY` falha antes de gastar sessão | medido: falha na hora |
+| ✅ | As três faltas viram um item só, e cada ausência é nomeada | `scope-creep`, 23/09 — 10 turnos, 184s |
+| ✅ | Estratégia de produto não é opinião técnica | `scope-creep` · `sem_opiniao_tecnica` |
 | ✅ | Portão de estágio é a primeira coisa, sem leitura antes | `cto-stage-gate` |
 | ✅ | Empurrar até o específico, nomeando a bandeira vermelha | `cto-push-specific` |
 | ✅ | Sinais com citação, sem nota — e sem "nenhum dos sete" | `cto-push-specific` · `sem_nota` |
@@ -56,11 +61,16 @@ está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
 | ✅ | Escrever não conta como investigar | `scope-creep` (determinístico) |
 | ✅ | Nada do baseline aparece no que a sessão grava | `handoff-unconfirmed` · `cto-push-specific` |
 
-## Caiu na última rodada, e já tem correção escrita
+## Nada em aberto
+
+Todas as linhas `⏳` foram medidas. O que resta é a `⚠️` acima, que não é dívida
+de medição — é ausência de teste.
+
+## Caiu antes, e a correção já foi provada
 
 | | Comportamento | O que falhou |
 |---|---|---|
-| ❌ | Cobrar o número com dono **na conversa** | `scope-creep`, duas medições. A primeira regra ("a pergunta se faz na conversa") não bastou: ela colidia com a da 0003, que manda não repetir o menu quando a pessoa pede sequência — e a sessão leu "siga" como "não me pergunte mais nada". Correção nova em `⏳` acima |
+| ❌→✅ | Cobrar o número com dono **na conversa** | `scope-creep`, três medições. A primeira regra ("a pergunta se faz na conversa") não bastou: ela colidia com a da 0003, que manda não repetir o menu quando a pessoa pede sequência — e a sessão leu "siga" como "não me pergunte mais nada". Correção nova em `⏳` acima |
 
 ---
 
