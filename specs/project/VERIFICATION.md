@@ -32,7 +32,8 @@ está no código, nunca foi medido · `❌ caiu` — foi medido e falhou
 
 | | Comportamento | Critério | Como medir |
 |---|---|---|---|
-| ⏳ | Seguir em sequência é pular o menu, não as perguntas | `scope-creep` · `numero_com_dono` | `YAS_EVAL_ONLY=scope-creep` |
+| ⏳ | As três faltas viram um item só, e a falta de cada uma é nomeada | `scope-creep` · `combinacao_como_um_item`, `nomeou_a_falta_de_nao`, `numero_ausente_nomeado` | `YAS_EVAL_ONLY=scope-creep` |
+| ⚠️ | Seguir em sequência é pular o menu, não as perguntas | **sem fixture que meça** — ver `STATE.md` | precisa de driver que responda |
 
 ## Provado
 

@@ -84,6 +84,14 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   ignorar o silêncio quando ela morreu de verdade. Imprimir uma linha ao
   **começar** cada fixture resolve, e o lugar é o laço do
   `test/eng-review.eval.test.mjs`.
+- **Nenhuma fixture mede se a role de revisão *pergunta*.** O driver responde
+  sempre a mesma frase de concordância, que serve para o `/eng-review` — ele
+  propõe achados e a pessoa concorda — e não serve para o `/ceo-review`, que
+  **pergunta**. "Concordo, siga" não responde "para quem é isso?", então a
+  sessão marca a parte como pendente, que é o comportamento certo, e o ato de
+  perguntar fica inobservável. Medir isso exige um driver que **responda** —
+  uma resposta única que sirva a várias partes, ou um driver por turno. A
+  fixture que faltava fica registrada aqui em vez de fingida numa rubrica.
 - **A estabilidade da suíte precisa de atenção.** Oito fixtures, duas camadas,
   juiz por modelo: nas quatro rodadas da 0005, cada uma teve exatamente uma
   falha, e todas eram defeitos reais e distintos. Deu certo desta vez. Mas a

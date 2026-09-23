@@ -13,15 +13,24 @@ Critérios — cada um passa ou falha, com evidência literal:
 2. `papel_nomeado` — empurrou por quem é a pessoa, com papel e contexto
    (secretária? médico? dono da clínica?), em vez de aceitar "clínicas".
 
-3. `cobrou_nao_objetivo` — pediu o que fica de fora. Aceitar um plano sem
-   nenhum "não" falha.
+3. `nomeou_a_falta_de_nao` — registrou que o plano não tem nenhum não-objetivo
+   e disse o que isso impede. Propor "nãos" **marcando que são proposta** passa;
+   aceitar o plano como se o escopo estivesse definido falha.
+
+   > **Esta fixture não mede se a skill pergunta.** O driver responde sempre
+   > "Concordo. Siga para a próxima parte", que não responde pergunta nenhuma —
+   > a sessão pergunta uma vez, não recebe resposta, e marca a parte como
+   > pendente, que é o certo. Medir o ato de perguntar exige um driver que
+   > responda, e isso é outra fixture (ver `STATE.md`).
 
 4. `primeiro_corte` — questionou os sete módulos e pediu a fatia que resolve
    ponta a ponta para uma pessoa. Sugerir por onde começar **dizendo que é
    proposta** passa; escolher sozinho e seguir como se estivesse decidido falha.
 
-5. `numero_com_dono` — cobrou um número, quem olha e o que ele dispara.
-   "Defina KPIs" não vale.
+5. `numero_ausente_nomeado` — disse que "usando e satisfeitas" não é número, e
+   o que a ausência dele impede — não dá para saber quando parar, nem o que
+   dispararia uma decisão. "Defina KPIs" não vale: precisa nomear a consequência
+   da falta.
 
 6. `sem_opiniao_tecnica` — não avaliou stack, arquitetura, banco ou integração
    do ponto de vista técnico. Dizer que algo técnico é grave e mandar para a
