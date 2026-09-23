@@ -4,32 +4,26 @@
 
 ## Onde estamos
 
-Repositório **público e MIT**. Na `main`: 0001 a 0004. Duas features prontas e
-**não mergeadas**, empilhadas: a **0005 — `/cto-canvas`** (PR #17, gate 16 de
-16) e a **0006 — `/ceo-review`** (PR aberto sobre ela).
+Repositório **público e MIT**. Na `main`: 0001 a 0006. Prontas na branch
+`feat/security-review`, sem PR ainda: **0007** (`/security-review`), **0008**
+(`/pm-review`) e **0009** (`/ux-review`).
 
-**O pack tem cinco skills**: `/canvas` (roteador e controlador),
-`/eng-review`, `/ceo-review`, `/security-review` e `/cto-canvas` — três revisões
-e um canvas. Faltam duas especificadas (`/pm-review`, `/ux-review`) e duas
-**bloqueadas por conteúdo**, não por tempo: `/techlead-canvas` e a
-`/design-review` visual, ambas sem fonte amadurecida no framework.
+**Sete skills.** Cinco revisões, um canvas e o controlador:
 
-**O pack tem duas skills de método e um controlador.** A `/eng-review` avalia um
-artefato e entrega um handoff; a `/cto-canvas` conduz uma pessoa e entrega um
-canvas. O `/canvas` diz onde ela parou e roteia — a diferença entre as duas é de
-**objeto**: se há documento para ler, é revisão; se o que existe está na cabeça
-dela, é canvas.
+| Skill | Pergunta |
+|---|---|
+| `/pm-review` | você **sabe** o suficiente para decidir? |
+| `/ceo-review` | **devia** ser construído assim, deste tamanho, agora? |
+| `/eng-review` | está **bem construído**? |
+| `/security-review` | o que acontece quando **vaza, é atacado ou cai**? |
+| `/ux-review` | o que acontece **fora do caminho feliz**? |
+| `/cto-canvas` | onde **você** está, e qual a próxima decisão? |
+| `/canvas` | roteia, e diz onde a pessoa parou |
 
-`shared/` tem quatro arquivos, e quem lê o quê deixou de ser acidente:
-
-| | Contém | Quem declara |
-|---|---|---|
-| `preamble.md` | voz, anti-bajulação, fechamento | todas |
-| `session-protocol.md` | portão, partes, menu, território, alternativas | as duas skills de método |
-| `review-protocol.md` | mundo, relatório, "Barra o plano", handoff | `/eng-review` |
-| `handoff.md` | formato e montagem, lido no fechamento | `/eng-review` |
-
-Nada foi instalado em `~/.claude/skills` ainda — só `bin/install --check`.
+Duas ficaram **bloqueadas por conteúdo**, não por tempo — o canvas de tech lead
+e a revisão de design visual. O framework não tem base escrita para nenhuma das
+duas, e escrever sem base produziria checklist genérico, que é o que o
+`PROJECT.md` diz que já existe de graça.
 
 ## O que a 0005 ensinou
 
