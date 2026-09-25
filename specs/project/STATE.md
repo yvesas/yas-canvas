@@ -1,12 +1,20 @@
-# Estado — 2026-09-23
+# Estado — 2026-09-25
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
 ## Onde estamos
 
-Repositório **público e MIT**. **Tudo mergeado: 0001 a 0009**, nada pendente em
-branch. `npm run check` e `npm test` verdes; as treze fixtures existem e as
-últimas medições estão no `VERIFICATION.md`.
+Repositório **público e MIT**. **Tudo mergeado: 0001 a 0009**; em aberto, só o
+**PR #21** (`docs/onboarding`), que é markdown puro. `npm run check` e
+`npm test` verdes; as treze fixtures existem e as últimas medições estão no
+`VERIFICATION.md`.
+
+**O pack passou a ter documentação de usuário** (25/09, PR #21). O `README.md`
+dizia que existiam duas skills e listava como "próximas" cinco já entregues —
+estava quatro features atrás. Agora ele é vitrine curta, o
+`docs/getting-started.md` conduz a primeira sessão de ponta a ponta (portão,
+menu, os arquivos que aparecem, o que fazer com o handoff) e o `CONTRIBUTING.md`
+recebeu a bancada. Nada disso é medido por eval: é prosa para gente.
 
 **Sete skills.** Cinco revisões, um canvas e o controlador:
 
@@ -31,6 +39,11 @@ duas, e escrever sem base produziria checklist genérico, que é o que o
 bloqueado) · `VERIFICATION.md` (o que está escrito e ainda não foi medido) ·
 `specs/codebase/WRITING-SKILLS.md` **antes de escrever qualquer skill** ·
 `specs/codebase/TESTING.md` antes de rodar qualquer eval.
+
+**Para saber o que o pack faz visto de fora**, `docs/getting-started.md` — é a
+única descrição do produto na perspectiva de quem instala, e serve de conferência
+quando uma skill muda de comportamento. `CONTRIBUTING.md` tem a bancada e o
+checklist de PR.
 
 **O que mais surpreende quem chega:**
 
@@ -76,6 +89,10 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
 
 ## Decisões tomadas
 
+- **A documentação de usuário mora em três arquivos** (2026-09-25): `README.md`
+  vitrine, `docs/getting-started.md` guia da primeira sessão, `CONTRIBUTING.md`
+  bancada. Um arquivo só misturava quem instala com quem mantém, e a bancada era
+  o que mais crescia.
 - **Sessão e revisão são dois protocolos** (2026-09-23) — ADR 0005. A pergunta
   que separa: de que a regra depende — conduzir alguém, ou avaliar um artefato?
 - **Sinais de maturidade nunca viram nota** (2026-09-23). Registrados com a
@@ -95,13 +112,16 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   `/cto-canvas` conduz uma pessoa, e pessoa nenhuma respondeu a este protocolo
   até hoje.** Seis perguntas com empurrão é uma conversa longa; se alguém sair
   sempre na segunda, o problema é o protocolo.
-- **A bancada não mostra progresso (decidido fazer em 23/09).** O `node --test`
-  só imprime o resultado de uma fixture quando ela termina, e as dez rodam em
-  sequência: meia hora de log mudo, indistinguível de processo travado. Não é
-  cosmético — leva quem acompanha a matar a rodada achando que morreu, ou a
-  ignorar o silêncio quando ela morreu de verdade. Imprimir uma linha ao
-  **começar** cada fixture resolve, e o lugar é o laço do
-  `test/eng-review.eval.test.mjs`.
+- **`bin/install` ignora o `CLAUDE_CONFIG_DIR` e não avisa.** Ele escreve sempre
+  em `~/.claude/skills`; quem tem a configuração do Claude Code em outro lugar
+  instala, vê "30 arquivos instalados", abre sessão nova e **não tem skill
+  nenhuma** — sem erro, sem pista. Apareceu escrevendo o guia, não rodando teste.
+  Por ora está documentado como caso de "não apareceu?" no
+  `docs/getting-started.md`; a correção é honrar a variável quando ela existir, e
+  dizer em uma linha para onde foi.
+- ~~A bancada não mostra progresso~~ — **resolvido em 23/09**: a rodada imprime
+  fixture, posição, turnos e tempo, e o `VERIFICATION.md` registra a linha como
+  provada.
 - **A marca "pelo que eu sei, confirme" não tem cobrança automática.** A regra
   está no `review-protocol` e está certa; quatro medições e três reforços de
   texto não conseguiram fazer a sessão aplicá-la sempre. Ela marca a maioria e
@@ -125,35 +145,49 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   perguntar fica inobservável. Medir isso exige um driver que **responda** —
   uma resposta única que sirva a várias partes, ou um driver por turno. A
   fixture que faltava fica registrada aqui em vez de fingida numa rubrica.
-- **A estabilidade da suíte precisa de atenção.** Oito fixtures, duas camadas,
+- **A estabilidade da suíte precisa de atenção.** Treze fixtures, duas camadas,
   juiz por modelo: nas quatro rodadas da 0005, cada uma teve exatamente uma
   falha, e todas eram defeitos reais e distintos. Deu certo desta vez. Mas a
   chance de uma rodada verde inteira cai conforme a suíte cresce, e uma rodada
   custa meia hora.
-- **Nenhuma fixture tem código.** As oito são plano ou conversa. O caminho "com
+- **Nenhuma fixture tem código.** As treze são plano ou conversa. O caminho "com
   código" do protocolo nunca foi exercitado, e a `/cto-canvas` deixou de fora
   "ler o repositório antes de perguntar" pelo mesmo motivo.
-- **O baseline instalado aqui está 1 arquivo atrás** (`guard-main-bash.sh`).
+- **O baseline instalado aqui está 1 arquivo atrás** (`guard-main-bash.sh`,
+  conferido em 25/09). Este repo não tem `.claude/update-baseline.sh`, então a
+  comparação é à mão contra `claude-base/base/claude/hooks/`.
+- **Catorze branches locais, todas já mergeadas por squash.** Como o squash não
+  deixa rastro de merge, `git branch --merged main` não enxerga nenhuma e elas
+  ficam para sempre. Limpeza de uma linha, mas ninguém a fez.
 - **A separação de material de cliente foi feita?** Era condição para abrir o
   repositório e nunca foi registrada.
 - **Bun 1.4.2 instalado, e não é usado.** `bun test` sai verde sem rodar nada.
 
 ## Fora deste repositório
 
-- **yaslab-site PR #15** — aberto; o merge publica em produção.
-- **niklas PR #66** — aberto, esperando o CI.
-- **alfred** — a branch `docs/realinhamento` quebrou a referência
-  `01-visao-yaslab-suite.md` (o arquivo real tem o "s") e edita `.claude/`, que
-  a próxima instalação do baseline sobrescreve.
+- **yaslab-site PR #15 e niklas PR #66 saíram** — nenhum dos dois repositórios
+  tem PR aberto (conferido em 25/09).
+- **alfred** — a branch `docs/realinhamento` continua lá, **sem PR aberto**. Ela
+  quebrou a referência `01-visao-yaslab-suite.md` (o arquivo real tem o "s") e
+  edita `.claude/`, que a próxima instalação do baseline sobrescreve.
+- **O workspace `yaslab/` tem uma cópia velha das rules** (`ci-e-minutos.md`,
+  `docs-e-specs.md`), que carrega junto com as deste repo sempre que a sessão
+  abre aqui: ~5k tokens de quase-duplicata, e a cópia velha não tem as correções
+  de `quotePath` e `ready_for_review`. O conserto é no `claude-base` — parar de
+  instalar rules na pasta-mãe —, não aqui.
 
 ## Perguntas em aberto para o Yves
 
 1. **Rodar uma sessão real da `/cto-canvas`, com você mesmo como fundador.**
-   É a coisa mais barata que restou e a que mais pode mudar o protocolo. Duas
-   skills existem; nenhuma foi usada por gente.
-2. A próxima é `/ceo-review` ou `/techlead-canvas`? O ROADMAP diz `/ceo-review`,
-   e ela seria a **segunda role de revisão** — a primeira a provar que o
-   `review-protocol` serve a mais de um papel, do mesmo jeito que a
-   `/cto-canvas` provou o `session-protocol`.
-3. O `/design-review` cobre design visual e UX na mesma skill, ou os dois
-   papéis ficam separados como estão no roteador hoje?
+   É a coisa mais barata que restou e a que mais pode mudar o protocolo. **Sete
+   skills existem; nenhuma foi usada por gente** — e cada role nova aumenta o que
+   pode estar errado sem ninguém ter visto.
+2. **Orquestrador agora, ou sessão real antes?** A condição que o orquestrador
+   declarava — "três ou quatro roles existirem" — já foi cumprida. Mas ele decide
+   ordem, passagem entre roles e onde a pessoa entra: três decisões de protocolo
+   que uma sessão com gente pode mudar.
+3. As perguntas 2 e 3 da versão anterior **foram respondidas pelos fatos**: a
+   `/ceo-review` saiu na 0006, a `/ux-review` na 0009, e a revisão de design
+   visual ficou bloqueada por falta de base autoral, separada da UX. O que
+   sobrou de aberto é se `/techlead-canvas` continua bloqueada ou vira sessão de
+   extração do método com você.
