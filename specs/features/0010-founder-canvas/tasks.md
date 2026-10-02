@@ -41,6 +41,18 @@ de parte no lugar dos nomes numerados (D-FC-005).
 Code nem caminho do baseline (o `check.mjs` cobra); `templates.md` cobre as dez
 partes.
 
+**✅ escrito em 02/10** — 295 linhas nos três arquivos, as dez partes cobertas no
+`questions.md` e no `templates.md`, e a varredura do que viaja passou limpa.
+
+**Mas a T2 não fecha sozinha, e a culpa é desta divisão.** Pasta de skill sem
+`SKILL.md` é erro no `check.mjs` — e deve ser: skill pela metade instalada falha
+na frente da pessoa. Então o gate fica vermelho entre a T2 e a T3, e as duas
+viram **um commit só**. A alternativa seria afrouxar o gate para tolerar pasta
+sem skill, o que é trocar um defeito real por conveniência de ordem de tarefa.
+
+Lição para a próxima feature: **task que cria metade de uma unidade que o gate
+valida inteira não é task.** A fronteira do commit é a unidade que o gate aceita.
+
 ## T3 — A skill inteira (REQ-001 a REQ-010)
 
 `skills/founder-canvas/SKILL.md`: portão de estágio no topo, tabela de calibragem
@@ -51,6 +63,21 @@ frase na voz do fundador, armadilhas, e o fechamento com o `canvas.md`.
 declarada é parte conduzida, nada de ferramenta que só existe aqui); o corpo não
 cita outra skill; `bin/install --check` mostra a skill com `preamble`,
 `session-protocol` e as três references.
+
+**✅ feito em 02/10, junto com a T2** (ver o achado lá). **191 linhas** — bem
+abaixo do teto, e esse número é o argumento do ADR 0006 medido: as dez fases
+cabem porque perguntas, conceitos e modelos saíram do corpo. Zero menções a
+outra skill. O `--check` lista os seis arquivos, references inclusive.
+
+Uma decisão tomada escrevendo: **"product-led growth" virou "crescimento pelo
+produto"** no corpo e nas armadilhas. O jargão fica em `concepts.md`, onde é
+definido, e nos `triggers` — que existem para casar com o que a pessoa escreve.
+Cobrar "PLG" de quem não conhece o termo é a mesma falha que a skill aponta na
+fase de valor: descrever a tecnologia em vez do resultado.
+
+A linha do roteador e a ordem do amadurecimento (parte da T4) entraram no mesmo
+commit: sem elas o `check` fica com aviso, e aviso que fica é aviso que ninguém
+lê.
 
 ## T4 — O roteador e a documentação (REQ-014, REQ-015)
 

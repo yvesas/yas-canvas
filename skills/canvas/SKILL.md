@@ -68,6 +68,7 @@ handoff       docs-plano-webhook.md, gerado 22/09 — 2 partes fora
 | "será que alguém quer isso?", "como eu valido", hipótese | `/pm-review` |
 | fluxo, tela, formulário, "por que ninguém termina o cadastro" | `/ux-review` |
 | "por onde eu começo", "me ajuda a estruturar a técnica" | `/cto-canvas` |
+| proposta de valor, público, pitch, lean canvas, "me ajuda a pensar meu produto" | `/founder-canvas` |
 
 **Cinco revisões, cinco perguntas diferentes sobre o mesmo plano:**
 
@@ -83,6 +84,12 @@ Na dúvida entre duas, escolha pela pergunta, não pelo assunto — e **uma de c
 vez**. As várias no mesmo alvo somam no mesmo handoff. Plano que não
 diz para quem serve nem o que fica de fora é da segunda, mesmo cheio de decisão
 técnica. As duas no mesmo alvo somam no mesmo handoff — mas uma de cada vez.
+
+**A ordem do amadurecimento, quando ele não sabe por onde começar:**
+`/founder-canvas` (ideia ou protótipo: o produto ainda não tem base escrita) →
+`/pm-review` → `/ceo-review` → `/cto-canvas` → `/eng-review` ·
+`/security-review` · `/ux-review`. Não é trilha obrigatória: é a resposta para
+"qual primeiro" quando tudo parece ao mesmo tempo.
 
 **A diferença entre revisão e canvas não é de assunto, é de objeto.** A revisão avalia um
 **artefato** que já existe escrito; o canvas estrutura a **pessoa** — onde ela
