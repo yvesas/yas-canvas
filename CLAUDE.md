@@ -3,11 +3,12 @@
 ## O que é
 
 Pack de skills de **método** para liderança técnica, instalado em
-`~/.claude/skills` por `bin/install`. Sete existem, cada revisão com **a
-pergunta que a separa das outras**:
+`~/.claude/skills` por `bin/install`. Oito existem, cada uma com **a pergunta
+que a separa das outras**:
 
 | Skill | Pergunta |
 |---|---|
+| `/founder-canvas` | o produto tem **base**: problema, público, valor, métrica? |
 | `/pm-review` | você **sabe** o suficiente para decidir? |
 | `/ceo-review` | **devia** ser construído assim, deste tamanho, agora? |
 | `/eng-review` | está **bem construído**? |
@@ -61,12 +62,13 @@ nada (`specs/codebase/TESTING.md`).
 | `shared/session-protocol.md` | portão, partes, menu, onde gravar, alternativas — quem **conduz** alguém |
 | `shared/review-protocol.md` | mundo, relatório, "Barra o plano", handoff — quem **avalia** um artefato |
 | `shared/handoff.md` | formato e montagem do handoff; lido **no fechamento** |
+| `skills/<nome>/references/` | material que **essa** skill lê na fase que precisa — ADR 0006 |
 | `scripts/check.mjs` | o gate barato; as frases-âncora de cada compartilhado moram aqui |
 | `test/` | evals e fixtures |
 | `bin/install` | copia as skills para o usuário (ou para um projeto, com `--project`) |
 
-Cada skill **declara** no frontmatter o que precisa (`shared: [...]`) e o
-instalador copia só isso — ADR 0002. A divisão entre sessão e revisão é o
+Cada skill **declara** no frontmatter o que precisa (`shared: [...]`,
+`references: [...]`) e o instalador copia só isso — ADRs 0002 e 0006. A divisão entre sessão e revisão é o
 ADR 0005, e a pergunta que separa é: **de que a regra depende — conduzir
 alguém, ou avaliar um artefato?**
 

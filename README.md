@@ -30,7 +30,7 @@ bin/install --project ../algum-repo   # só naquele repositório
 
 Abra uma sessão nova do Claude Code depois de instalar.
 
-## As sete skills
+## As oito skills
 
 Cinco revisões, cinco perguntas diferentes sobre o mesmo plano:
 
@@ -42,14 +42,32 @@ Cinco revisões, cinco perguntas diferentes sobre o mesmo plano:
 | `/security-review` | o que acontece quando **vaza, é atacado ou cai**? |
 | `/ux-review` | o que acontece **fora do caminho feliz**? |
 
-E mais duas:
+E mais três:
 
 | Skill | O que faz |
 |---|---|
+| `/founder-canvas` | dá base ao produto: problema com evidência, público, valor, aha, North Star |
 | `/cto-canvas` | estrutura **você**: onde está, o que está adiando, qual a próxima decisão |
 | `/canvas` | roteador: diz onde você parou e manda o pedido para a role certa |
 
 Na dúvida sobre qual usar, invoque `/canvas` e descreva o problema.
+
+**Quando usar cada uma**, na ordem do amadurecimento do produto:
+
+```
+/founder-canvas   ideia ou protótipo — o produto ainda não tem base escrita
+      ↓
+/pm-review        já tem base; falta saber se alguém quer
+      ↓
+/ceo-review       vale construir assim, deste tamanho, agora?
+      ↓
+/cto-canvas       por onde começar pela técnica
+      ↓
+/eng-review  ·  /security-review  ·  /ux-review     o plano, antes do código
+```
+
+Não é trilha obrigatória: é a resposta para "qual primeiro" quando tudo parece
+ao mesmo tempo. `/canvas` serve em qualquer ponto.
 
 **A diferença entre revisão e canvas é o objeto.** A revisão avalia um artefato
 que já existe escrito; o canvas estrutura a pessoa. Se há um documento para ler,

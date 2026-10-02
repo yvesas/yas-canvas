@@ -71,6 +71,7 @@ A pergunta que separa uma role da outra é o critério, não o assunto:
 
 | Você está pensando… | Skill |
 |---|---|
+| "me ajuda a pensar meu produto", proposta de valor, público, pitch | `/founder-canvas` |
 | "isso está bem construído?" | `/eng-review` |
 | "isso é grande demais? o que eu corto?" | `/ceo-review` |
 | "e quando vazar, cair ou alguém atacar?" | `/security-review` |
@@ -80,6 +81,11 @@ A pergunta que separa uma role da outra é o critério, não o assunto:
 
 **Uma de cada vez.** Duas roles no mesmo alvo somam no mesmo handoff, mas rodadas
 juntas viram uma mistura morna das duas — cada uma tem o seu portão de escopo.
+
+**Se o produto ainda não tem base escrita, comece pela `/founder-canvas`** — ela
+é a única que não pressupõe um plano: dá para chegar nela com o produto só na sua
+cabeça. A ordem completa está no [README](../README.md#as-oito-skills), e ela
+responde "qual primeiro" quando tudo parece ao mesmo tempo.
 
 ## 3. A sessão, passo a passo
 

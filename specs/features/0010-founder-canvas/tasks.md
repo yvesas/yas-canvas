@@ -87,6 +87,22 @@ do `README.md` e do `CLAUDE.md`; ordem de uso no `docs/getting-started.md`.
 **Done when:** `npm run check` verde (roteador aponta só para skill que existe);
 as três tabelas listam oito skills; o `CLAUDE.md` não passa de 95 linhas.
 
+**✅ feito em 02/10.** `CLAUDE.md` em **93 linhas**, dentro do teto que eu mesmo
+pus. O roteador já tinha entrado no commit da T3 (sem ele o gate ficava com
+aviso), então aqui foram as três tabelas, mais duas coisas que não estavam na
+task e fazem falta:
+
+- **O bloco "quando usar cada uma"** no `README.md`, como diagrama da ordem do
+  amadurecimento — era item da Parte C do prompt original, e é o que responde
+  "qual primeiro" quando tudo parece ao mesmo tempo. Com a linha de que não é
+  trilha obrigatória, senão vira processo.
+- **Uma linha no `getting-started.md`** dizendo que a `/founder-canvas` é a única
+  que **não pressupõe um plano** — dá para chegar nela com o produto só na
+  cabeça. É a informação que faz um fundador saber que o pack serve para ele.
+
+O `CLAUDE.md` também ganhou a linha de `references/` na tabela de estrutura: o
+mecanismo existe desde a T1 e um agente que lê o índice precisa saber dele.
+
 ## T5 — Sessão real (ciclo, passo 3)
 
 Instalar num diretório descartável com `bin/install --project`, rodar uma sessão
@@ -105,6 +121,21 @@ skill do pack.
 
 **Done when:** `npm test` verde; o teste falha de verdade quando se insere
 `/pm-review` no corpo (verificado à mão, e desfeito).
+
+**✅ feito em 02/10.** Nove testes verdes. Inseri `/pm-review` no corpo e o teste
+falhou nomeando o arquivo e a citação; desfeito com `git checkout`.
+
+Duas decisões de implementação:
+
+- **A varredura cobre as references também**, não só o `SKILL.md`. Elas viajam
+  no mesmo zip, e uma reference que manda invocar outra skill tem o mesmo
+  defeito.
+- **A lista de independentes é explícita, com o motivo de cada skill**, em vez de
+  valer para todas por padrão. Citar a vizinha é legítimo na maioria — o roteador
+  existe para isso. E tem um teste que cobra a própria lista: se alguém renomear
+  a skill, a lista aponta para nome que não existe e o teste diz isso, em vez de
+  passar vazio. Guarda contra o pior defeito de um teste de grep: deixar de medir
+  em silêncio.
 
 ## T7 — As quatro fixtures (REQ-016)
 
