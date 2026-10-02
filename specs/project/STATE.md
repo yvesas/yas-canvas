@@ -1,13 +1,18 @@
-# Estado — 2026-09-25
+# Estado — 2026-10-02
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
 ## Onde estamos
 
-Repositório **público e MIT**. **Tudo mergeado: 0001 a 0009**; em aberto, só o
-**PR #21** (`docs/onboarding`), que é markdown puro. `npm run check` e
-`npm test` verdes; as treze fixtures existem e as últimas medições estão no
-`VERIFICATION.md`.
+Repositório **público e MIT**. **Tudo mergeado: 0001 a 0010**, nada em branch.
+`npm run check` verde com oito skills, `npm test` 9 de 9.
+
+**A 0010 entrou com ressalva, e é o fato mais importante deste arquivo:** a
+`/founder-canvas` está na `main` e **nenhuma fixture a mede**. O PR #22 estava em
+draft por isso; o merge foi decisão consciente. O `VERIFICATION.md` tem agora
+sete linhas `⚠️` dela — e `⚠️` não é dívida de rodada, é ausência de régua: a
+fixture não existe para ser rodada. A frase honesta sobre o pack hoje é **sete
+skills medidas, uma escrita**.
 
 **O pack passou a ter documentação de usuário** (25/09, PR #21). O `README.md`
 dizia que existiam duas skills e listava como "próximas" cinco já entregues —
@@ -16,10 +21,11 @@ estava quatro features atrás. Agora ele é vitrine curta, o
 menu, os arquivos que aparecem, o que fazer com o handoff) e o `CONTRIBUTING.md`
 recebeu a bancada. Nada disso é medido por eval: é prosa para gente.
 
-**Sete skills.** Cinco revisões, um canvas e o controlador:
+**Oito skills.** Cinco revisões, dois canvas e o controlador:
 
 | Skill | Pergunta |
 |---|---|
+| `/founder-canvas` | o produto tem **base**: problema, público, valor, métrica? |
 | `/pm-review` | você **sabe** o suficiente para decidir? |
 | `/ceo-review` | **devia** ser construído assim, deste tamanho, agora? |
 | `/eng-review` | está **bem construído**? |
@@ -89,6 +95,15 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
 
 ## Decisões tomadas
 
+- **`references/`: conteúdo de uma skill, lido na fase que precisa** (2026-10-02)
+  — ADR 0006. A pergunta que separa de `shared/`: a regra depende da fase? É o
+  que fez dez fases caberem em 191 linhas. **Mecanismo com um usuário só**: se
+  nenhuma segunda skill precisar, a decisão certa é inliná-lo de volta, não
+  guardá-lo por simetria.
+- **Jargão que é nome fica em inglês** (2026-10-02) — "product-led growth", não
+  "crescimento pelo produto"; D-FC-007 na 0010. Traduzir um termo que nomeia uma
+  coisa tira o nome dela, e é o nome que a pessoa reencontra em tudo que ler
+  depois. Não mexe na regra de idioma: prosa segue em português.
 - **A documentação de usuário mora em três arquivos** (2026-09-25): `README.md`
   vitrine, `docs/getting-started.md` guia da primeira sessão, `CONTRIBUTING.md`
   bancada. Um arquivo só misturava quem instala com quem mantém, e a bancada era
@@ -107,6 +122,14 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
 
 ## Pendências e bloqueios
 
+- **A 0010 tem três tasks abertas, e a T5 é a que destrava as outras duas.** A
+  sessão real da `/founder-canvas` (T5) → as quatro fixtures escritas a partir
+  dela (T7) → a medição (T8). O ciclo do `WRITING-SKILLS.md` manda nessa ordem
+  porque rubrica escrita sobre comportamento que ninguém observou custou três
+  correções na 0005. **Uma das sete linhas `⚠️` pode não ter régua possível:**
+  "as frases do produto saem em 2–3 versões e são validadas na voz dele" exige um
+  driver que **discorde de uma versão e aceite outra**, o que nenhuma fixture faz
+  hoje. Se não houver formulação, fica declarada em vez de fingida.
 - **Validação com fundador real ainda não aconteceu, e agora ela é o gargalo.**
   A `/eng-review` sobrevive a teste automatizado porque revisa um texto. **A
   `/cto-canvas` conduz uma pessoa, e pessoa nenhuma respondeu a este protocolo
@@ -179,7 +202,7 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
 ## Perguntas em aberto para o Yves
 
 1. **Rodar uma sessão real da `/cto-canvas`, com você mesmo como fundador.**
-   É a coisa mais barata que restou e a que mais pode mudar o protocolo. **Sete
+   É a coisa mais barata que restou e a que mais pode mudar o protocolo. **Oito
    skills existem; nenhuma foi usada por gente** — e cada role nova aumenta o que
    pode estar errado sem ninguém ter visto.
 2. **Orquestrador agora, ou sessão real antes?** A condição que o orquestrador
