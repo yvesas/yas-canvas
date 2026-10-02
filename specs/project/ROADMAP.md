@@ -6,6 +6,17 @@
 > por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
 > renumerado: número gasto fica gasto.
 
+- **0010 — `/founder-canvas` e o mecanismo de `references/`** (2026-10-02,
+  `specs/features/0010-founder-canvas/`): a oitava skill e o **segundo canvas** —
+  dez fases da ideia até a base de produto, com portão de **estágio** (ideia ·
+  protótipo · primeiros clientes · primeira receita) calibrando a profundidade de
+  cada fase. Independente por requisito: não cita nenhuma outra skill, porque
+  quem chega nela pode ter instalado só ela, e um teste cobra isso. Com ela veio
+  **`references/`** (ADR 0006): conteúdo de uma skill só, lido **na fase que
+  precisa dele** — é o que faz dez fases caberem em **191 linhas**.
+  **Entregue com ressalva:** mergeada antes da sessão real e das fixtures, então
+  o comportamento está escrito e **não medido** — sete linhas `⚠️` no
+  `VERIFICATION.md`. As tasks T5, T7 e T8 continuam abertas.
 - **0007 — `/security-review`** (2026-09-23,
   `specs/features/0007-security-review/`): a terceira role de revisão, das
   etapas 10 e 11 do `docs_yaslab/26`. Seis partes — ciclo de vida do dado,
@@ -73,7 +84,13 @@
 
 ## Em desenvolvimento
 
-_Nada em andamento._
+- **0010, as três tasks que faltaram** — a sessão real da `/founder-canvas`
+  (T5), as quatro fixtures escritas a partir dela (T7) e a medição (T8). A skill
+  já está na `main`; o que falta é a régua.
+- **0011 — build portátil** (`specs/features/0011-portable-build/`) e **0012 —
+  versão, changelog e release** (`specs/features/0012-release-pipeline/`):
+  especificadas, não começadas. A 0011 vem primeiro, e a tabela de neutralização
+  dela será revisada agora que a skill existe.
 
 ## Próximo
 
@@ -83,9 +100,17 @@ _Nada em andamento._
    somando no mesmo handoff. O que ele precisa decidir: em que ordem rodam, o
    que passa de uma para a outra, e onde a pessoa entra sem virar carimbo.
 
-2. **Uma sessão real com fundador.** Sete skills existem e **nenhuma foi usada
+2. **Uma sessão real com fundador.** Oito skills existem e **nenhuma foi usada
    por gente** — é a pendência mais velha do `STATE.md`, e agora a mais cara de
    adiar: cada role nova aumenta o que pode estar errado sem ninguém ter visto.
+   Com a 0010 mergeada sem medição, ela deixou de ser só a pendência mais velha e
+   passou a ser **o que destrava a T7** — a sessão da `/founder-canvas` serve às
+   duas coisas de uma vez.
+
+3. **CI em pull request** — rodar `npm run check` e `npm test` a cada PR. Hoje
+   não existe workflow nenhum no repo, e a prova de que o gate passou é a palavra
+   de quem commitou. Ficou fora da 0012 de propósito (lá é release, por tag): é
+   outro gatilho e outra conversa sobre minuto.
 
 ## Bloqueadas por conteúdo, não por tempo
 

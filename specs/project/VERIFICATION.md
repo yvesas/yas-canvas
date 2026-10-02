@@ -37,6 +37,29 @@ ninguém está esperando resultado dele.
 | | Comportamento | Critério | Como medir |
 |---|---|---|---|
 | ⚠️ | A marca "pelo que eu sei, confirme" na mesma frase | **quatro medições não sustentaram a cobrança** | a regra fica no protocolo; o critério saiu |
+| ⚠️ | **O portão de estágio da `/founder-canvas` é a primeira chamada** | escrito, nunca observado | `founder-solution-first`, a escrever (T7 da 0010) |
+| ⚠️ | **O estágio calibra a profundidade**, e "prematuro" é frase no menu, não bloqueio | escrito, nunca observado | idem |
+| ⚠️ | **Dor na voz do cliente**: a parte de problema não fecha sem citação de cliente | escrito, nunca observado | `founder-solution-first` |
+| ⚠️ | **Público amplo demais é empurrado** até segmento, early adopter e anti-persona | escrito, nunca observado | `audience-too-broad`, a escrever |
+| ⚠️ | **PLG com aha que exige reunião é recusado**, com o sinal nomeado | escrito, nunca observado | `plg-without-aha`, a escrever |
+| ⚠️ | **Número sem fonte vira `(hipótese)`** e a pergunta é a origem | escrito, nunca observado | `numbers-without-source`, a escrever |
+| ⚠️ | **As frases do produto saem em 2–3 versões** e são validadas na voz dele | escrito, nunca observado | nenhuma fixture prevista ainda — ver abaixo |
+| ⚠️ | **Uma pergunta por vez** (D-FC-002), contra os blocos do material de origem | escrito, nunca observado — e é a decisão mais nova | `driver.replies` em qualquer das quatro |
+
+**Por que oito linhas `⚠️` de uma vez.** A `/founder-canvas` foi mergeada
+(02/10, PR #22) **antes** da sessão real e das fixtures: o PR estava em draft
+exatamente por isso, e o merge foi decisão consciente. O efeito é que a skill
+está instalável e ninguém sabe como ela se comporta.
+
+Nenhuma dessas linhas pode virar `⏳` ainda, e a diferença importa: `⏳` é
+"está no código, nunca foi medido" e tem comando para rodar hoje. Aqui **a
+fixture não existe** — a régua é que falta, não a rodada. Elas viram `⏳` quando
+a T7 escrever as quatro, e aí já nascem medíveis.
+
+A linha das frases na voz do fundador é a mais difícil das oito: exige que o
+driver **discorde de uma versão e aceite outra**, o que nenhuma fixture do pack
+faz hoje. Se a T7 não achar formulação, ela fica `⚠️` declarada em vez de
+rubrica fingida.
 
 ## Provado
 
@@ -74,10 +97,18 @@ ninguém está esperando resultado dele.
 | ✅ | Escrever não conta como investigar | `scope-creep` (determinístico) |
 | ✅ | Nada do baseline aparece no que a sessão grava | `handoff-unconfirmed` · `cto-push-specific` |
 
-## Nada em aberto
+## O que está em aberto
 
-Todas as linhas `⏳` foram medidas. O que resta é a `⚠️` acima, que não é dívida
-de medição — é ausência de teste.
+**Nenhuma linha `⏳`:** tudo que tem fixture e nunca rodou, rodou. Essa parte
+continua em dia.
+
+**Oito linhas `⚠️`**, e sete delas são da `/founder-canvas` — a oitava skill,
+mergeada sem medição. Não é dívida de rodada: é **ausência de régua**, e a
+tarefa que a resolve é escrever as quatro fixtures (T7 da 0010), depois da
+sessão real (T5).
+
+Enquanto estiverem `⚠️`, a frase honesta sobre o pack é: **sete skills medidas,
+uma escrita.**
 
 ## Caiu antes, e a correção já foi provada
 
