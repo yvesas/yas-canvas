@@ -16,6 +16,11 @@
 - **A sessão termina em arquivo**, com citação literal do que a pessoa disse e
   **uma** tarefa concreta. Ver o fechamento no preâmbulo.
 - **Teto de 400 linhas.** Skill que ninguém lê inteira não é seguida inteira.
+- **Material de consulta vai em `references/`**, declarado no frontmatter e lido
+  **na fase que precisa dele** — banco de perguntas, definição de conceito,
+  modelo de documento. Regra que vale do primeiro turno ao último não é
+  reference: é `shared/` ou corpo da skill. A pergunta que separa os dois e as
+  três cobranças do `check.mjs` estão no ADR 0006.
 - Roteador só aponta para skill que existe — o `check.mjs` cobra isso.
 
 **E o que custou medição para aprender:**
