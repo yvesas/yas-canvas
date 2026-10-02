@@ -146,6 +146,39 @@ for (const dir of skills) {
     }
   }
 
+  // --- as references ----------------------------------------------------
+  //
+  // `shared/` é do pack e é lido no começo da sessão; uma reference é de **uma**
+  // skill e é lida na fase que precisa dela (ADR 0006). A régua do `shared:`
+  // vale igual, e ganha um terceiro lado: arquivo em disco que ninguém declarou
+  // **não é instalado**, e aí a skill manda ler o que não chegou — falha na
+  // frente da pessoa, no meio da sessão, que é o caso que o instalador existe
+  // para evitar.
+  const refsDir = join(SKILLS, dir, "references");
+  const refs = ((fm.match(/^references:\s*\[(.*)\]/m) || [])[1] || "")
+    .split(",")
+    .map((x) => x.trim())
+    .filter(Boolean);
+
+  for (const item of refs) {
+    if (!existsSync(join(refsDir, `${item}.md`))) {
+      fail(rel, `declara \`${item}\` em references:, e skills/${dir}/references/${item}.md não existe`);
+      continue;
+    }
+    if (!new RegExp(`${item}\\.md`).test(text)) {
+      fail(rel, `declara a reference \`${item}\` e nunca manda lê-la — arquivo copiado que ninguém abre`);
+    }
+  }
+
+  if (existsSync(refsDir)) {
+    for (const f of readdirSync(refsDir).filter((f) => f.endsWith(".md")).sort()) {
+      const item = f.replace(/\.md$/, "");
+      if (!refs.includes(item)) {
+        fail(`skills/${dir}/references/${f}`, "não está em `references:` do frontmatter — o instalador copia só o que é declarado, então este arquivo não chega na máquina de ninguém");
+      }
+    }
+  }
+
   // --- as partes --------------------------------------------------------
   //
   // Role de revisão é a que declara o protocolo; só ela tem partes. Um canvas
@@ -198,9 +231,22 @@ const BASELINE_PATTERNS = [
   [/specs\/(features|quick)\//g, "estrutura de pastas que o projeto pode não ter"],
 ];
 
+// Reference viaja junto com a skill, então ela entra nesta varredura pelo mesmo
+// motivo que o `SKILL.md`: o texto vai para a máquina de quem não tem o
+// baseline.
+const referenceFiles = (d) => {
+  const dirPath = join(SKILLS, d, "references");
+  if (!existsSync(dirPath)) return [];
+  return readdirSync(dirPath)
+    .filter((f) => f.endsWith(".md"))
+    .sort()
+    .map((f) => [`skills/${d}/references/${f}`, join(dirPath, f)]);
+};
+
 const traveling = [
   ...(existsSync(SHARED) ? readdirSync(SHARED).filter((f) => f.endsWith(".md")).map((f) => [`shared/${f}`, join(SHARED, f)]) : []),
   ...skills.map((d) => [`skills/${d}/SKILL.md`, join(SKILLS, d, "SKILL.md")]),
+  ...skills.flatMap(referenceFiles),
 ];
 
 for (const [rel, file] of traveling) {

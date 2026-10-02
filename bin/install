@@ -75,6 +75,16 @@ for dir in "$ROOT"/skills/*/; do
     [ -n "$item" ] || continue
     copy "$ROOT/shared/$item.md" "$target/$name/$item.md"
   done
+
+  # `references: [questions, concepts]` → o conteúdo que **esta** skill lê na
+  # fase que precisa dele, e só ela. Vai para uma subpasta porque é material de
+  # consulta, não protocolo: quem abre a pasta instalada vê de um relance o que
+  # é regra e o que é referência. Ver docs/adr/0006.
+  references="$(sed -n 's/^references:[[:space:]]*\[\(.*\)\].*/\1/p' "$dir/SKILL.md" | tr ',' '\n' | tr -d ' ')"
+  for item in $references; do
+    [ -n "$item" ] || continue
+    copy "$dir/references/$item.md" "$target/$name/references/$item.md"
+  done
 done
 
 echo

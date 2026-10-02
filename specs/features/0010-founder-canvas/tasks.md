@@ -16,6 +16,21 @@ declarada); ADR 0006 com a divisão `shared/` × `references/`.
 ausente **falha**; `bin/install --check` lista `references/<item>.md` quando ela
 existe. ADR 0006 escrito.
 
+**✅ feito em 02/10.** As três cobranças foram provadas uma a uma, com a
+`/cto-canvas` como cobaia e desfeitas depois: declarada e inexistente · existente
+e nunca lida · em disco e não declarada. As sete skills seguem verdes sem
+declarar nada (`references:` é opcional), e o caminho feliz pôs
+`cto-canvas/references/questions.md` na lista do `--check`.
+
+Duas coisas que só apareceram implementando:
+
+- **A terceira cobrança não tem equivalente no `shared:`** — lá a pasta é do
+  pack e todo arquivo dela é fonte de alguém. Aqui, arquivo não declarado é
+  arquivo que não viaja, e a skill manda ler o que não chegou. Foi para o ADR.
+- **O `check.mjs` rodando dentro do `bin/install` já é a guarda** do caso
+  "declarada e o arquivo não existe": a instalação aborta antes de copiar, então
+  o `copy` não precisa de tratamento próprio para fonte ausente.
+
 ## T2 — As references da skill (REQ-002, D-FC-004)
 
 `skills/founder-canvas/references/`: `questions.md`, `concepts.md`,
