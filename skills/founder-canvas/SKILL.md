@@ -87,7 +87,7 @@ mais rápido de ele concluir que ninguém leu.
 | `value-proposition` | proposta, conceito de alto nível e pitch, na voz dele |
 | `lean-canvas` | os onze blocos, cada um marcado fato ou hipótese |
 | `aha-and-wow` | o aha, o wow, e os passos e minutos até o valor |
-| `growth-model` | crescimento pelo produto, venda consultiva ou híbrido; entrada, ativação, PQL |
+| `growth-model` | product-led growth, venda consultiva ou híbrido; entrada, ativação, PQL |
 | `north-star-and-experiments` | North Star com alvo e prazo, métricas de entrada, experimentos |
 
 A ordem é essa porque uma parte dá vocabulário à seguinte: sem dor na voz do
@@ -170,7 +170,7 @@ Aponte na hora, com a frase dele do lado:
 | público amplo demais ("pequenas empresas") | peça o segmento, o early adopter e onde essas pessoas estão |
 | proposta de valor que descreve tecnologia | o cliente compra resultado; a tecnologia é como, não o quê |
 | usuário confundido com pagador | separe os quatro papéis: cada um precisa de um argumento |
-| crescimento pelo produto com aha que exige reunião | não serve, e o sinal é o próprio aha: diga isso |
+| product-led growth com aha que exige reunião | não serve, e o sinal é o próprio aha: diga isso |
 | medir cadastro em vez de ativação | cadastro não é valor entregue; ativação é chegar ao aha |
 | pitch na voz de quem conduz | devolva as versões e pergunte qual soa como ele |
 | número sem fonte | vira `(hipótese)`, e a pergunta é de onde ele saiu |

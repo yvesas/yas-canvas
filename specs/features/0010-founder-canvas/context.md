@@ -1,7 +1,8 @@
 # 0010 — decisões em área cinzenta
 
-> O que o material e o prompt deixaram aberto, com quem decidiu. Decisão sem
-> citação é palpite meu — e está marcada como **pendente de aprovação**.
+> O que o material e o prompt deixaram aberto, com quem decidiu. A citação
+> literal é o que separa decisão dele de recomendação minha — e o que impede
+> que, meses depois, um palpite meu seja lido como requisito.
 
 ## Decidido pelo Yves
 
@@ -14,7 +15,28 @@ Consequência: a numeração gasta 0010, 0011 e 0012 de uma vez, e parte do
 `design.md` da 0011 será reescrita depois que a skill existir — aceito
 conscientemente.
 
-## Pendente de aprovação (minha recomendação, com o motivo)
+**D-FC-007 — O jargão fica em inglês: "product-led growth", não "crescimento
+pelo produto".** Eu havia traduzido no corpo da skill, pelo mesmo argumento que a
+skill usa contra proposta de valor que descreve tecnologia. Corrigido:
+
+> "o termo em ingles ainda é melhor, porque dá nome ao que é. preferivel manter
+> 'product-led growth', porque o usuario sabe melhor o que é."
+
+A distinção que eu tinha perdido: **traduzir um termo que nomeia uma coisa não é
+simplificar, é tirar o nome dela.** Quem decide entre PLG e venda consultiva vai
+encontrar "product-led growth" em tudo que ler depois — e "crescimento pelo
+produto" não devolve nada numa busca. O que continua valendo é a regra do
+`concepts.md`: termo que o fundador não conhece se explica em uma frase na
+conversa, em vez de ser cobrado como se ele devesse saber.
+
+Vale para o jargão **que é nome** — PLG, Jobs to be Done, North Star, PQL. Não
+autoriza prosa em inglês: a regra de idioma do `CLAUDE.md` segue igual.
+
+## Aprovadas em 02/10 — minha recomendação, com o motivo
+
+> As cinco foram aprovadas sem alteração ("aprovado, commita a spec e começa
+> a T1"). Ficam aqui com o motivo escrito: decisão sem o porquê é decisão que
+> alguém desfaz sem saber o que estava comprando.
 
 **D-FC-002 — Uma pergunta por vez, e o banco de perguntas é fonte, não
 roteiro.** O material manda "blocos de 3 a 4 perguntas por vez"; o pack tem uma

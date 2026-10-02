@@ -69,11 +69,11 @@ abaixo do teto, e esse número é o argumento do ADR 0006 medido: as dez fases
 cabem porque perguntas, conceitos e modelos saíram do corpo. Zero menções a
 outra skill. O `--check` lista os seis arquivos, references inclusive.
 
-Uma decisão tomada escrevendo: **"product-led growth" virou "crescimento pelo
-produto"** no corpo e nas armadilhas. O jargão fica em `concepts.md`, onde é
-definido, e nos `triggers` — que existem para casar com o que a pessoa escreve.
-Cobrar "PLG" de quem não conhece o termo é a mesma falha que a skill aponta na
-fase de valor: descrever a tecnologia em vez do resultado.
+Uma decisão que eu tomei escrevendo e o Yves reverteu em 02/10: eu havia trocado
+"product-led growth" por "crescimento pelo produto" no corpo. **O termo em inglês
+voltou** — ver D-FC-007 no `context.md`. Traduzir um termo que nomeia uma coisa
+tira o nome dela, e é o nome que a pessoa vai reencontrar em tudo que ler depois.
+A explicação sob demanda, que era o meu objetivo, já estava no `concepts.md`.
 
 A linha do roteador e a ordem do amadurecimento (parte da T4) entraram no mesmo
 commit: sem elas o `check` fica com aviso, e aviso que fica é aviso que ninguém
