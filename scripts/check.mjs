@@ -7,6 +7,7 @@
 // com modelo juiz, mora em test/, custa dinheiro e exige Bun.
 import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
+import { frontmatter, listField } from "./lib/frontmatter.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const SKILLS = join(ROOT, "skills");
@@ -112,12 +113,6 @@ for (const file of [SHARED, SKILLS].filter(existsSync).flatMap((d) => markdownFi
 // --- frontmatter mínimo ------------------------------------------------------
 const REQUIRED = ["name", "shared", "description", "allowed-tools", "triggers"];
 
-function frontmatter(text) {
-  if (!text.startsWith("---\n")) return null;
-  const end = text.indexOf("\n---", 3);
-  if (end === -1) return null;
-  return text.slice(4, end);
-}
 
 const skills = existsSync(SKILLS)
   ? readdirSync(SKILLS).filter((d) => statSync(join(SKILLS, d)).isDirectory()).sort()
@@ -153,10 +148,7 @@ for (const dir of skills) {
 
   // O contrato do compartilhado tem três lados, e todos os três são cobrados:
   // o arquivo declarado existe, a skill manda lê-lo, e ninguém cola trecho.
-  const declared = ((fm.match(/^shared:\s*\[(.*)\]/m) || [])[1] || "")
-    .split(",")
-    .map((x) => x.trim())
-    .filter(Boolean);
+  const declared = listField(fm, "shared");
 
   if (!declared.includes("preamble")) {
     fail(rel, "não declara `preamble` em `shared:` — toda skill começa por ele");
@@ -186,10 +178,7 @@ for (const dir of skills) {
   // frente da pessoa, no meio da sessão, que é o caso que o instalador existe
   // para evitar.
   const refsDir = join(SKILLS, dir, "references");
-  const refs = ((fm.match(/^references:\s*\[(.*)\]/m) || [])[1] || "")
-    .split(",")
-    .map((x) => x.trim())
-    .filter(Boolean);
+  const refs = listField(fm, "references");
 
   for (const item of refs) {
     if (!existsSync(join(refsDir, `${item}.md`))) {
@@ -216,10 +205,7 @@ for (const dir of skills) {
   // conduz uma pessoa em vez de avaliar um artefato, e não tem o que listar
   // num menu — por isso a cobrança sai do `shared:`, e não de uma lista de
   // nomes aqui dentro, que envelheceria a cada skill nova.
-  const parts = ((fm.match(/^parts:\s*\[(.*)\]/m) || [])[1] || "")
-    .split(",")
-    .map((x) => x.trim())
-    .filter(Boolean);
+  const parts = listField(fm, "parts");
 
   if (declared.includes("review-protocol") && parts.length === 0) {
     fail(rel, "declara `review-protocol` e não declara `parts:` — sem partes não há menu");
