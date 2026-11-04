@@ -6,7 +6,7 @@
 // O que ela não faz: julgar se a skill conduz bem uma conversa. Isso é eval
 // com modelo juiz, mora em test/, custa dinheiro e exige Bun.
 import { readdirSync, readFileSync, statSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative } from "node:path";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const SKILLS = join(ROOT, "skills");
@@ -49,6 +49,7 @@ const FINGERPRINTS = {
     "Menu em cima de premissa não examinada só organiza o palpite",
     "A parte é **memória**; relatório e handoff são **vistas** dela",
     "Pedir permissão para criar a própria pasta trava a sessão",
+    "**A separação é o título, não a prosa.**",
   ],
   handoff: [
     "Uma proposta sua implementada como se fosse decisão dela é o seu palpite virando código em produção",
@@ -76,6 +77,36 @@ for (const [item, phrases] of Object.entries(FINGERPRINTS)) {
       fail("scripts/check.mjs", `a frase-âncora "${phrase.slice(0, 40)}…" sumiu de ${item}.md; atualize FINGERPRINTS junto`);
     }
   }
+}
+
+// --- bloco de código fechado -------------------------------------------------
+// Um ``` que abre e não fecha engole o resto do arquivo calado: o modelo lê as
+// regras de depois como exemplo literal. Foi assim que o session-protocol
+// perdeu os três títulos do arquivo de parte do PR #17 até a sessão do elmer.
+function unclosedFence(text) {
+  let open = null;
+  const lines = text.split("\n");
+  for (let i = 0; i < lines.length; i++) {
+    const m = lines[i].match(/^ {0,3}(`{3,}|~{3,})/);
+    if (!m) continue;
+    if (!open) open = { fence: m[1], line: i + 1 };
+    else if (m[1][0] === open.fence[0] && m[1].length >= open.fence.length) open = null;
+  }
+  return open?.line ?? null;
+}
+
+function markdownFiles(dir, out = []) {
+  for (const entry of readdirSync(dir)) {
+    const path = join(dir, entry);
+    if (statSync(path).isDirectory()) markdownFiles(path, out);
+    else if (entry.endsWith(".md")) out.push(path);
+  }
+  return out;
+}
+
+for (const file of [SHARED, SKILLS].filter(existsSync).flatMap((d) => markdownFiles(d))) {
+  const line = unclosedFence(readFileSync(file, "utf8"));
+  if (line) fail(relative(ROOT, file), `bloco de código aberto na linha ${line} e nunca fechado — tudo depois dele vira exemplo`);
 }
 
 // --- frontmatter mínimo ------------------------------------------------------
