@@ -1,5 +1,12 @@
 # 0011 — tasks
 
+> **Entregue em 2026-11-04.** Desvios do design, registrados aqui: não há
+> `bin/build` — `npm run build` basta, e um segundo executável seria uma segunda
+> porta para o mesmo script. O teste de vazamento **não** proíbe `specs/canvas/`:
+> o caminho é o nome do arquivo que a pessoa salva, e o cabeçalho do portátil
+> explica isso (perder o nome seria perder a retomada da sessão). Junto veio o
+> `bin/install` honrando `CLAUDE_CONFIG_DIR`, pendência do `STATE.md`.
+
 > Começa **depois** da 0010 mergeada: a `/founder-canvas` é a primeira skill com
 > `references/`, e sem ela o build empacota um caso que não existe.
 

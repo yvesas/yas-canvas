@@ -6,6 +6,14 @@
 > por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
 > renumerado: número gasto fica gasto.
 
+- **0011 — build portátil** (2026-11-04, `specs/features/0011-portable-build/`):
+  `npm run build` gera, por skill, a pasta que o instalador produziria, um zip
+  para o app do Claude e um `.md` portátil para outra IA — com as instruções que
+  só existem no Claude Code trocadas pelo comportamento que pedem, numa lista de
+  regras no topo do `scripts/build.mjs`. Determinístico byte a byte, zip
+  incluído, e cobrado por `test/build.test.mjs` (vazamento, anexos, paridade com
+  o `bin/install`, determinismo). Junto: o `bin/install` passou a honrar o
+  `CLAUDE_CONFIG_DIR`, e o leitor de frontmatter virou um só para check e build.
 - **0010 — `/founder-canvas` e o mecanismo de `references/`** (2026-10-02,
   `specs/features/0010-founder-canvas/`): a oitava skill e o **segundo canvas** —
   dez fases da ideia até a base de produto, com portão de **estágio** (ideia ·
@@ -87,10 +95,8 @@
 - **0010, as três tasks que faltaram** — a sessão real da `/founder-canvas`
   (T5), as quatro fixtures escritas a partir dela (T7) e a medição (T8). A skill
   já está na `main`; o que falta é a régua.
-- **0011 — build portátil** (`specs/features/0011-portable-build/`) e **0012 —
-  versão, changelog e release** (`specs/features/0012-release-pipeline/`):
-  especificadas, não começadas. A 0011 vem primeiro, e a tabela de neutralização
-  dela será revisada agora que a skill existe.
+- **0012 — versão, changelog e release** (`specs/features/0012-release-pipeline/`):
+  a primeira Action do repositório, disparada por tag, e a `v0.2.0`.
 
 ## Próximo
 
