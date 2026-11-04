@@ -1,11 +1,13 @@
-# Estado — 2026-11-04
+# Estado — 2026-11-04 (release)
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
 ## Onde estamos
 
-Repositório **público e MIT**. **Tudo mergeado: 0001 a 0010**, nada em branch.
-`npm run check` verde com oito skills, `npm test` 9 de 9.
+Repositório **público e MIT**. **Tudo mergeado: 0001 a 0012**, nada em branch.
+**Primeira release publicada: `v0.2.0`** (04/11), com zip e `.md` portátil de
+cada skill e o zip do pack. `npm run check` verde com oito skills, `npm test`
+14 de 14.
 
 **O público mudou** (12/10, PR #24): o principal é o **fundador não técnico**
 early stage, em dois níveis — o iniciante e o que já usa Claude Code, git,

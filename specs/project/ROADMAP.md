@@ -6,6 +6,12 @@
 > por isso há dois "0001" e um "0002" que não é o desta lista. Nada é
 > renumerado: número gasto fica gasto.
 
+- **0012 — versão, changelog e a `v0.2.0`** (2026-11-04,
+  `specs/features/0012-release-pipeline/`): a primeira release publicada, e a
+  primeira Action do repositório — por tag, um job, recusa tag que não bate com
+  o `package.json`, e anexa 17 arquivos (zip e portátil de cada skill, mais o
+  zip do pack). O corpo sai da seção do `CHANGELOG.md`. Ensaio `v0.2.0-rc.1`
+  antes, e os anexos do CI saíram **idênticos byte a byte** aos do build local.
 - **0011 — build portátil** (2026-11-04, `specs/features/0011-portable-build/`):
   `npm run build` gera, por skill, a pasta que o instalador produziria, um zip
   para o app do Claude e um `.md` portátil para outra IA — com as instruções que
@@ -95,8 +101,6 @@
 - **0010, as três tasks que faltaram** — a sessão real da `/founder-canvas`
   (T5), as quatro fixtures escritas a partir dela (T7) e a medição (T8). A skill
   já está na `main`; o que falta é a régua.
-- **0012 — versão, changelog e release** (`specs/features/0012-release-pipeline/`):
-  a primeira Action do repositório, disparada por tag, e a `v0.2.0`.
 
 ## Próximo
 

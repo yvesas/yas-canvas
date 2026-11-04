@@ -2,7 +2,8 @@
 
 > Texto-fonte para a sessão do repositório `site` montar o card do yas-canvas,
 > no mesmo formato do Niklas e do Audova (texto curto no card, detalhe num
-> `<details>`). Escrito em 2026-11-04, a partir do estado da `main` neste dia.
+> `<details>`). Escrito em 2026-11-04 e atualizado com a `v0.2.0`, publicada no
+> mesmo dia.
 > **Só fato verificável:** cada número abaixo sai de um comando ou arquivo deste
 > repositório, e a última seção diz de onde.
 
@@ -30,8 +31,12 @@ em `bio.skills` e precisa mudar junto.
   código: elas decidem antes.
 - **Stack:** Markdown · Claude Code Skills · Node.js (bancada) · avaliação com
   modelo juiz
-- **Link:** `Ver no GitHub ↗` → `https://github.com/yvesas/yas-canvas`
-- **Nota:** Público, licença MIT. Precisa do Claude Code.
+- **Link:** `Baixar a v0.2.0 ↗` → `https://github.com/yvesas/yas-canvas/releases/latest`
+  (a release tem o zip do pack, o zip de cada skill para o app do Claude e o
+  `.md` portátil). Link secundário, se couber: `Ver no GitHub` →
+  `https://github.com/yvesas/yas-canvas`.
+- **Nota:** Público, licença MIT. Feito para o Claude Code; roda também no app
+  do Claude.
 
 **Painel de demonstração** (ilustrativo, como o do Niklas — não é transcrição de
 sessão real):
@@ -74,7 +79,7 @@ documento para ler, é revisão; se o que existe está na cabeça, é canvas.
 ### Em números
 
 - 8 skills: cinco revisões, dois canvas e um roteador
-- 25 entregas na `main`, todas por pull request
+- 29 entregas na `main`, todas por pull request
 - 12 especificações de feature e 6 ADRs (registros de decisão de arquitetura)
 - 13 cenários de avaliação conduzidos por turnos, julgados por um segundo modelo
 - Nenhuma skill passa de 200 linhas; o teto é 400
@@ -120,14 +125,16 @@ documento para ler, é revisão; se o que existe está na cabeça, é canvas.
 ### Status
 
 Sete skills medidas pela bancada de avaliação; a oitava, `/founder-canvas`, está
-escrita e em validação com fundadores. Próximos passos especificados: versão
-portátil para usar em outras IAs (ChatGPT, Gemini, app do Claude) e release
-versionada com download.
+escrita e em validação com fundadores. Primeira release, `v0.2.0`, publicada em
+4 de novembro de 2026, com download para o Claude Code, para o app do Claude e
+uma versão portátil para outras IAs, ainda não testada nelas.
 
 ## O que não afirmar
 
-- Que as skills **funcionam em outras IAs**: só depois da versão portátil
-  (feature 0011). Hoje é Claude Code.
+- Que as skills **funcionam em outras IAs**: a versão portátil existe, mas não
+  foi testada em nenhuma. O que se pode dizer: "uma versão portátil para colar
+  em outra IA". O app do Claude aceita o zip (conferido na central de ajuda em
+  4/11), sem medição do pack lá.
 - Que foram **validadas com fundadores**: houve uma sessão, em que a skill foi
   usada como roteiro e não invocada. "Em validação" é o termo honesto.
 - Que existe **canvas de tech lead** ou **revisão de design visual**: as duas
@@ -138,11 +145,6 @@ versionada com download.
 
 ## Pendências que afetam o card
 
-- **Link para release:** quando sair a `v0.2.0` (feature 0012), o link aponta
-  para a release em vez do repositório.
-- **Instalação com `CLAUDE_CONFIG_DIR`:** o instalador ignora a variável e
-  escreve em `~/.claude/skills`. Está documentado no `docs/getting-started.md`,
-  que é para onde o README manda quem chega.
 - **Nas três línguas:** a prosa das skills é só em português. O card em inglês
   e espanhol precisa dizer isso, para ninguém instalar esperando outra língua.
 
@@ -151,7 +153,7 @@ versionada com download.
 | Número | Comando |
 |---|---|
 | 8 skills | `ls skills` |
-| 25 entregas | `gh pr list --state merged -L 200 --json number \| jq length` |
+| 29 entregas | `gh pr list --state merged -L 200 --json number \| jq length` |
 | 12 specs, 6 ADRs | `ls specs/features`, `ls docs/adr` |
 | 13 cenários | `ls test/fixtures` |
 | maior skill: 193 linhas | `wc -l skills/*/SKILL.md` |
