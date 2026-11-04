@@ -4,7 +4,7 @@ Skills de **método** para liderança técnica. Cada uma é um papel com um
 protocolo próprio: cinco roles que revisam um plano antes de virar código, e um
 canvas que estrutura o fundador técnico em vez do plano.
 
-Elas conduzem uma conversa — uma pergunta por vez, até aparecer um nome próprio,
+Elas conduzem uma conversa — no máximo duas perguntas por vez, até aparecer um nome próprio,
 um número, um incidente real — e terminam num documento que você entrega a quem
 vai construir.
 

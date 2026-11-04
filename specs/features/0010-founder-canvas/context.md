@@ -77,6 +77,18 @@ como material de origem, versionado junto. Alternativa descartada: mover para
 `specs/` × `docs/` — não movi porque foi você que escolheu o lugar, e o custo de
 movê-lo depois é um `git mv`.
 
+**D-FC-008 — Até duas perguntas por vez, do mesmo assunto** (2026-11-04,
+revisa a D-FC-002). A primeira sessão com gente — o Elmer, 29/10, com você como
+fundador — pediu para acelerar já na terceira pergunta, e a decisão foi sua:
+"bloco com duas perguntas ajuda, muitas vezes os assuntos das perguntas vão em
+uma resposta longa". A regra mudou no `preamble.md`, então vale para o pack
+inteiro, não só para esta skill. O que a D-FC-002 protegia continua de pé: o
+teto é dois, e o defeito medido na 0003 e na 0006 vinha de blocos de três ou
+quatro. **O que não mudou:** a pergunta espera a resposta. A sessão do Elmer
+escorregou para "responda só onde discordar, o silêncio aceita", e isso grava
+proposta da skill como decisão do fundador — o que o ADR 0004 existe para
+impedir.
+
 ## O que fica pendente de terceiro
 
 Nada. Todo o conteúdo necessário está no material aprovado.
