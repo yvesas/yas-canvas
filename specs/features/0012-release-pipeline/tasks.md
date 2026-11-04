@@ -1,5 +1,13 @@
 # 0012 — tasks
 
+> **T1 a T3 feitas em 2026-11-04; T4 e T5 são as tags.** Desvios do design,
+> registrados aqui: **sem `npm ci` e sem cache** — o pack não tem dependência
+> nenhuma, e não há lockfile para instalar; a Action roda **`npm test`**, não só
+> o `check`, porque o teste do build é o que prova o artefato; a pré-release é
+> marcada com **`--prerelease` explícito** quando a tag tem sufixo, em vez de
+> confiar que o `gh` deduz; e um passo **recusa tag que não bate com o
+> `package.json`**, porque tag publicada não se corrige.
+
 > Depois da 0011: sem `npm run build` não há o que anexar.
 
 ## T1 — Metadado e `.nvmrc` (REQ-201)
