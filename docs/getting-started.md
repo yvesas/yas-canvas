@@ -21,13 +21,17 @@ funcionam numa conversa com quem ainda não escreveu uma linha.
 
 ## 1. Instalar
 
+Este guia segue o caminho do Claude Code. O app do Claude e outras IAs têm
+caminho próprio, descrito em [Como usar](../README.md#como-usar) no README.
+
 ```bash
 git clone https://github.com/yvesas/yas-canvas.git
 cd yas-canvas
 bin/install
 ```
 
-O instalador copia cada skill para `~/.claude/skills/<nome>/`, junto com os
+O instalador copia cada skill para `~/.claude/skills/<nome>/` (ou
+`$CLAUDE_CONFIG_DIR/skills/<nome>/`), junto com os
 arquivos de protocolo que aquela skill declara precisar. Ele valida tudo antes
 de escrever: skill quebrada instalada é pior que skill não instalada, porque só
 falha na sua frente, no meio de uma sessão.
@@ -55,11 +59,12 @@ não aparece nela.
 ### Não apareceu?
 
 - **Sessão nova mesmo** — sair e entrar, não `/clear`.
-- **Você usa `CLAUDE_CONFIG_DIR`?** O instalador escreve em `~/.claude/skills`,
-  que é onde o Claude Code procura por padrão. Se a sua configuração mora em
-  outro lugar, copie a pasta para `$CLAUDE_CONFIG_DIR/skills` ou instale com
-  `--project` no repositório onde você vai trabalhar.
-- **Confira que chegou**: `ls ~/.claude/skills` deve listar as sete pastas.
+- **Você usa `CLAUDE_CONFIG_DIR`?** O instalador respeita a variável e escreve
+  em `$CLAUDE_CONFIG_DIR/skills`; a primeira linha da saída diz para onde foi.
+  Se ela não estava definida no terminal em que você rodou o `bin/install`, as
+  skills foram para `~/.claude/skills` — rode de novo com ela definida.
+- **Confira que chegou**: `ls "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills"` deve
+  listar as oito pastas.
 
 ## 2. Escolher a skill
 
