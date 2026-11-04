@@ -16,19 +16,38 @@ a pessoa.
 instalação, a primeira sessão comentada de ponta a ponta e o que fazer com o que
 ela grava.
 
-## Instalar
+## Como usar
 
-Precisa do [Claude Code](https://claude.com/claude-code) instalado.
+Três caminhos. Os arquivos dos dois primeiros estão em cada
+[release](https://github.com/yvesas/yas-canvas/releases/latest).
+
+**1. Claude Code** — o caminho completo, e o único em que o pack é medido:
 
 ```bash
 git clone https://github.com/yvesas/yas-canvas.git
 cd yas-canvas
-bin/install            # copia para ~/.claude/skills (o padrão)
+bin/install            # copia para ~/.claude/skills (ou $CLAUDE_CONFIG_DIR/skills)
 bin/install --check    # mostra o que mudaria, sem escrever
 bin/install --project ../algum-repo   # só naquele repositório
 ```
 
-Abra uma sessão nova do Claude Code depois de instalar.
+Ou baixe o `yas-canvas.zip` da release e descompacte na pasta de skills. Abra
+uma sessão nova do Claude Code depois de instalar.
+
+**2. App do Claude** (web e desktop) — envie o zip de **uma** skill, por
+exemplo `founder-canvas.zip`, em *Customize → Skills → Upload a skill* (em
+versões anteriores do app, *Settings → Capabilities*). Precisa da execução de
+código ligada. Conferido na
+[central de ajuda do Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude)
+em 2026-11-04; o pack não tem medição neste caminho.
+
+**3. Outra IA** — cada skill tem um `.md` portátil (`founder-canvas.md`): tudo
+num arquivo só, sem instrução que dependa do Claude Code. Cole como instrução de
+sistema ou no começo da conversa. **Não testado em nenhuma IA específica**, e o
+portão de estágio fica mais fraco: lá ele é pedido em palavras, não garantido
+pela ferramenta. O cabeçalho do arquivo diz o que muda.
+
+O texto das skills é em português.
 
 ## As oito skills
 

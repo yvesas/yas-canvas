@@ -1,8 +1,8 @@
 # Banco de perguntas, por parte
 
-> **Uma por vez, ou duas do mesmo assunto.** Esta lista é fonte, não roteiro: escolha a próxima pela
-> resposta anterior, e pule o que o material do fundador já responde — confirme
-> em uma linha em vez de perguntar de novo.
+> **Uma por vez, ou duas do mesmo assunto.** Esta lista é fonte, não roteiro:
+> escolha a próxima pela resposta anterior, e pule o que o material do fundador
+> já responde — confirme em uma linha em vez de perguntar de novo.
 >
 > Resposta genérica não fecha a pergunta. Sem nome próprio, número ou caso real,
 > pergunte de novo com outra formulação.

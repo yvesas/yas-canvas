@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Instala as skills deste pack.
 #
-#   bin/install                    → ~/.claude/skills  (o usuário; o padrão)
+#   bin/install                    → ~/.claude/skills  (o usuário; o padrão —
+#                                     ou $CLAUDE_CONFIG_DIR/skills, se existir)
 #   bin/install --check            → mostra o que mudaria, sem escrever
 #   bin/install --project <caminho> → .claude/skills de um repositório
 #
@@ -19,7 +20,10 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-target="$HOME/.claude/skills"
+# Quem tem a configuração do Claude Code em outro lugar aponta para ela com
+# CLAUDE_CONFIG_DIR. Ignorar a variável instalava num diretório que o Claude
+# Code não lê: "30 arquivos instalados", e nenhuma skill na sessão.
+target="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills"
 check_only=false
 
 while [ $# -gt 0 ]; do

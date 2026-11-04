@@ -178,13 +178,9 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   `/cto-canvas` conduz uma pessoa, e pessoa nenhuma respondeu a este protocolo
   até hoje.** Seis perguntas com empurrão é uma conversa longa; se alguém sair
   sempre na segunda, o problema é o protocolo.
-- **`bin/install` ignora o `CLAUDE_CONFIG_DIR` e não avisa.** Ele escreve sempre
-  em `~/.claude/skills`; quem tem a configuração do Claude Code em outro lugar
-  instala, vê "30 arquivos instalados", abre sessão nova e **não tem skill
-  nenhuma** — sem erro, sem pista. Apareceu escrevendo o guia, não rodando teste.
-  Por ora está documentado como caso de "não apareceu?" no
-  `docs/getting-started.md`; a correção é honrar a variável quando ela existir, e
-  dizer em uma linha para onde foi.
+- ~~`bin/install` ignora o `CLAUDE_CONFIG_DIR`~~ — **resolvido em 04/11** na
+  0011: o alvo é `${CLAUDE_CONFIG_DIR:-~/.claude}/skills`, e a primeira linha
+  da saída diz para onde foi.
 - ~~A bancada não mostra progresso~~ — **resolvido em 23/09**: a rodada imprime
   fixture, posição, turnos e tempo, e o `VERIFICATION.md` registra a linha como
   provada.
