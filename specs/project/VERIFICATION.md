@@ -44,7 +44,7 @@ ninguém está esperando resultado dele.
 | ⚠️ | **PLG com aha que exige reunião é recusado**, com o sinal nomeado | escrito, nunca observado | `plg-without-aha`, a escrever |
 | ⚠️ | **Número sem fonte vira `(hipótese)`** e a pergunta é a origem | escrito, nunca observado | `numbers-without-source`, a escrever |
 | ⚠️ | **As frases do produto saem em 2–3 versões** e são validadas na voz dele | escrito, nunca observado | nenhuma fixture prevista ainda — ver abaixo |
-| ⚠️ | **Uma pergunta por vez** (D-FC-002), contra os blocos do material de origem | escrito, nunca observado — e é a decisão mais nova | `driver.replies` em qualquer das quatro |
+| ⚠️ | **Até duas perguntas por vez, do mesmo assunto** (D-FC-008, revisa a D-FC-002) | a regra antiga foi violada na sessão do Elmer (29/10) e o fundador preferiu duas; a nova nunca foi observada | `driver.replies` em qualquer das quatro |
 
 **Por que oito linhas `⚠️` de uma vez.** A `/founder-canvas` foi mergeada
 (02/10, PR #22) **antes** da sessão real e das fixtures: o PR estava em draft

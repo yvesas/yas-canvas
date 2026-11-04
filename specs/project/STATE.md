@@ -1,4 +1,4 @@
-# Estado — 2026-10-02
+# Estado — 2026-11-04
 
 > Memória de trabalho. É reescrito. O que precisa sobreviver vira ADR.
 
@@ -6,6 +6,18 @@
 
 Repositório **público e MIT**. **Tudo mergeado: 0001 a 0010**, nada em branch.
 `npm run check` verde com oito skills, `npm test` 9 de 9.
+
+**O público mudou** (12/10, PR #24): o principal é o **fundador não técnico**
+early stage, em dois níveis — o iniciante e o que já usa Claude Code, git,
+Vercel, Supabase, que é quem instala o pack. O nível técnico das skills fica, de
+propósito. O tech lead saiu das personas por ora. O pack é o degrau gratuito da
+escada da Yaslab, e o próximo passo é expô-lo no `yaslab.io/lab`.
+
+**A primeira sessão com gente aconteceu, e não foi a skill rodando** (Elmer,
+29/10). A `/founder-canvas` não estava instalada: o agente leu o `SKILL.md` com
+`cat` e usou como roteiro, sem preâmbulo. Seis das dez partes saíram, e o canvas
+foi desviado para modelo de dados por oferta do próprio agente. O que ela
+ensinou está em "O que a sessão do Elmer ensinou", abaixo.
 
 **A 0010 entrou com ressalva, e é o fato mais importante deste arquivo:** a
 `/founder-canvas` está na `main` e **nenhuma fixture a mede**. O PR #22 estava em
@@ -62,6 +74,25 @@ checklist de PR.
   sugere. Foi decisão: a tabela das sete skills é o que um agente novo mais
   precisa, e cortá-la para caber seria otimizar o número errado.
 
+## O que a sessão do Elmer ensinou
+
+**O protocolo de sessão estava quebrado desde o PR #17, e só gente achou.** Um
+bloco ```` ```markdown ```` abria e não fechava no `session-protocol.md`: os
+três títulos do arquivo de parte e as quatro regras depois deles sumiram dos
+dois canvas. Treze fixtures verdes não viram, porque o modelo inferia o formato.
+Corrigido no PR #25, e o `check` agora falha com bloco aberto.
+
+**Uma pergunta por vez era lenta demais para quem responde por áudio.** O
+fundador pediu para acelerar na terceira pergunta; a regra virou **até duas, do
+mesmo assunto** (D-FC-008). O agente da sessão foi além e passou a mandar oito
+perguntas com "o silêncio aceita a recomendação" — o oposto do que o pack quer,
+e ficou gravado na memória do Elmer como preferência do fundador.
+
+**Skill que não foi invocada não conta como skill testada.** Do que o
+`VERIFICATION.md` cobra, a sessão confirmou uma linha (o estágio calibra a
+profundidade), violou duas (portão e pergunta por vez) e não exercitou as
+outras. A T5 continua aberta: precisa de uma sessão com a skill instalada.
+
 ## O que a 0005 ensinou
 
 **Critério que passa por sorte parece critério que passa.** O `vague-scale`
@@ -95,6 +126,11 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
 
 ## Decisões tomadas
 
+- **Até duas perguntas por vez, do mesmo assunto** (2026-11-04) — D-FC-008,
+  no `preamble.md`, vale para o pack inteiro. A pergunta continua esperando a
+  resposta: silêncio não aceita proposta.
+- **Fundador não técnico como público principal; o nível técnico fica**
+  (2026-10-12) — `PROJECT.md`, PR #24.
 - **`references/`: conteúdo de uma skill, lido na fase que precisa** (2026-10-02)
   — ADR 0006. A pergunta que separa de `shared/`: a regra depende da fase? É o
   que fez dez fases caberem em 191 linhas. **Mecanismo com um usuário só**: se
@@ -122,6 +158,13 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
 
 ## Pendências e bloqueios
 
+- **Expor o pack no `yaslab.io/lab`.** O card de skills do site tem selo "em
+  breve", nenhum link, e um texto que descreve o baseline, não este pack. O
+  próximo passo é um texto-fonte escrito aqui, como foi feito com o Audova, para
+  a sessão do site montar um estudo de caso — só com fato verificável.
+- **A memória do Elmer diz que o fundador prefere blocos com "silêncio
+  aceita".** Contradiz a D-FC-008 e vai pesar na próxima sessão lá. Corrigir
+  numa sessão aberta no Elmer.
 - **A 0010 tem três tasks abertas, e a T5 é a que destrava as outras duas.** A
   sessão real da `/founder-canvas` (T5) → as quatro fixtures escritas a partir
   dela (T7) → a medição (T8). O ciclo do `WRITING-SKILLS.md` manda nessa ordem
