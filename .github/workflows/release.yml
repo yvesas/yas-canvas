@@ -1,0 +1,58 @@
+# Release por tag — feature 0012.
+#
+# `v0.2.0` publica; `v0.2.0-rc.1` publica como pré-release, e é o ensaio. A tag
+# nasce de commit que já está na `main`, com o CHANGELOG dentro.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Sem cancelamento: release cortada no meio publica anexo pela metade.
+  cancel-in-progress: false
+
+permissions:
+  contents: write # criar a release e anexar; nada além disso
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10 # build de markdown em Node puro; leva segundos
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      # Sem `npm ci` e sem cache: o pack não tem dependência nenhuma.
+
+      # A tag é o pedido; o package.json é a fonte. Tag que não bate com a
+      # versão publicaria um artefato com o número errado, e tag publicada não
+      # se corrige — se abandona.
+      - name: Tag bate com o package.json
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(node -p 'require("./package.json").version')"
+          if [ "${tag%%-*}" != "$version" ]; then
+            echo "::error::tag $GITHUB_REF_NAME, package.json $version"
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - run: npm test
+      - run: npm run build
+
+      - name: Publicar
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes="dist/notes/$VERSION.md"
+          test -s "$notes" || { echo "::error::CHANGELOG.md sem seção [$VERSION]"; exit 1; }
+          pre=""
+          case "$GITHUB_REF_NAME" in *-*) pre="--prerelease" ;; esac
+          gh release create "$GITHUB_REF_NAME" $pre \
+            --title "$GITHUB_REF_NAME" \
+            --notes-file "$notes" \
+            dist/*.zip dist/*.md
