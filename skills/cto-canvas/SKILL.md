@@ -71,8 +71,9 @@ respostas de uma linha.
 
 ## Passo 2 — as seis perguntas
 
-Uma por vez — ou duas, se forem do mesmo assunto —, parando para a resposta. Pergunta já respondida dentro de outra
-não se repete: diga que ela já foi e siga.
+Uma por vez — ou duas, se forem do mesmo assunto —, parando para a resposta.
+Pergunta já respondida dentro de outra não se repete: diga que ela já foi e
+siga.
 
 **`production-reality`.** O que já roda em produção hoje, e quem depende disso a
 ponto de reclamar se cair por vinte minutos?
