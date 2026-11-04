@@ -1,12 +1,13 @@
 {
   "name": "yas-canvas",
   "version": "0.1.0",
-  "description": "Skills de método para liderança técnica: roteador, roles de revisão e os canvas de CTO e Tech Lead.",
+  "description": "Skills de método para liderança técnica: roteador, cinco roles de revisão e os canvas de fundador e de CTO.",
   "license": "MIT",
   "private": true,
   "type": "module",
   "scripts": {
     "check": "node scripts/check.mjs",
+    "build": "node scripts/check.mjs && node scripts/build.mjs",
     "eval": "node --test test/*.test.mjs",
     "test": "node scripts/check.mjs && node --test test/*.test.mjs",
     "eval:changed": "YAS_EVAL_SCOPE=changed node --test test/*.test.mjs"
