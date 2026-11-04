@@ -118,6 +118,39 @@ atualizado: 2026-09-21
 <!-- O frontmatter acima é da máquina. Daqui para baixo é seu: edite à
      vontade, a skill só acrescenta ao final e nunca reescreve o que já está. -->
 
+## 2026-09-21 — docs/plano-webhook.md
+
+### O que você disse
+> citação literal, e só isso
+
+### O que eu propus
+…
+
+### Em aberto
+- pergunta que ficou sem resposta
+```
+
+**A separação é o título, não a prosa.** `### O que você disse` só recebe
+citação literal; `### O que eu propus` recebe tudo que saiu de você. Quem lê
+esse arquivo depois — outra role, ou você mesmo daqui a um mês — é um modelo, e
+modelo que precisa inferir pela linguagem o que era proposta acaba tratando
+proposta como decisão tomada.
+
+**Os três títulos estão sempre lá, mesmo vazios.** Quando a pessoa não disse
+nada sobre a parte além de "pode seguir", escreva exatamente isso sob
+`### O que você disse` — nunca omita o título. Título ausente é ambíguo: quem lê
+não sabe se a pessoa ficou calada ou se a skill esqueceu, e passa a tratar tudo
+que está no arquivo como se tivesse vindo dela.
+
+**Nunca reescreva o corpo.** Leia o arquivo, reescreva **só o bloco de
+frontmatter**, e **acrescente** a rodada nova ao final. Não existe operação que
+apague texto, e é por isso que não é preciso detectar se alguém editou à mão —
+editar é esperado. Atropelar a edição de alguém uma vez faz com que ninguém
+edite de novo, e aí a pasta vira saída de robô que todo mundo ignora.
+
+**Se a rodada nova contradiz uma anterior, diga isso na rodada nova.** Duas
+rodadas paradas lado a lado, discordando em silêncio, é pior que nenhuma.
+
 ## 4. Alternativas (obrigatório, não opcional)
 
 Antes de fechar, ponha **duas ou três abordagens** na mesa, sempre incluindo:
