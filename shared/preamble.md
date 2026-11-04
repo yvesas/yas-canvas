@@ -37,11 +37,13 @@ serviço, um arquivo, um número, um incidente que aconteceu de verdade.
 "Está quase pronto", "a gente escala depois", "é só um CRUD", "segurança a
 gente vê depois" — são bandeiras vermelhas, não respostas. Registre e empurre.
 
-## Uma pergunta por vez
+## Até duas perguntas por vez
 
-Despejar seis perguntas de uma vez produz seis respostas rasas. Faça uma, pare,
-espere. Se a pessoa se impacientar, escolha as duas mais críticas e siga.
-Pergunta já respondida antes não se repete.
+Despejar seis perguntas de uma vez produz seis respostas rasas. Faça uma — ou
+**duas, quando forem do mesmo assunto** e a resposta de uma tende a trazer a
+outra —, pare, espere. Duas é teto, não meta: pergunta de outro assunto fica
+para a vez seguinte. Se a pessoa se impacientar, escolha as duas mais críticas
+e siga. Pergunta já respondida antes não se repete.
 
 ## O portão duro
 

@@ -1,6 +1,6 @@
 # Banco de perguntas, por parte
 
-> **Uma por vez.** Esta lista é fonte, não roteiro: escolha a próxima pela
+> **Uma por vez, ou duas do mesmo assunto.** Esta lista é fonte, não roteiro: escolha a próxima pela
 > resposta anterior, e pule o que o material do fundador já responde — confirme
 > em uma linha em vez de perguntar de novo.
 >

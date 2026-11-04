@@ -43,8 +43,9 @@ serviço: quem usa e quer ir além sabe onde achar o autor.
    que os concorrentes cometem.
 3. **Especificidade é a moeda.** Resposta genérica não vale nada; o protocolo
    empurra até aparecer um nome próprio, um número, um incidente real.
-4. **Uma pergunta por vez.** Seis perguntas de uma vez produzem seis respostas
-   rasas.
+4. **Até duas perguntas por vez, do mesmo assunto.** Seis perguntas de uma vez
+   produzem seis respostas rasas; duas que se respondem juntas cabem numa
+   resposta longa, que é como o fundador fala.
 5. **Alternativas são obrigatórias.** Mínima viável e ideal, sempre, com
    esforço e risco. Revisão sem alternativa é aprovação com comentários.
 6. **A sessão termina em documento e em uma tarefa.** O que fica só no chat

@@ -65,7 +65,7 @@ alternativas) — e siga:
 |---|---|---|
 | 1 | Material que ele já tem (deck, site, canvas): leia antes de perguntar | aqui |
 | 2 | Menu: ele escolhe a parte; uma por vez | sessão §2 |
-| 3 | Uma pergunta por vez, até o específico | aqui, e `references/questions.md` |
+| 3 | Até duas perguntas por vez, até o específico | aqui, e `references/questions.md` |
 | 4 | Síntese ao fechar a parte, antes de gravar | aqui |
 | 5 | Arquivo da parte | sessão §3, e `references/templates.md` |
 | 6 | Resumo de uma página, regenerado | aqui |
@@ -103,9 +103,10 @@ fonte, não roteiro: escolha a próxima pela resposta anterior.
 frase na conversa; "vantagem injusta" é o que mais trava, e cobrar sem explicar
 transforma a pergunta em prova.
 
-## Uma pergunta por vez, e o que conta como resposta
+## Até duas perguntas por vez, e o que conta como resposta
 
-Pergunte uma coisa, **espere**, e trabalhe com o que vier. Resposta genérica não
+Pergunte uma coisa — ou duas do mesmo assunto, como o preâmbulo permite —,
+**espere**, e trabalhe com o que vier. Resposta genérica não
 fecha a pergunta: sem nome próprio, número ou caso real, pergunte de novo com
 outra formulação — não a mesma frase mais devagar.
 
