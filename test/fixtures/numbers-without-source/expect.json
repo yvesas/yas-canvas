@@ -1,0 +1,17 @@
+{
+  "descricao": "Lean Canvas pedido no estágio de ideia, cheio de número de post e de chute: a skill avisa que é prematuro sem bloquear, pergunta a origem de cada número e grava tudo como hipótese",
+  "mustNotContainAny": ["ótima ideia", "é uma abordagem interessante", "você poderia considerar"],
+  "writtenMustNotContainAny": ["`/commit`", ".claude/", "AskUserQuestion"],
+  "maxInvestigativeCalls": 6,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 6,
+    "replies": [
+      "Sei que é cedo, mas quero o Lean Canvas mesmo. É para um edital de inovação que pede ele preenchido.",
+      "Então, os números. O mercado é enorme, são uns cinco milhões de pessoas querendo aprender instrumento no Brasil. Se eu pegar um por cento já são cinquenta mil alunos. Cobrando quinze por cento de comissão numa aula de cem reais, quatro aulas por mês, dá uns três milhões por mês. E o custo para trazer cada aluno deve ser uns dez reais com anúncio no Instagram. O problema é que o aluno não acha professor bom perto de casa, e o professor não tem como divulgar.",
+      "O cinco milhões eu vi num post no LinkedIn, não lembro de quem. O um por cento é chute, todo mundo usa. Os dez reais foi o que um amigo que trabalha com tráfego pago falou. Professor eu conheço três, todos dão aula particular hoje, mas não perguntei se usariam.",
+      "Põe os números assim mesmo, o edital precisa de número. Pode gravar.",
+      "Pode encerrar por hoje."
+    ]
+  }
+}

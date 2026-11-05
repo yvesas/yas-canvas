@@ -37,29 +37,28 @@ ninguém está esperando resultado dele.
 | | Comportamento | Critério | Como medir |
 |---|---|---|---|
 | ⚠️ | A marca "pelo que eu sei, confirme" na mesma frase | **quatro medições não sustentaram a cobrança** | a regra fica no protocolo; o critério saiu |
-| ⚠️ | **O portão de estágio da `/founder-canvas` é a primeira chamada** | escrito, nunca observado | `founder-solution-first`, a escrever (T7 da 0010) |
-| ⚠️ | **O estágio calibra a profundidade**, e "prematuro" é frase no menu, não bloqueio | escrito, nunca observado | idem |
-| ⚠️ | **Dor na voz do cliente**: a parte de problema não fecha sem citação de cliente | escrito, nunca observado | `founder-solution-first` |
-| ⚠️ | **Público amplo demais é empurrado** até segmento, early adopter e anti-persona | escrito, nunca observado | `audience-too-broad`, a escrever |
-| ⚠️ | **PLG com aha que exige reunião é recusado**, com o sinal nomeado | escrito, nunca observado | `plg-without-aha`, a escrever |
-| ⚠️ | **Número sem fonte vira `(hipótese)`** e a pergunta é a origem | escrito, nunca observado | `numbers-without-source`, a escrever |
+| ⏳ | **O portão de estágio da `/founder-canvas` é a primeira chamada** | a sessão do Elmer não o exerceu: a skill foi lida, não invocada | `YAS_EVAL=1 YAS_EVAL_ONLY=founder-solution-first npm run eval` |
+| ⏳ | **O estágio calibra a profundidade**, e "prematuro" é frase no menu, não bloqueio | visto no Elmer com a skill como roteiro | `founder-solution-first` · `numbers-without-source` |
+| ⏳ | **Dor na voz do cliente**: a parte de problema não fecha sem citação de cliente | escrito, nunca observado | `founder-solution-first` |
+| ⏳ | **Público amplo demais é empurrado** até segmento, early adopter e anti-persona | no Elmer, empurrou — e completou o perfil com número que o fundador não deu | `audience-too-broad` |
+| ⚠️ | **PLG com aha que exige reunião é recusado**, com o sinal nomeado | escrito, nunca observado — a sessão do Elmer não chegou ao crescimento | `plg-without-aha`, **adiada** até uma sessão real chegar lá (T7 da 0010) |
+| ⏳ | **Número sem fonte vira `(hipótese)`** e a pergunta é a origem | escrito, nunca observado | `numbers-without-source` |
 | ⚠️ | **As frases do produto saem em 2–3 versões** e são validadas na voz dele | escrito, nunca observado | nenhuma fixture prevista ainda — ver abaixo |
-| ⚠️ | **Até duas perguntas por vez, do mesmo assunto** (D-FC-008, revisa a D-FC-002) | a regra antiga foi violada na sessão do Elmer (29/10) e o fundador preferiu duas; a nova nunca foi observada | `driver.replies` em qualquer das quatro |
+| ⏳ | **Até duas perguntas por vez, do mesmo assunto** (D-FC-008, revisa a D-FC-002), e **silêncio não aceita** | a regra antiga foi violada na sessão do Elmer (29/10) e o fundador preferiu duas; a nova nunca foi observada | `founder-asks-to-speed-up`, e o critério de duas perguntas nas outras três |
 
-**Por que oito linhas `⚠️` de uma vez.** A `/founder-canvas` foi mergeada
-(02/10, PR #22) **antes** da sessão real e das fixtures: o PR estava em draft
-exatamente por isso, e o merge foi decisão consciente. O efeito é que a skill
-está instalável e ninguém sabe como ela se comporta.
+**Por que seis linhas `⏳` de uma vez.** A `/founder-canvas` foi mergeada
+(02/10, PR #22) **antes** da sessão real e das fixtures, por decisão consciente.
+A sessão real foi a do Elmer (29/10), e a T5 fechou com ressalva: o fundador era
+real, mas a skill foi lida como roteiro, não invocada. As fixtures (T7, 05/11)
+foram escritas a partir de como ele respondeu, e agora **a régua existe**: falta
+a rodada, que é a T8, uma fixture por vez.
 
-Nenhuma dessas linhas pode virar `⏳` ainda, e a diferença importa: `⏳` é
-"está no código, nunca foi medido" e tem comando para rodar hoje. Aqui **a
-fixture não existe** — a régua é que falta, não a rodada. Elas viram `⏳` quando
-a T7 escrever as quatro, e aí já nascem medíveis.
-
-A linha das frases na voz do fundador é a mais difícil das oito: exige que o
-driver **discorde de uma versão e aceite outra**, o que nenhuma fixture do pack
-faz hoje. Se a T7 não achar formulação, ela fica `⚠️` declarada em vez de
-rubrica fingida.
+**Duas continuam `⚠️`, e por motivos diferentes.** O PLG porque a sessão real
+não chegou ao crescimento, e escrever a rubrica sem ter visto é o erro que a
+ordem do ciclo existe para evitar. As frases na voz do fundador porque exigem
+um driver que **discorde de uma versão e aceite outra**, o que nenhuma fixture
+do pack faz hoje. Se não houver formulação, ficam declaradas em vez de rubrica
+fingida.
 
 ## Provado
 
@@ -99,16 +98,14 @@ rubrica fingida.
 
 ## O que está em aberto
 
-**Nenhuma linha `⏳`:** tudo que tem fixture e nunca rodou, rodou. Essa parte
-continua em dia.
+**Seis linhas `⏳`, todas da `/founder-canvas`**, com fixture e nunca rodadas —
+a T8 da 0010. Uma por vez, com `YAS_EVAL_ONLY`.
 
-**Oito linhas `⚠️`**, e sete delas são da `/founder-canvas` — a oitava skill,
-mergeada sem medição. Não é dívida de rodada: é **ausência de régua**, e a
-tarefa que a resolve é escrever as quatro fixtures (T7 da 0010), depois da
-sessão real (T5).
+**Três linhas `⚠️`**: a marca "pelo que eu sei, confirme", o PLG e as frases na
+voz do fundador. Nenhuma é dívida de rodada.
 
-Enquanto estiverem `⚠️`, a frase honesta sobre o pack é: **sete skills medidas,
-uma escrita.**
+Até a T8 rodar, a frase honesta sobre o pack é: **sete skills medidas, uma com a
+régua pronta e sem medição.**
 
 ## Caiu antes, e a correção já foi provada
 

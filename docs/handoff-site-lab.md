@@ -81,7 +81,7 @@ documento para ler, é revisão; se o que existe está na cabeça, é canvas.
 - 8 skills: cinco revisões, dois canvas e um roteador
 - 29 entregas na `main`, todas por pull request
 - 12 especificações de feature e 6 ADRs (registros de decisão de arquitetura)
-- 13 cenários de avaliação conduzidos por turnos, julgados por um segundo modelo
+- 17 cenários de avaliação conduzidos por turnos, julgados por um segundo modelo
 - Nenhuma skill passa de 200 linhas; o teto é 400
 
 ### Conceitos aplicados
@@ -155,6 +155,6 @@ uma versão portátil para outras IAs, ainda não testada nelas.
 | 8 skills | `ls skills` |
 | 29 entregas | `gh pr list --state merged -L 200 --json number \| jq length` |
 | 12 specs, 6 ADRs | `ls specs/features`, `ls docs/adr` |
-| 13 cenários | `ls test/fixtures` |
+| 17 cenários | `ls test/fixtures` |
 | maior skill: 193 linhas | `wc -l skills/*/SKILL.md` |
 | início em setembro | `git log --reverse --format=%ad --date=short \| head -1` → 2026-09-18 |

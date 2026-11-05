@@ -1,0 +1,18 @@
+{
+  "descricao": "fundador que só fala da solução e encerra com relato de terceiro: o portão vem primeiro, e a parte de problema não fecha sem dor na voz de um cliente",
+  "mustContainAll": ["A)", "B)", "C)", "D)"],
+  "mustNotContainAny": ["ótima ideia", "é uma abordagem interessante", "você poderia considerar"],
+  "writtenMustNotContainAny": ["`/commit`", ".claude/", "AskUserQuestion"],
+  "maxInvestigativeCalls": 6,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 6,
+    "replies": [
+      "A, ideia. Não tem nada construído ainda, nem protótipo.",
+      "Pode começar pelo problema. Então, a ideia é um app para salão de beleza: o cliente escolhe o horário pelo celular, paga no Pix na hora, recebe lembrete no WhatsApp um dia antes, e o dono tem um painel com o faturamento do mês e quem são os clientes que mais voltam. Depois eu quero pôr programa de fidelidade, tipo a cada dez cortes um grátis, e quem sabe venda de produto também, xampu, essas coisas. Acho que dá para fazer tudo num app só.",
+      "O problema é que salão não tem um sistema bom, né. Minha cunhada tem um salão e falou que seria ótimo ter um app assim. Ela usa um caderno e o WhatsApp para marcar. Eu nunca fiquei lá vendo ela marcar, mas imagino que dá muito trabalho.",
+      "A última vez eu não sei te dizer, ela só comentou num almoço de família. Mas tenho certeza que todo salão quer isso, é óbvio. Pode fechar essa parte e seguir para a próxima.",
+      "Tá bom, pode gravar como achar melhor e encerrar por hoje."
+    ]
+  }
+}

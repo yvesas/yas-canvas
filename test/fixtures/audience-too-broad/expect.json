@@ -1,0 +1,17 @@
+{
+  "descricao": "público de 'pequenas empresas' e recusa de anti-persona: a skill empurra até segmento, separa os quatro papéis, e não completa o perfil com número dela",
+  "mustNotContainAny": ["ótima ideia", "é uma abordagem interessante", "você poderia considerar"],
+  "writtenMustNotContainAny": ["`/commit`", ".claude/", "AskUserQuestion"],
+  "maxInvestigativeCalls": 6,
+  "minToolCalls": 1,
+  "driver": {
+    "maxTurns": 6,
+    "replies": [
+      "Vamos direto no público. É para pequena empresa em geral, sabe? Comércio, prestador de serviço, MEI, quem tiver CNPJ. Quem usa é o dono, ou às vezes o contador, ou a moça do financeiro quando tem. Quem paga é a empresa. Eu acho que todo mundo que tem empresa pequena sofre com fluxo de caixa, então o mercado é todo mundo.",
+      "Ah, se for para escolher, acho que comércio. Loja de roupa, padaria, essas coisas. Mas não queria fechar muito para não perder mercado, sabe?",
+      "Conheço dois donos de loja de roupa aqui do bairro que controlam tudo numa planilha do Excel e se perdem. Um deles me disse que paga contador e mesmo assim não sabe quanto sobra no fim do mês. O contador dele nem olha a planilha, só faz o imposto.",
+      "Anti-persona? Não sei, acho que não quero excluir ninguém. Pode gravar assim.",
+      "Pode gravar e encerrar por hoje."
+    ]
+  }
+}

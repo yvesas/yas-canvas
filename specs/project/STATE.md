@@ -22,11 +22,12 @@ foi desviado para modelo de dados por oferta do próprio agente. O que ela
 ensinou está em "O que a sessão do Elmer ensinou", abaixo.
 
 **A 0010 entrou com ressalva, e é o fato mais importante deste arquivo:** a
-`/founder-canvas` está na `main` e **nenhuma fixture a mede**. O PR #22 estava em
-draft por isso; o merge foi decisão consciente. O `VERIFICATION.md` tem agora
-sete linhas `⚠️` dela — e `⚠️` não é dívida de rodada, é ausência de régua: a
-fixture não existe para ser rodada. A frase honesta sobre o pack hoje é **sete
-skills medidas, uma escrita**.
+`/founder-canvas` está na `main` e **nunca foi medida**. Desde 05/11 a régua
+existe: a T5 fechou com a sessão do Elmer, com ressalva (o fundador era real, a
+skill não foi invocada), e a T7 escreveu quatro fixtures a partir de como ele
+respondeu. O `VERIFICATION.md` tem seis linhas `⏳` dela, cada uma com o
+comando. Falta a T8 — rodar. A frase honesta hoje é **sete skills medidas, uma
+com a régua pronta e sem medição**.
 
 **O pack passou a ter documentação de usuário** (25/09, PR #21). O `README.md`
 dizia que existiam duas skills e listava como "próximas" cinco já entregues —
@@ -67,8 +68,8 @@ checklist de PR.
 
 **O que mais surpreende quem chega:**
 
-- **A suíte completa não roda a cada mudança.** São treze fixtures e ~40
-  minutos. Mede-se com `YAS_EVAL_ONLY=<fixture>`, e a dívida de medição fica
+- **A suíte completa não roda a cada mudança.** São dezessete fixtures e ~50
+  minutos (estimado; a suíte com as quatro novas nunca rodou). Mede-se com `YAS_EVAL_ONLY=<fixture>`, e a dívida de medição fica
   registrada, não na cabeça de ninguém.
 - **Conserta-se o texto, não a fixture** — e quando a fixture *é* o problema,
   isso vai escrito no commit, porque é a exceção que corrói a regra.
@@ -93,7 +94,9 @@ e ficou gravado na memória do Elmer como preferência do fundador.
 **Skill que não foi invocada não conta como skill testada.** Do que o
 `VERIFICATION.md` cobra, a sessão confirmou uma linha (o estágio calibra a
 profundidade), violou duas (portão e pergunta por vez) e não exercitou as
-outras. A T5 continua aberta: precisa de uma sessão com a skill instalada.
+outras. A T5 fechou assim mesmo, com ressalva (05/11): o que a sessão tem de
+valioso é como o fundador responde, e as fixtures da T7 saíram disso. O
+comportamento da skill invocada é a T8 que mede.
 
 ## O que a 0005 ensinou
 
@@ -164,17 +167,17 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   breve", nenhum link, e um texto que descreve o baseline, não este pack. O
   próximo passo é um texto-fonte escrito aqui, como foi feito com o Audova, para
   a sessão do site montar um estudo de caso — só com fato verificável.
-- **A memória do Elmer diz que o fundador prefere blocos com "silêncio
-  aceita".** Contradiz a D-FC-008 e vai pesar na próxima sessão lá. Corrigir
-  numa sessão aberta no Elmer.
-- **A 0010 tem três tasks abertas, e a T5 é a que destrava as outras duas.** A
-  sessão real da `/founder-canvas` (T5) → as quatro fixtures escritas a partir
-  dela (T7) → a medição (T8). O ciclo do `WRITING-SKILLS.md` manda nessa ordem
-  porque rubrica escrita sobre comportamento que ninguém observou custou três
-  correções na 0005. **Uma das sete linhas `⚠️` pode não ter régua possível:**
-  "as frases do produto saem em 2–3 versões e são validadas na voz dele" exige um
-  driver que **discorde de uma versão e aceite outra**, o que nenhuma fixture faz
-  hoje. Se não houver formulação, fica declarada em vez de fingida.
+- ~~A memória do Elmer diz que o fundador prefere blocos com "silêncio
+  aceita"~~ — **corrigida em 04/11**. Os arquivos de parte do Elmer ainda
+  dizem "aceitos por silêncio" em alguns itens; isso é do repositório dele, e
+  se revê na próxima sessão lá.
+- **A 0010 tem duas tasks abertas: a T8 (medir) e a T9 (fechar).** Quatro
+  fixtures, uma por vez, com `YAS_EVAL=1 YAS_EVAL_ONLY=<fixture> npm run eval`.
+  Critério que falhar três rodadas com exemplo diferente vira limite conhecido,
+  não quarta reescrita. **Duas linhas `⚠️` ficam fora da T8:** o PLG, porque a
+  sessão real não chegou ao crescimento (a fixture foi adiada, não fingida), e
+  as frases na voz do fundador, porque exigem um driver que discorde de uma
+  versão e aceite outra.
 - **Validação com fundador real ainda não aconteceu, e agora ela é o gargalo.**
   A `/eng-review` sobrevive a teste automatizado porque revisa um texto. **A
   `/cto-canvas` conduz uma pessoa, e pessoa nenhuma respondeu a este protocolo
@@ -209,12 +212,12 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   perguntar fica inobservável. Medir isso exige um driver que **responda** —
   uma resposta única que sirva a várias partes, ou um driver por turno. A
   fixture que faltava fica registrada aqui em vez de fingida numa rubrica.
-- **A estabilidade da suíte precisa de atenção.** Treze fixtures, duas camadas,
+- **A estabilidade da suíte precisa de atenção.** Dezessete fixtures, duas camadas,
   juiz por modelo: nas quatro rodadas da 0005, cada uma teve exatamente uma
   falha, e todas eram defeitos reais e distintos. Deu certo desta vez. Mas a
   chance de uma rodada verde inteira cai conforme a suíte cresce, e uma rodada
   custa meia hora.
-- **Nenhuma fixture tem código.** As treze são plano ou conversa. O caminho "com
+- **Nenhuma fixture tem código.** As dezessete são plano ou conversa. O caminho "com
   código" do protocolo nunca foi exercitado, e a `/cto-canvas` deixou de fora
   "ler o repositório antes de perguntar" pelo mesmo motivo.
 - **O baseline instalado aqui está 1 arquivo atrás** (`guard-main-bash.sh`,
