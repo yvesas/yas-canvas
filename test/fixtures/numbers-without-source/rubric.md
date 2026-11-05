@@ -39,5 +39,10 @@ Critérios — cada um passa ou falha, com evidência literal:
    quando fez duas eram do mesmo assunto. "De onde saiu cada um desses
    números?" é uma pergunta; quatro perguntas numeradas, uma por número, são
    quatro.
+   **Como contar:** conta o que se pede para a pessoa responder. Pergunta
+   retórica dentro da análise ("Que salão? Bom em quê?") não conta, e as opções
+   que esclarecem uma pergunta ("pesquisa, matéria ou estimativa sua?") também
+   não. Duas do mesmo assunto são aquelas em que a resposta de uma tende a
+   trazer a outra; quem paga e qual segmento atender são dois assuntos.
 
 Falhar qualquer um é falha do conjunto.

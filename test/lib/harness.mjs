@@ -166,10 +166,15 @@ export function runSubject(fixture) {
 
   const text = [];
   const toolCalls = [];
+  // O mesmo conteúdo, separado por turno e com a fala do usuário. Lista plana
+  // de ferramentas não diz se a leitura veio antes ou depois da pergunta: o
+  // juiz reprovou o portão da `/founder-canvas` que tinha funcionado, com o
+  // turno 1 só pergunta e as leituras todas no turno 2.
+  const log = [];
   let turns = 0;
   let reachedStop = false;
 
-  const turn = (args) => {
+  const turn = (args, fala) => {
     const run = spawnSync("claude", claudeArgs(args), {
       cwd,
       encoding: "utf8",
@@ -185,11 +190,12 @@ export function runSubject(fixture) {
     const parsed = parseStream(run.stdout || "");
     text.push(parsed.text);
     toolCalls.push(...parsed.toolCalls);
+    log.push({ user: fala, text: parsed.text, tools: parsed.toolCalls.map((t) => t.name) });
     turns += 1;
     return run;
   };
 
-  turn(["-p", fixture.prompt, "--session-id", sessionId]);
+  turn(["-p", fixture.prompt, "--session-id", sessionId], fixture.prompt);
 
   if (driver) {
     const maxTurns = driver.maxTurns ?? 5;
@@ -207,7 +213,7 @@ export function runSubject(fixture) {
       const fala = Array.isArray(driver.replies)
         ? driver.replies[Math.min(turns - 1, driver.replies.length - 1)]
         : driver.reply;
-      turn(["-p", fala, "--resume", sessionId]);
+      turn(["-p", fala, "--resume", sessionId], fala);
     }
     if (!reachedStop && driver.stopWhen) {
       // Na transcrição **ou no disco**. O marco é "a sessão chegou ao fim", e o
@@ -227,7 +233,7 @@ export function runSubject(fixture) {
   const ownFile = (t) =>
     t.name === "Read" && typeof t.input?.file_path === "string" && t.input.file_path.includes("/.claude/skills/");
   const investigative = toolCalls.filter((t) => INVESTIGATIVE_TOOLS.has(t.name) && !ownFile(t));
-  return { text: text.join("\n\n"), toolCalls, investigative, cwd, turns, reachedStop, driver };
+  return { text: text.join("\n\n"), log, toolCalls, investigative, cwd, turns, reachedStop, driver };
 }
 
 // --- camada 1: o que dá para afirmar sem gastar token ------------------------
@@ -337,6 +343,22 @@ const JUDGE_SCHEMA = {
   required: ["criterios"],
 };
 
+function renderLog(session) {
+  // Sessão sem `log` (montada à mão num teste) cai no texto corrido.
+  if (!Array.isArray(session.log)) return session.text;
+  return session.log
+    .map((t, i) =>
+      [
+        `### Turno ${i + 1}`,
+        `**Usuário:** ${t.user}`,
+        `**Ferramentas, em ordem:** ${t.tools.length ? t.tools.join(", ") : "(nenhuma)"}`,
+        "**Agente:**",
+        t.text,
+      ].join("\n"),
+    )
+    .join("\n\n");
+}
+
 export function judge(fixture, session) {
   const marker = fixture.expect.mustWriteFileContaining || fixture.expect.driver?.stopWhen;
   const artifacts = marker ? writtenArtifacts(session.cwd, marker) : [];
@@ -362,12 +384,12 @@ export function judge(fixture, session) {
     "## Critérios",
     fixture.rubric,
     "",
-    "## Ferramentas que a sessão chamou, em ordem",
-    session.toolCalls.length
-      ? session.toolCalls.map((t, i) => `${i + 1}. ${t.name}`).join("\n")
-      : "(nenhuma)",
+    "## Como ler a transcrição",
+    "Ela vem turno a turno: o que o usuário disse, as ferramentas que o agente",
+    "chamou naquele turno, em ordem, e o que ele respondeu. Ferramenta de um turno",
+    "veio depois de tudo o que está nos turnos anteriores.",
     "",
-    "Esta lista é o fato. Não deduza uso de ferramenta a partir do texto: o",
+    "A lista de ferramentas é o fato. Não deduza uso de ferramenta a partir do texto: o",
     "agente sabe o diretório e o estado do git pelo contexto da sessão, sem",
     "rodar comando. Se a lista não traz a ferramenta, ela não foi chamada.",
     "",
@@ -378,7 +400,7 @@ export function judge(fixture, session) {
     "",
     "## Transcrição",
     "<<<TRANSCRICAO",
-    session.text.slice(0, 100000),
+    renderLog(session).slice(0, 100000),
     "TRANSCRICAO",
     "",
     ...(artifacts.length

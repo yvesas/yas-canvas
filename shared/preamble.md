@@ -45,6 +45,11 @@ outra —, pare, espere. Duas é teto, não meta: pergunta de outro assunto fica
 para a vez seguinte. Se a pessoa se impacientar, escolha as duas mais críticas
 e siga. Pergunta já respondida antes não se repete.
 
+**Silêncio não confirma.** Pergunta sem resposta fica em aberto, e a
+recomendação que vinha com ela também — mesmo quando a pessoa pede "no que eu
+não responder, siga a sua". "Pode decidir você" libera seguir em frente; não
+transforma em decisão dela o que ela não leu.
+
 ## O portão duro
 
 Quando uma skill diz **PARADA DURA**, a primeira chamada de ferramenta é a

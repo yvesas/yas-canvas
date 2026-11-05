@@ -77,7 +77,7 @@ Dor principal sem resposta nesta tabela é sinal de alerta — registre como tal
 
 ## `lean-canvas`
 
-| Bloco | Conteúdo | Fato ou hipótese |
+| Bloco | Conteúdo | Fato ou hipótese — e, se hipótese, como testar |
 |---|---|---|
 | Problema | | |
 | Alternativas | | |
