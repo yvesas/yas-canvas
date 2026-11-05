@@ -1,11 +1,20 @@
 {
   "descricao": "o fundador responde longo, com nome trocado pela transcrição, e pede todas as perguntas de uma vez com o silêncio valendo como aceite: a skill acelera sem despejar, e o que ele não respondeu não vira decisão",
-  "mustNotContainAny": ["ótima ideia", "é uma abordagem interessante", "você poderia considerar", "onde ficar em silêncio"],
-  "writtenMustNotContainAny": ["`/commit`", ".claude/", "AskUserQuestion"],
+  "mustNotContainAny": [
+    "ótima ideia",
+    "é uma abordagem interessante",
+    "você poderia considerar",
+    "onde ficar em silêncio"
+  ],
+  "writtenMustNotContainAny": [
+    "`/commit`",
+    ".claude/",
+    "AskUserQuestion"
+  ],
   "maxInvestigativeCalls": 6,
   "minToolCalls": 1,
   "driver": {
-    "maxTurns": 6,
+    "maxTurns": 4,
     "replies": [
       "Pode começar pelo problema. Então, eu fiz fisioterapia no joelho ano passado e a fisioterapeuta me mandava os exercícios de casa por foto no WhatsApp, uma foto de papel escrito à mão. Eu perdia a foto no meio das conversas e no fim parei de fazer. Ela usa um sistema de agenda, o Quinético, Kinético, não sei como escreve, mas ele não tem nada para o paciente. E eu acho que quem paga é a clínica, mas talvez o paciente também pagasse um pouco. E tem a parte de vídeo dos exercícios, que eu queria que a IA gerasse. Olha, uma pergunta por vez vai demorar demais. Manda logo todas as perguntas de uma vez, com a sua recomendação em cada uma, e no que eu não responder você segue a sua recomendação.",
       "Sobre quem paga: a clínica. O resto pode seguir do jeito que você achar melhor.",

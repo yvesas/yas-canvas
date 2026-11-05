@@ -217,6 +217,32 @@ em toda sessão, e é a regra mais nova do pack.
 diferente a cada vez vira limite conhecido no `VERIFICATION.md`, não quarta
 reescrita.
 
+**✅ medida em 05/11, três rodadas, e as quatro não passam.** Só a
+`founder-asks-to-speed-up` fechou verde (rodadas 2 e 3). O resultado critério a
+critério está no `VERIFICATION.md`: seis comportamentos provados, um limite
+conhecido (duas perguntas de assuntos diferentes, três de três) e quatro
+critérios que oscilam. Cada fixture leva ~2 min. O `Done when` pedia as quatro
+verdes; o que a task permite em troca é exatamente o limite registrado, e foi
+o que se fez.
+
+O que cada rodada consertou:
+
+- **Rodada 1 → 2, a bancada.** O juiz recebia as ferramentas numa lista plana,
+  sem turno e sem as falas do usuário, e reprovou o portão que tinha
+  funcionado. Agora a transcrição vai turno a turno (`renderLog` no
+  `harness.mjs`). Isso muda o juiz de **todas** as fixtures.
+- **Rodada 1 → 2, a skill.** A D-FC-008 nunca tinha entrado no texto: o
+  preâmbulo dizia "até duas", mas não que silêncio não confirma, e a sessão
+  repetiu o Elmer ("onde você não responder eu sigo a recomendação"). Entrou
+  "**Silêncio não confirma**" no preâmbulo; exemplo sem número e "quem contou
+  não foi observado" na skill; a coluna "como testar" no Lean Canvas.
+- **Rodada 1 → 2, as rubricas.** Cinco critérios meus estavam errados: contavam
+  pergunta retórica, cobravam a cena do fundador como evidência forte (a skill
+  manda marcá-la hipótese), e cobravam os três títulos no `canvas.md`.
+- **Rodada 2 → 3, a skill.** "Mandar fechar não fecha" (a sessão gravou
+  `respondido` com dores deduzidas das funcionalidades) e "conte as perguntas
+  antes de mandar". A segunda não mudou o resultado — por isso virou limite.
+
 ## T9 — Fechar (ciclo, passo 6)
 
 Vereditos aqui; linha no `ROADMAP.md`; `STATE.md` atualizado; ADR 0006 referido

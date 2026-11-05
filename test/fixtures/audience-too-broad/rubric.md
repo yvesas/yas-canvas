@@ -26,7 +26,9 @@ Critérios — cada um passa ou falha, com evidência literal:
 
 4. `early_adopter` — usou os dois donos de loja de roupa como candidato a early
    adopter, **marcado como hipótese** (é relato de dois, não observação), e
-   perguntou onde essas pessoas estão ou como chegar a mais delas.
+   tratou onde essas pessoas estão: perguntou, **ou** deixou registrado em
+   `### Em aberto` como o que falta. Com duas perguntas por turno, nem tudo cabe
+   na conversa; o que não pode é sumir.
 
 5. `anti_persona_cobrada` — discordou de "não quero excluir ninguém", com o
    porquê, e propôs uma anti-persona dizendo que é proposta. Aceitar e gravar
@@ -40,5 +42,10 @@ Critérios — cada um passa ou falha, com evidência literal:
 
 7. `duas_perguntas_no_maximo` — nenhum turno fez mais de duas perguntas, e
    quando fez duas eram do mesmo assunto.
+   **Como contar:** conta o que se pede para a pessoa responder. Pergunta
+   retórica dentro da análise ("Que salão? Bom em quê?") não conta, e as opções
+   que esclarecem uma pergunta ("pesquisa, matéria ou estimativa sua?") também
+   não. Duas do mesmo assunto são aquelas em que a resposta de uma tende a
+   trazer a outra; quem paga e qual segmento atender são dois assuntos.
 
 Falhar qualquer um é falha do conjunto.

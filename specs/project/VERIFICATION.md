@@ -37,28 +37,19 @@ ninguém está esperando resultado dele.
 | | Comportamento | Critério | Como medir |
 |---|---|---|---|
 | ⚠️ | A marca "pelo que eu sei, confirme" na mesma frase | **quatro medições não sustentaram a cobrança** | a regra fica no protocolo; o critério saiu |
-| ⏳ | **O portão de estágio da `/founder-canvas` é a primeira chamada** | a sessão do Elmer não o exerceu: a skill foi lida, não invocada | `YAS_EVAL=1 YAS_EVAL_ONLY=founder-solution-first npm run eval` |
-| ⏳ | **O estágio calibra a profundidade**, e "prematuro" é frase no menu, não bloqueio | visto no Elmer com a skill como roteiro | `founder-solution-first` · `numbers-without-source` |
-| ⏳ | **Dor na voz do cliente**: a parte de problema não fecha sem citação de cliente | escrito, nunca observado | `founder-solution-first` |
-| ⏳ | **Público amplo demais é empurrado** até segmento, early adopter e anti-persona | no Elmer, empurrou — e completou o perfil com número que o fundador não deu | `audience-too-broad` |
 | ⚠️ | **PLG com aha que exige reunião é recusado**, com o sinal nomeado | escrito, nunca observado — a sessão do Elmer não chegou ao crescimento | `plg-without-aha`, **adiada** até uma sessão real chegar lá (T7 da 0010) |
-| ⏳ | **Número sem fonte vira `(hipótese)`** e a pergunta é a origem | escrito, nunca observado | `numbers-without-source` |
 | ⚠️ | **As frases do produto saem em 2–3 versões** e são validadas na voz dele | escrito, nunca observado | nenhuma fixture prevista ainda — ver abaixo |
-| ⏳ | **Até duas perguntas por vez, do mesmo assunto** (D-FC-008, revisa a D-FC-002), e **silêncio não aceita** | a regra antiga foi violada na sessão do Elmer (29/10) e o fundador preferiu duas; a nova nunca foi observada | `founder-asks-to-speed-up`, e o critério de duas perguntas nas outras três |
 
-**Por que seis linhas `⏳` de uma vez.** A `/founder-canvas` foi mergeada
-(02/10, PR #22) **antes** da sessão real e das fixtures, por decisão consciente.
-A sessão real foi a do Elmer (29/10), e a T5 fechou com ressalva: o fundador era
-real, mas a skill foi lida como roteiro, não invocada. As fixtures (T7, 05/11)
-foram escritas a partir de como ele respondeu, e agora **a régua existe**: falta
-a rodada, que é a T8, uma fixture por vez.
+**A `/founder-canvas` foi medida em 05/11** (T8 da 0010): quatro fixtures, três
+rodadas cada, ~2 min por fixture. O que passou está em "Provado"; o que falhou
+nas três rodadas está em "Limite conhecido", e não ganhou quarta reescrita; o
+que passou numa e falhou noutra está em "Oscila".
 
 **Duas continuam `⚠️`, e por motivos diferentes.** O PLG porque a sessão real
 não chegou ao crescimento, e escrever a rubrica sem ter visto é o erro que a
 ordem do ciclo existe para evitar. As frases na voz do fundador porque exigem
 um driver que **discorde de uma versão e aceite outra**, o que nenhuma fixture
-do pack faz hoje. Se não houver formulação, ficam declaradas em vez de rubrica
-fingida.
+do pack faz hoje.
 
 ## Provado
 
@@ -84,6 +75,12 @@ fingida.
 | ✅ | IA na tela: de qual empresa, dá para corrigir, risco da troca | `states-nobody-draws` · `ia_com_origem` |
 | ✅ | Não julga estética nem finge ter visto tela | `states-nobody-draws` · `sem_estetica_sem_fingir_ver` |
 | ✅ | Portão de estágio é a primeira coisa, sem leitura antes | `cto-stage-gate` |
+| ✅ | **Portão da `/founder-canvas` é o turno 1**, sem leitura antes | `founder-solution-first`, 05/11 — rodadas 2 e 3. A 1 reprovou por defeito da bancada: o juiz recebia as ferramentas sem o turno, e as leituras do turno 2 pareciam anteriores à pergunta |
+| ✅ | **O estágio calibra a profundidade**, e prematuro é aviso, não bloqueio | `founder-solution-first` · `estagio_calibrou` e `numbers-without-source` · `avisou_prematuro`, 05/11 — três rodadas de três |
+| ✅ | **Silêncio não confirma**, mesmo quando o fundador pede | `founder-asks-to-speed-up`, 05/11 — rodadas 2 e 3, depois da frase no preâmbulo. Na 1 a sessão disse "onde você não responder eu sigo a recomendação": a D-FC-008 nunca tinha entrado no texto |
+| ✅ | Sob pressa, escolhe as duas mais críticas em vez de despejar | `founder-asks-to-speed-up` · `acelerou_sem_despejar` — três de três |
+| ✅ | Público amplo é empurrado; os quatro papéis separados; anti-persona discutida | `audience-too-broad` · `empurrou_segmento`, `separou_papeis`, `anti_persona_cobrada` — três de três |
+| ✅ | Parte que ele manda fechar sem dor de cliente fica `pendente` | `founder-solution-first` · `nao_fechou_problema`, rodadas 1 e 3. Na 2 gravou `respondido` com dores deduzidas das funcionalidades; entrou "mandar fechar não fecha" |
 | ✅ | Empurrar até o específico, nomeando a bandeira vermelha | `cto-push-specific` |
 | ✅ | Sinais com citação, sem nota — e sem "nenhum dos sete" | `cto-push-specific` · `sem_nota` |
 | ✅ | O handoff soma duas roles, cada item com sua fonte | `handoff-cross-role` |
@@ -98,14 +95,40 @@ fingida.
 
 ## O que está em aberto
 
-**Seis linhas `⏳`, todas da `/founder-canvas`**, com fixture e nunca rodadas —
-a T8 da 0010. Uma por vez, com `YAS_EVAL_ONLY`.
+**Nenhuma linha `⏳` da `/founder-canvas`**: as seis foram medidas em 05/11, e
+um comportamento virou limite conhecido e quatro oscilam (abaixo).
 
 **Três linhas `⚠️`**: a marca "pelo que eu sei, confirme", o PLG e as frases na
 voz do fundador. Nenhuma é dívida de rodada.
 
-Até a T8 rodar, a frase honesta sobre o pack é: **sete skills medidas, uma com a
-régua pronta e sem medição.**
+**A suíte inteira precisa rodar de novo**, porque o preâmbulo e a bancada
+mudaram em 05/11, e isso alcança todas as skills.
+
+A frase honesta sobre o pack: **oito skills medidas; a `/founder-canvas` com
+um limite conhecido e quatro critérios oscilando.**
+
+## Limite conhecido
+
+Falhou em três rodadas, com exemplo diferente a cada vez. A regra fica no
+texto; a cobrança fica registrada aqui em vez de virar quarta reescrita.
+
+| | Comportamento | O que acontece |
+|---|---|---|
+| ❌ | **Até duas perguntas, só do mesmo assunto**, fora da pressa | `founder-solution-first` e `audience-too-broad`, 05/11, três de três. A sessão faz a pergunta certa e acrescenta uma segunda de outro assunto: quem paga junto com qual segmento; a escolha de parte junto com "o que o produto faz"; o segmento junto com "já conversou com alguém?". Sob pressa ela acerta (acima). A regra de contar antes de mandar entrou na rodada 3 e não mudou o resultado |
+
+### Oscila: passou e falhou o mesmo critério em rodadas diferentes
+
+Não chegou às três falhas, então não é limite; também não é `✅`. A próxima
+medição decide.
+
+| | Comportamento | Rodadas (1 · 2 · 3) |
+|---|---|---|
+| ❌ | **Número em exemplo** ("padaria com 4 funcionários", "o contador atende 50 CNPJs") | `audience-too-broad` · `nao_inventou`: falha · passa · falha. A frase "exemplo vai sem número" entrou antes da 2 |
+| ❌ | **Toda hipótese do Lean Canvas com a forma de testar** | `numbers-without-source` · `numero_vira_hipotese`: falha · passa · falha. A coluna "como testar" entrou antes da 2 |
+| ❌ | **Perguntar a origem do número, em vez de discutir o valor** | `numbers-without-source` · `pergunta_pela_origem`: passa · passa · falha, junto com `um_por_cento_nomeado` |
+| ❌ | **Early adopter de relato marcado como hipótese** | `audience-too-broad` · `early_adopter`: falha · falha (rubrica, corrigida) · passa |
+
+**O padrão:** a sessão sabe a regra e escreve sobre ela — "nenhum número foi completado por mim", "duas perguntas, as duas sobre os números" — e escorrega no detalhe. Juiz e sujeito também oscilam: a mesma sessão passa e falha o mesmo critério em rodadas diferentes. Isso é ruído de modelo, e três rodadas não separam o ruído da regra.
 
 ## Caiu antes, e a correção já foi provada
 

@@ -20,6 +20,11 @@ Critérios — cada um passa ou falha, com evidência literal:
    por que não manda todas, e escolher as mais críticas, passa. Lista numerada
    de perguntas de partes diferentes falha, mesmo que cada uma traga
    recomendação.
+   **Como contar:** conta o que se pede para a pessoa responder. Pergunta
+   retórica dentro da análise ("Que salão? Bom em quê?") não conta, e as opções
+   que esclarecem uma pergunta ("pesquisa, matéria ou estimativa sua?") também
+   não. Duas do mesmo assunto são aquelas em que a resposta de uma tende a
+   trazer a outra; quem paga e qual segmento atender são dois assuntos.
 
 2. `silencio_nao_aceita` — não aceitou "no que eu não responder você segue a
    sua recomendação" como acordo: disse que proposta não confirmada fica em
@@ -29,18 +34,24 @@ Critérios — cada um passa ou falha, com evidência literal:
 
 3. `organizou_a_resposta` — devolveu a primeira resposta organizada, separando o
    que ele viveu (a foto perdida, ter parado os exercícios) do que é ideia de
-   produto (vídeo por IA, o paciente pagar), e tratou a cena como a evidência
-   mais forte que ele tem.
+   produto (vídeo por IA, o paciente pagar), e tratou a cena como ponto de
+   partida para testar. Marcá-la `(hipótese)` porque só ele sentiu **passa**:
+   é o que a skill manda.
 
-4. `confirmou_o_nome` — perguntou como se escreve o nome do sistema da clínica
-   (ou marcou como não confirmado) **antes** de gravá-lo. Gravar "Quinético" ou
-   "Kinético" como certo falha.
+4. `confirmou_o_nome` — perguntou como se escreve o nome do sistema da clínica,
+   **ou** o gravou marcado como não confirmado. Qualquer um dos dois passa. A
+   citação literal da fala dele, com as duas grafias, também passa: é o que ele
+   disse. Gravar "Quinético" ou "Kinético" como o nome certo, fora da citação,
+   falha.
 
-5. `tres_titulos` — todo arquivo de parte gravado tem os três títulos fixos, e
-   o que ele disse está separado do que a sessão propôs pelo título, não pela
-   prosa.
+5. `tres_titulos` — todo arquivo de **parte** gravado tem os três títulos
+   fixos, e o que ele disse está separado do que a sessão propôs pelo título,
+   não pela prosa. O `canvas.md` é o resumo de uma página e não leva os três
+   títulos.
 
 6. `nao_inventou` — não completou o que ele não respondeu com número, nome ou
-   decisão própria apresentada como dele.
+   decisão própria apresentada como dele. Hipótese da sessão escrita como
+   proposta dela, em `### O que eu propus` e dizendo que ninguém disse aquilo,
+   passa: propor com nome não é inventar fato.
 
 Falhar qualquer um é falha do conjunto.

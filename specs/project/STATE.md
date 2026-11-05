@@ -21,13 +21,13 @@ escada da Yaslab, e o próximo passo é expô-lo no `yaslab.io/lab`.
 foi desviado para modelo de dados por oferta do próprio agente. O que ela
 ensinou está em "O que a sessão do Elmer ensinou", abaixo.
 
-**A 0010 entrou com ressalva, e é o fato mais importante deste arquivo:** a
-`/founder-canvas` está na `main` e **nunca foi medida**. Desde 05/11 a régua
-existe: a T5 fechou com a sessão do Elmer, com ressalva (o fundador era real, a
-skill não foi invocada), e a T7 escreveu quatro fixtures a partir de como ele
-respondeu. O `VERIFICATION.md` tem seis linhas `⏳` dela, cada uma com o
-comando. Falta a T8 — rodar. A frase honesta hoje é **sete skills medidas, uma
-com a régua pronta e sem medição**.
+**A `/founder-canvas` foi medida, e não passa inteira** (05/11, T8 da 0010).
+Quatro fixtures, três rodadas: seis comportamentos provados — o portão, o
+estágio, silêncio não confirma, o público empurrado, parte mandada fechar fica
+pendente — e um **limite conhecido**: fora da pressa, ela junta uma segunda
+pergunta de outro assunto. Quatro critérios oscilam entre rodadas. A medição
+mudou o preâmbulo e o juiz da bancada, então **a suíte inteira precisa rodar de
+novo** antes de qualquer outra medição valer como comparação.
 
 **O pack passou a ter documentação de usuário** (25/09, PR #21). O `README.md`
 dizia que existiam duas skills e listava como "próximas" cinco já entregues —
@@ -171,13 +171,10 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   aceita"~~ — **corrigida em 04/11**. Os arquivos de parte do Elmer ainda
   dizem "aceitos por silêncio" em alguns itens; isso é do repositório dele, e
   se revê na próxima sessão lá.
-- **A 0010 tem duas tasks abertas: a T8 (medir) e a T9 (fechar).** Quatro
-  fixtures, uma por vez, com `YAS_EVAL=1 YAS_EVAL_ONLY=<fixture> npm run eval`.
-  Critério que falhar três rodadas com exemplo diferente vira limite conhecido,
-  não quarta reescrita. **Duas linhas `⚠️` ficam fora da T8:** o PLG, porque a
-  sessão real não chegou ao crescimento (a fixture foi adiada, não fingida), e
-  as frases na voz do fundador, porque exigem um driver que discorde de uma
-  versão e aceite outra.
+- **A 0010 tem uma task aberta, a T9 (fechar)**, e ela espera a suíte inteira
+  rodar com o preâmbulo e o juiz novos. **Duas linhas `⚠️` ficam fora:** o PLG,
+  porque a sessão real não chegou ao crescimento, e as frases na voz do
+  fundador, porque exigem um driver que discorde de uma versão e aceite outra.
 - **Validação com fundador real ainda não aconteceu, e agora ela é o gargalo.**
   A `/eng-review` sobrevive a teste automatizado porque revisa um texto. **A
   `/cto-canvas` conduz uma pessoa, e pessoa nenhuma respondeu a este protocolo

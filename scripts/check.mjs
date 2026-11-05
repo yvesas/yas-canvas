@@ -40,6 +40,7 @@ const FINGERPRINTS = {
   preamble: [
     "Concordar por educação destrói o valor da sessão inteira",
     "Despejar seis perguntas de uma vez produz seis respostas rasas",
+    "não transforma em decisão dela o que ela não leu",
     "Inventar API, comando ou comportamento é a falha mais cara",
   ],
   // Âncora é sentença inteira e distintiva, nunca expressão curta: a primeira
