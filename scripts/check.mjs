@@ -320,6 +320,7 @@ const EXPECT_KEYS = new Set([
   "descricao", "mustContainAll", "mustNotContainAny",
   "mustWriteFileContaining", "writtenMustNotContainAny",
   "maxInvestigativeCalls", "minToolCalls", "driver",
+  "partsHaveThreeHeadings", "partStatusIn", "fileMustContain",
 ]);
 
 if (existsSync(FIXTURES)) {
@@ -365,6 +366,23 @@ if (existsSync(FIXTURES)) {
             }
             if (d.stopWhen !== undefined && typeof d.stopWhen !== "string") {
               fail(`${rel}/expect.json`, "`driver.stopWhen` precisa ser string");
+            }
+          }
+        }
+        // Caminho relativo a `specs/canvas/`, com a pasta da role: o harness
+        // compara exatamente assim, e um caminho sem a pasta nunca casa.
+        for (const key of ["partStatusIn", "fileMustContain"]) {
+          const map = expect[key];
+          if (map === undefined) continue;
+          if (typeof map !== "object" || map === null || Array.isArray(map)) {
+            fail(`${rel}/expect.json`, `\`${key}\` precisa ser um objeto { "<role>/<arquivo>.md": [...] }`);
+            continue;
+          }
+          for (const [path, list] of Object.entries(map)) {
+            if (!/^[a-z0-9-]+\/[a-z0-9-]+\.md$/.test(path)) fail(`${rel}/expect.json`, `\`${key}\`: "${path}" não é <role>/<arquivo>.md`);
+            if (!Array.isArray(list) || list.length === 0) fail(`${rel}/expect.json`, `\`${key}\`: "${path}" sem lista`);
+            if (key === "partStatusIn" && Array.isArray(list)) {
+              for (const st of list) if (!STATUS.has(st)) fail(`${rel}/expect.json`, `\`partStatusIn\`: "${st}" fora de ${[...STATUS].join(" | ")}`);
             }
           }
         }

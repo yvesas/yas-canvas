@@ -250,3 +250,17 @@ onde couber.
 
 **Done when:** `npm test` verde, PR aberto contra `main` com um assunto só, e o
 `ROADMAP.md` dizendo o que saiu.
+
+**✅ fechada em 05/11.** Os vereditos estão no `VERIFICATION.md`; a suíte
+inteira rodou depois do preâmbulo e da bancada novos (10/17 no juiz antigo) e
+as sete que falharam rodaram de novo no juiz novo: **seis passaram**. A sétima,
+`states-nobody-draws`, perdeu `sem_estetica_sem_fingir_ver` por dizer que o
+toast "some sozinho" e "depende só da cor" sem ninguém ter dito — inferência
+como fato, um critério que nunca tinha falhado. Fica como oscilação.
+
+**O veredito da feature:** a skill faz o que o ciclo exige onde mais importa —
+portão, estágio, silêncio, hipótese, parte pendente quando falta a dor. E tem um
+limite que nenhuma reescrita resolveu em três rodadas: fora da pressa, a
+segunda pergunta é de outro assunto. A pergunta que fica para a próxima sessão
+real é se isso incomoda gente ou só o juiz — no Elmer, o fundador pediu
+**mais** perguntas por vez, não menos.

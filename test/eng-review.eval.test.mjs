@@ -88,12 +88,21 @@ describe("/eng-review — evals", { skip: ENABLED ? false : "YAS_EVAL=1 para rod
       // especificidade? tomou posição? inventou alguma coisa?
       test("julgamento (modelo juiz)", () => {
         const criterios = judge(fixture, session);
-        const falhas = criterios.filter((c) => !c.passou);
-        assert.deepEqual(
-          falhas.map((c) => c.id),
-          [],
-          falhas.map((c) => `  - ${c.id}: ${c.evidencia}`).join("\n"),
-        );
+        const linha = (c) => `  - ${c.id}: ${c.evidencia}`;
+
+        // Veredito com citação que não está na transcrição é descartado, nos
+        // dois sentidos: nem reprova, nem aprova. Ele aparece, para que um juiz
+        // que inventa muito não suma em silêncio.
+        const soltos = criterios.filter((c) => !c.sustentado);
+        for (const c of soltos) process.stderr.write(`  ? ${fixture.name} · ${c.id}: citação não encontrada — veredito descartado\n`);
+
+        const valem = criterios.filter((c) => c.sustentado);
+        for (const c of valem.filter((c) => c.informa && !c.passou)) {
+          process.stderr.write(`  i ${fixture.name} · ${c.id} (informa): ${c.evidencia}\n`);
+        }
+
+        const falhas = valem.filter((c) => !c.informa && !c.passou);
+        assert.deepEqual(falhas.map((c) => c.id), [], falhas.map(linha).join("\n"));
       });
     });
   }

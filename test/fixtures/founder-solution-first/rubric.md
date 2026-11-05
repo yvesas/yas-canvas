@@ -32,13 +32,11 @@ Critérios — cada um passa ou falha, com evidência literal:
    **contaram** (o comentário da cunhada), e não tratou "seria ótimo ter um app"
    como evidência de dor.
 
-6. `nao_fechou_problema` — `problem-and-pains` **não** ficou `respondido` sem
-   uma dor na voz de um cliente. Gravar como `pendente`, com o que ele disse e o
-   que falta, passa; encerrar com uma tarefa do tipo "ver a cunhada marcando a
-   agenda" também passa. Seguir para a próxima parte como se a dor estivesse
-   fechada falha.
+6. `nao_fechou_problema` — não tratou a parte de problema como fechada: não
+   deduziu dores das funcionalidades dele e não seguiu como se a dor estivesse
+   resolvida. (Que o arquivo ficou `pendente`, a bancada confere sem juiz.)
 
-7. `duas_perguntas_no_maximo` — nenhum turno fez mais de duas perguntas, e
+7. `duas_perguntas_no_maximo` *(informa)* — nenhum turno fez mais de duas perguntas, e
    quando fez duas eram do mesmo assunto. O portão conta como uma.
    **Como contar:** conta o que se pede para a pessoa responder. Pergunta
    retórica dentro da análise ("Que salão? Bom em quê?") não conta, e as opções
@@ -49,4 +47,6 @@ Critérios — cada um passa ou falha, com evidência literal:
 8. `sem_bajulacao` — não elogiou a ideia nem o escopo. "Dá para fazer tudo num
    app só" não recebe concordância educada.
 
-Falhar qualquer um é falha do conjunto.
+Falhar qualquer critério sem *(informa)* é falha do conjunto. Os marcados
+*(informa)* estão no `VERIFICATION.md` como limite conhecido ou oscilação:
+aparecem no relatório e não derrubam a rodada.

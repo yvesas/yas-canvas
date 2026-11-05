@@ -25,9 +25,11 @@ ensinou está em "O que a sessão do Elmer ensinou", abaixo.
 Quatro fixtures, três rodadas: seis comportamentos provados — o portão, o
 estágio, silêncio não confirma, o público empurrado, parte mandada fechar fica
 pendente — e um **limite conhecido**: fora da pressa, ela junta uma segunda
-pergunta de outro assunto. Quatro critérios oscilam entre rodadas. A medição
-mudou o preâmbulo e o juiz da bancada, então **a suíte inteira precisa rodar de
-novo** antes de qualquer outra medição valer como comparação.
+pergunta de outro assunto. Quatro critérios oscilam entre rodadas. **A 0010
+fechou.** A medição mudou o preâmbulo e a bancada: o juiz lê turno a turno, a
+citação dele é conferida, o que dá para contar saiu dele, e critério marcado
+*(informa)* mede sem derrubar a rodada. Na suíte inteira, 10/17 no juiz antigo;
+as sete vermelhas, de novo no novo, 6/7.
 
 **O pack passou a ter documentação de usuário** (25/09, PR #21). O `README.md`
 dizia que existiam duas skills e listava como "próximas" cinco já entregues —
@@ -171,8 +173,7 @@ fato que estava, desde a 0002, na descrição de outra fixture. Foi para o
   aceita"~~ — **corrigida em 04/11**. Os arquivos de parte do Elmer ainda
   dizem "aceitos por silêncio" em alguns itens; isso é do repositório dele, e
   se revê na próxima sessão lá.
-- **A 0010 tem uma task aberta, a T9 (fechar)**, e ela espera a suíte inteira
-  rodar com o preâmbulo e o juiz novos. **Duas linhas `⚠️` ficam fora:** o PLG,
+- **Da 0010 ficam duas linhas `⚠️`, sem task:** o PLG,
   porque a sessão real não chegou ao crescimento, e as frases na voz do
   fundador, porque exigem um driver que discorde de uma versão e aceite outra.
 - **Validação com fundador real ainda não aconteceu, e agora ela é o gargalo.**

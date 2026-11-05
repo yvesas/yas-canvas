@@ -281,23 +281,76 @@ export function deterministicFailures(fixture, session) {
       problems.push(`nenhum arquivo escrito contém "${e.mustWriteFileContaining}" — a sessão terminou só no chat`);
     }
   }
+  problems.push(...partFileFailures(e, join(session.cwd, "specs", "canvas")));
+  return problems;
+}
+
+// O que dá para conferir no arquivo não vai para o juiz. Status no
+// frontmatter, os três títulos, uma marca que precisa estar lá: o juiz acertava
+// isso quase sempre, e o "quase" derrubava rodada. Aqui o erro é zero e o
+// custo também.
+const HEADINGS = ["### O que você disse", "### O que eu propus", "### Em aberto"];
+
+export function partFileFailures(e, canvasDir) {
+  const problems = [];
+  const written = existsSync(canvasDir) ? writtenArtifacts(canvasDir, "") : [];
+  const byPath = new Map(written.map((a) => [a.path, a.content]));
+
+  if (e.partsHaveThreeHeadings) {
+    // Arquivo de parte é o que declara `parte:` no frontmatter; o resumo, o
+    // relatório e o handoff são vistas e não levam os três títulos.
+    const parts = written.filter((a) => /^---\n[\s\S]*?^parte:/m.test(a.content));
+    if (parts.length === 0) problems.push("nenhum arquivo de parte gravado em specs/canvas/");
+    for (const a of parts) {
+      const missing = HEADINGS.filter((h) => !a.content.includes(h));
+      if (missing.length) problems.push(`specs/canvas/${a.path} sem ${missing.map((h) => `"${h}"`).join(", ")}`);
+    }
+  }
+
+  for (const [path, allowed] of Object.entries(e.partStatusIn || {})) {
+    const content = byPath.get(path);
+    if (content === undefined) {
+      problems.push(`specs/canvas/${path} não foi gravado`);
+      continue;
+    }
+    const status = (content.match(/^status:\s*(\S+)/m) || [])[1];
+    if (!allowed.includes(status)) {
+      problems.push(`specs/canvas/${path} com \`status: ${status ?? "(nenhum)"}\`, esperado ${allowed.join(" | ")}`);
+    }
+  }
+
+  for (const [path, needles] of Object.entries(e.fileMustContain || {})) {
+    const content = byPath.get(path);
+    if (content === undefined) {
+      problems.push(`specs/canvas/${path} não foi gravado`);
+      continue;
+    }
+    for (const needle of needles) {
+      if (!content.includes(needle)) problems.push(`specs/canvas/${path} sem "${needle}"`);
+    }
+  }
   return problems;
 }
 
 // O relatório é escrito NO ARQUIVO, não no chat. O juiz lia só a transcrição e
 // reprovava por não achar o que estava no disco — julgando a narração em vez do
 // entregável. Aqui a bancada recolhe o que a sessão escreveu.
-export function writtenArtifacts(dir, needle, depth = 0, out = []) {
+//
+// O caminho é relativo à pasta da chamada, não à subpasta da recursão. Era
+// relativo à subpasta: `founder-canvas/problem-and-pains.md` chegava ao juiz
+// como `problem-and-pains.md`, e ele reprovou uma sessão por gravar "fora de
+// `specs/canvas/founder-canvas/`" — onde o arquivo estava.
+export function writtenArtifacts(dir, needle, base = dir, out = []) {
   for (const entry of readdirSync(dir)) {
     if (entry === ".claude" || entry === ".git" || entry === "node_modules") continue;
     const full = join(dir, entry);
     if (statSync(full).isDirectory()) {
-      writtenArtifacts(full, needle, depth + 1, out);
+      writtenArtifacts(full, needle, base, out);
       continue;
     }
     try {
       const content = readFileSync(full, "utf8");
-      if (content.includes(needle)) out.push({ path: full.slice(dir.length + 1), content });
+      if (content.includes(needle)) out.push({ path: full.slice(base.length + 1), content });
     } catch {
       /* binário, ignora */
     }
@@ -335,8 +388,9 @@ const JUDGE_SCHEMA = {
           id: { type: "string" },
           passou: { type: "boolean" },
           evidencia: { type: "string" },
+          citacao: { type: "string" },
         },
-        required: ["id", "passou", "evidencia"],
+        required: ["id", "passou", "evidencia", "citacao"],
       },
     },
   },
@@ -378,7 +432,11 @@ export function judge(fixture, session) {
 
   const prompt = [
     "Você julga a transcrição de uma sessão de agente contra critérios objetivos.",
-    "Não seja generoso: a dúvida conta como falha, e evidência é citação literal da transcrição.",
+    "Não seja generoso: critério sem evidência literal na transcrição ou nos arquivos falha.",
+    "Para cada critério, `citacao` é um trecho COPIADO da transcrição ou de um arquivo, com",
+    "pelo menos seis palavras, sem reticências e sem juntar pedaços. Quando o critério falha por",
+    "ausência, cite o trecho onde aquilo deveria estar. A bancada confere a citação: se ela não",
+    "estiver lá, palavra por palavra, o seu veredito sobre aquele critério é descartado.",
     "Responda apenas o JSON do schema, com um item por critério, usando o id exato do critério.",
     "",
     "## Critérios",
@@ -444,7 +502,45 @@ export function judge(fixture, session) {
   const raw = envelope.structured_output ?? envelope.structuredOutput ?? envelope.result;
   const verdict = typeof raw === "string" ? JSON.parse(raw) : raw;
   if (!verdict?.criterios) throw new Error(`resposta do juiz sem 'criterios': ${run.stdout.slice(0, 400)}`);
-  return verdict.criterios;
+
+  const haystack = normalize([renderLog(session), ...artifacts.map((a) => a.content)].join("\n"));
+  const kinds = rubricKinds(fixture.rubric);
+  return verdict.criterios.map((c) => ({
+    ...c,
+    informa: kinds.get(c.id) === "informa",
+    sustentado: citationFound(c.citacao, haystack),
+  }));
+}
+
+// O juiz já citou trecho que não estava no turno que ele dizia, e "na dúvida,
+// falha" transformava esse erro em falha da skill. Citação conferida é o que
+// separa o veredito do palpite. A comparação ignora o que muda sem mudar o
+// texto: espaço, aspas, ênfase de markdown, maiúscula.
+export function normalize(text) {
+  return text
+    .toLowerCase()
+    .replace(/[*_`>]/g, "")
+    .replace(/[“”"«»]/g, '"')
+    .replace(/[‘’']/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function citationFound(citacao, normalizedHaystack) {
+  const quote = normalize(citacao || "").replace(/^["']|["']$/g, "").trim();
+  if (quote.split(" ").length < 6) return false;
+  return normalizedHaystack.includes(quote);
+}
+
+// `1. \`id\` — ...` barra a fixture; `1. \`id\` *(informa)* — ...` só aparece no
+// relatório. Informa é para o que está registrado como limite conhecido ou
+// oscila no VERIFICATION.md: medir continua, derrubar a rodada não.
+export function rubricKinds(rubric) {
+  const kinds = new Map();
+  for (const m of rubric.matchAll(/^\d+\.\s+`([a-z0-9_]+)`(\s+\*\(informa\)\*)?/gm)) {
+    kinds.set(m[1], m[2] ? "informa" : "barra");
+  }
+  return kinds;
 }
 
 export const config = { SUBJECT_MODEL, JUDGE_MODEL, BUDGET_USD, TIMEOUT_MS };

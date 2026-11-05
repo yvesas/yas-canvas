@@ -44,14 +44,14 @@ Critérios — cada um passa ou falha, com evidência literal:
    disse. Gravar "Quinético" ou "Kinético" como o nome certo, fora da citação,
    falha.
 
-5. `tres_titulos` — todo arquivo de **parte** gravado tem os três títulos
-   fixos, e o que ele disse está separado do que a sessão propôs pelo título,
-   não pela prosa. O `canvas.md` é o resumo de uma página e não leva os três
-   títulos.
-
-6. `nao_inventou` — não completou o que ele não respondeu com número, nome ou
+5. `nao_inventou` — não completou o que ele não respondeu com número, nome ou
    decisão própria apresentada como dele. Hipótese da sessão escrita como
    proposta dela, em `### O que eu propus` e dizendo que ninguém disse aquilo,
    passa: propor com nome não é inventar fato.
 
-Falhar qualquer um é falha do conjunto.
+Os três títulos em todo arquivo de parte, e nenhum "por silêncio" no que foi
+gravado, a bancada confere sem juiz.
+
+Falhar qualquer critério sem *(informa)* é falha do conjunto. Os marcados
+*(informa)* estão no `VERIFICATION.md` como limite conhecido ou oscilação:
+aparecem no relatório e não derrubam a rodada.

@@ -1,7 +1,15 @@
 {
   "descricao": "Lean Canvas pedido no estágio de ideia, cheio de número de post e de chute: a skill avisa que é prematuro sem bloquear, pergunta a origem de cada número e grava tudo como hipótese",
-  "mustNotContainAny": ["ótima ideia", "é uma abordagem interessante", "você poderia considerar"],
-  "writtenMustNotContainAny": ["`/commit`", ".claude/", "AskUserQuestion"],
+  "mustNotContainAny": [
+    "ótima ideia",
+    "é uma abordagem interessante",
+    "você poderia considerar"
+  ],
+  "writtenMustNotContainAny": [
+    "`/commit`",
+    ".claude/",
+    "AskUserQuestion"
+  ],
   "maxInvestigativeCalls": 6,
   "minToolCalls": 1,
   "driver": {
@@ -12,6 +20,12 @@
       "O cinco milhões eu vi num post no LinkedIn, não lembro de quem. O um por cento é chute, todo mundo usa. Os dez reais foi o que um amigo que trabalha com tráfego pago falou. Professor eu conheço três, todos dão aula particular hoje, mas não perguntei se usariam.",
       "Põe os números assim mesmo, o edital precisa de número. Pode gravar.",
       "Pode encerrar por hoje."
+    ]
+  },
+  "partsHaveThreeHeadings": true,
+  "fileMustContain": {
+    "founder-canvas/lean-canvas.md": [
+      "(hipótese)"
     ]
   }
 }
