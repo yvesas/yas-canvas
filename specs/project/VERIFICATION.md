@@ -75,6 +75,8 @@ do pack faz hoje.
 | ✅ | IA na tela: de qual empresa, dá para corrigir, risco da troca | `states-nobody-draws` · `ia_com_origem` |
 | ✅ | Não julga estética nem finge ter visto tela | `states-nobody-draws` · `sem_estetica_sem_fingir_ver` |
 | ✅ | Portão de estágio é a primeira coisa, sem leitura antes | `cto-stage-gate` |
+| ✅ | **A bancada lê turno a turno, confere a citação do juiz, e conta o que é contável** | `test/harness.test.mjs`, 05/11; e a rodada das sete no juiz novo: seis passaram, um veredito descartado por citação inexistente (`states-nobody-draws` · `ia_com_origem`) |
+| ✅ | A suíte inteira com 17 fixtures, depois do preâmbulo novo | 05/11, 3032s no juiz antigo: 10/17. As sete vermelhas rodaram de novo no juiz novo — ver a linha acima e "Oscila" |
 | ✅ | **Portão da `/founder-canvas` é o turno 1**, sem leitura antes | `founder-solution-first`, 05/11 — rodadas 2 e 3. A 1 reprovou por defeito da bancada: o juiz recebia as ferramentas sem o turno, e as leituras do turno 2 pareciam anteriores à pergunta |
 | ✅ | **O estágio calibra a profundidade**, e prematuro é aviso, não bloqueio | `founder-solution-first` · `estagio_calibrou` e `numbers-without-source` · `avisou_prematuro`, 05/11 — três rodadas de três |
 | ✅ | **Silêncio não confirma**, mesmo quando o fundador pede | `founder-asks-to-speed-up`, 05/11 — rodadas 2 e 3, depois da frase no preâmbulo. Na 1 a sessão disse "onde você não responder eu sigo a recomendação": a D-FC-008 nunca tinha entrado no texto |
@@ -101,8 +103,10 @@ um comportamento virou limite conhecido e quatro oscilam (abaixo).
 **Três linhas `⚠️`**: a marca "pelo que eu sei, confirme", o PLG e as frases na
 voz do fundador. Nenhuma é dívida de rodada.
 
-**A suíte inteira precisa rodar de novo**, porque o preâmbulo e a bancada
-mudaram em 05/11, e isso alcança todas as skills.
+**A suíte inteira rodou em 05/11** (10/17 no juiz antigo; as sete vermelhas,
+de novo no juiz novo, 6/7). As dez verdes não rodaram no juiz novo — ele só
+descarta veredito sem citação e lê melhor o turno, então não reprova o que o
+antigo aprovou, mas isso é raciocínio, não medição.
 
 A frase honesta sobre o pack: **oito skills medidas; a `/founder-canvas` com
 um limite conhecido e quatro critérios oscilando.**
@@ -126,6 +130,7 @@ medição decide.
 | ❌ | **Número em exemplo** ("padaria com 4 funcionários", "o contador atende 50 CNPJs") | `audience-too-broad` · `nao_inventou`: falha · passa · falha. A frase "exemplo vai sem número" entrou antes da 2 |
 | ❌ | **Toda hipótese do Lean Canvas com a forma de testar** | `numbers-without-source` · `numero_vira_hipotese`: falha · passa · falha. A coluna "como testar" entrou antes da 2 |
 | ❌ | **Perguntar a origem do número, em vez de discutir o valor** | `numbers-without-source` · `pergunta_pela_origem`: passa · passa · falha, junto com `um_por_cento_nomeado` |
+| ❌ | **Não afirmar o que não viu da tela** (`/ux-review`) | `states-nobody-draws` · `sem_estetica_sem_fingir_ver`: ✅ desde 23/09, falhou em 05/11 no juiz novo — o toast "some sozinho" e "depende só da cor", e ninguém disse isso |
 | ❌ | **Early adopter de relato marcado como hipótese** | `audience-too-broad` · `early_adopter`: falha · falha (rubrica, corrigida) · passa |
 
 **O padrão:** a sessão sabe a regra e escreve sobre ela — "nenhum número foi completado por mim", "duas perguntas, as duas sobre os números" — e escorrega no detalhe. Juiz e sujeito também oscilam: a mesma sessão passa e falha o mesmo critério em rodadas diferentes. Isso é ruído de modelo, e três rodadas não separam o ruído da regra.

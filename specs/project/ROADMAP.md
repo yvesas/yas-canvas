@@ -28,9 +28,13 @@
   quem chega nela pode ter instalado só ela, e um teste cobra isso. Com ela veio
   **`references/`** (ADR 0006): conteúdo de uma skill só, lido **na fase que
   precisa dele** — é o que faz dez fases caberem em **191 linhas**.
-  **Entregue com ressalva:** mergeada antes da sessão real e das fixtures, então
-  o comportamento está escrito e **não medido** — sete linhas `⚠️` no
-  `VERIFICATION.md`. As tasks T5, T7 e T8 continuam abertas.
+  **Fechada em 2026-11-05**, depois de mergeada sem medição: a sessão real foi a
+  do Elmer (29/10), com a skill lida como roteiro; quatro fixtures saíram dela;
+  a medição achou que a D-FC-008 nunca tinha entrado no texto (silêncio valia
+  como aceite) e corrigiu. Seis comportamentos provados, **um limite conhecido**
+  (fora da pressa, junta uma segunda pergunta de outro assunto) e quatro
+  critérios oscilando. A medição também consertou a bancada: o juiz lê turno a
+  turno, cita o que afirma, e o que dá para contar saiu dele.
 - **0007 — `/security-review`** (2026-09-23,
   `specs/features/0007-security-review/`): a terceira role de revisão, das
   etapas 10 e 11 do `docs_yaslab/26`. Seis partes — ciclo de vida do dado,
@@ -98,9 +102,7 @@
 
 ## Em desenvolvimento
 
-- **0010, as três tasks que faltaram** — a sessão real da `/founder-canvas`
-  (T5), as quatro fixtures escritas a partir dela (T7) e a medição (T8). A skill
-  já está na `main`; o que falta é a régua.
+- Nada. A 0010 fechou em 05/11.
 
 ## Próximo
 
@@ -110,12 +112,11 @@
    somando no mesmo handoff. O que ele precisa decidir: em que ordem rodam, o
    que passa de uma para a outra, e onde a pessoa entra sem virar carimbo.
 
-2. **Uma sessão real com fundador.** Oito skills existem e **nenhuma foi usada
-   por gente** — é a pendência mais velha do `STATE.md`, e agora a mais cara de
-   adiar: cada role nova aumenta o que pode estar errado sem ninguém ter visto.
-   Com a 0010 mergeada sem medição, ela deixou de ser só a pendência mais velha e
-   passou a ser **o que destrava a T7** — a sessão da `/founder-canvas` serve às
-   duas coisas de uma vez.
+2. **Uma sessão real com a skill invocada.** A do Elmer (29/10) teve fundador
+   real e skill lida como roteiro: mostrou como gente responde, não como a skill
+   se comporta instalada na frente de alguém. As fixtures cobrem o segundo com
+   fala sintética. O que falta é os dois juntos — e o limite das duas perguntas
+   é o primeiro lugar para olhar.
 
 3. **CI em pull request** — rodar `npm run check` e `npm test` a cada PR. Hoje
    não existe workflow nenhum no repo, e a prova de que o gate passou é a palavra
