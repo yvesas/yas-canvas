@@ -114,6 +114,39 @@ gravou**.
 anotadas nesta task: o que a skill fez que não estava previsto, e em que fase a
 conversa ficou pesada.
 
+**✅ fechada em 05/11, com ressalva** — decisão do Yves. A sessão foi a do
+Elmer (29/10), com o produto real dele, e não um diretório descartável: seis
+partes gravadas em `elmer/specs/canvas/founder-canvas/`. **Mas a skill não foi
+invocada.** Ela não estava instalada (o `bin/install` ainda ignorava o
+`CLAUDE_CONFIG_DIR`), e o agente leu o `SKILL.md` com `cat` e seguiu como
+roteiro, sem o preâmbulo. Por isso a sessão serve para metade do que a T5
+existe para dar: **como o fundador responde**. O comportamento da skill
+invocada fica para a T8, que roda a skill instalada contra essas falas.
+
+O que o fundador fez, e que as fixtures agora reproduzem:
+
+- **Respondeu longo, por áudio transcrito, com três ou quatro assuntos numa
+  resposta só.** Foi o que levou à D-FC-008.
+- **Corrigiu premissa da sessão** ("não, não precisa") e corrigiu o estágio
+  que o agente presumiu ("não tem protótipo"). Presumir o estágio é o que o
+  portão existe para impedir.
+- **A transcrição trocou nome próprio**: "WeDiet", "Wealth", "Else" para as
+  ferramentas reais. A sessão confirmou os nomes antes de gravar, e acertou.
+- **Respondeu com funcionalidade quando a pergunta era a dor** (painel
+  financeiro, funil, equipe). A sessão marcou o financeiro como hipótese, porque
+  não veio de queixa.
+- **Pediu para acelerar na terceira pergunta.** Foi aí que a conversa ficou
+  pesada, e a resposta errada — oito perguntas de três partes, "o silêncio
+  aceita" — é o que a sessão fez de pior.
+
+O que a sessão fez que não estava previsto: **completou o perfil do público com
+um número que o fundador nunca deu** ("20 a 80 pacientes ativos"), e **ofereceu
+desviar o canvas para modelo de dados**, saindo do método no meio.
+
+Violado ou não exercido: o portão (nada disparou a skill), uma pergunta por vez,
+o menu e o fechamento com uma tarefa. As partes de crescimento não rodaram — no
+estágio de ideia são prematuras, e ninguém escolheu.
+
 ## T6 — O teste de independência (REQ-017)
 
 `test/standalone.test.mjs`: falha se o corpo da `founder-canvas` citar outra
@@ -151,6 +184,29 @@ turno a turno:
 
 **Done when:** `npm run check` valida as quatro (prompt, rubrica, expect, driver);
 cada rubrica cobra comportamento **visto** na T5, não imaginado.
+
+**✅ escrita em 05/11, com uma troca.** `npm run check` valida as quatro, e cada
+rubrica diz, no topo, o que a T5 viu e de onde vem cada critério. As falas são
+sintéticas (salão de beleza, controle financeiro, aulas de música, fisioterapia),
+mas a **forma** é a do Elmer: resposta longa e misturada, nome trocado pela
+transcrição, relato de terceiro no lugar de cena, pressa.
+
+**A troca: `plg-without-aha` saiu, `founder-asks-to-speed-up` entrou.** A T5
+não chegou a `growth-model` — no estágio de ideia ela é prematura —, então uma
+rubrica sobre PLG seria exatamente a fixture escrita antes da sessão que esta
+ordem existe para evitar. Ela espera uma sessão que chegue lá; a linha continua
+`⚠️` no `VERIFICATION.md`. No lugar entrou o defeito mais caro que a T5 mostrou:
+o pedido para acelerar respondido com oito perguntas e "o silêncio aceita".
+
+| Fixture | O que ela cobra | De onde veio |
+|---|---|---|
+| `founder-solution-first` | portão primeiro; estágio calibra; dor na voz do cliente | funcionalidade no lugar de dor; o portão que a T5 não exerceu |
+| `audience-too-broad` | segmento, quatro papéis, early adopter, anti-persona, **sem número inventado** | o "20 a 80 pacientes" |
+| `numbers-without-source` | prematuro sem bloquear; a origem, não o valor; a marca fica no arquivo | o financeiro como hipótese; o número próprio sem fonte |
+| `founder-asks-to-speed-up` | até duas perguntas sob pressa; silêncio não aceita; confirmar nome | a terceira pergunta do Elmer |
+
+Todas cobram `duas_perguntas_no_maximo` ou equivalente, porque a D-FC-008 vale
+em toda sessão, e é a regra mais nova do pack.
 
 ## T8 — Medir (ciclo, passo 5)
 

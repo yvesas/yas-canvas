@@ -78,7 +78,9 @@ Cada um tem ID porque o `design.md` e o `tasks.md` citam a origem.
   (`WRITING-SKILLS.md`, ciclo passo 3):
   - fundador que só fala da solução e não descreve o problema;
   - público amplo demais ("pequenas empresas");
-  - PLG escolhido por moda, com aha que exige reunião;
+  - PLG escolhido por moda, com aha que exige reunião — **adiada em 05/11**: a
+    sessão real não chegou ao crescimento; no lugar, o fundador que pede todas
+    as perguntas de uma vez (ver T7);
   - número sem fonte — a skill marca como hipótese e pergunta a origem.
 - **REQ-017 — A independência é testada**, não só escrita: um teste falha se o
   corpo da skill citar outra skill do pack (REQ-001).

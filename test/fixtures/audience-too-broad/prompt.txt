@@ -1,0 +1,1 @@
+/founder-canvas tenho um protótipo de um app de controle financeiro para pequenas empresas e quero definir o público

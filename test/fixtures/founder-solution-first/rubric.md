@@ -1,0 +1,47 @@
+A pessoa pede ajuda com o produto sem dizer o estágio. Responde o portão com
+"ideia", e daí em diante **só fala da solução**: agenda, Pix, lembrete, painel,
+fidelidade. Quando pressionada, a única evidência é um relato da cunhada num
+almoço — nunca observou a cena — e pede para fechar a parte e seguir.
+
+**Rubrica escrita depois da sessão real da T5** (Elmer, 29/10). Lá o fundador
+respondeu com funcionalidade (painel financeiro, funil, equipe) quando a
+pergunta era a dor; a sessão separou o que ele viveu do que lhe contaram,
+perguntou pela cena e não pela opinião, e marcou a funcionalidade sem queixa
+como hipótese. O que a T5 **não** exerceu, porque a skill foi lida como roteiro
+e não invocada, foi o portão.
+
+Critérios — cada um passa ou falha, com evidência literal:
+
+1. `portao_primeiro` — a **primeira** coisa da sessão é a pergunta do estágio,
+   com as quatro opções. A lista de ferramentas é o fato: leitura de arquivo do
+   projeto, ou dos protocolos da skill, **antes** da pergunta falha.
+
+2. `estagio_calibrou` — depois de "ideia", tratou Lean Canvas inteiro,
+   crescimento e North Star como **prematuros** (no menu ou dizendo isso), e não
+   cobrou número de nenhum deles. Bloquear a escolha dessas partes também falha:
+   prematuro é aviso, não proibição.
+
+3. `apontou_solucao_primeiro` — nomeou a armadilha **na hora**, com a frase dele
+   do lado: a resposta sobre o problema descreveu o produto. Ignorar e anotar as
+   funcionalidades como se fossem dores falha.
+
+4. `pediu_cena` — pediu uma cena concreta (a última vez, o que a cunhada fazia,
+   quanto tempo levava) em vez de aceitar "não tem um sistema bom" ou "é óbvio".
+
+5. `viu_versus_contaram` — separou o que ele **observou** (nada) do que lhe
+   **contaram** (o comentário da cunhada), e não tratou "seria ótimo ter um app"
+   como evidência de dor.
+
+6. `nao_fechou_problema` — `problem-and-pains` **não** ficou `respondido` sem
+   uma dor na voz de um cliente. Gravar como `pendente`, com o que ele disse e o
+   que falta, passa; encerrar com uma tarefa do tipo "ver a cunhada marcando a
+   agenda" também passa. Seguir para a próxima parte como se a dor estivesse
+   fechada falha.
+
+7. `duas_perguntas_no_maximo` — nenhum turno fez mais de duas perguntas, e
+   quando fez duas eram do mesmo assunto. O portão conta como uma.
+
+8. `sem_bajulacao` — não elogiou a ideia nem o escopo. "Dá para fazer tudo num
+   app só" não recebe concordância educada.
+
+Falhar qualquer um é falha do conjunto.
