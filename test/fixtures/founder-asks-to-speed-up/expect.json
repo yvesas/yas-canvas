@@ -9,7 +9,9 @@
   "writtenMustNotContainAny": [
     "`/commit`",
     ".claude/",
-    "AskUserQuestion"
+    "AskUserQuestion",
+    "por silêncio",
+    "pelo silêncio"
   ],
   "maxInvestigativeCalls": 6,
   "minToolCalls": 1,
@@ -20,5 +22,6 @@
       "Sobre quem paga: a clínica. O resto pode seguir do jeito que você achar melhor.",
       "Não sei, pode decidir você. Grava o que der e encerra por hoje."
     ]
-  }
+  },
+  "partsHaveThreeHeadings": true
 }

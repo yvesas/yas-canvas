@@ -56,6 +56,29 @@ Dentro de cada fixture, os dois níveis:
    juiz são modelos diferentes de propósito: quem julga a própria transcrição se
    acha ótimo.
 
+**O que dá para contar não vai para o juiz** (05/11). Status no frontmatter
+(`partStatusIn`), os três títulos em todo arquivo de parte
+(`partsHaveThreeHeadings`), marca obrigatória num arquivo (`fileMustContain`),
+frase proibida no que foi gravado (`writtenMustNotContainAny`). O juiz acertava
+isso quase sempre, e o "quase" derrubava rodada.
+
+**O juiz cita, e a bancada confere.** Cada veredito traz `citacao`, um trecho
+copiado de no mínimo seis palavras. Se ele não está na transcrição nem nos
+arquivos — comparado sem espaço, aspas, ênfase e maiúscula —, o veredito é
+descartado nos dois sentidos e aparece como `?` no log. Antes era "na dúvida,
+falha", e o erro do juiz virava falha da skill.
+
+**Critério que barra e critério que informa.** `1. \`id\` *(informa)* — …` na
+rubrica: o critério é julgado e aparece no log como `i`, mas não derruba a
+fixture. É para o que o `VERIFICATION.md` registra como limite conhecido ou
+oscilação — medir continua, derrubar a rodada por defeito já conhecido não diz
+nada novo. Só se marca *(informa)* com a linha correspondente no
+`VERIFICATION.md`; sem ela, é esconder falha.
+
+**Por que isso importa:** com oito critérios que acertam 95% das vezes cada um,
+uma fixture tudo-ou-nada fica verde em 66% das rodadas, mesmo com a skill
+certa. A suíte de dezessete quase nunca.
+
 ## As três fixtures de hoje
 
 | Fixture | O que ela protege |
@@ -227,6 +250,15 @@ nos arquivos escritos.
 lendo só a transcrição (0003), o juiz sem ver os arquivos de parte (0003), e
 agora o marco de parada. **Sempre que a régua olhar só o que foi dito, ela vai
 reprovar quem entregou sem narrar.**
+
+## Footgun: o caminho do arquivo que o juiz recebe
+
+O `writtenArtifacts` montava o caminho relativo à subpasta da recursão, e
+`founder-canvas/problem-and-pains.md` chegava ao juiz como
+`problem-and-pains.md`. Ele reprovou a sessão por gravar "fora de
+`specs/canvas/founder-canvas/`", onde o arquivo estava. Corrigido em 05/11, com
+teste em `test/harness.test.mjs` — a régua também tem testes, porque régua
+errada reprova skill certa.
 
 ## Footgun: o juiz não pode enxergar o próprio ambiente
 

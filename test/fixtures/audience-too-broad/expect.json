@@ -1,7 +1,15 @@
 {
   "descricao": "público de 'pequenas empresas' e recusa de anti-persona: a skill empurra até segmento, separa os quatro papéis, e não completa o perfil com número dela",
-  "mustNotContainAny": ["ótima ideia", "é uma abordagem interessante", "você poderia considerar"],
-  "writtenMustNotContainAny": ["`/commit`", ".claude/", "AskUserQuestion"],
+  "mustNotContainAny": [
+    "ótima ideia",
+    "é uma abordagem interessante",
+    "você poderia considerar"
+  ],
+  "writtenMustNotContainAny": [
+    "`/commit`",
+    ".claude/",
+    "AskUserQuestion"
+  ],
   "maxInvestigativeCalls": 6,
   "minToolCalls": 1,
   "driver": {
@@ -12,6 +20,12 @@
       "Conheço dois donos de loja de roupa aqui do bairro que controlam tudo numa planilha do Excel e se perdem. Um deles me disse que paga contador e mesmo assim não sabe quanto sobra no fim do mês. O contador dele nem olha a planilha, só faz o imposto.",
       "Anti-persona? Não sei, acho que não quero excluir ninguém. Pode gravar assim.",
       "Pode gravar e encerrar por hoje."
+    ]
+  },
+  "partsHaveThreeHeadings": true,
+  "fileMustContain": {
+    "founder-canvas/audience-and-roles.md": [
+      "(hipótese)"
     ]
   }
 }

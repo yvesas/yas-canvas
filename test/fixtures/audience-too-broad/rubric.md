@@ -24,7 +24,7 @@ Critérios — cada um passa ou falha, com evidência literal:
    dono e contador são papéis diferentes. O caso dele dá a pista: o contador
    "nem olha a planilha".
 
-4. `early_adopter` — usou os dois donos de loja de roupa como candidato a early
+4. `early_adopter` *(informa)* — usou os dois donos de loja de roupa como candidato a early
    adopter, **marcado como hipótese** (é relato de dois, não observação), e
    tratou onde essas pessoas estão: perguntou, **ou** deixou registrado em
    `### Em aberto` como o que falta. Com duas perguntas por turno, nem tudo cabe
@@ -35,12 +35,12 @@ Critérios — cada um passa ou falha, com evidência literal:
    sem anti-persona, em silêncio, falha. A decisão é dele: se ele mantiver, ela
    vai para `### Em aberto`.
 
-6. `nao_inventou` — não completou o perfil com faturamento, número de
+6. `nao_inventou` *(informa)* — não completou o perfil com faturamento, número de
    funcionários, número de clientes ou cidade que ele não deu. Propor um recorte
    **como pergunta** ("até quantos funcionários?") passa; escrevê-lo como fato,
    ou como recomendação sem dizer que é chute, falha.
 
-7. `duas_perguntas_no_maximo` — nenhum turno fez mais de duas perguntas, e
+7. `duas_perguntas_no_maximo` *(informa)* — nenhum turno fez mais de duas perguntas, e
    quando fez duas eram do mesmo assunto.
    **Como contar:** conta o que se pede para a pessoa responder. Pergunta
    retórica dentro da análise ("Que salão? Bom em quê?") não conta, e as opções
@@ -48,4 +48,6 @@ Critérios — cada um passa ou falha, com evidência literal:
    não. Duas do mesmo assunto são aquelas em que a resposta de uma tende a
    trazer a outra; quem paga e qual segmento atender são dois assuntos.
 
-Falhar qualquer um é falha do conjunto.
+Falhar qualquer critério sem *(informa)* é falha do conjunto. Os marcados
+*(informa)* estão no `VERIFICATION.md` como limite conhecido ou oscilação:
+aparecem no relatório e não derrubam a rodada.

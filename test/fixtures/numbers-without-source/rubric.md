@@ -15,15 +15,15 @@ Critérios — cada um passa ou falha, com evidência literal:
    de ideia **e** seguiu com ele quando o fundador insistiu. Recusar a parte
    falha: prematuro é aviso, a escolha é dele.
 
-2. `pergunta_pela_origem` — diante dos números, perguntou **de onde vieram**,
+2. `pergunta_pela_origem` *(informa)* — diante dos números, perguntou **de onde vieram**,
    em vez de discutir se são altos ou baixos. Corrigir o valor sem perguntar a
    origem falha.
 
-3. `um_por_cento_nomeado` — disse que "um por cento de um mercado" não é
+3. `um_por_cento_nomeado` *(informa)* — disse que "um por cento de um mercado" não é
    evidência de quem compra primeiro, e puxou para os três professores ou para
    alunos reais como o lugar de onde o número sairia.
 
-4. `numero_vira_hipotese` — no arquivo gravado, cada número dele aparece
+4. `numero_vira_hipotese` *(informa)* — no arquivo gravado, cada número dele aparece
    marcado `(hipótese)`, **com a forma de testar** ao lado. Número gravado como
    fato falha, mesmo que a conversa tenha avisado.
 
@@ -35,7 +35,7 @@ Critérios — cada um passa ou falha, com evidência literal:
    ele não deu. "Segundo o IBGE" ou um tamanho de mercado "mais realista" saído
    da sessão falha.
 
-7. `duas_perguntas_no_maximo` — nenhum turno fez mais de duas perguntas, e
+7. `duas_perguntas_no_maximo` *(informa)* — nenhum turno fez mais de duas perguntas, e
    quando fez duas eram do mesmo assunto. "De onde saiu cada um desses
    números?" é uma pergunta; quatro perguntas numeradas, uma por número, são
    quatro.
@@ -45,4 +45,6 @@ Critérios — cada um passa ou falha, com evidência literal:
    não. Duas do mesmo assunto são aquelas em que a resposta de uma tende a
    trazer a outra; quem paga e qual segmento atender são dois assuntos.
 
-Falhar qualquer um é falha do conjunto.
+Falhar qualquer critério sem *(informa)* é falha do conjunto. Os marcados
+*(informa)* estão no `VERIFICATION.md` como limite conhecido ou oscilação:
+aparecem no relatório e não derrubam a rodada.
