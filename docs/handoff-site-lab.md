@@ -3,7 +3,8 @@
 > Texto-fonte para a sessão do repositório `site` montar o card do yas-canvas,
 > no mesmo formato do Niklas e do Audova (texto curto no card, detalhe num
 > `<details>`). Escrito em 2026-11-04 e atualizado com a `v0.2.0`, publicada no
-> mesmo dia.
+> mesmo dia; números e status reconferidos em 2026-11-06, depois de a
+> `/founder-canvas` ser medida.
 > **Só fato verificável:** cada número abaixo sai de um comando ou arquivo deste
 > repositório, e a última seção diz de onde.
 
@@ -79,10 +80,10 @@ documento para ler, é revisão; se o que existe está na cabeça, é canvas.
 ### Em números
 
 - 8 skills: cinco revisões, dois canvas e um roteador
-- 29 entregas na `main`, todas por pull request
+- 32 entregas na `main`, todas por pull request
 - 12 especificações de feature e 6 ADRs (registros de decisão de arquitetura)
 - 17 cenários de avaliação conduzidos por turnos, julgados por um segundo modelo
-- Nenhuma skill passa de 200 linhas; o teto é 400
+- A maior skill tem 208 linhas; o teto é 400
 
 ### Conceitos aplicados
 
@@ -124,8 +125,10 @@ documento para ler, é revisão; se o que existe está na cabeça, é canvas.
 
 ### Status
 
-Sete skills medidas pela bancada de avaliação; a oitava, `/founder-canvas`, está
-escrita e em validação com fundadores. Primeira release, `v0.2.0`, publicada em
+As oito skills medidas pela bancada de avaliação. A última, `/founder-canvas`,
+foi medida em 5 de novembro de 2026: seis comportamentos provados e um limite
+conhecido, porque fora da pressa ela junta uma segunda pergunta de outro
+assunto. Primeira release, `v0.2.0`, publicada em
 4 de novembro de 2026, com download para o Claude Code, para o app do Claude e
 uma versão portátil para outras IAs, ainda não testada nelas.
 
@@ -136,7 +139,8 @@ uma versão portátil para outras IAs, ainda não testada nelas.
   em outra IA". O app do Claude aceita o zip (conferido na central de ajuda em
   4/11), sem medição do pack lá.
 - Que foram **validadas com fundadores**: houve uma sessão, em que a skill foi
-  usada como roteiro e não invocada. "Em validação" é o termo honesto.
+  usada como roteiro e não invocada. A medição de 5/11 é da bancada, com fala
+  sintética — não é validação com fundador.
 - Que existe **canvas de tech lead** ou **revisão de design visual**: as duas
   estão bloqueadas por falta de conteúdo autoral.
 - Número de usuários, instalações ou estrelas: não há medição.
@@ -148,13 +152,14 @@ uma versão portátil para outras IAs, ainda não testada nelas.
 - **Nas três línguas:** a prosa das skills é só em português. O card em inglês
   e espanhol precisa dizer isso, para ninguém instalar esperando outra língua.
 
-## De onde vem cada número (conferido em 2026-11-04)
+## De onde vem cada número (conferido em 2026-11-06)
 
-| Número | Comando |
-|---|---|
-| 8 skills | `ls skills` |
-| 29 entregas | `gh pr list --state merged -L 200 --json number \| jq length` |
-| 12 specs, 6 ADRs | `ls specs/features`, `ls docs/adr` |
-| 17 cenários | `ls test/fixtures` |
-| maior skill: 193 linhas | `wc -l skills/*/SKILL.md` |
-| início em setembro | `git log --reverse --format=%ad --date=short \| head -1` → 2026-09-18 |
+| Número | Comando | Resultado |
+|---|---|---|
+| 8 skills | `ls skills` | 8 |
+| 32 entregas | `gh pr list --state merged -L 200 --json number \| jq length` | 32 |
+| 12 specs, 6 ADRs | `ls specs/features`, `ls docs/adr` | 12 e 6 |
+| 17 cenários | `ls test/fixtures` | 17 |
+| maior skill: 208 linhas | `wc -l skills/*/SKILL.md` | 208, a `/founder-canvas`; teto de 400 em `scripts/check.mjs` (`MAX_LINES`) |
+| início em setembro | `git log --reverse --format=%ad --date=short \| head -1` | 2026-09-18 |
+| `/founder-canvas` medida | `specs/features/0010-founder-canvas/tasks.md` (T8) e `specs/project/VERIFICATION.md` | 05/11: seis provados, um limite conhecido |
