@@ -107,6 +107,15 @@ de executar".
 É o que você entrega a quem vai construir: outro agente, outro editor, um dev do
 time. O detalhe está no [guia](docs/getting-started.md#o-que-aparece-no-seu-projeto).
 
+## Faz parte de um conjunto
+
+- **yas-canvas** ajuda a decidir *o que* construir e *por quê*.
+- **[yas-sdd](https://github.com/yvesas/yas-sdd)** cuida de *como* construir,
+  e sob quais regras. Se você já passou pelo `yas-canvas`, ele lê as suas
+  respostas e não pergunta de novo.
+
+Um não depende do outro.
+
 ## Contribuir
 
 A bancada de teste, as regras de escrever uma skill e o fluxo de PR estão em
